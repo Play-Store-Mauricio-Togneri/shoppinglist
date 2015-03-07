@@ -1,2 +1,2 @@
-# shoppingcart
+# Shopping Cart
 A shopping cart application

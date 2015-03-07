@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 
+	<style name="app_theme" parent="android:style/Theme.Holo.Light" />
+    -->
+
+	<style name="app_theme" parent="@style/Theme.AppCompat.Light" />
+    
+</resources>
