@@ -42,7 +42,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 			convertView = this.inflater.inflate(R.layout.activity_list_row, null);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
+		TextView name = (TextView)convertView.findViewById(R.id.title);
 		name.setText(cartItem.getName());
 		
 		if (cartItem.isSelected())

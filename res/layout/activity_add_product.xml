@@ -10,12 +10,12 @@
             style="@style/ToolbarTitle"
             android:text="@string/add_product_toolbar_title" />
 
-        <View style="@style/ToolbarSeparator" />
+        <View style="@style/HorizontalSeparator" />
 
         <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarButton"
             android:id="@+id/create_product"
-            android:text="@string/main_toolbar_add_product" />
+            android:text="@string/icon_add" />
         
     </LinearLayout>
 

@@ -17,7 +17,7 @@ public class CategoryAdapter extends ArrayAdapter<Category>
 	
 	public CategoryAdapter(Context context, List<Category> list)
 	{
-		super(context, R.layout.spinner_category, list);
+		super(context, R.layout.spinner_category_header, list);
 		
 		this.inflater = LayoutInflater.from(context);
 		
@@ -33,10 +33,10 @@ public class CategoryAdapter extends ArrayAdapter<Category>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.spinner_category, null);
+			convertView = this.inflater.inflate(R.layout.spinner_category_header, null);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
+		TextView name = (TextView)convertView.findViewById(R.id.title);
 		name.setText(category.getName());
 		
 		return convertView;
@@ -51,10 +51,10 @@ public class CategoryAdapter extends ArrayAdapter<Category>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.spinner_category, null);
+			convertView = this.inflater.inflate(R.layout.spinner_category_dropdown, null);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
+		TextView name = (TextView)convertView.findViewById(R.id.title);
 		name.setText(category.getName());
 		
 		return convertView;

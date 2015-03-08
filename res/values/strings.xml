@@ -5,11 +5,12 @@
     
     <string name="label_list_empty">Empty List</string>
     
+    <string name="icon_add">\u002B</string>
+    <string name="icon_dropdown">\uE114</string>
+    
     <string name="main_toolbar_title">Shopping Cart</string>
-    <string name="main_toolbar_add_product">\u002B</string>
     
     <string name="add_product_toolbar_title">Add product</string>
-    <string name="add_product_toolbar_add_product">\u002B</string>
     
     <!-- ============================================================ -->
     

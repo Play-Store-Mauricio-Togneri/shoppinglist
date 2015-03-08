@@ -34,7 +34,7 @@ public class ProductAdapter extends ArrayAdapter<Product>
 			convertView = this.inflater.inflate(R.layout.activity_add_product_row, null);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
+		TextView name = (TextView)convertView.findViewById(R.id.title);
 		name.setText(product.getName());
 		name.setCompoundDrawablePadding(15);
 		// name.setCompoundDrawablesWithIntrinsicBounds(product.getThumbnail(), 0, 0, 0);
