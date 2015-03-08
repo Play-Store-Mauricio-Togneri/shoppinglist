@@ -5,17 +5,17 @@ import com.activeandroid.Model;
 public class Product extends Model
 {
 	private String name;
-	private long categoryId;
+	private Category category;
 	private byte[] picture;
 	
 	public Product()
 	{
 	}
 	
-	public Product(String name, long categoryId, byte[] picture)
+	public Product(String name, Category category, byte[] picture)
 	{
 		this.name = name;
-		this.categoryId = categoryId;
+		this.category = category;
 		this.picture = picture;
 	}
 	
@@ -24,9 +24,9 @@ public class Product extends Model
 		return this.name;
 	}
 	
-	public long getCategoryId()
+	public Category getCategory()
 	{
-		return this.categoryId;
+		return this.category;
 	}
 	
 	public byte[] getPicture()

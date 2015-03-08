@@ -32,9 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.database.ProductDao;
-import com.mauriciotogneri.shoppingcart.objects.Product;
-import com.mauriciotogneri.shoppingcart.objects.Product.Category;
-import com.mauriciotogneri.shoppingcart.objects.Product.Type;
+import com.mauriciotogneri.shoppingcart.model.Category;
+import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.screens.edit.EditProductActivity;
 
 public class AddProductActivity extends Activity
@@ -49,7 +48,6 @@ public class AddProductActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		setTitle("   " + getString(R.string.add_product_title));
 		
 		this.adapter = new AddProductAdapter(this, this.filteredList);
 		
@@ -106,7 +104,7 @@ public class AddProductActivity extends Activity
 		builder.setCancelable(true);
 		
 		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_product, null);
+		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
 		builder.setView(layout);
 		
 		ImageView image = (ImageView)layout.findViewById(R.id.image);

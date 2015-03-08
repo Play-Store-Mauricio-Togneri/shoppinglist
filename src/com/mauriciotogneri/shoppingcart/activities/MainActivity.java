@@ -1,9 +1,5 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,9 +8,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -25,15 +18,13 @@ import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.adapters.ListAdapter;
-import com.mauriciotogneri.shoppingcart.database.ProductDao;
-import com.mauriciotogneri.shoppingcart.objects.Product;
+import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
+import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.screens.add.AddProductActivity;
 
 public class MainActivity extends Activity
 {
-	private ListAdapter adapter;
-	private final List<Product> cartList = new ArrayList<Product>();
+	private CartItemAdapter cartItemAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -42,21 +33,21 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		this.adapter = new ListAdapter(this, this.cartList);
+		this.cartItemAdapter = new CartItemAdapter(this);
 		
 		ListView listView = (ListView)findViewById(R.id.list);
-		listView.setAdapter(this.adapter);
+		listView.setAdapter(this.cartItemAdapter);
 		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener()
 		{
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				Product product = (Product)parent.getItemAtPosition(position);
+				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
 				
-				if (!product.isSelected())
+				if (!cartItem.isSelected())
 				{
-					displayProduct(product);
+					displayCartItem(cartItem);
 				}
 				
 				return true;
@@ -68,76 +59,31 @@ public class MainActivity extends Activity
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				Product product = (Product)parent.getItemAtPosition(position);
-				selectProduct(product);
+				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
+				selectCartItem(cartItem);
 			}
 		});
 		
-		updateList(true);
+		// updateList(true);
 		
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		// intent.setType("image/*");
 		// startActivityForResult(intent, 123);
-		
 	}
 	
-	private void selectProduct(Product product)
+	private void selectCartItem(CartItem cartItem)
 	{
-		product.setSelected(!product.isSelected());
+		cartItem.invertSelection();
+		cartItem.save();
 		
-		ProductDao productDao = new ProductDao();
-		
-		if (productDao.updateProduct(product))
-		{
-			updateList(true);
-		}
+		updateList(true);
 	}
 	
 	private void updateList(boolean sort)
 	{
-		if (sort)
-		{
-			List<Product> notSelected = new ArrayList<Product>();
-			List<Product> selected = new ArrayList<Product>();
-			
-			for (Product product : this.cartList)
-			{
-				if (product.isSelected())
-				{
-					selected.add(product);
-				}
-				else
-				{
-					notSelected.add(product);
-				}
-			}
-			
-			Collections.sort(notSelected, new Comparator<Product>()
-			{
-				@Override
-				public int compare(Product lhs, Product rhs)
-				{
-					return lhs.getName().compareTo(rhs.getName());
-				}
-			});
-			
-			Collections.sort(selected, new Comparator<Product>()
-			{
-				@Override
-				public int compare(Product lhs, Product rhs)
-				{
-					return lhs.getName().compareTo(rhs.getName());
-				}
-			});
-			
-			this.cartList.clear();
-			this.cartList.addAll(notSelected);
-			this.cartList.addAll(selected);
-		}
+		this.cartItemAdapter.update(sort);
 		
-		this.adapter.notifyDataSetChanged();
-		
-		if (this.cartList.size() > 0)
+		if (this.cartItemAdapter.getCount() > 0)
 		{
 			ListView listView = (ListView)findViewById(R.id.list);
 			listView.setVisibility(View.VISIBLE);
@@ -156,30 +102,30 @@ public class MainActivity extends Activity
 	}
 	
 	@SuppressLint("InflateParams")
-	private void displayProduct(final Product product)
+	private void displayCartItem(final CartItem cartItem)
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(product.getName());
+		builder.setTitle(cartItem.getName());
 		builder.setCancelable(true);
 		
 		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_product, null);
+		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
 		builder.setView(layout);
 		
 		ImageView image = (ImageView)layout.findViewById(R.id.image);
-		image.setImageResource(product.getThumbnail());
+		// image.setImageResource(cartItem.getPicture());
 		
 		final NumberPicker quantity = (NumberPicker)layout.findViewById(R.id.quantity);
 		quantity.setMinValue(1);
 		quantity.setMaxValue(100);
-		quantity.setValue(product.getQuantity());
+		quantity.setValue(cartItem.getQuantity());
 		
 		builder.setPositiveButton(R.string.button_accept, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				updateQuantity(product, quantity.getValue());
+				updateQuantity(cartItem, quantity.getValue());
 				dialog.dismiss();
 			}
 		});
@@ -191,7 +137,7 @@ public class MainActivity extends Activity
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				removeProduct(product);
+				removeCartItem(cartItem);
 			}
 		});
 		
@@ -199,33 +145,25 @@ public class MainActivity extends Activity
 		dialog.show();
 	}
 	
-	private void updateQuantity(Product product, int quantity)
+	private void updateQuantity(CartItem cartItem, int quantity)
 	{
-		product.setQuantity(quantity);
+		cartItem.setQuantity(quantity);
+		cartItem.save();
 		
-		ProductDao productDao = new ProductDao();
-		
-		if (productDao.updateProduct(product))
-		{
-			updateList(false);
-		}
+		updateList(false);
 	}
 	
-	private void removeProduct(Product product)
+	private void removeCartItem(CartItem cartItem)
 	{
-		product.setQuantity(0);
-		product.setSelected(false);
-		this.cartList.remove(product);
+		cartItem.setQuantity(0);
+		cartItem.setSelected(false);
+		cartItem.save();
 		
-		ProductDao productDao = new ProductDao();
-		
-		if (productDao.updateProduct(product))
-		{
-			updateList(false);
-		}
+		this.cartItemAdapter.remove(cartItem);
+		updateList(false);
 	}
 	
-	private void addProduct()
+	private void addCartItem()
 	{
 		Intent intent = new Intent(this, AddProductActivity.class);
 		startActivity(intent);
@@ -236,32 +174,9 @@ public class MainActivity extends Activity
 	{
 		super.onResume();
 		
-		// ProductDao productDao = new ProductDao();
-		// this.productsList.clear();
-		// this.productsList.addAll(productDao.getProducts(true));
-		// updateList(true);
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.activity_list_bar, menu);
-		
-		return super.onCreateOptionsMenu(menu);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId())
-		{
-			case R.id.add_product:
-				addProduct();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
+		this.cartItemAdapter.clear();
+		this.cartItemAdapter.addAll(CartItem.getAll());
+		updateList(true);
 	}
 	
 	@Override
@@ -269,16 +184,18 @@ public class MainActivity extends Activity
 	{
 		super.onDestroy();
 		
-		// ProductDao productDao = new ProductDao();
-		//
-		// for (Product product : this.productsList)
-		// {
-		// if (product.isSelected())
-		// {
-		// product.setQuantity(0);
-		// product.setSelected(false);
-		// productDao.updateProduct(product);
-		// }
-		// }
+		int limit = this.cartItemAdapter.getCount();
+		
+		for (int i = 0; i < limit; i++)
+		{
+			CartItem cartItem = this.cartItemAdapter.getItem(i);
+			
+			if (cartItem.isSelected())
+			{
+				cartItem.setQuantity(0);
+				cartItem.setSelected(false);
+				cartItem.save();
+			}
+		}
 	}
 }
