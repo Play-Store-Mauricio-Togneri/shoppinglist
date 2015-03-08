@@ -18,14 +18,14 @@
             android:textSize="@dimen/default_font_size"
             android:padding="10dp"
             android:paddingRight="15dp"
-            android:background="@layout/border_label" />
+            android:background="#FFFFFF" />
 
         <Spinner
             android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@layout/border_input" />
+            android:background="#FFFFFF" />
         
     </TableRow>
 
@@ -43,14 +43,14 @@
             android:textSize="@dimen/default_font_size"
             android:padding="10dp"
             android:paddingRight="15dp"
-            android:background="@layout/border_label" />
+            android:background="#FFFFFF" />
 
         <Spinner
             android:id="@+id/type"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@layout/border_input" />
+            android:background="#FFFFFF" />
         
     </TableRow>
 
@@ -66,7 +66,7 @@
             android:textColor="@color/toolbar_background_color"
             android:textSize="@dimen/default_font_size"
             android:padding="10dp"
-            android:background="@layout/border_label" />
+            android:background="#FFFFFF" />
 
         <EditText
             android:id="@+id/title"
@@ -79,7 +79,7 @@
             android:padding="10dp"
             android:textSize="@dimen/default_font_size"
             android:textColor="@color/toolbar_background_color"
-            android:background="@layout/border_input" />
+            android:background="#FFFFFF" />
         
     </TableRow>
 

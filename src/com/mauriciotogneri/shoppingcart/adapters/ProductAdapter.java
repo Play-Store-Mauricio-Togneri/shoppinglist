@@ -13,12 +13,14 @@ import com.mauriciotogneri.shoppingcart.model.Product;
 
 public class ProductAdapter extends ArrayAdapter<Product>
 {
+	private final Context context;
 	private final LayoutInflater inflater;
 	
 	public ProductAdapter(Context context, List<Product> list)
 	{
 		super(context, android.R.layout.simple_list_item_1, list);
 		
+		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 	}
 	
@@ -36,8 +38,18 @@ public class ProductAdapter extends ArrayAdapter<Product>
 		
 		TextView name = (TextView)convertView.findViewById(R.id.title);
 		name.setText(product.getName());
-		name.setCompoundDrawablePadding(15);
-		// name.setCompoundDrawablesWithIntrinsicBounds(product.getThumbnail(), 0, 0, 0);
+		name.setCompoundDrawablePadding(20);
+		byte[] picture = product.getPicture();
+		name.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_bananas, 0, 0, 0);
+		
+		if (position % 2 == 0)
+		{
+			convertView.setBackgroundColor(this.context.getResources().getColor(R.color.row_background_color_even));
+		}
+		else
+		{
+			convertView.setBackgroundColor(this.context.getResources().getColor(R.color.row_background_color_odd));
+		}
 		
 		return convertView;
 	}

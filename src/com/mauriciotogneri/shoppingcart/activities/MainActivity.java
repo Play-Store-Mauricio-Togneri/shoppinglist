@@ -22,6 +22,8 @@ import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
+import com.mauriciotogneri.shoppingcart.model.Category;
+import com.mauriciotogneri.shoppingcart.model.Product;
 
 public class MainActivity extends Activity
 {
@@ -75,11 +77,48 @@ public class MainActivity extends Activity
 			}
 		});
 		
-		// updateList(true);
-		
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		// intent.setType("image/*");
 		// startActivityForResult(intent, 123);
+		
+		// initDatabase();
+	}
+	
+	private void initDatabase()
+	{
+		Category drinks = new Category("Drinks");
+		drinks.save();
+		
+		Category food = new Category("Food");
+		food.save();
+		
+		Category kitchen = new Category("Kitchen");
+		kitchen.save();
+		
+		// --------------------------------
+		
+		Product cocaCola = new Product("Coca-Cola", drinks, new byte[0]);
+		cocaCola.save();
+		
+		Product milk = new Product("Milk", drinks, new byte[0]);
+		milk.save();
+		
+		Product bananas = new Product("Bananas", food, new byte[0]);
+		bananas.save();
+		
+		Product cereals = new Product("Cereals", food, new byte[0]);
+		cereals.save();
+		
+		Product bag = new Product("Bag", kitchen, new byte[0]);
+		bag.save();
+		
+		// --------------------------------
+		
+		CartItem bananas1 = new CartItem(bananas, 12, false);
+		bananas1.save();
+		
+		CartItem bag1 = new CartItem(bag, 34, false);
+		bag1.save();
 	}
 	
 	private void selectCartItem(CartItem cartItem)
