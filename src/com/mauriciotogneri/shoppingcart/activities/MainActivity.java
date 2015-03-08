@@ -41,7 +41,6 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		setTitle("   " + getString(R.string.app_name));
 		
 		this.adapter = new ListAdapter(this, this.cartList);
 		
@@ -79,6 +78,7 @@ public class MainActivity extends Activity
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		// intent.setType("image/*");
 		// startActivityForResult(intent, 123);
+		
 	}
 	
 	private void selectProduct(Product product)

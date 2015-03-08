@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Shopping List</string>
+    <string name="app_name">Shopping Cart</string>
+    
+    <string name="label_list_empty">Empty List</string>
+    
+    <string name="main_toolbar_title">Shopping Cart</string>
+    <string name="main_toolbar_add_product">\u002B</string>
+    
+    <!-- ============================================================ -->
     
     <string name="button_accept">Accept</string>
     <string name="button_cancel">Cancel</string>
@@ -21,7 +28,7 @@
     <string name="product_name">Name</string>
     
     <string name="list_quantity">Quantity:</string>
-    <string name="list_empty">Empty List</string>
+    
     
     <string name="error_removing_product">Error removing product</string>
     <string name="error_creating_product">Error creating product</string>

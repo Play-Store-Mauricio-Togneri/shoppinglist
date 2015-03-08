@@ -8,24 +8,15 @@
 
         <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarTitle"
-            android:text="Add product" />
+            android:text="@string/main_toolbar_title" />
 
         <View style="@style/ToolbarSeparator" />
 
         <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarButton"
-            android:text="\uE086"
+            android:text="@string/main_toolbar_add_product"
             custom:font="glyphicons" />
-
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            style="@style/ToolbarButton"
-            android:text="\uF001"
-            custom:font="fontawesome" />
-
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            style="@style/ToolbarButton"
-            android:text="\uE962"
-            custom:font="icomoon" />
+        
     </LinearLayout>
 
     <ListView
@@ -38,8 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/list_empty"
+        android:text="@string/label_list_empty"
         android:textSize="@dimen/default_font_size"
+        android:textColor="@color/default_text_color"
         android:visibility="gone"
         custom:font="opensans" />
 
