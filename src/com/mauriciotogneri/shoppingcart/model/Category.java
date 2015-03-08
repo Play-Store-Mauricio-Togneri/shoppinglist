@@ -21,4 +21,10 @@ public class Category extends Model
 	{
 		return this.name;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return this.name;
+	}
 }

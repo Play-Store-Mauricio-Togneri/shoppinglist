@@ -8,6 +8,9 @@
     <string name="main_toolbar_title">Shopping Cart</string>
     <string name="main_toolbar_add_product">\u002B</string>
     
+    <string name="add_product_toolbar_title">Add product</string>
+    <string name="add_product_toolbar_add_product">\u002B</string>
+    
     <!-- ============================================================ -->
     
     <string name="button_accept">Accept</string>

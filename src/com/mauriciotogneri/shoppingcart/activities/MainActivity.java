@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
+import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,10 +18,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
-import com.mauriciotogneri.shoppingcart.screens.add.AddProductActivity;
 
 public class MainActivity extends Activity
 {
@@ -35,7 +36,7 @@ public class MainActivity extends Activity
 		
 		this.cartItemAdapter = new CartItemAdapter(this);
 		
-		ListView listView = (ListView)findViewById(R.id.list);
+		ListView listView = (ListView)findViewById(R.id.cart_list);
 		listView.setAdapter(this.cartItemAdapter);
 		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener()
@@ -64,6 +65,16 @@ public class MainActivity extends Activity
 			}
 		});
 		
+		TextView addProduct = (TextView)findViewById(R.id.add_product);
+		addProduct.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				addProduct();
+			}
+		});
+		
 		// updateList(true);
 		
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -85,7 +96,7 @@ public class MainActivity extends Activity
 		
 		if (this.cartItemAdapter.getCount() > 0)
 		{
-			ListView listView = (ListView)findViewById(R.id.list);
+			ListView listView = (ListView)findViewById(R.id.cart_list);
 			listView.setVisibility(View.VISIBLE);
 			
 			TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
@@ -93,7 +104,7 @@ public class MainActivity extends Activity
 		}
 		else
 		{
-			ListView listView = (ListView)findViewById(R.id.list);
+			ListView listView = (ListView)findViewById(R.id.cart_list);
 			listView.setVisibility(View.GONE);
 			
 			TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
@@ -163,7 +174,7 @@ public class MainActivity extends Activity
 		updateList(false);
 	}
 	
-	private void addCartItem()
+	private void addProduct()
 	{
 		Intent intent = new Intent(this, AddProductActivity.class);
 		startActivity(intent);
@@ -174,8 +185,10 @@ public class MainActivity extends Activity
 	{
 		super.onResume();
 		
+		List<CartItem> cartItems = Model.all(CartItem.class);
+		
 		this.cartItemAdapter.clear();
-		this.cartItemAdapter.addAll(CartItem.getAll());
+		this.cartItemAdapter.addAll(cartItems);
 		updateList(true);
 	}
 	

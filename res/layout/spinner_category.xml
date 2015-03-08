@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mauriciotogneri.shoppingcart.widgets.CustomTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.mauriciotogneri.shoppingcart"
+    android:id="@+id/name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:padding="10dp"
+    android:textColor="@color/default_text_color"
+    android:textSize="@dimen/default_font_size"
+    custom:font="opensans" />

@@ -1,9 +1,7 @@
 package com.mauriciotogneri.shoppingcart.model;
 
-import java.util.List;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
-import com.activeandroid.query.Select;
 
 public class CartItem extends Model
 {
@@ -60,10 +58,5 @@ public class CartItem extends Model
 	public void invertSelection()
 	{
 		this.selected = !this.selected;
-	}
-	
-	public static List<CartItem> getAll()
-	{
-		return new Select().from(CartItem.class).execute();
 	}
 }

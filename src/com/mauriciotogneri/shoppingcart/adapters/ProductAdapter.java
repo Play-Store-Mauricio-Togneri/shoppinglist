@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.screens.add;
+package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.List;
 import android.annotation.SuppressLint;
@@ -11,11 +11,11 @@ import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Product;
 
-public class AddProductAdapter extends ArrayAdapter<Product>
+public class ProductAdapter extends ArrayAdapter<Product>
 {
 	private final LayoutInflater inflater;
 	
-	public AddProductAdapter(Context context, List<Product> list)
+	public ProductAdapter(Context context, List<Product> list)
 	{
 		super(context, android.R.layout.simple_list_item_1, list);
 		
