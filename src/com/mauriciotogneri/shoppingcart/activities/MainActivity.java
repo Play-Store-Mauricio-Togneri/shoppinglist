@@ -81,10 +81,6 @@ public class MainActivity extends Activity
 		// intent.setType("image/*");
 		// startActivityForResult(intent, 123);
 		
-		Typeface fontFamily = Typeface.createFromAsset(getAssets(), "fonts/opensans.ttf");
-		TextView sampleText = (TextView)findViewById(R.id.toolbar_title);
-		sampleText.setTypeface(fontFamily);
-		
 		Typeface fontFamily1 = Typeface.createFromAsset(getAssets(), "fonts/glyphicons.ttf");
 		TextView sampleText1 = (TextView)findViewById(R.id.button_glyphicons);
 		sampleText1.setTypeface(fontFamily1);
