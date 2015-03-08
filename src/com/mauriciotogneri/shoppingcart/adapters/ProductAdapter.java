@@ -3,10 +3,13 @@ package com.mauriciotogneri.shoppingcart.adapters;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -36,11 +39,17 @@ public class ProductAdapter extends ArrayAdapter<Product>
 			convertView = this.inflater.inflate(R.layout.activity_add_product_row, null);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.title);
+		TextView name = (TextView)convertView.findViewById(R.id.name);
 		name.setText(product.getName());
-		name.setCompoundDrawablePadding(20);
+		
+		ImageView thumbnail = (ImageView)convertView.findViewById(R.id.thumbnail);
 		byte[] picture = product.getPicture();
-		name.setCompoundDrawablesWithIntrinsicBounds(R.drawable.product_bananas, 0, 0, 0);
+		
+		if ((picture != null) && (picture.length > 0))
+		{
+			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+			thumbnail.setImageBitmap(bitmap);
+		}
 		
 		if (position % 2 == 0)
 		{

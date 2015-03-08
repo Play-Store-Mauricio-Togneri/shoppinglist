@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
@@ -44,7 +46,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 			convertView = this.inflater.inflate(R.layout.activity_main_row, null);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.title);
+		TextView name = (TextView)convertView.findViewById(R.id.name);
 		name.setText(cartItem.getName());
 		
 		if (cartItem.isSelected())
@@ -70,16 +72,21 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		
 		ImageView thumbnail = (ImageView)convertView.findViewById(R.id.thumbnail);
 		byte[] picture = cartItem.getPicture();
-		thumbnail.setImageResource(R.drawable.product_bananas);
 		
-		ColorMatrix matrix = new ColorMatrix();
-		matrix.setSaturation(cartItem.isSelected() ? 0 : 1);
-		
-		ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-		thumbnail.setColorFilter(filter);
-		
-		CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
-		selected.setChecked(cartItem.isSelected());
+		if ((picture != null) && (picture.length > 0))
+		{
+			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+			thumbnail.setImageBitmap(bitmap);
+			
+			ColorMatrix matrix = new ColorMatrix();
+			matrix.setSaturation(cartItem.isSelected() ? 0 : 1);
+			
+			ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+			thumbnail.setColorFilter(filter);
+			
+			CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
+			selected.setChecked(cartItem.isSelected());
+		}
 		
 		return convertView;
 	}

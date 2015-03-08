@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -7,6 +8,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,19 +100,24 @@ public class MainActivity extends Activity
 		
 		// --------------------------------
 		
-		Product cocaCola = new Product("Coca-Cola", drinks, new byte[0]);
+		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.product_bananas);
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		byte[] bitmapdata = stream.toByteArray();
+		
+		Product cocaCola = new Product("Coca-Cola", drinks, bitmapdata);
 		cocaCola.save();
 		
-		Product milk = new Product("Milk", drinks, new byte[0]);
+		Product milk = new Product("Milk", drinks, bitmapdata);
 		milk.save();
 		
-		Product bananas = new Product("Bananas", food, new byte[0]);
+		Product bananas = new Product("Bananas", food, bitmapdata);
 		bananas.save();
 		
-		Product cereals = new Product("Cereals", food, new byte[0]);
+		Product cereals = new Product("Cereals", food, bitmapdata);
 		cereals.save();
 		
-		Product bag = new Product("Bag", kitchen, new byte[0]);
+		Product bag = new Product("Bag", kitchen, bitmapdata);
 		bag.save();
 		
 		// --------------------------------

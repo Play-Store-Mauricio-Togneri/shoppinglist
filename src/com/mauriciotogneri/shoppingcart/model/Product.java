@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.model;
 
+import android.util.Base64;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 
@@ -12,7 +13,7 @@ public class Product extends Model
 	private Category category;
 	
 	@Column(name = "picture")
-	private byte[] picture;
+	private String picture;
 	
 	public Product()
 	{
@@ -22,7 +23,7 @@ public class Product extends Model
 	{
 		this.name = name;
 		this.category = category;
-		this.picture = picture;
+		this.picture = Base64.encodeToString(picture, Base64.DEFAULT);
 	}
 	
 	public String getName()
@@ -43,6 +44,6 @@ public class Product extends Model
 	
 	public byte[] getPicture()
 	{
-		return this.picture;
+		return Base64.decode(this.picture, Base64.DEFAULT);
 	}
 }
