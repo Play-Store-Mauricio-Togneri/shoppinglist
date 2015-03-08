@@ -10,7 +10,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -80,21 +79,6 @@ public class MainActivity extends Activity
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		// intent.setType("image/*");
 		// startActivityForResult(intent, 123);
-		
-		Typeface fontFamily1 = Typeface.createFromAsset(getAssets(), "fonts/glyphicons.ttf");
-		TextView sampleText1 = (TextView)findViewById(R.id.button_glyphicons);
-		sampleText1.setTypeface(fontFamily1);
-		sampleText1.setText("\uE086");
-		
-		Typeface fontFamily2 = Typeface.createFromAsset(getAssets(), "fonts/fontawesome.ttf");
-		TextView sampleText2 = (TextView)findViewById(R.id.button_fontawesome);
-		sampleText2.setTypeface(fontFamily2);
-		sampleText2.setText("\uF001");
-		
-		Typeface fontFamily3 = Typeface.createFromAsset(getAssets(), "fonts/icomoon.ttf");
-		TextView sampleText3 = (TextView)findViewById(R.id.button_iconmoon);
-		sampleText3.setTypeface(fontFamily3);
-		sampleText3.setText("\uE962");
 	}
 	
 	private void selectProduct(Product product)

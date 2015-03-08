@@ -1,27 +1,21 @@
 package com.mauriciotogneri.shoppingcart.widgets;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
-import com.mauriciotogneri.shoppingcart.R;
 
 public class ToolbarTitle extends TextView
 {
 	public ToolbarTitle(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
-		init(context, attrs);
+		init();
 	}
 	
-	private void init(Context context, AttributeSet attrs)
+	private void init()
 	{
-		TypedArray styledAttributes = context.obtainStyledAttributes(attrs, R.styleable.ToolbarTitle);
-		String fontName = styledAttributes.getString(R.styleable.ToolbarTitle_font);
-		styledAttributes.recycle();
-		
-		Typeface font = Fonts.getFont(fontName);
+		Typeface font = Fonts.getFont(Fonts.OPEN_SANS);
 		setTypeface(font);
 	}
 }
