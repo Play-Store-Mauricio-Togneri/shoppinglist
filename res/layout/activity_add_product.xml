@@ -30,18 +30,31 @@
             android:text="@string/product_category"
             android:textColor="@color/default_text_color"
             android:textSize="@dimen/default_font_size"
-            android:padding="10dp"
-            android:background="@layout/border_label"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="#FFFFFF"
             custom:font="opensans" />
 
+        <View
+	        android:layout_width="0.5dp"
+	        android:layout_height="match_parent"
+	        android:background="@color/boder_color" />
+        
         <Spinner
             android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@layout/border_input" />
+            android:background="#FFFFFF" />
         
     </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/boder_color" />
     
     <ListView
         android:id="@+id/product_list"

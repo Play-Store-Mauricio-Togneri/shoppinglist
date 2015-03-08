@@ -12,8 +12,8 @@
         <View style="@style/HorizontalSeparator" />
 
         <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            style="@style/ToolbarButton"
             android:id="@+id/add_product"
+            style="@style/ToolbarButton"
             android:text="@string/icon_add" />
         
     </LinearLayout>

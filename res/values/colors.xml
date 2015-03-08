@@ -5,4 +5,6 @@
     
     <color name="toolbar_background_color">#00A0E6</color>
     
+    <color name="boder_color">#AAAAAA</color>
+    
 </resources>
