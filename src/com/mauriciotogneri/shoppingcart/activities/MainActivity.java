@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -28,6 +29,7 @@ import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
+import com.mauriciotogneri.shoppingcart.widgets.Fonts;
 
 public class MainActivity extends Activity
 {
@@ -209,6 +211,15 @@ public class MainActivity extends Activity
 		
 		AlertDialog dialog = builder.create();
 		dialog.show();
+		
+		Button buttonNegative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+		buttonNegative.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
+		
+		Button buttonNeutral = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+		buttonNeutral.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
+		
+		Button buttonPositive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+		buttonPositive.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
 	}
 	
 	private void updateQuantity(CartItem cartItem, int quantity)
