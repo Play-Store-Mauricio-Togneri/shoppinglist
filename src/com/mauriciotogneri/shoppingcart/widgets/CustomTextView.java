@@ -3,13 +3,14 @@ package com.mauriciotogneri.shoppingcart.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 
-public class ToolbarButton extends TextView
+public class CustomTextView extends TextView
 {
-	public ToolbarButton(Context context, AttributeSet attrs)
+	public CustomTextView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		init(context, attrs);
@@ -17,11 +18,14 @@ public class ToolbarButton extends TextView
 	
 	private void init(Context context, AttributeSet attrs)
 	{
-		TypedArray styledAttributes = context.obtainStyledAttributes(attrs, R.styleable.ToolbarButton);
-		String fontName = styledAttributes.getString(R.styleable.ToolbarButton_font);
+		TypedArray styledAttributes = context.obtainStyledAttributes(attrs, R.styleable.CustomTextView);
+		String fontName = styledAttributes.getString(R.styleable.CustomTextView_font);
 		styledAttributes.recycle();
 		
-		Typeface font = Fonts.getFont(fontName);
-		setTypeface(font);
+		if (!TextUtils.isEmpty(fontName))
+		{
+			Typeface font = Fonts.getFont(fontName);
+			setTypeface(font);
+		}
 	}
 }

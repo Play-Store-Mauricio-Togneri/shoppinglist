@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <com.mauriciotogneri.shoppingcart.widgets.ToolbarTitle
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarTitle"
             android:text="Add product" />
 
@@ -22,17 +22,17 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <com.mauriciotogneri.shoppingcart.widgets.ToolbarButton
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarButton"
             android:text="\uE086"
             custom:font="glyphicons" />
 
-        <com.mauriciotogneri.shoppingcart.widgets.ToolbarButton
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarButton"
             android:text="\uF001"
             custom:font="fontawesome" />
 
-        <com.mauriciotogneri.shoppingcart.widgets.ToolbarButton
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarButton"
             android:text="\uE962"
             custom:font="icomoon" />

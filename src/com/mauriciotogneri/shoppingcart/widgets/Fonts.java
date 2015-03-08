@@ -11,17 +11,12 @@ public class Fonts
 	private static final Map<String, Typeface> fonts = new HashMap<String, Typeface>();
 	private static final String FONTS_PATH = "fonts/";
 	
-	public static final String OPEN_SANS = "opensans";
-	public static final String GLYPHICONS = "glyphicons";
-	public static final String FONT_AWESOME = "fontawesome";
-	public static final String ICO_MOON = "icomoon";
-	
 	public static void init(Context context)
 	{
-		Fonts.loadFont(context.getAssets(), Fonts.OPEN_SANS);
-		Fonts.loadFont(context.getAssets(), Fonts.GLYPHICONS);
-		Fonts.loadFont(context.getAssets(), Fonts.FONT_AWESOME);
-		Fonts.loadFont(context.getAssets(), Fonts.ICO_MOON);
+		Fonts.loadFont(context.getAssets(), "opensans");
+		Fonts.loadFont(context.getAssets(), "glyphicons");
+		Fonts.loadFont(context.getAssets(), "fontawesome");
+		Fonts.loadFont(context.getAssets(), "icomoon");
 	}
 	
 	private static void loadFont(AssetManager assets, String name)
