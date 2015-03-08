@@ -1,15 +1,13 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,13 +30,13 @@ import com.mauriciotogneri.shoppingcart.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.ProductAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
-import com.mauriciotogneri.shoppingcart.screens.edit.EditProductActivity;
 
 public class AddProductActivity extends Activity
 {
 	private ProductAdapter productAdapter;
-	private final List<Product> totalList = new ArrayList<Product>();
-	private final List<Product> filteredList = new ArrayList<Product>();
+	
+	// private final List<Product> totalList = new ArrayList<Product>();
+	// private final List<Product> filteredList = new ArrayList<Product>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +45,7 @@ public class AddProductActivity extends Activity
 		setContentView(R.layout.activity_add_product);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		this.productAdapter = new ProductAdapter(this, this.filteredList);
+		this.productAdapter = new ProductAdapter(this);
 		
 		List<Category> categories = Model.all(Category.class);
 		
@@ -60,8 +58,7 @@ public class AddProductActivity extends Activity
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
 			{
-				Category category = (Category)parent.getItemAtPosition(position);
-				filterList(category);
+				refreshList();
 			}
 			
 			@Override
@@ -117,8 +114,14 @@ public class AddProductActivity extends Activity
 		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
 		builder.setView(layout);
 		
-		ImageView image = (ImageView)layout.findViewById(R.id.image);
-		// image.setImageResource(product.getPicture());
+		ImageView thumbnail = (ImageView)layout.findViewById(R.id.thumbnail);
+		byte[] picture = product.getPicture();
+		
+		if ((picture != null) && (picture.length > 0))
+		{
+			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+			thumbnail.setImageBitmap(bitmap);
+		}
 		
 		final NumberPicker quantity = (NumberPicker)layout.findViewById(R.id.quantity);
 		quantity.setMinValue(1);
@@ -216,8 +219,8 @@ public class AddProductActivity extends Activity
 	
 	private void createProduct()
 	{
-		Intent intent = new Intent(this, EditProductActivity.class);
-		startActivity(intent);
+		// Intent intent = new Intent(this, EditProductActivity.class);
+		// startActivity(intent);
 	}
 	
 	private void editProduct(Product product)
@@ -243,37 +246,16 @@ public class AddProductActivity extends Activity
 		// }
 	}
 	
-	private void filterList(Category category)
-	{
-		this.filteredList.clear();
-		
-		if (category != null)
-		{
-			for (Product product : this.totalList)
-			{
-				if (product.isCategory(category))
-				{
-					this.filteredList.add(product);
-				}
-			}
-		}
-		else
-		{
-			this.filteredList.addAll(this.totalList);
-		}
-		
-		sortList(this.filteredList);
-		refreshList();
-	}
-	
 	private void refreshList()
 	{
-		this.productAdapter.notifyDataSetChanged();
+		Spinner categoryField = (Spinner)findViewById(R.id.category);
+		Category category = (Category)categoryField.getSelectedItem();
+		this.productAdapter.update(category);
 		
 		ListView listView = (ListView)findViewById(R.id.product_list);
 		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
 		
-		if (this.filteredList.size() > 0)
+		if (this.productAdapter.getCount() > 0)
 		{
 			listView.setVisibility(View.VISIBLE);
 			emptyLabel.setVisibility(View.GONE);
@@ -290,25 +272,6 @@ public class AddProductActivity extends Activity
 	{
 		super.onResume();
 		
-		List<Product> products = Model.all(Product.class);
-		
-		this.totalList.clear();
-		this.totalList.addAll(products);
-		
-		Spinner categoryField = (Spinner)findViewById(R.id.category);
-		Category category = (Category)categoryField.getSelectedItem();
-		filterList(category);
-	}
-	
-	private void sortList(List<Product> list)
-	{
-		Collections.sort(list, new Comparator<Product>()
-		{
-			@Override
-			public int compare(Product lhs, Product rhs)
-			{
-				return lhs.getName().compareTo(rhs.getName());
-			}
-		});
+		refreshList();
 	}
 }

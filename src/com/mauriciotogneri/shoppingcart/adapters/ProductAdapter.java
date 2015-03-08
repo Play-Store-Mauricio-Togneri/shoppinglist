@@ -1,5 +1,7 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,19 +13,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 
 public class ProductAdapter extends ArrayAdapter<Product>
 {
-	private final Context context;
 	private final LayoutInflater inflater;
 	
-	public ProductAdapter(Context context, List<Product> list)
+	public ProductAdapter(Context context)
 	{
-		super(context, android.R.layout.simple_list_item_1, list);
+		super(context, android.R.layout.simple_list_item_1, new ArrayList<Product>());
 		
-		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 	}
 	
@@ -52,5 +54,42 @@ public class ProductAdapter extends ArrayAdapter<Product>
 		}
 		
 		return convertView;
+	}
+	
+	public void update(Category category)
+	{
+		clear();
+		
+		List<Product> products = Model.all(Product.class);
+		
+		if (category != null)
+		{
+			List<Product> filtered = new ArrayList<Product>();
+			
+			for (Product product : products)
+			{
+				if (product.isCategory(category) && (!product.isInCart()))
+				{
+					filtered.add(product);
+				}
+			}
+			
+			addAll(filtered);
+		}
+		else
+		{
+			addAll(products);
+		}
+		
+		sort(new Comparator<Product>()
+		{
+			@Override
+			public int compare(Product lhs, Product rhs)
+			{
+				return lhs.getName().compareTo(rhs.getName());
+			}
+		});
+		
+		notifyDataSetChanged();
 	}
 }

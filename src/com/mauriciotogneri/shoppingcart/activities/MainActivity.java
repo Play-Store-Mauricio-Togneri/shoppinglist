@@ -167,8 +167,14 @@ public class MainActivity extends Activity
 		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
 		builder.setView(layout);
 		
-		ImageView image = (ImageView)layout.findViewById(R.id.image);
-		// image.setImageResource(cartItem.getPicture());
+		ImageView thumbnail = (ImageView)layout.findViewById(R.id.thumbnail);
+		byte[] picture = cartItem.getPicture();
+		
+		if ((picture != null) && (picture.length > 0))
+		{
+			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
+			thumbnail.setImageBitmap(bitmap);
+		}
 		
 		final NumberPicker quantity = (NumberPicker)layout.findViewById(R.id.quantity);
 		quantity.setMinValue(1);

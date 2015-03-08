@@ -3,6 +3,7 @@ package com.mauriciotogneri.shoppingcart.model;
 import android.util.Base64;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.query.Select;
 
 public class Product extends Model
 {
@@ -40,6 +41,13 @@ public class Product extends Model
 	{
 		// TODO: override equals?
 		return this.category.equals(category);
+	}
+	
+	public boolean isInCart()
+	{
+		CartItem cartItem = new Select().from(CartItem.class).where("product = ?", getId()).executeSingle();
+		
+		return (cartItem != null);
 	}
 	
 	public byte[] getPicture()
