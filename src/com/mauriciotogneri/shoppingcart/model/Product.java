@@ -35,6 +35,12 @@ public class Product extends Model
 		return this.category;
 	}
 	
+	public boolean isCategory(Category category)
+	{
+		// TODO: override equals?
+		return this.category.equals(category);
+	}
+	
 	public byte[] getPicture()
 	{
 		return this.picture;

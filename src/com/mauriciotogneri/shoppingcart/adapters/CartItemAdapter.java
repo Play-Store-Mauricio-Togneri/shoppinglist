@@ -6,6 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +41,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.activity_list_row, null);
+			convertView = this.inflater.inflate(R.layout.activity_main_row, null);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.title);
@@ -55,7 +57,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		}
 		
 		TextView quantity = (TextView)convertView.findViewById(R.id.quantity);
-		quantity.setText(this.context.getString(R.string.list_quantity) + " " + cartItem.getQuantity());
+		quantity.setText(this.context.getString(R.string.list_quantity) + "   " + cartItem.getQuantity());
 		
 		if (cartItem.isSelected())
 		{
@@ -68,7 +70,13 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		
 		ImageView thumbnail = (ImageView)convertView.findViewById(R.id.thumbnail);
 		byte[] picture = cartItem.getPicture();
-		// thumbnail.setImageResource();
+		thumbnail.setImageResource(R.drawable.product_bananas);
+		
+		ColorMatrix matrix = new ColorMatrix();
+		matrix.setSaturation(cartItem.isSelected() ? 0 : 1);
+		
+		ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+		thumbnail.setColorFilter(filter);
 		
 		CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
 		selected.setChecked(cartItem.isSelected());
@@ -123,5 +131,20 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		}
 		
 		notifyDataSetChanged();
+	}
+	
+	public void removeSelectedItems()
+	{
+		int limit = getCount();
+		
+		for (int i = 0; i < limit; i++)
+		{
+			CartItem cartItem = getItem(i);
+			
+			if (cartItem.isSelected())
+			{
+				cartItem.delete();
+			}
+		}
 	}
 }

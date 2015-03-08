@@ -94,6 +94,16 @@ public class AddProductActivity extends Activity
 				selectProduct(product);
 			}
 		});
+		
+		TextView createProduct = (TextView)findViewById(R.id.create_product);
+		createProduct.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				createProduct();
+			}
+		});
 	}
 	
 	@SuppressLint("InflateParams")
@@ -204,7 +214,7 @@ public class AddProductActivity extends Activity
 		dialog.show();
 	}
 	
-	private void newProduct()
+	private void createProduct()
 	{
 		Intent intent = new Intent(this, EditProductActivity.class);
 		startActivity(intent);
@@ -239,15 +249,13 @@ public class AddProductActivity extends Activity
 		
 		if (category != null)
 		{
-			// Type[] types = category.getTypes();
-			//
-			// for (Product product : this.totalList)
-			// {
-			// if (product.isType(types))
-			// {
-			// this.filteredList.add(product);
-			// }
-			// }
+			for (Product product : this.totalList)
+			{
+				if (product.isCategory(category))
+				{
+					this.filteredList.add(product);
+				}
+			}
 		}
 		else
 		{
@@ -262,20 +270,17 @@ public class AddProductActivity extends Activity
 	{
 		this.productAdapter.notifyDataSetChanged();
 		
+		ListView listView = (ListView)findViewById(R.id.product_list);
+		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
+		
 		if (this.filteredList.size() > 0)
 		{
-			ListView listView = (ListView)findViewById(R.id.product_list);
 			listView.setVisibility(View.VISIBLE);
-			
-			TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
 			emptyLabel.setVisibility(View.GONE);
 		}
 		else
 		{
-			ListView listView = (ListView)findViewById(R.id.product_list);
 			listView.setVisibility(View.GONE);
-			
-			TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
 			emptyLabel.setVisibility(View.VISIBLE);
 		}
 	}

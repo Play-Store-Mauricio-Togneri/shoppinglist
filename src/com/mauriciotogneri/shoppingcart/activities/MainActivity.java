@@ -94,20 +94,17 @@ public class MainActivity extends Activity
 	{
 		this.cartItemAdapter.update(sort);
 		
+		ListView listView = (ListView)findViewById(R.id.cart_list);
+		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
+		
 		if (this.cartItemAdapter.getCount() > 0)
 		{
-			ListView listView = (ListView)findViewById(R.id.cart_list);
 			listView.setVisibility(View.VISIBLE);
-			
-			TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
 			emptyLabel.setVisibility(View.GONE);
 		}
 		else
 		{
-			ListView listView = (ListView)findViewById(R.id.cart_list);
 			listView.setVisibility(View.GONE);
-			
-			TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
 			emptyLabel.setVisibility(View.VISIBLE);
 		}
 	}
@@ -166,9 +163,7 @@ public class MainActivity extends Activity
 	
 	private void removeCartItem(CartItem cartItem)
 	{
-		cartItem.setQuantity(0);
-		cartItem.setSelected(false);
-		cartItem.save();
+		cartItem.delete();
 		
 		this.cartItemAdapter.remove(cartItem);
 		updateList(false);
@@ -197,18 +192,6 @@ public class MainActivity extends Activity
 	{
 		super.onDestroy();
 		
-		int limit = this.cartItemAdapter.getCount();
-		
-		for (int i = 0; i < limit; i++)
-		{
-			CartItem cartItem = this.cartItemAdapter.getItem(i);
-			
-			if (cartItem.isSelected())
-			{
-				cartItem.setQuantity(0);
-				cartItem.setSelected(false);
-				cartItem.save();
-			}
-		}
+		this.cartItemAdapter.removeSelectedItems();
 	}
 }
