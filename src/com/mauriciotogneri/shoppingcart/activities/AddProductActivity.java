@@ -28,15 +28,13 @@ import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.ProductAdapter;
+import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 
 public class AddProductActivity extends Activity
 {
 	private ProductAdapter productAdapter;
-	
-	// private final List<Product> totalList = new ArrayList<Product>();
-	// private final List<Product> filteredList = new ArrayList<Product>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -70,6 +68,16 @@ public class AddProductActivity extends Activity
 		ListView listView = (ListView)findViewById(R.id.product_list);
 		listView.setAdapter(this.productAdapter);
 		
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Product product = (Product)parent.getItemAtPosition(position);
+				selectProduct(product);
+			}
+		});
+		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener()
 		{
 			@Override
@@ -79,16 +87,6 @@ public class AddProductActivity extends Activity
 				showProductOptions(product);
 				
 				return true;
-			}
-		});
-		
-		listView.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				Product product = (Product)parent.getItemAtPosition(position);
-				selectProduct(product);
 			}
 		});
 		
@@ -146,17 +144,10 @@ public class AddProductActivity extends Activity
 	
 	private void addProduct(Product product, int quantity)
 	{
-		// product.setQuantity(quantity);
-		// product.setSelected(false);
-		//
-		// ProductDao productDao = new ProductDao();
-		//
-		// if (productDao.updateProduct(product))
-		// {
-		// this.filteredList.remove(product);
-		// this.totalList.remove(product);
-		// refreshList();
-		// }
+		CartItem cartItem = new CartItem(product, quantity, false);
+		cartItem.save();
+		
+		refreshList();
 	}
 	
 	private void showProductOptions(final Product product)
