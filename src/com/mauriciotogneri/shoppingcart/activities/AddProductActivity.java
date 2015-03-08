@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,14 +12,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -28,6 +28,8 @@ import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.ProductAdapter;
+import com.mauriciotogneri.shoppingcart.adapters.ProductOptionAdapter;
+import com.mauriciotogneri.shoppingcart.adapters.ProductOptionAdapter.Option;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -104,8 +106,12 @@ public class AddProductActivity extends Activity
 	@SuppressLint("InflateParams")
 	private void selectProduct(final Product product)
 	{
+		LinearLayout customTitle = (LinearLayout)getLayoutInflater().inflate(R.layout.dialog_title, null);
+		TextView dialogTitle = (TextView)customTitle.findViewById(R.id.title);
+		dialogTitle.setText(product.getName());
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(product.getName());
+		builder.setCustomTitle(customTitle);
 		builder.setCancelable(true);
 		
 		LayoutInflater inflater = LayoutInflater.from(this);
@@ -150,41 +156,24 @@ public class AddProductActivity extends Activity
 		refreshList();
 	}
 	
+	@SuppressLint("InflateParams")
 	private void showProductOptions(final Product product)
 	{
 		final int EDIT_PRODUCT = 0;
 		final int REMOVE_PRODCUT = 1;
 		
-		String[] list = new String[2];
-		list[EDIT_PRODUCT] = getString(R.string.button_edit);
-		list[REMOVE_PRODCUT] = getString(R.string.button_remove);
+		List<Option> optionsList = new ArrayList<Option>();
+		optionsList.add(new Option(getString(R.string.icon_edit), getString(R.string.button_edit)));
+		optionsList.add(new Option(getString(R.string.icon_remove), getString(R.string.button_remove)));
 		
-		ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, android.R.id.text1, list)
-		{
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent)
-			{
-				View view = super.getView(position, convertView, parent);
-				TextView text = (TextView)view.findViewById(android.R.id.text1);
-				text.setCompoundDrawablePadding(20);
-				
-				switch (position)
-				{
-					case EDIT_PRODUCT:
-						text.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_edit, 0, 0, 0);
-						break;
-					
-					case REMOVE_PRODCUT:
-						text.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_delete, 0, 0, 0);
-						break;
-				}
-				
-				return view;
-			}
-		};
+		ListAdapter adapter = new ProductOptionAdapter(this, optionsList);
+		
+		LinearLayout customTitle = (LinearLayout)getLayoutInflater().inflate(R.layout.dialog_title, null);
+		TextView dialogTitle = (TextView)customTitle.findViewById(R.id.title);
+		dialogTitle.setText(product.getName());
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(product.getName());
+		builder.setCustomTitle(customTitle);
 		builder.setCancelable(true);
 		builder.setAdapter(adapter, new OnClickListener()
 		{

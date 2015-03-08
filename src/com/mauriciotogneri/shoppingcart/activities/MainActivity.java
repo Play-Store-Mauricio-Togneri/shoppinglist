@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -159,8 +160,12 @@ public class MainActivity extends Activity
 	@SuppressLint("InflateParams")
 	private void displayCartItem(final CartItem cartItem)
 	{
+		LinearLayout customTitle = (LinearLayout)getLayoutInflater().inflate(R.layout.dialog_title, null);
+		TextView dialogTitle = (TextView)customTitle.findViewById(R.id.title);
+		dialogTitle.setText(cartItem.getName());
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(cartItem.getName());
+		builder.setCustomTitle(customTitle);
 		builder.setCancelable(true);
 		
 		LayoutInflater inflater = LayoutInflater.from(this);

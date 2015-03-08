@@ -6,7 +6,9 @@
     <string name="label_list_empty">Empty List</string>
     
     <string name="icon_add">\u002B</string>
-    <string name="icon_dropdown">\uE114</string>
+    <string name="icon_dropdown">\uE259</string>
+    <string name="icon_remove">\uE020</string>
+    <string name="icon_edit">\uE065</string>
     
     <string name="main_toolbar_title">Shopping Cart</string>
     
