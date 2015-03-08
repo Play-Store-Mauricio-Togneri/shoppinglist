@@ -2,12 +2,18 @@ package com.mauriciotogneri.shoppingcart.model;
 
 import java.util.List;
 import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
 import com.activeandroid.query.Select;
 
 public class CartItem extends Model
 {
+	@Column(name = "product")
 	private Product product;
+	
+	@Column(name = "quantity")
 	private int quantity;
+	
+	@Column(name = "selected")
 	private boolean selected;
 	
 	public CartItem()

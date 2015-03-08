@@ -1,6 +1,5 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
-import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,8 +20,6 @@ import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
-import com.mauriciotogneri.shoppingcart.model.Category;
-import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.screens.add.AddProductActivity;
 
 public class MainActivity extends Activity
@@ -72,18 +69,6 @@ public class MainActivity extends Activity
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		// intent.setType("image/*");
 		// startActivityForResult(intent, 123);
-		
-		Category category = new Category("Drinks");
-		category.save();
-		
-		Product milk = new Product("Milk", category, new byte[0]);
-		milk.save();
-		
-		CartItem cartItem = new CartItem(milk, 123, true);
-		cartItem.save();
-		
-		List<CartItem> l = CartItem.getAll();
-		System.out.println(l);
 	}
 	
 	private void selectCartItem(CartItem cartItem)

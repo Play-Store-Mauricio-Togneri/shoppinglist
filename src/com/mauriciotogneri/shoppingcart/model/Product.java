@@ -1,11 +1,17 @@
 package com.mauriciotogneri.shoppingcart.model;
 
 import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
 
 public class Product extends Model
 {
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "category")
 	private Category category;
+	
+	@Column(name = "picture")
 	private byte[] picture;
 	
 	public Product()
