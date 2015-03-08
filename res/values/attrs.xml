@@ -2,7 +2,12 @@
 <resources>
 
     <declare-styleable name="CustomTextView">
-        <attr name="font" format="string" />
+        <attr name="font" format="string">
+            <enum name="opensans" value="0" />
+            <enum name="glyphicons" value="1" />
+            <enum name="fontawesome" value="2" />
+            <enum name="icomoon" value="3" />
+        </attr>
     </declare-styleable>
 
 </resources>

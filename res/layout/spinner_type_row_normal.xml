@@ -5,5 +5,5 @@
     android:layout_gravity="center_vertical"
     android:padding="10dp"
     android:gravity="center_vertical"
-    android:textColor="@color/default_font_color"
+    android:textColor="@color/toolbar_background_color"
     android:textSize="@dimen/default_font_size" />

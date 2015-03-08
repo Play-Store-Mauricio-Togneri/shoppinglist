@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/product_category"
-            android:textColor="@color/default_font_color"
+            android:textColor="@color/toolbar_background_color"
             android:textSize="@dimen/default_font_size"
             android:padding="10dp"
             android:paddingRight="15dp"

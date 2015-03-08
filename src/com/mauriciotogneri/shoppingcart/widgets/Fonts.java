@@ -13,15 +13,15 @@ public class Fonts
 	
 	public static void init(Context context)
 	{
-		Fonts.loadFont(context.getAssets(), "opensans");
-		Fonts.loadFont(context.getAssets(), "glyphicons");
-		Fonts.loadFont(context.getAssets(), "fontawesome");
-		Fonts.loadFont(context.getAssets(), "icomoon");
+		Fonts.loadFont(context.getAssets(), "opensans", "0");
+		Fonts.loadFont(context.getAssets(), "glyphicons", "1");
+		Fonts.loadFont(context.getAssets(), "fontawesome", "2");
+		Fonts.loadFont(context.getAssets(), "icomoon", "3");
 	}
 	
-	private static void loadFont(AssetManager assets, String name)
+	private static void loadFont(AssetManager assets, String name, String key)
 	{
-		Fonts.fonts.put(name, Typeface.createFromAsset(assets, Fonts.FONTS_PATH + name + ".ttf"));
+		Fonts.fonts.put(key, Typeface.createFromAsset(assets, Fonts.FONTS_PATH + name + ".ttf"));
 	}
 	
 	public static Typeface getFont(String name, int style)
