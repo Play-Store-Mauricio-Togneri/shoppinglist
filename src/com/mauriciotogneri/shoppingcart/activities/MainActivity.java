@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -17,9 +16,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -29,7 +26,7 @@ import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
-import com.mauriciotogneri.shoppingcart.widgets.Fonts;
+import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 
 public class MainActivity extends Activity
 {
@@ -162,17 +159,11 @@ public class MainActivity extends Activity
 	@SuppressLint("InflateParams")
 	private void displayCartItem(final CartItem cartItem)
 	{
-		LinearLayout customTitle = (LinearLayout)getLayoutInflater().inflate(R.layout.dialog_title, null);
-		TextView dialogTitle = (TextView)customTitle.findViewById(R.id.title);
-		dialogTitle.setText(cartItem.getName());
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setCustomTitle(customTitle);
-		builder.setCancelable(true);
+		CustomDialog dialog = new CustomDialog(this, cartItem.getName());
 		
 		LayoutInflater inflater = LayoutInflater.from(this);
 		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
-		builder.setView(layout);
+		dialog.setView(layout);
 		
 		ImageView thumbnail = (ImageView)layout.findViewById(R.id.thumbnail);
 		byte[] picture = cartItem.getPicture();
@@ -188,7 +179,7 @@ public class MainActivity extends Activity
 		quantity.setMaxValue(100);
 		quantity.setValue(cartItem.getQuantity());
 		
-		builder.setPositiveButton(R.string.button_accept, new OnClickListener()
+		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int which)
@@ -198,9 +189,9 @@ public class MainActivity extends Activity
 			}
 		});
 		
-		builder.setNegativeButton(R.string.button_cancel, null);
+		dialog.setNegativeButton(R.string.button_cancel, null);
 		
-		builder.setNeutralButton(R.string.button_remove, new OnClickListener()
+		dialog.setNeutralButton(R.string.button_remove, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int which)
@@ -209,17 +200,7 @@ public class MainActivity extends Activity
 			}
 		});
 		
-		AlertDialog dialog = builder.create();
-		dialog.show();
-		
-		Button buttonNegative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-		buttonNegative.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
-		
-		Button buttonNeutral = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-		buttonNeutral.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
-		
-		Button buttonPositive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-		buttonPositive.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
+		dialog.display();
 	}
 	
 	private void updateQuantity(CartItem cartItem, int quantity)

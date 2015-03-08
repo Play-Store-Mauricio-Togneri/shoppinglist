@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
@@ -18,7 +17,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -33,6 +31,7 @@ import com.mauriciotogneri.shoppingcart.adapters.ProductOptionAdapter.Option;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
+import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 
 public class AddProductActivity extends Activity
 {
@@ -106,17 +105,11 @@ public class AddProductActivity extends Activity
 	@SuppressLint("InflateParams")
 	private void selectProduct(final Product product)
 	{
-		LinearLayout customTitle = (LinearLayout)getLayoutInflater().inflate(R.layout.dialog_title, null);
-		TextView dialogTitle = (TextView)customTitle.findViewById(R.id.title);
-		dialogTitle.setText(product.getName());
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setCustomTitle(customTitle);
-		builder.setCancelable(true);
+		CustomDialog dialog = new CustomDialog(this, product.getName());
 		
 		LayoutInflater inflater = LayoutInflater.from(this);
 		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
-		builder.setView(layout);
+		dialog.setView(layout);
 		
 		ImageView thumbnail = (ImageView)layout.findViewById(R.id.thumbnail);
 		byte[] picture = product.getPicture();
@@ -132,7 +125,7 @@ public class AddProductActivity extends Activity
 		quantity.setMaxValue(100);
 		quantity.setValue(1);
 		
-		builder.setPositiveButton(R.string.button_accept, new OnClickListener()
+		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int which)
@@ -142,10 +135,9 @@ public class AddProductActivity extends Activity
 			}
 		});
 		
-		builder.setNegativeButton(R.string.button_cancel, null);
+		dialog.setNegativeButton(R.string.button_cancel, null);
 		
-		AlertDialog dialog = builder.create();
-		dialog.show();
+		dialog.display();
 	}
 	
 	private void addProduct(Product product, int quantity)
@@ -166,16 +158,10 @@ public class AddProductActivity extends Activity
 		optionsList.add(new Option(getString(R.string.icon_edit), getString(R.string.button_edit)));
 		optionsList.add(new Option(getString(R.string.icon_remove), getString(R.string.button_remove)));
 		
+		CustomDialog dialog = new CustomDialog(this, product.getName());
+		
 		ListAdapter adapter = new ProductOptionAdapter(this, optionsList);
-		
-		LinearLayout customTitle = (LinearLayout)getLayoutInflater().inflate(R.layout.dialog_title, null);
-		TextView dialogTitle = (TextView)customTitle.findViewById(R.id.title);
-		dialogTitle.setText(product.getName());
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setCustomTitle(customTitle);
-		builder.setCancelable(true);
-		builder.setAdapter(adapter, new OnClickListener()
+		dialog.setAdapter(adapter, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int index)
@@ -193,8 +179,7 @@ public class AddProductActivity extends Activity
 			}
 		});
 		
-		AlertDialog dialog = builder.create();
-		dialog.show();
+		dialog.display();
 	}
 	
 	private void createProduct()
