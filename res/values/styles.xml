@@ -55,7 +55,7 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:gravity">center</item>
         <item name="android:clickable">true</item>
-        <item name="android:background">@layout/border_toolbar_button</item>
+        <item name="android:background">@layout/background_toolbar_button</item>
         <item name="font">glyphicons</item>
     </style>
 

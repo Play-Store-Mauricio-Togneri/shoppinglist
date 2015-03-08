@@ -51,15 +51,6 @@ public class ProductAdapter extends ArrayAdapter<Product>
 			thumbnail.setImageBitmap(bitmap);
 		}
 		
-		if (position % 2 == 0)
-		{
-			convertView.setBackgroundColor(this.context.getResources().getColor(R.color.row_background_color_even));
-		}
-		else
-		{
-			convertView.setBackgroundColor(this.context.getResources().getColor(R.color.row_background_color_odd));
-		}
-		
 		return convertView;
 	}
 }

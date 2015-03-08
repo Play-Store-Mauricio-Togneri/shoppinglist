@@ -8,7 +8,4 @@
     
     <color name="boder_color">#AAAAAA</color>
     
-    <color name="row_background_color_even">#FFFFFF</color>
-    <color name="row_background_color_odd">#FAFAFA</color>
-    
 </resources>
