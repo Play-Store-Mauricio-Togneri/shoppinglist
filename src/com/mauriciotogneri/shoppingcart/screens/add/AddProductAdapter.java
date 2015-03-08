@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.objects.Product;
+import com.mauriciotogneri.shoppingcart.model.Product;
 
 public class AddProductAdapter extends ArrayAdapter<Product>
 {
@@ -37,7 +37,7 @@ public class AddProductAdapter extends ArrayAdapter<Product>
 		TextView name = (TextView)convertView.findViewById(R.id.name);
 		name.setText(product.getName());
 		name.setCompoundDrawablePadding(15);
-		name.setCompoundDrawablesWithIntrinsicBounds(product.getThumbnail(), 0, 0, 0);
+		// name.setCompoundDrawablesWithIntrinsicBounds(product.getThumbnail(), 0, 0, 0);
 		
 		return convertView;
 	}
