@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00A0E6"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Add product"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+        
+        <View 
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        
+        <TextView
+            android:id="@+id/button_glyphicons"
+            android:clickable="true"
+	        android:layout_width="50dp"
+	        android:layout_height="50dp"
+	        android:textColor="#FFFFFF"
+	        android:background="@layout/border_toolbar_button"
+	        android:text="+"
+	        android:gravity="center"
+	        android:textSize="20sp" />
+        
+        <TextView
+            android:id="@+id/button_fontawesome"
+            android:clickable="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textColor="#FFFFFF"
+            android:background="@layout/border_toolbar_button"
+            android:text="+"
+            android:gravity="center"
+            android:textSize="20sp" />
+        
+        <TextView
+            android:id="@+id/button_iconmoon"
+            android:clickable="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textColor="#FFFFFF"
+            android:background="@layout/border_toolbar_button"
+            android:text="+"
+            android:gravity="center"
+            android:textSize="20sp" />
+        
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/empty_label"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/list_empty"
+        android:textSize="@dimen/default_font_size"
+        android:visibility="gone" />
+
+</LinearLayout>

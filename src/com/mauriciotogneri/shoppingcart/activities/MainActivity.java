@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +18,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -30,52 +34,71 @@ import com.mauriciotogneri.shoppingcart.screens.add.AddProductActivity;
 public class MainActivity extends Activity
 {
 	private ListAdapter adapter;
-	private final List<Product> productsList = new ArrayList<Product>();
+	private final List<Product> cartList = new ArrayList<Product>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_list);
+		setContentView(R.layout.activity_main);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		// setTitle("   " + getString(R.string.app_name));
-		//
-		// this.adapter = new ListAdapter(this, this.productsList);
-		//
-		// ListView listView = (ListView)findViewById(R.id.list);
-		// listView.setAdapter(this.adapter);
-		//
-		// listView.setOnItemLongClickListener(new OnItemLongClickListener()
-		// {
-		// @Override
-		// public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
-		// {
-		// Product product = (Product)parent.getItemAtPosition(position);
-		//
-		// if (!product.isSelected())
-		// {
-		// displayProduct(product);
-		// }
-		//
-		// return true;
-		// }
-		// });
-		//
-		// listView.setOnItemClickListener(new OnItemClickListener()
-		// {
-		// @Override
-		// public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-		// {
-		// Product product = (Product)parent.getItemAtPosition(position);
-		// selectProduct(product);
-		// }
-		// });
-		//
-		// updateList(true);
-		//
+		setTitle("   " + getString(R.string.app_name));
+		
+		this.adapter = new ListAdapter(this, this.cartList);
+		
+		ListView listView = (ListView)findViewById(R.id.list);
+		listView.setAdapter(this.adapter);
+		
+		listView.setOnItemLongClickListener(new OnItemLongClickListener()
+		{
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Product product = (Product)parent.getItemAtPosition(position);
+				
+				if (!product.isSelected())
+				{
+					displayProduct(product);
+				}
+				
+				return true;
+			}
+		});
+		
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				Product product = (Product)parent.getItemAtPosition(position);
+				selectProduct(product);
+			}
+		});
+		
+		updateList(true);
+		
 		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		// intent.setType("image/*");
 		// startActivityForResult(intent, 123);
+		
+		Typeface fontFamily = Typeface.createFromAsset(getAssets(), "fonts/opensans.ttf");
+		TextView sampleText = (TextView)findViewById(R.id.toolbar_title);
+		sampleText.setTypeface(fontFamily);
+		
+		Typeface fontFamily1 = Typeface.createFromAsset(getAssets(), "fonts/glyphicons.ttf");
+		TextView sampleText1 = (TextView)findViewById(R.id.button_glyphicons);
+		sampleText1.setTypeface(fontFamily1);
+		sampleText1.setText("\uE086");
+		
+		Typeface fontFamily2 = Typeface.createFromAsset(getAssets(), "fonts/fontawesome.ttf");
+		TextView sampleText2 = (TextView)findViewById(R.id.button_fontawesome);
+		sampleText2.setTypeface(fontFamily2);
+		sampleText2.setText("\uF001");
+		
+		Typeface fontFamily3 = Typeface.createFromAsset(getAssets(), "fonts/icomoon.ttf");
+		TextView sampleText3 = (TextView)findViewById(R.id.button_iconmoon);
+		sampleText3.setTypeface(fontFamily3);
+		sampleText3.setText("\uE962");
 	}
 	
 	private void selectProduct(Product product)
@@ -97,7 +120,7 @@ public class MainActivity extends Activity
 			List<Product> notSelected = new ArrayList<Product>();
 			List<Product> selected = new ArrayList<Product>();
 			
-			for (Product product : this.productsList)
+			for (Product product : this.cartList)
 			{
 				if (product.isSelected())
 				{
@@ -127,14 +150,14 @@ public class MainActivity extends Activity
 				}
 			});
 			
-			this.productsList.clear();
-			this.productsList.addAll(notSelected);
-			this.productsList.addAll(selected);
+			this.cartList.clear();
+			this.cartList.addAll(notSelected);
+			this.cartList.addAll(selected);
 		}
 		
 		this.adapter.notifyDataSetChanged();
 		
-		if (this.productsList.size() > 0)
+		if (this.cartList.size() > 0)
 		{
 			ListView listView = (ListView)findViewById(R.id.list);
 			listView.setVisibility(View.VISIBLE);
@@ -212,7 +235,7 @@ public class MainActivity extends Activity
 	{
 		product.setQuantity(0);
 		product.setSelected(false);
-		this.productsList.remove(product);
+		this.cartList.remove(product);
 		
 		ProductDao productDao = new ProductDao();
 		

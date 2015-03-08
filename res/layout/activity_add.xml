@@ -17,14 +17,14 @@
             android:textSize="@dimen/default_font_size"
             android:padding="10dp"
             android:paddingRight="15dp"
-            android:background="@layout/bolder_label" />
+            android:background="@layout/border_label" />
 
         <Spinner
             android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@layout/bolder_input" />
+            android:background="@layout/border_input" />
         
     </LinearLayout>
     
