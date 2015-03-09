@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -27,6 +26,7 @@ import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
+import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class MainActivity extends Activity
 {
@@ -44,6 +44,16 @@ public class MainActivity extends Activity
 		ListView listView = (ListView)findViewById(R.id.cart_list);
 		listView.setAdapter(this.cartItemAdapter);
 		
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
+				selectCartItem(cartItem);
+			}
+		});
+		
 		listView.setOnItemLongClickListener(new OnItemLongClickListener()
 		{
 			@Override
@@ -57,16 +67,6 @@ public class MainActivity extends Activity
 				}
 				
 				return true;
-			}
-		});
-		
-		listView.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
-				selectCartItem(cartItem);
 			}
 		});
 		
@@ -165,14 +165,8 @@ public class MainActivity extends Activity
 		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
 		dialog.setView(layout);
 		
-		ImageView thumbnail = (ImageView)layout.findViewById(R.id.thumbnail);
-		byte[] picture = cartItem.getPicture();
-		
-		if ((picture != null) && (picture.length > 0))
-		{
-			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-			thumbnail.setImageBitmap(bitmap);
-		}
+		ProductImage productImage = (ProductImage)layout.findViewById(R.id.thumbnail);
+		productImage.setImage(cartItem.getImage());
 		
 		final NumberPicker quantity = (NumberPicker)layout.findViewById(R.id.quantity);
 		quantity.setMinValue(1);

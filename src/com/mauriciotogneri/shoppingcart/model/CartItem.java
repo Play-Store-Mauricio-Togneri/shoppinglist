@@ -30,9 +30,9 @@ public class CartItem extends Model
 		return this.product.getName();
 	}
 	
-	public byte[] getPicture()
+	public byte[] getImage()
 	{
-		return this.product.getPicture();
+		return this.product.getImage();
 	}
 	
 	public int getQuantity()

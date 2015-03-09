@@ -6,20 +6,16 @@ import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
+import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class CartItemAdapter extends ArrayAdapter<CartItem>
 {
@@ -70,23 +66,11 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 			quantity.setPaintFlags(quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
 		}
 		
-		ImageView thumbnail = (ImageView)convertView.findViewById(R.id.thumbnail);
-		byte[] picture = cartItem.getPicture();
+		ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
+		productImage.setImage(cartItem.getImage(), cartItem.isSelected());
 		
-		if ((picture != null) && (picture.length > 0))
-		{
-			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-			thumbnail.setImageBitmap(bitmap);
-			
-			ColorMatrix matrix = new ColorMatrix();
-			matrix.setSaturation(cartItem.isSelected() ? 0 : 1);
-			
-			ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-			thumbnail.setColorFilter(filter);
-			
-			CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
-			selected.setChecked(cartItem.isSelected());
-		}
+		CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
+		selected.setChecked(cartItem.isSelected());
 		
 		return convertView;
 	}

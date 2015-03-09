@@ -5,18 +5,16 @@ import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
+import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class ProductAdapter extends ArrayAdapter<Product>
 {
@@ -44,14 +42,8 @@ public class ProductAdapter extends ArrayAdapter<Product>
 		TextView name = (TextView)convertView.findViewById(R.id.name);
 		name.setText(product.getName());
 		
-		ImageView thumbnail = (ImageView)convertView.findViewById(R.id.thumbnail);
-		byte[] picture = product.getPicture();
-		
-		if ((picture != null) && (picture.length > 0))
-		{
-			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-			thumbnail.setImageBitmap(bitmap);
-		}
+		ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
+		productImage.setImage(product.getImage());
 		
 		return convertView;
 	}

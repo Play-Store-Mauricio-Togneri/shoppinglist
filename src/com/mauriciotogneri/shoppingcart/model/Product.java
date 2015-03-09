@@ -13,18 +13,18 @@ public class Product extends Model
 	@Column(name = "category")
 	private Category category;
 	
-	@Column(name = "picture")
-	private String picture;
+	@Column(name = "image")
+	private String image;
 	
 	public Product()
 	{
 	}
 	
-	public Product(String name, Category category, byte[] picture)
+	public Product(String name, Category category, byte[] image)
 	{
 		this.name = name;
 		this.category = category;
-		this.picture = Base64.encodeToString(picture, Base64.DEFAULT);
+		this.image = Base64.encodeToString(image, Base64.DEFAULT);
 	}
 	
 	public String getName()
@@ -50,8 +50,8 @@ public class Product extends Model
 		return (cartItem != null);
 	}
 	
-	public byte[] getPicture()
+	public byte[] getImage()
 	{
-		return Base64.decode(this.picture, Base64.DEFAULT);
+		return Base64.decode(this.image, Base64.DEFAULT);
 	}
 }

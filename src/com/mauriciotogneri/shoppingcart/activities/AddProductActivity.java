@@ -6,8 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
@@ -32,6 +29,7 @@ import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
+import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class AddProductActivity extends Activity
 {
@@ -111,14 +109,8 @@ public class AddProductActivity extends Activity
 		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
 		dialog.setView(layout);
 		
-		ImageView thumbnail = (ImageView)layout.findViewById(R.id.thumbnail);
-		byte[] picture = product.getPicture();
-		
-		if ((picture != null) && (picture.length > 0))
-		{
-			Bitmap bitmap = BitmapFactory.decodeByteArray(picture, 0, picture.length);
-			thumbnail.setImageBitmap(bitmap);
-		}
+		ProductImage productImage = (ProductImage)layout.findViewById(R.id.thumbnail);
+		productImage.setImage(product.getImage());
 		
 		final NumberPicker quantity = (NumberPicker)layout.findViewById(R.id.quantity);
 		quantity.setMinValue(1);

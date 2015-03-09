@@ -7,7 +7,7 @@
     android:padding="10dp"
     android:background="@layout/background_list_row" >
     
-    <ImageView
+    <com.mauriciotogneri.shoppingcart.widgets.ProductImage
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
