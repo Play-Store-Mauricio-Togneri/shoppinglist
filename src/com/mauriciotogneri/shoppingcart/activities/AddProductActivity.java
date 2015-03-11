@@ -187,20 +187,33 @@ public class AddProductActivity extends Activity
 		// startActivity(intent);
 	}
 	
-	private void removeProduct(Product product)
+	@SuppressLint("InflateParams")
+	private void removeProduct(final Product product)
 	{
-		// ProductDao productDao = new ProductDao();
-		//
-		// if (productDao.removeProduct(product))
-		// {
-		// this.filteredList.remove(product);
-		// this.totalList.remove(product);
-		// refreshList();
-		// }
-		// else
-		// {
-		// Toast.makeText(this, R.string.error_removing_product, Toast.LENGTH_SHORT).show();
-		// }
+		CustomDialog dialog = new CustomDialog(this, product.getName());
+		
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View layout = inflater.inflate(R.layout.dialog_confirm, null);
+		dialog.setView(layout);
+		
+		TextView text = (TextView)layout.findViewById(R.id.text);
+		text.setText("Do you want to remove the product?");
+		
+		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
+		{
+			@Override
+			public void onClick(DialogInterface dialog, int which)
+			{
+				product.delete();
+				refreshList();
+				
+				dialog.dismiss();
+			}
+		});
+		
+		dialog.setNegativeButton(R.string.button_cancel, null);
+		
+		dialog.display();
 	}
 	
 	private void refreshList()
