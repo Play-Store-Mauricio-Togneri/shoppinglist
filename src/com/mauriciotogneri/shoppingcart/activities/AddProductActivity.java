@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -176,8 +177,8 @@ public class AddProductActivity extends Activity
 	
 	private void createProduct()
 	{
-		// Intent intent = new Intent(this, EditProductActivity.class);
-		// startActivity(intent);
+		Intent intent = new Intent(this, UpdateProductActivity.class);
+		startActivity(intent);
 	}
 	
 	private void editProduct(Product product)

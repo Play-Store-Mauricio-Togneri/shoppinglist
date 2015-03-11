@@ -39,7 +39,7 @@
             android:keepScreenOn="true" />
         
         <activity
-            android:name=".activities.EditProductActivity"
+            android:name=".activities.UpdateProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:keepScreenOn="true" />

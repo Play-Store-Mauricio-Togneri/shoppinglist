@@ -8,6 +8,8 @@
     <string name="label_list_empty">Empty List</string>
     <string name="label_quantity">Quantity:</string>
     <string name="label_product_category">Category</string>
+    <string name="label_product_name">Name</string>
+    <string name="label_product_picture">Picture</string>
     
     <string name="button_accept">Accept</string>
     <string name="button_cancel">Cancel</string>
@@ -18,6 +20,8 @@
     <string name="icon_dropdown">\uE259</string>
     <string name="icon_remove">\uE020</string>
     <string name="icon_edit">\uE065</string>
+    <string name="icon_update">\uE013</string>
+    <string name="icon_menu">\uE012</string>
     
     <string name="toolbar_title_main">Shopping Cart</string>
     <string name="toolbar_title_add_product">Add product</string>

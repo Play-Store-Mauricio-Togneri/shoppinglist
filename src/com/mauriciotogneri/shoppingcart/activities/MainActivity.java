@@ -100,7 +100,7 @@ public class MainActivity extends Activity
 		
 		// --------------------------------
 		
-		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.product_bananas);
+		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.product_generic);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		byte[] bitmapdata = stream.toByteArray();
