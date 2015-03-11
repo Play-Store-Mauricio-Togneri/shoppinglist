@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="@string/list_quantity"
+            android:text="@string/label_quantity"
             android:textColor="@color/default_text_color"
             android:textSize="16sp"
             custom:font="opensans" />

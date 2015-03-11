@@ -55,7 +55,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		}
 		
 		TextView quantity = (TextView)convertView.findViewById(R.id.quantity);
-		quantity.setText(this.context.getString(R.string.list_quantity) + "   " + cartItem.getQuantity());
+		quantity.setText(this.context.getString(R.string.label_quantity) + "   " + cartItem.getQuantity());
 		
 		if (cartItem.isSelected())
 		{

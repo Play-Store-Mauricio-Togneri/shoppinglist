@@ -197,7 +197,7 @@ public class AddProductActivity extends Activity
 		dialog.setView(layout);
 		
 		TextView text = (TextView)layout.findViewById(R.id.text);
-		text.setText("Do you want to remove the product?");
+		text.setText(R.string.confirmation_remove_product);
 		
 		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
 		{

@@ -3,42 +3,27 @@
 
     <string name="app_name">Shopping Cart</string>
     
+    <string name="image_description"></string>
+    
     <string name="label_list_empty">Empty List</string>
+    <string name="label_quantity">Quantity:</string>
+    <string name="label_product_category">Category</string>
+    
+    <string name="button_accept">Accept</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_edit">Edit</string>
+    <string name="button_remove">Remove</string>
     
     <string name="icon_add">\u002B</string>
     <string name="icon_dropdown">\uE259</string>
     <string name="icon_remove">\uE020</string>
     <string name="icon_edit">\uE065</string>
     
-    <string name="main_toolbar_title">Shopping Cart</string>
+    <string name="toolbar_title_main">Shopping Cart</string>
+    <string name="toolbar_title_add_product">Add product</string>
+    <string name="toolbar_title_create_product">Create product</string>
+    <string name="toolbar_title_edit_product">Edit product</string>
     
-    <string name="add_product_toolbar_title">Add product</string>
-    
-    <!-- ============================================================ -->
-    
-    <string name="button_accept">Accept</string>
-    <string name="button_cancel">Cancel</string>
-    <string name="button_create">Create</string>
-    <string name="button_edit">Edit</string>
-    <string name="button_remove">Remove</string>
-    <string name="button_save">Save</string>
-    
-    <string name="image_description"></string>
-    
-    <string name="add_product_title">Add Product</string>
-    <string name="create_product_title">Create Product</string>
-    <string name="edit_product_title">Edit Product</string>
-    
-    <string name="product_category">Category</string>
-    <string name="product_type">Type</string>
-    <string name="product_name">Name</string>
-    
-    <string name="list_quantity">Quantity:</string>
-    
-    
-    <string name="error_removing_product">Error removing product</string>
-    <string name="error_creating_product">Error creating product</string>
-    <string name="error_editing_product">Error editing product</string>
-    <string name="error_missing_name">Error missing name</string>
+    <string name="confirmation_remove_product">Do you want to remove the product?</string>
 
 </resources>

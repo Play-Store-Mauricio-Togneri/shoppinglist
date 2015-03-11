@@ -22,7 +22,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp"
-        android:text="@string/list_quantity"
+        android:text="@string/label_quantity"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
         custom:font="opensans" />

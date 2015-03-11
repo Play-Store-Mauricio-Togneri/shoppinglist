@@ -6,7 +6,7 @@
 
         <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             style="@style/ToolbarTitle"
-            android:text="@string/main_toolbar_title" />
+            android:text="@string/toolbar_title_main" />
 
         <View style="@style/HorizontalSeparator" />
 
