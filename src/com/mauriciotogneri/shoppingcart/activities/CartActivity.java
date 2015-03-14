@@ -19,28 +19,28 @@ import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
+import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public class MainActivity extends Activity
+public class CartActivity extends Activity
 {
-	private CartItemAdapter cartItemAdapter;
+	private ListCartItemAdapter listCartItemAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_cart);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		this.cartItemAdapter = new CartItemAdapter(this);
+		this.listCartItemAdapter = new ListCartItemAdapter(this);
 		
 		ListView listView = (ListView)findViewById(R.id.cart_list);
-		listView.setAdapter(this.cartItemAdapter);
+		listView.setAdapter(this.listCartItemAdapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{
@@ -133,12 +133,12 @@ public class MainActivity extends Activity
 	
 	private void updateList(boolean sort)
 	{
-		this.cartItemAdapter.refresh(sort);
+		this.listCartItemAdapter.refresh(sort);
 		
 		ListView listView = (ListView)findViewById(R.id.cart_list);
 		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
 		
-		if (this.cartItemAdapter.getCount() > 0)
+		if (this.listCartItemAdapter.getCount() > 0)
 		{
 			listView.setVisibility(View.VISIBLE);
 			emptyLabel.setVisibility(View.GONE);
@@ -203,7 +203,7 @@ public class MainActivity extends Activity
 	{
 		cartItem.delete();
 		
-		this.cartItemAdapter.remove(cartItem);
+		this.listCartItemAdapter.remove(cartItem);
 		updateList(false);
 	}
 	
@@ -218,7 +218,7 @@ public class MainActivity extends Activity
 	{
 		super.onResume();
 		
-		this.cartItemAdapter.refresh();
+		this.listCartItemAdapter.refresh();
 		updateList(true);
 	}
 	
@@ -227,6 +227,6 @@ public class MainActivity extends Activity
 	{
 		super.onDestroy();
 		
-		this.cartItemAdapter.removeSelectedItems();
+		this.listCartItemAdapter.removeSelectedItems();
 	}
 }

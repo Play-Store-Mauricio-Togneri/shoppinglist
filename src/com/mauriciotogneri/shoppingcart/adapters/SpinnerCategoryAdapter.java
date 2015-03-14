@@ -11,11 +11,11 @@ import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Category;
 
-public class CategoryAdapter extends ArrayAdapter<Category>
+public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 {
 	private final LayoutInflater inflater;
 	
-	public CategoryAdapter(Context context, List<Category> list)
+	public SpinnerCategoryAdapter(Context context, List<Category> list)
 	{
 		super(context, R.layout.spinner_category_header, list);
 		

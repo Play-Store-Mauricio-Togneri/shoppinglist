@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.adapters.ProductOptionAdapter.Option;
+import com.mauriciotogneri.shoppingcart.adapters.MenuProductAdapter.Option;
 
-public class ProductOptionAdapter extends ArrayAdapter<Option>
+public class MenuProductAdapter extends ArrayAdapter<Option>
 {
 	private final LayoutInflater inflater;
 	
-	public ProductOptionAdapter(Context context, List<Option> options)
+	public MenuProductAdapter(Context context, List<Option> options)
 	{
 		super(context, android.R.layout.simple_list_item_1, options);
 		

@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.adapters.CategoryAdapter;
+import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
@@ -68,13 +68,13 @@ public class UpdateProductActivity extends Activity
 		// ---------------------------
 		
 		List<Category> categories = Model.all(Category.class);
-		CategoryAdapter categoryAdapter = new CategoryAdapter(this, categories);
+		SpinnerCategoryAdapter spinnerCategoryAdapter = new SpinnerCategoryAdapter(this, categories);
 		Spinner productCategory = (Spinner)findViewById(R.id.category);
-		productCategory.setAdapter(categoryAdapter);
+		productCategory.setAdapter(spinnerCategoryAdapter);
 		
 		if (product != null)
 		{
-			productCategory.setSelection(categoryAdapter.getPosition(product.getCategory()));
+			productCategory.setSelection(spinnerCategoryAdapter.getPosition(product.getCategory()));
 		}
 		
 		// ---------------------------

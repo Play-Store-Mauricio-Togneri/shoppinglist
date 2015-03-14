@@ -16,11 +16,11 @@ import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public class ProductAdapter extends ArrayAdapter<Product>
+public class ListProductAdapter extends ArrayAdapter<Product>
 {
 	private final LayoutInflater inflater;
 	
-	public ProductAdapter(Context context)
+	public ListProductAdapter(Context context)
 	{
 		super(context, android.R.layout.simple_list_item_1, new ArrayList<Product>());
 		
@@ -36,7 +36,7 @@ public class ProductAdapter extends ArrayAdapter<Product>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.activity_add_product_row, null);
+			convertView = this.inflater.inflate(R.layout.list_product_row, null);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.name);

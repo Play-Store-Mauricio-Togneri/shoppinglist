@@ -18,12 +18,12 @@ import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public class CartItemAdapter extends ArrayAdapter<CartItem>
+public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 {
 	private final Context context;
 	private final LayoutInflater inflater;
 	
-	public CartItemAdapter(Context context)
+	public ListCartItemAdapter(Context context)
 	{
 		super(context, android.R.layout.simple_list_item_1, new ArrayList<CartItem>());
 		
@@ -40,7 +40,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.activity_main_row, null);
+			convertView = this.inflater.inflate(R.layout.list_cart_item_row, null);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.name);

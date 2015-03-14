@@ -28,6 +28,7 @@
     <string name="toolbar_title_add_product">Add product</string>
     <string name="toolbar_title_create_product">Create product</string>
     <string name="toolbar_title_edit_product">Edit product</string>
+    <string name="toolbar_title_manage_categories">Manage categories</string>
     
     <string name="confirmation_remove_product">Do you want to remove the product?</string>
     

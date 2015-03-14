@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Screen" >
+    
+    <LinearLayout style="@style/Toolbar" >
+
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            style="@style/ToolbarTitle"
+            android:text="@string/toolbar_title_manage_categories" />
+
+        <View style="@style/HorizontalSeparator" />
+
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            style="@style/ToolbarButton"
+            android:id="@+id/create_category"
+            android:text="@string/icon_add" />
+        
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/category_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_background_color" />
+
+    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        android:id="@+id/empty_label"
+        style="@style/LabelEmptyList" />
+
+</LinearLayout>

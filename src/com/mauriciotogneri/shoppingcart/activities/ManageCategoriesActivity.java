@@ -14,16 +14,13 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
-import com.mauriciotogneri.shoppingcart.adapters.ListProductAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuProductAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuProductAdapter.Option;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
@@ -32,9 +29,9 @@ import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public class AddProductActivity extends Activity
+public class ManageCategoriesActivity extends Activity
 {
-	private ListProductAdapter listProductAdapter;
+	private SpinnerCategoryAdapter productAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -43,30 +40,10 @@ public class AddProductActivity extends Activity
 		setContentView(R.layout.activity_add_product);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		this.listProductAdapter = new ListProductAdapter(this);
-		
-		List<Category> categories = Model.all(Category.class);
-		
-		SpinnerCategoryAdapter spinnerCategoryAdapter = new SpinnerCategoryAdapter(this, categories);
-		
-		Spinner category = (Spinner)findViewById(R.id.category);
-		category.setAdapter(spinnerCategoryAdapter);
-		category.setOnItemSelectedListener(new OnItemSelectedListener()
-		{
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-			{
-				refreshList();
-			}
-			
-			@Override
-			public void onNothingSelected(AdapterView<?> parent)
-			{
-			}
-		});
+		// this.productAdapter = new CategoryAdapter(this);
 		
 		ListView listView = (ListView)findViewById(R.id.product_list);
-		listView.setAdapter(this.listProductAdapter);
+		listView.setAdapter(this.productAdapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{
@@ -90,8 +67,8 @@ public class AddProductActivity extends Activity
 			}
 		});
 		
-		TextView createProduct = (TextView)findViewById(R.id.create_product);
-		createProduct.setOnClickListener(new View.OnClickListener()
+		TextView createCategory = (TextView)findViewById(R.id.create_category);
+		createCategory.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -153,8 +130,8 @@ public class AddProductActivity extends Activity
 		
 		CustomDialog dialog = new CustomDialog(this, product.getName());
 		
-		ListAdapter menuProductAdapter = new MenuProductAdapter(this, optionsList);
-		dialog.setAdapter(menuProductAdapter, new OnClickListener()
+		ListAdapter adapter = new MenuProductAdapter(this, optionsList);
+		dialog.setAdapter(adapter, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int index)
@@ -221,12 +198,12 @@ public class AddProductActivity extends Activity
 	{
 		Spinner categoryField = (Spinner)findViewById(R.id.category);
 		Category category = (Category)categoryField.getSelectedItem();
-		this.listProductAdapter.refresh(category);
+		// this.productAdapter.refresh(category);
 		
 		ListView listView = (ListView)findViewById(R.id.product_list);
 		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
 		
-		if (this.listProductAdapter.getCount() > 0)
+		if (this.productAdapter.getCount() > 0)
 		{
 			listView.setVisibility(View.VISIBLE);
 			emptyLabel.setVisibility(View.GONE);
