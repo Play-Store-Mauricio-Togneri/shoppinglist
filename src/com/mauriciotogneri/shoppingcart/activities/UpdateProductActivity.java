@@ -3,7 +3,6 @@ package com.mauriciotogneri.shoppingcart.activities;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
@@ -30,10 +28,11 @@ public class UpdateProductActivity extends Activity
 {
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
 	private static final int SELECT_IMAGE_REQUEST = 123;
+	private static final int SELECT_CATEGORY_REQUEST = 456;
 	
 	private Product product = null;
-	
 	private byte[] selectedImage = null;
+	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -67,14 +66,15 @@ public class UpdateProductActivity extends Activity
 		
 		// ---------------------------
 		
-		List<Category> categories = Model.all(Category.class);
-		SpinnerCategoryAdapter spinnerCategoryAdapter = new SpinnerCategoryAdapter(this, categories);
+		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(this);
+		this.spinnerCategoryAdapter.refresh();
+		
 		Spinner productCategory = (Spinner)findViewById(R.id.category);
-		productCategory.setAdapter(spinnerCategoryAdapter);
+		productCategory.setAdapter(this.spinnerCategoryAdapter);
 		
 		if (product != null)
 		{
-			productCategory.setSelection(spinnerCategoryAdapter.getPosition(product.getCategory()));
+			productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(product.getCategory()));
 		}
 		
 		// ---------------------------
@@ -206,6 +206,18 @@ public class UpdateProductActivity extends Activity
 				Toast.makeText(this, R.string.error_invalid_image, Toast.LENGTH_SHORT).show();
 			}
 		}
+		else if ((requestCode == UpdateProductActivity.SELECT_CATEGORY_REQUEST) && (resultCode == Activity.RESULT_OK))
+		{
+			this.spinnerCategoryAdapter.refresh();
+			
+			Category category = (Category)data.getSerializableExtra(ManageCategoriesActivity.RESULT_CATEGORY);
+			
+			if (category != null)
+			{
+				Spinner productCategory = (Spinner)findViewById(R.id.category);
+				productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(category));
+			}
+		}
 	}
 	
 	private byte[] getImage(Uri uri) throws IOException
@@ -262,7 +274,7 @@ public class UpdateProductActivity extends Activity
 		{
 			setNameInputError(R.string.error_invalid_name);
 		}
-		else if (Product.existsWithName(getProductName()))
+		else if (Product.exists(getProductName(), getProductCategory()))
 		{
 			setNameInputError(R.string.error_product_already_exists);
 		}
@@ -315,7 +327,6 @@ public class UpdateProductActivity extends Activity
 	private void manageCategories()
 	{
 		Intent intent = new Intent(this, ManageCategoriesActivity.class);
-		startActivity(intent);
-		// TODO: FOR RESULT
+		startActivityForResult(intent, UpdateProductActivity.SELECT_CATEGORY_REQUEST);
 	}
 }

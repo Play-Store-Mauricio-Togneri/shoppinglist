@@ -39,10 +39,10 @@ public class Category extends Model implements Serializable
 		return this.name;
 	}
 	
-	public static boolean existsWithName(String name)
+	public static boolean exists(String name)
 	{
 		Category category = new Select().from(Category.class).where("name = ?", name).executeSingle();
 		
-		return category != null;
+		return (category != null);
 	}
 }

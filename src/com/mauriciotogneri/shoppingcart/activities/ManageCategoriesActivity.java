@@ -148,7 +148,7 @@ public class ManageCategoriesActivity extends Activity
 				
 				if (!TextUtils.isEmpty(name))
 				{
-					if (!Category.existsWithName(name))
+					if (!Category.exists(name))
 					{
 						if (category != null)
 						{

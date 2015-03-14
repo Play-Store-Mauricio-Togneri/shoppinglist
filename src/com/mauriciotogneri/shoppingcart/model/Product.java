@@ -71,10 +71,10 @@ public class Product extends Model
 		return new Select().from(Product.class).where("id = ?", id).executeSingle();
 	}
 	
-	public static boolean existsWithName(String name)
+	public static boolean exists(String name, Category category)
 	{
-		Product product = new Select().from(Product.class).where("name = ?", name).executeSingle();
+		Product product = new Select().from(Product.class).where("(name = ?) AND (category = ?)", name, category.getId()).executeSingle();
 		
-		return product != null;
+		return (product != null);
 	}
 }

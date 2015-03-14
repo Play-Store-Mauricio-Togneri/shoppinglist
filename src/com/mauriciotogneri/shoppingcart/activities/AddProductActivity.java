@@ -20,7 +20,6 @@ import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListProductAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
@@ -35,6 +34,7 @@ import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 public class AddProductActivity extends Activity
 {
 	private ListProductAdapter listProductAdapter;
+	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -45,12 +45,10 @@ public class AddProductActivity extends Activity
 		
 		this.listProductAdapter = new ListProductAdapter(this);
 		
-		List<Category> categories = Model.all(Category.class);
-		
-		SpinnerCategoryAdapter spinnerCategoryAdapter = new SpinnerCategoryAdapter(this, categories);
+		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(this);
 		
 		Spinner category = (Spinner)findViewById(R.id.category);
-		category.setAdapter(spinnerCategoryAdapter);
+		category.setAdapter(this.spinnerCategoryAdapter);
 		category.setOnItemSelectedListener(new OnItemSelectedListener()
 		{
 			@Override
@@ -241,5 +239,6 @@ public class AddProductActivity extends Activity
 		super.onResume();
 		
 		refreshList();
+		this.spinnerCategoryAdapter.refresh();
 	}
 }
