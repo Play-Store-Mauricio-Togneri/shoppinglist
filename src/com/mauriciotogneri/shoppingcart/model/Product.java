@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.model;
 
+import java.util.List;
 import android.util.Base64;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -41,8 +42,7 @@ public class Product extends Model
 	
 	public boolean isCategory(Category category)
 	{
-		// TODO: override equals?
-		return this.category.equals(category);
+		return this.category.getName().equals(category.getName());
 	}
 	
 	public boolean isInCart()
@@ -76,5 +76,12 @@ public class Product extends Model
 		Product product = new Select().from(Product.class).where("(name = ?) AND (category = ?)", name, category.getId()).executeSingle();
 		
 		return (product != null);
+	}
+	
+	public static boolean exists(Category category)
+	{
+		List<Product> products = new Select().from(Product.class).where("category = ?", category.getId()).execute();
+		
+		return (products != null) && (!products.isEmpty());
 	}
 }

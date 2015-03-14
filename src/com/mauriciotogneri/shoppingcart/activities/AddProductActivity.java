@@ -191,7 +191,7 @@ public class AddProductActivity extends Activity
 		CustomDialog dialog = new CustomDialog(this, product.getName());
 		
 		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_confirm, null);
+		View layout = inflater.inflate(R.layout.dialog_content_text, null);
 		dialog.setView(layout);
 		
 		TextView text = (TextView)layout.findViewById(R.id.text);
@@ -202,12 +202,36 @@ public class AddProductActivity extends Activity
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				product.delete();
-				refreshList();
+				if (!CartItem.exists(product))
+				{
+					product.delete();
+					refreshList();
+				}
+				else
+				{
+					showError();
+				}
 			}
 		});
 		
 		dialog.setNegativeButton(R.string.button_cancel, null);
+		
+		dialog.display();
+	}
+	
+	@SuppressLint("InflateParams")
+	private void showError()
+	{
+		CustomDialog dialog = new CustomDialog(this, getString(R.string.label_error));
+		
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View layout = inflater.inflate(R.layout.dialog_content_text, null);
+		dialog.setView(layout);
+		
+		TextView text = (TextView)layout.findViewById(R.id.text);
+		text.setText(R.string.error_product_in_use);
+		
+		dialog.setPositiveButton(R.string.button_accept, null);
 		
 		dialog.display();
 	}

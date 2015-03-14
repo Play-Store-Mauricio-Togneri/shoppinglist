@@ -10,6 +10,7 @@
     <string name="label_product_category">Category</string>
     <string name="label_product_name">Name</string>
     <string name="label_product_picture">Picture</string>
+    <string name="label_error">Error</string>
     
     <string name="button_accept">Accept</string>
     <string name="button_cancel">Cancel</string>
@@ -41,5 +42,7 @@
     <string name="error_invalid_image">Invalid image</string>
     <string name="error_product_already_exists">Product already exists</string>
     <string name="error_category_already_exists">Category already exists</string>
+    <string name="error_category_in_use">The category is linked to one or more products.</string>
+    <string name="error_product_in_use">The product is linked to one or more cart items.</string>
 
 </resources>

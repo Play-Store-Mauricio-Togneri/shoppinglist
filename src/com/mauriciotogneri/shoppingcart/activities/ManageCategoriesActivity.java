@@ -24,6 +24,7 @@ import com.mauriciotogneri.shoppingcart.adapters.ListCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 import com.mauriciotogneri.shoppingcart.model.Category;
+import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
 
@@ -187,7 +188,7 @@ public class ManageCategoriesActivity extends Activity
 		CustomDialog dialog = new CustomDialog(this, category.getName());
 		
 		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_confirm, null);
+		View layout = inflater.inflate(R.layout.dialog_content_text, null);
 		dialog.setView(layout);
 		
 		TextView text = (TextView)layout.findViewById(R.id.text);
@@ -198,12 +199,36 @@ public class ManageCategoriesActivity extends Activity
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				category.delete();
-				refreshList();
+				if (!Product.exists(category))
+				{
+					category.delete();
+					refreshList();
+				}
+				else
+				{
+					showError();
+				}
 			}
 		});
 		
 		dialog.setNegativeButton(R.string.button_cancel, null);
+		
+		dialog.display();
+	}
+	
+	@SuppressLint("InflateParams")
+	private void showError()
+	{
+		CustomDialog dialog = new CustomDialog(this, getString(R.string.label_error));
+		
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View layout = inflater.inflate(R.layout.dialog_content_text, null);
+		dialog.setView(layout);
+		
+		TextView text = (TextView)layout.findViewById(R.id.text);
+		text.setText(R.string.error_category_in_use);
+		
+		dialog.setPositiveButton(R.string.button_accept, null);
 		
 		dialog.display();
 	}
