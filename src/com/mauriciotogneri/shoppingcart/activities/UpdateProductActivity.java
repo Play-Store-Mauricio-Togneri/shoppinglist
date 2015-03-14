@@ -189,10 +189,9 @@ public class UpdateProductActivity extends Activity
 				byte[] image = getImage(imageUri);
 				setProductImage(image);
 			}
-			catch (IOException e)
+			catch (Exception e)
 			{
-				e.printStackTrace();
-				// TODO
+				Toast.makeText(this, R.string.error_invalid_image, Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
