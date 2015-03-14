@@ -147,4 +147,28 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 			}
 		}
 	}
+	
+	public String getShareContent()
+	{
+		StringBuilder result = new StringBuilder();
+		
+		int limit = getCount();
+		
+		for (int i = 0; i < limit; i++)
+		{
+			CartItem cartItem = getItem(i);
+			
+			if (!cartItem.isSelected())
+			{
+				if (result.length() != 0)
+				{
+					result.append("\r\n");
+				}
+				
+				result.append(cartItem.getName()).append(": ").append(cartItem.getQuantity());
+			}
+		}
+		
+		return result.toString();
+	}
 }

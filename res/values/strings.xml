@@ -23,6 +23,7 @@
     <string name="icon_edit">\uE065</string>
     <string name="icon_update">\uE013</string>
     <string name="icon_menu">\uE012</string>
+    <string name="icon_share">\uE066</string>
     
     <string name="toolbar_title_main">Shopping Cart</string>
     <string name="toolbar_title_add_product">Add product</string>
@@ -32,6 +33,8 @@
     
     <string name="confirmation_remove_product">Do you want to remove the product?</string>
     <string name="confirmation_remove_category">Do you want to remove the category?</string>
+    
+    <string name="share_cart">Share cart with</string>
     
     <string name="error_invalid_category">Invalid category</string>
     <string name="error_invalid_name">Invalid name</string>

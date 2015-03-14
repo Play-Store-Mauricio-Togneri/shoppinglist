@@ -68,8 +68,18 @@ public class CartActivity extends Activity
 			}
 		});
 		
-		TextView addProduct = (TextView)findViewById(R.id.add_product);
-		addProduct.setOnClickListener(new View.OnClickListener()
+		TextView shareButton = (TextView)findViewById(R.id.share_cart);
+		shareButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				shareCart();
+			}
+		});
+		
+		TextView addProductButton = (TextView)findViewById(R.id.add_product);
+		addProductButton.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -121,6 +131,15 @@ public class CartActivity extends Activity
 		
 		CartItem bag1 = new CartItem(bag, 34, false);
 		bag1.save();
+	}
+	
+	private void shareCart()
+	{
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.putExtra(Intent.EXTRA_TEXT, this.listCartItemAdapter.getShareContent());
+		shareIntent.setType("text/plain");
+		startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share_cart)));
 	}
 	
 	private void selectCartItem(CartItem cartItem)

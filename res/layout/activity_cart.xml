@@ -11,6 +11,11 @@
         <View style="@style/HorizontalSeparator" />
 
         <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            android:id="@+id/share_cart"
+            style="@style/ToolbarButton"
+            android:text="@string/icon_share" />
+        
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
             android:id="@+id/add_product"
             style="@style/ToolbarButton"
             android:text="@string/icon_add" />
