@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,12 +18,14 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
+import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
 
 public class ManageCategoriesActivity extends Activity
 {
@@ -70,9 +73,11 @@ public class ManageCategoriesActivity extends Activity
 			@Override
 			public void onClick(View view)
 			{
-				createCategoory();
+				createCategory();
 			}
 		});
+		
+		refreshList();
 	}
 	
 	private void selectCategory(final Category category)
@@ -117,9 +122,46 @@ public class ManageCategoriesActivity extends Activity
 		dialog.display();
 	}
 	
-	private void createCategoory()
+	@SuppressLint("InflateParams")
+	private void createCategory()
 	{
-		// TODO
+		CustomDialog dialog = new CustomDialog(this, getString(R.string.label_product_category));
+		
+		LayoutInflater inflater = LayoutInflater.from(this);
+		View layout = inflater.inflate(R.layout.dialog_create_category, null);
+		dialog.setView(layout);
+		
+		final CustomEditText categoryName = (CustomEditText)layout.findViewById(R.id.name);
+		
+		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
+		{
+			@Override
+			public void onClick(DialogInterface dialog, int which)
+			{
+				String name = categoryName.getTextValue();
+				
+				if (!TextUtils.isEmpty(name))
+				{
+					createCategory(name);
+					refreshList();
+				}
+				else
+				{
+					createCategory();
+					Toast.makeText(ManageCategoriesActivity.this, R.string.error_invalid_name, Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		
+		dialog.setNegativeButton(R.string.button_cancel, null);
+		
+		dialog.display();
+	}
+	
+	private void createCategory(String name)
+	{
+		Category category = new Category(name);
+		category.save();
 	}
 	
 	private void editCategory(Category category)
@@ -173,13 +215,5 @@ public class ManageCategoriesActivity extends Activity
 			listView.setVisibility(View.GONE);
 			emptyLabel.setVisibility(View.VISIBLE);
 		}
-	}
-	
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		
-		refreshList();
 	}
 }

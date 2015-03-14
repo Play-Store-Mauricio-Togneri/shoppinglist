@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.mauriciotogneri.shoppingcart"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingStart="20dp"
+    android:paddingRight="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="20dp" >
+
+    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/label_product_name"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/default_font_size"
+        custom:font="opensans" />
+
+    <com.mauriciotogneri.shoppingcart.widgets.CustomEditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/bolder_input"
+        android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
+        android:padding="10dp"
+        android:textColor="#007AB0"
+        custom:font="opensans" />
+
+</LinearLayout>
