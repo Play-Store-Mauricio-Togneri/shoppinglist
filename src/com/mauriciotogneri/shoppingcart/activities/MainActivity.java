@@ -78,10 +78,6 @@ public class MainActivity extends Activity
 			}
 		});
 		
-		// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-		// intent.setType("image/*");
-		// startActivityForResult(intent, 123);
-		
 		// initDatabase();
 	}
 	

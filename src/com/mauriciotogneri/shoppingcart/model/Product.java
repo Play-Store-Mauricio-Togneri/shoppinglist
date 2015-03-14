@@ -70,4 +70,11 @@ public class Product extends Model
 	{
 		return new Select().from(Product.class).where("id = ?", id).executeSingle();
 	}
+	
+	public static boolean existsWithName(String name)
+	{
+		Product product = new Select().from(Product.class).where("name = ?", name).executeSingle();
+		
+		return product != null;
+	}
 }

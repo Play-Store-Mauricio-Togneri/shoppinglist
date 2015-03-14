@@ -34,5 +34,6 @@
     <string name="error_invalid_category">Invalid category</string>
     <string name="error_invalid_name">Invalid name</string>
     <string name="error_invalid_image">Invalid image</string>
+    <string name="error_product_already_exists">Product already exists</string>
 
 </resources>

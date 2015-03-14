@@ -248,6 +248,10 @@ public class UpdateProductActivity extends Activity
 		{
 			Toast.makeText(this, R.string.error_invalid_name, Toast.LENGTH_SHORT).show();
 		}
+		else if (Product.existsWithName(getProductName()))
+		{
+			Toast.makeText(this, R.string.error_product_already_exists, Toast.LENGTH_SHORT).show();
+		}
 		else if (this.selectedImage == null)
 		{
 			Toast.makeText(this, R.string.error_invalid_image, Toast.LENGTH_SHORT).show();
@@ -256,8 +260,6 @@ public class UpdateProductActivity extends Activity
 		{
 			valid = true;
 		}
-		
-		// TODO: CHECK IF THERE IS A PRODUCT WITH THE SAME NAME
 		
 		return valid;
 	}
