@@ -252,17 +252,19 @@ public class UpdateProductActivity extends Activity
 	{
 		boolean valid = false;
 		
+		removeInputNameError();
+		
 		if (getProductCategory() == null)
 		{
 			Toast.makeText(this, R.string.error_invalid_category, Toast.LENGTH_SHORT).show();
 		}
 		else if (TextUtils.isEmpty(getProductName()))
 		{
-			Toast.makeText(this, R.string.error_invalid_name, Toast.LENGTH_SHORT).show();
+			setNameInputError(R.string.error_invalid_name);
 		}
 		else if (Product.existsWithName(getProductName()))
 		{
-			Toast.makeText(this, R.string.error_product_already_exists, Toast.LENGTH_SHORT).show();
+			setNameInputError(R.string.error_product_already_exists);
 		}
 		else if (this.selectedImage == null)
 		{
@@ -274,6 +276,19 @@ public class UpdateProductActivity extends Activity
 		}
 		
 		return valid;
+	}
+	
+	private void setNameInputError(int textId)
+	{
+		CustomEditText productName = (CustomEditText)findViewById(R.id.name);
+		productName.requestFocus();
+		productName.setError(getString(textId));
+	}
+	
+	private void removeInputNameError()
+	{
+		CustomEditText productName = (CustomEditText)findViewById(R.id.name);
+		productName.setError(null);
 	}
 	
 	private void editProduct(Product product)
