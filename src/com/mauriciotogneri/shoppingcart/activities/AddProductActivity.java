@@ -262,7 +262,7 @@ public class AddProductActivity extends Activity
 	{
 		super.onResume();
 		
-		refreshList();
 		this.spinnerCategoryAdapter.refresh();
+		refreshList();
 	}
 }
