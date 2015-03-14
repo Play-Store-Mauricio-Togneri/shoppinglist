@@ -206,16 +206,19 @@ public class UpdateProductActivity extends Activity
 				Toast.makeText(this, R.string.error_invalid_image, Toast.LENGTH_SHORT).show();
 			}
 		}
-		else if ((requestCode == UpdateProductActivity.SELECT_CATEGORY_REQUEST) && (resultCode == Activity.RESULT_OK))
+		else if (requestCode == UpdateProductActivity.SELECT_CATEGORY_REQUEST)
 		{
 			this.spinnerCategoryAdapter.refresh();
 			
-			Category category = (Category)data.getSerializableExtra(ManageCategoriesActivity.RESULT_CATEGORY);
-			
-			if (category != null)
+			if (resultCode == Activity.RESULT_OK)
 			{
-				Spinner productCategory = (Spinner)findViewById(R.id.category);
-				productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(category));
+				Category category = (Category)data.getSerializableExtra(ManageCategoriesActivity.RESULT_CATEGORY);
+				
+				if (category != null)
+				{
+					Spinner productCategory = (Spinner)findViewById(R.id.category);
+					productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(category));
+				}
 			}
 		}
 	}
@@ -274,7 +277,7 @@ public class UpdateProductActivity extends Activity
 		{
 			setNameInputError(R.string.error_invalid_name);
 		}
-		else if (Product.exists(getProductName(), getProductCategory()))
+		else if (((this.product == null) || (!this.product.getName().equals(getProductName()))) && (Product.exists(getProductName(), getProductCategory())))
 		{
 			setNameInputError(R.string.error_product_already_exists);
 		}

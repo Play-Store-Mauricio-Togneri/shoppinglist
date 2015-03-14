@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -87,6 +88,15 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 		
 		List<Category> categories = Model.all(Category.class);
 		addAll(categories);
+		
+		sort(new Comparator<Category>()
+		{
+			@Override
+			public int compare(Category lhs, Category rhs)
+			{
+				return lhs.getName().compareTo(rhs.getName());
+			}
+		});
 		
 		notifyDataSetChanged();
 	}
