@@ -31,6 +31,6 @@ public class CustomEditText extends EditText
 	
 	public String getTextValue()
 	{
-		return getText().toString();
+		return getText().toString().trim();
 	}
 }

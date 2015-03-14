@@ -22,10 +22,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.ListProductAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
+import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -124,7 +124,6 @@ public class AddProductActivity extends Activity
 			public void onClick(DialogInterface dialog, int which)
 			{
 				addProduct(product, quantity.getValue());
-				dialog.dismiss();
 			}
 		});
 		
@@ -207,8 +206,6 @@ public class AddProductActivity extends Activity
 			{
 				product.delete();
 				refreshList();
-				
-				dialog.dismiss();
 			}
 		});
 		

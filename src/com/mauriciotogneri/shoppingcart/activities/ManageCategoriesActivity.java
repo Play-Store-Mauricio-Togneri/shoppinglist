@@ -73,7 +73,7 @@ public class ManageCategoriesActivity extends Activity
 			@Override
 			public void onClick(View view)
 			{
-				createCategory();
+				updateCategory(null);
 			}
 		});
 		
@@ -109,7 +109,7 @@ public class ManageCategoriesActivity extends Activity
 				switch (index)
 				{
 					case EDIT_CATEGORY:
-						editCategory(category);
+						updateCategory(category);
 						break;
 					
 					case REMOVE_CATEGORY:
@@ -123,7 +123,7 @@ public class ManageCategoriesActivity extends Activity
 	}
 	
 	@SuppressLint("InflateParams")
-	private void createCategory()
+	private void updateCategory(final Category category)
 	{
 		CustomDialog dialog = new CustomDialog(this, getString(R.string.label_product_category));
 		
@@ -132,6 +132,12 @@ public class ManageCategoriesActivity extends Activity
 		dialog.setView(layout);
 		
 		final CustomEditText categoryName = (CustomEditText)layout.findViewById(R.id.name);
+		
+		if (category != null)
+		{
+			categoryName.setText(category.getName());
+			categoryName.setSelection(category.getName().length());
+		}
 		
 		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
 		{
@@ -142,12 +148,29 @@ public class ManageCategoriesActivity extends Activity
 				
 				if (!TextUtils.isEmpty(name))
 				{
-					createCategory(name);
-					refreshList();
+					if (!Category.existsWithName(name))
+					{
+						if (category != null)
+						{
+							category.update(name);
+						}
+						else
+						{
+							Category newCategory = new Category(name);
+							newCategory.save();
+						}
+						
+						refreshList();
+					}
+					else
+					{
+						updateCategory(category);
+						Toast.makeText(ManageCategoriesActivity.this, R.string.error_category_already_exists, Toast.LENGTH_SHORT).show();
+					}
 				}
 				else
 				{
-					createCategory();
+					updateCategory(category);
 					Toast.makeText(ManageCategoriesActivity.this, R.string.error_invalid_name, Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -156,17 +179,6 @@ public class ManageCategoriesActivity extends Activity
 		dialog.setNegativeButton(R.string.button_cancel, null);
 		
 		dialog.display();
-	}
-	
-	private void createCategory(String name)
-	{
-		Category category = new Category(name);
-		category.save();
-	}
-	
-	private void editCategory(Category category)
-	{
-		// TODO
 	}
 	
 	@SuppressLint("InflateParams")
@@ -188,8 +200,6 @@ public class ManageCategoriesActivity extends Activity
 			{
 				category.delete();
 				refreshList();
-				
-				dialog.dismiss();
 			}
 		});
 		

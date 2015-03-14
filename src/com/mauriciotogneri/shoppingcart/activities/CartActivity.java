@@ -192,7 +192,6 @@ public class CartActivity extends Activity
 			public void onClick(DialogInterface dialog, int which)
 			{
 				updateQuantity(cartItem, quantity.getValue());
-				dialog.dismiss();
 			}
 		});
 		
