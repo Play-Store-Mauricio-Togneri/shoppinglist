@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
 import java.io.ByteArrayOutputStream;
-import java.util.List;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -19,7 +18,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.CartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
@@ -139,7 +137,7 @@ public class MainActivity extends Activity
 	
 	private void updateList(boolean sort)
 	{
-		this.cartItemAdapter.update(sort);
+		this.cartItemAdapter.refresh(sort);
 		
 		ListView listView = (ListView)findViewById(R.id.cart_list);
 		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
@@ -224,10 +222,7 @@ public class MainActivity extends Activity
 	{
 		super.onResume();
 		
-		List<CartItem> cartItems = Model.all(CartItem.class);
-		
-		this.cartItemAdapter.clear();
-		this.cartItemAdapter.addAll(cartItems);
+		this.cartItemAdapter.refresh();
 		updateList(true);
 	}
 	

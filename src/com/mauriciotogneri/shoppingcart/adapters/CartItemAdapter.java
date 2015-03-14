@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
@@ -75,7 +76,7 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		return convertView;
 	}
 	
-	public void update(boolean sort)
+	public void refresh(boolean sort)
 	{
 		if (sort)
 		{
@@ -122,6 +123,14 @@ public class CartItemAdapter extends ArrayAdapter<CartItem>
 		}
 		
 		notifyDataSetChanged();
+	}
+	
+	public void refresh()
+	{
+		List<CartItem> cartItems = Model.all(CartItem.class);
+		
+		clear();
+		addAll(cartItems);
 	}
 	
 	public void removeSelectedItems()

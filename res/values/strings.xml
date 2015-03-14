@@ -15,6 +15,7 @@
     <string name="button_cancel">Cancel</string>
     <string name="button_edit">Edit</string>
     <string name="button_remove">Remove</string>
+    <string name="button_create">Create</string>
     
     <string name="icon_add">\u002B</string>
     <string name="icon_dropdown">\uE259</string>
@@ -29,5 +30,9 @@
     <string name="toolbar_title_edit_product">Edit product</string>
     
     <string name="confirmation_remove_product">Do you want to remove the product?</string>
+    
+    <string name="error_invalid_category">Invalid category</string>
+    <string name="error_invalid_name">Invalid name</string>
+    <string name="error_invalid_image">Invalid image</string>
 
 </resources>

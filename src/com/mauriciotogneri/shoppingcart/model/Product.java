@@ -54,4 +54,13 @@ public class Product extends Model
 	{
 		return Base64.decode(this.image, Base64.DEFAULT);
 	}
+	
+	public void update(String name, Category category, byte[] image)
+	{
+		this.name = name;
+		this.category = category;
+		this.image = Base64.encodeToString(image, Base64.DEFAULT);
+		
+		save();
+	}
 }

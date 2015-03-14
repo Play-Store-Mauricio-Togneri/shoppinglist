@@ -183,9 +183,9 @@ public class AddProductActivity extends Activity
 	
 	private void editProduct(Product product)
 	{
-		// Intent intent = new Intent(this, EditProductActivity.class);
-		// intent.putExtra(EditProductActivity.PARAMETER_PRODUCT, product);
-		// startActivity(intent);
+		Intent intent = new Intent(this, UpdateProductActivity.class);
+		intent.putExtra(UpdateProductActivity.PARAMETER_PRODUCT_ID, product.getId());
+		startActivity(intent);
 	}
 	
 	@SuppressLint("InflateParams")
@@ -221,7 +221,7 @@ public class AddProductActivity extends Activity
 	{
 		Spinner categoryField = (Spinner)findViewById(R.id.category);
 		Category category = (Category)categoryField.getSelectedItem();
-		this.productAdapter.update(category);
+		this.productAdapter.refresh(category);
 		
 		ListView listView = (ListView)findViewById(R.id.product_list);
 		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);

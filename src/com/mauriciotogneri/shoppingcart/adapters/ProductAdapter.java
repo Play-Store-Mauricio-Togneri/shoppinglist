@@ -48,7 +48,7 @@ public class ProductAdapter extends ArrayAdapter<Product>
 		return convertView;
 	}
 	
-	public void update(Category category)
+	public void refresh(Category category)
 	{
 		clear();
 		
