@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,8 +13,6 @@ import android.widget.TextView;
 import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Category;
-import com.mauriciotogneri.shoppingcart.model.Product;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class ListCategoryAdapter extends ArrayAdapter<Category>
 {
@@ -35,51 +34,30 @@ public class ListCategoryAdapter extends ArrayAdapter<Category>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.list_product_row, null);
+			convertView = this.inflater.inflate(R.layout.list_category_row, null);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.name);
 		name.setText(category.getName());
 		
-		ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
-		// productImage.setImage(category.getImage());
-		
 		return convertView;
 	}
 	
-	public void refresh(Category category)
+	public void refresh()
 	{
 		clear();
 		
-		List<Product> products = Model.all(Product.class);
+		List<Category> categories = Model.all(Category.class);
+		addAll(categories);
 		
-		// if (category != null)
-		// {
-		// List<Product> filtered = new ArrayList<Product>();
-		//
-		// for (Product product : products)
-		// {
-		// if (product.isCategory(category) && (!product.isInCart()))
-		// {
-		// filtered.add(product);
-		// }
-		// }
-		//
-		// addAll(filtered);
-		// }
-		// else
-		// {
-		// addAll(products);
-		// }
-		//
-		// sort(new Comparator<Product>()
-		// {
-		// @Override
-		// public int compare(Product lhs, Product rhs)
-		// {
-		// return lhs.getName().compareTo(rhs.getName());
-		// }
-		// });
+		sort(new Comparator<Category>()
+		{
+			@Override
+			public int compare(Category lhs, Category rhs)
+			{
+				return lhs.getName().compareTo(rhs.getName());
+			}
+		});
 		
 		notifyDataSetChanged();
 	}

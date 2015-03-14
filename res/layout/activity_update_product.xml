@@ -57,7 +57,7 @@
                 </LinearLayout>
 
                 <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-                    android:id="@+id/button_add_category"
+                    android:id="@+id/button_manage_categories"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"

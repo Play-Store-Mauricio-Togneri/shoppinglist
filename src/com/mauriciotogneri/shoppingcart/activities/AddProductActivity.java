@@ -24,8 +24,8 @@ import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.ListProductAdapter;
-import com.mauriciotogneri.shoppingcart.adapters.MenuProductAdapter;
-import com.mauriciotogneri.shoppingcart.adapters.MenuProductAdapter.Option;
+import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
+import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -153,8 +153,8 @@ public class AddProductActivity extends Activity
 		
 		CustomDialog dialog = new CustomDialog(this, product.getName());
 		
-		ListAdapter menuProductAdapter = new MenuProductAdapter(this, optionsList);
-		dialog.setAdapter(menuProductAdapter, new OnClickListener()
+		ListAdapter menuItemAdapter = new MenuItemAdapter(this, optionsList);
+		dialog.setAdapter(menuItemAdapter, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int index)

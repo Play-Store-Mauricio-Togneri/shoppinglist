@@ -79,6 +79,18 @@ public class UpdateProductActivity extends Activity
 		
 		// ---------------------------
 		
+		TextView buttonManageCategories = (TextView)findViewById(R.id.button_manage_categories);
+		buttonManageCategories.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				manageCategories();
+			}
+		});
+		
+		// ---------------------------
+		
 		EditText productName = (EditText)findViewById(R.id.name);
 		
 		if (product != null)
@@ -283,5 +295,12 @@ public class UpdateProductActivity extends Activity
 		product.save();
 		
 		finish();
+	}
+	
+	private void manageCategories()
+	{
+		Intent intent = new Intent(this, ManageCategoriesActivity.class);
+		startActivity(intent);
+		// TODO: FOR RESULT
 	}
 }
