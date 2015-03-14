@@ -5,7 +5,10 @@
     android:layout_height="wrap_content"
     android:background="@color/toolbar_background_color"
     android:orientation="horizontal"
-    android:padding="15dp" >
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp" >
 
     <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
         android:id="@+id/title"
