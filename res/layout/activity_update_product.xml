@@ -1,166 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/com.mauriciotogneri.shoppingcart"
-    style="@style/Screen"
-    android:background="#FFFFFF" >
-
-    <LinearLayout style="@style/Toolbar" >
-
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            android:id="@+id/toolbar_title"
-            style="@style/ToolbarTitle" />
-        
-    </LinearLayout>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp" >
+        style="@style/Screen"
+        android:background="#FFFFFF" >
 
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/label_product_category"
-            android:textColor="@color/default_text_color"
-            android:textSize="@dimen/default_font_size"
-            custom:font="opensans" />
+        <LinearLayout style="@style/Toolbar" >
+
+            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                android:id="@+id/toolbar_title"
+                style="@style/ToolbarTitle" />
+            
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:padding="1dp" >
+            android:orientation="vertical"
+            android:padding="20dp" >
+
+            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/label_product_category"
+                android:textColor="@color/default_text_color"
+                android:textSize="@dimen/default_font_size"
+                custom:font="opensans" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@layout/bolder_input"
+                android:layout_marginBottom="20dp"
                 android:padding="1dp" >
 
-                <Spinner
-                    android:id="@+id/category"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF" />
+                    android:layout_weight="1"
+                    android:background="@layout/bolder_input"
+                    android:padding="1dp" >
+
+                    <Spinner
+                        android:id="@+id/category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF" />
+                    
+                </LinearLayout>
+
+                <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                    android:id="@+id/button_add_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@layout/background_screen_button"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:paddingEnd="15dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingStart="15dp"
+                    android:text="@string/icon_menu"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="@dimen/default_font_size"
+                    custom:font="glyphicons" />
                 
             </LinearLayout>
 
             <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-                android:id="@+id/button_add_category"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
-                android:background="@layout/background_screen_button"
-                android:clickable="true"
-                android:gravity="center"
-                android:paddingEnd="15dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingStart="15dp"
-                android:text="@string/icon_menu"
+                android:text="@string/label_product_name"
                 android:textColor="@color/default_text_color"
                 android:textSize="@dimen/default_font_size"
-                custom:font="glyphicons" />
-            
-        </LinearLayout>
+                custom:font="opensans" />
 
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/label_product_name"
-            android:textColor="@color/default_text_color"
-            android:textSize="@dimen/default_font_size"
-            custom:font="opensans" />
-
-        <com.mauriciotogneri.shoppingcart.widgets.CustomEditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@layout/bolder_input"
-            android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
-            android:padding="10dp"
-            android:textColor="#007AB0"
-            custom:font="opensans" />
-
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/label_product_picture"
-            android:textColor="@color/default_text_color"
-            android:textSize="@dimen/default_font_size"
-            custom:font="opensans" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal" >
-
-            <com.mauriciotogneri.shoppingcart.widgets.ProductImage
-                android:id="@+id/thumbnail"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+            <com.mauriciotogneri.shoppingcart.widgets.CustomEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:background="@layout/bolder_input"
-                android:contentDescription="@string/image_description"
-                android:padding="10dp" />
-            
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/button_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:background="@layout/background_toolbar_button"
-            android:clickable="true"
-            android:orientation="horizontal" >
+                android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
+                android:padding="10dp"
+                android:textColor="#007AB0"
+                custom:font="opensans" />
 
             <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingEnd="15dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingStart="15dp"
-                android:paddingTop="12dp"
-                android:text="@string/icon_update"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/default_font_size"
-                custom:font="glyphicons" />
-
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-                android:id="@+id/button_update_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingEnd="15dp"
-                android:paddingLeft="0dp"
-                android:paddingRight="15dp"
-                android:paddingStart="0dp"
-                android:paddingTop="12dp"
-                android:text="@android:string/untitled"
-                android:textColor="#FFFFFF"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/label_product_picture"
+                android:textColor="@color/default_text_color"
                 android:textSize="@dimen/default_font_size"
                 custom:font="opensans" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" >
+
+                <com.mauriciotogneri.shoppingcart.widgets.ProductImage
+                    android:id="@+id/thumbnail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@layout/bolder_input"
+                    android:contentDescription="@string/image_description"
+                    android:padding="10dp" />
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/button_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@layout/background_toolbar_button"
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+                <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="12dp"
+                    android:paddingEnd="15dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="12dp"
+                    android:text="@string/icon_update"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/default_font_size"
+                    custom:font="glyphicons" />
+
+                <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                    android:id="@+id/button_update_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="12dp"
+                    android:paddingEnd="15dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingTop="12dp"
+                    android:text="@android:string/untitled"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/default_font_size"
+                    custom:font="opensans" />
+                
+            </LinearLayout>
             
         </LinearLayout>
         
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

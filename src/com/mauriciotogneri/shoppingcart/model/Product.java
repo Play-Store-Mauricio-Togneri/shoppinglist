@@ -63,4 +63,9 @@ public class Product extends Model
 		
 		save();
 	}
+	
+	public static Product byId(long id)
+	{
+		return new Select().from(Product.class).where("id = ?", id).executeSingle();
+	}
 }

@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.activeandroid.Model;
-import com.activeandroid.query.Select;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
@@ -44,7 +43,7 @@ public class UpdateProductActivity extends Activity
 		
 		if (productId != 0)
 		{
-			this.product = new Select().from(Product.class).where("id = ?", productId).executeSingle();
+			this.product = Product.byId(productId);
 		}
 		
 		init(this.product);
