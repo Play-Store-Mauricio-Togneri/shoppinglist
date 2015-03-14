@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/com.mauriciotogneri.shoppingcart"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    style="@style/Screen"
+    android:background="#FFFFFF" >
 
     <LinearLayout
         style="@style/Screen"
@@ -37,7 +37,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:padding="1dp" >
+                android:padding="1dp"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true" >
 
                 <LinearLayout
                     android:layout_width="0dp"

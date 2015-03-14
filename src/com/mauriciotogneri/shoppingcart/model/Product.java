@@ -7,6 +7,8 @@ import com.activeandroid.query.Select;
 
 public class Product extends Model
 {
+	public static final int IMAGE_SIZE = 96;
+	
 	@Column(name = "name")
 	private String name;
 	

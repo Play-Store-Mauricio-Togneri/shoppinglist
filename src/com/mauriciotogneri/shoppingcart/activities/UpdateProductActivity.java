@@ -1,10 +1,14 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -24,9 +28,8 @@ import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class UpdateProductActivity extends Activity
 {
-	// TODO: MAKE SCROLL VERTICAL
-	
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
+	private static final int SELECT_IMAGE_REQUEST = 123;
 	
 	private Product product = null;
 	
@@ -102,7 +105,7 @@ public class UpdateProductActivity extends Activity
 		}
 		else
 		{
-			setProductImage(getGenericProductImage());
+			setProductImage(getImageFromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.product_generic)));
 		}
 		
 		// ---------------------------
@@ -133,15 +136,21 @@ public class UpdateProductActivity extends Activity
 	
 	private void setProductImage(byte[] image)
 	{
-		this.selectedImage = image;
+		Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+		
+		if ((bitmap.getWidth() != Product.IMAGE_SIZE) || (bitmap.getHeight() != Product.IMAGE_SIZE))
+		{
+			bitmap = Bitmap.createScaledBitmap(bitmap, Product.IMAGE_SIZE, Product.IMAGE_SIZE, false);
+		}
+		
+		this.selectedImage = getImageFromBitmap(bitmap);
 		
 		ProductImage productImage = (ProductImage)findViewById(R.id.thumbnail);
-		productImage.setImage(image);
+		productImage.setImage(this.selectedImage);
 	}
 	
-	private byte[] getGenericProductImage()
+	private byte[] getImageFromBitmap(Bitmap bitmap)
 	{
-		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.product_generic);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
 		
@@ -164,7 +173,53 @@ public class UpdateProductActivity extends Activity
 	
 	private void updateImage()
 	{
-		Toast.makeText(this, "UPDATE IMAGE!", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		intent.setType("image/*");
+		startActivityForResult(intent, UpdateProductActivity.SELECT_IMAGE_REQUEST);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if ((requestCode == UpdateProductActivity.SELECT_IMAGE_REQUEST) && (resultCode == Activity.RESULT_OK))
+		{
+			try
+			{
+				Uri imageUri = data.getData();
+				byte[] image = getImage(imageUri);
+				setProductImage(image);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+				// TODO
+			}
+		}
+	}
+	
+	private byte[] getImage(Uri uri) throws IOException
+	{
+		InputStream inputStream = getContentResolver().openInputStream(uri);
+		byte[] inputData = getBytes(inputStream);
+		
+		inputStream.close();
+		
+		return inputData;
+	}
+	
+	private byte[] getBytes(InputStream inputStream) throws IOException
+	{
+		ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		
+		int read = 0;
+		
+		while ((read = inputStream.read(buffer)) != -1)
+		{
+			byteBuffer.write(buffer, 0, read);
+		}
+		
+		return byteBuffer.toByteArray();
 	}
 	
 	private void update()
