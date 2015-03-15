@@ -40,6 +40,9 @@ public class ListCategoryAdapter extends ArrayAdapter<Category>
 		TextView name = (TextView)convertView.findViewById(R.id.name);
 		name.setText(category.getName());
 		
+		TextView color = (TextView)convertView.findViewById(R.id.color);
+		color.setBackgroundColor(category.getIntColor());
+		
 		return convertView;
 	}
 	

@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,12 +25,14 @@ import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
+import com.mauriciotogneri.shoppingcart.widgets.CustomTextView;
 
 public class ManageCategoriesActivity extends BaseActivity
 {
 	public static final String RESULT_CATEGORY = "category";
 	
 	private ListCategoryAdapter listCategoryAdapter;
+	private String selectedColor = "";
 	
 	@Override
 	protected void init()
@@ -129,46 +133,122 @@ public class ManageCategoriesActivity extends BaseActivity
 			categoryName.setTextValue(category.getName());
 		}
 		
+		this.selectedColor = (category == null) ? Category.COLOR_1 : category.getColor();
+		
+		setColorButtonCallback(dialog, R.id.color_1, Category.COLOR_1, this.selectedColor);
+		setColorButtonCallback(dialog, R.id.color_2, Category.COLOR_2, this.selectedColor);
+		setColorButtonCallback(dialog, R.id.color_3, Category.COLOR_3, this.selectedColor);
+		setColorButtonCallback(dialog, R.id.color_4, Category.COLOR_4, this.selectedColor);
+		setColorButtonCallback(dialog, R.id.color_5, Category.COLOR_5, this.selectedColor);
+		setColorButtonCallback(dialog, R.id.color_6, Category.COLOR_6, this.selectedColor);
+		setColorButtonCallback(dialog, R.id.color_7, Category.COLOR_7, this.selectedColor);
+		setColorButtonCallback(dialog, R.id.color_8, Category.COLOR_8, this.selectedColor);
+		
 		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
 		{
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				String name = categoryName.getTextValue();
-				
-				if (!TextUtils.isEmpty(name))
-				{
-					if (!Category.exists(name))
-					{
-						if (category != null)
-						{
-							category.update(name);
-						}
-						else
-						{
-							Category newCategory = new Category(name);
-							newCategory.save();
-						}
-						
-						refreshList();
-					}
-					else
-					{
-						updateCategory(category);
-						showToast(R.string.error_category_already_exists);
-					}
-				}
-				else
-				{
-					updateCategory(category);
-					showToast(R.string.error_invalid_name);
-				}
+				updateCategory(category, categoryName.getTextValue());
 			}
 		});
 		
 		dialog.setNegativeButton(R.string.button_cancel, null);
 		
 		dialog.display();
+	}
+	
+	private void updateCategory(Category category, String name)
+	{
+		if (!TextUtils.isEmpty(name))
+		{
+			if (category == null)
+			{
+				if (!Category.exists(name))
+				{
+					Category newCategory = new Category(name, this.selectedColor);
+					newCategory.save();
+					
+					refreshList();
+				}
+				else
+				{
+					updateCategory(category);
+					showToast(R.string.error_category_already_exists);
+				}
+			}
+			else
+			{
+				if ((!category.getName().equals(name)) && Category.exists(name))
+				{
+					updateCategory(category);
+					showToast(R.string.error_category_already_exists);
+				}
+				else
+				{
+					category.update(name, this.selectedColor);
+					refreshList();
+				}
+			}
+		}
+		else
+		{
+			updateCategory(category);
+			showToast(R.string.error_invalid_name);
+		}
+	}
+	
+	private void setColorButtonCallback(final CustomDialog dialog, final int textViewId, String colorCode, String selectedColor)
+	{
+		CustomTextView customTextView = dialog.getCustomTextView(textViewId);
+		customTextView.setBackgroundColor(Color.parseColor("#" + colorCode));
+		
+		if (selectedColor.equals(colorCode))
+		{
+			selectColor(dialog, textViewId);
+		}
+		
+		customTextView.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				selectColor(dialog, textViewId);
+			}
+		});
+	}
+	
+	private void selectColor(CustomDialog dialog, int colorId)
+	{
+		CustomTextView color1 = dialog.getCustomTextView(R.id.color_1);
+		color1.setText("");
+		
+		CustomTextView color2 = dialog.getCustomTextView(R.id.color_2);
+		color2.setText("");
+		
+		CustomTextView color3 = dialog.getCustomTextView(R.id.color_3);
+		color3.setText("");
+		
+		CustomTextView color4 = dialog.getCustomTextView(R.id.color_4);
+		color4.setText("");
+		
+		CustomTextView color5 = dialog.getCustomTextView(R.id.color_5);
+		color5.setText("");
+		
+		CustomTextView color6 = dialog.getCustomTextView(R.id.color_6);
+		color6.setText("");
+		
+		CustomTextView color7 = dialog.getCustomTextView(R.id.color_7);
+		color7.setText("");
+		
+		CustomTextView color8 = dialog.getCustomTextView(R.id.color_8);
+		color8.setText("");
+		
+		CustomTextView color = dialog.getCustomTextView(colorId);
+		color.setText(R.string.icon_update);
+		
+		ColorDrawable colorDrawable = (ColorDrawable)color.getBackground();
+		this.selectedColor = String.format("%06X", 0xFFFFFF & colorDrawable.getColor());
 	}
 	
 	@SuppressLint("InflateParams")

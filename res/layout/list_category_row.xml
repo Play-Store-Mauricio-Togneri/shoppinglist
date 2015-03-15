@@ -6,15 +6,28 @@
     android:background="@layout/background_list_row"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="15dp" >
+    android:paddingLeft="15dp"
+    android:paddingStart="15dp"
+    android:paddingRight="15dp"
+    android:paddingEnd="15dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp" >
 
     <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
         android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
         custom:font="opensans" />
+
+    <View style="@style/ColorSeparator" />
+
+    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        android:id="@+id/color"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="#FF0000" />
 
 </LinearLayout>

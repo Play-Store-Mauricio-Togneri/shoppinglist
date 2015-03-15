@@ -59,5 +59,20 @@
         <item name="android:background">@layout/background_toolbar_button</item>
         <item name="font">glyphicons</item>
     </style>
+    
+    <style name="ColorButton">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:gravity">center</item>
+        <item name="font">glyphicons</item>
+        <item name="android:textColor">#606060</item>
+        <item name="android:textSize">@dimen/default_font_size</item>
+    </style>
+    
+    <style name="ColorSeparator">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 
 </resources>

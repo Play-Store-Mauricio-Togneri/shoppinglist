@@ -89,13 +89,13 @@ public class CartActivity extends BaseActivity
 	
 	private void initDatabase()
 	{
-		Category drinks = new Category("Drinks");
+		Category drinks = new Category("Drinks", Category.COLOR_1);
 		drinks.save();
 		
-		Category food = new Category("Food");
+		Category food = new Category("Food", Category.COLOR_2);
 		food.save();
 		
-		Category kitchen = new Category("Kitchen");
+		Category kitchen = new Category("Kitchen", Category.COLOR_3);
 		kitchen.save();
 		
 		// --------------------------------

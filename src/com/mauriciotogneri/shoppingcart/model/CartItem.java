@@ -62,6 +62,11 @@ public class CartItem extends Model
 		this.selected = selected;
 	}
 	
+	public Category getCategory()
+	{
+		return this.product.getCategory();
+	}
+	
 	public void invertSelection()
 	{
 		this.selected = !this.selected;

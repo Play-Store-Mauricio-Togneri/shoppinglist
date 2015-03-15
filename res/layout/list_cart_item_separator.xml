@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res/com.mauriciotogneri.shoppingcart"
+    android:id="@+id/separator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="8dp"
-    android:background="#999999"
+    android:background="#B4B4B4"
     android:clickable="false" >
 
     <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
         android:textStyle="bold"
         custom:font="opensans" />

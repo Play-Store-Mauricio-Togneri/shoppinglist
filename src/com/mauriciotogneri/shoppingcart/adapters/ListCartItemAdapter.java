@@ -6,17 +6,19 @@ import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
+import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class ListCartItemAdapter extends ArrayAdapter<CartItem>
@@ -44,6 +46,9 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 			CartItemSeparator separator = (CartItemSeparator)cartItem;
 			
 			convertView = this.inflater.inflate(R.layout.list_cart_item_separator, parent, false);
+			
+			LinearLayout separatorLayout = (LinearLayout)convertView.findViewById(R.id.separator);
+			separatorLayout.setBackgroundColor(separator.getColor());
 			
 			TextView title = (TextView)convertView.findViewById(R.id.title);
 			title.setText(separator.getTitle());
@@ -135,7 +140,9 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 			
 			if (!selected.isEmpty())
 			{
-				selected.add(0, new CartItemSeparator(getContext().getString(R.string.label_already_in_cart)));
+				Category separatorCategory = new Category(getContext().getString(R.string.label_already_in_cart), Category.COLOR_1);
+				
+				selected.add(0, new CartItemSeparator(separatorCategory, true));
 				addAll(selected);
 			}
 		}
@@ -147,16 +154,16 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 	{
 		List<CartItem> result = new ArrayList<CartItem>();
 		
-		String lastTitle = "";
+		Category lastCategory = null;
 		
 		for (CartItem cartItem : cartItems)
 		{
-			String currentTitle = cartItem.getCategoryName();
+			Category currentCategory = cartItem.getCategory();
 			
-			if (TextUtils.isEmpty(lastTitle) || (!currentTitle.equals(lastTitle)))
+			if ((lastCategory == null) || (!currentCategory.getName().equals(lastCategory.getName())))
 			{
-				lastTitle = currentTitle;
-				result.add(new CartItemSeparator(lastTitle));
+				lastCategory = currentCategory;
+				result.add(new CartItemSeparator(lastCategory, false));
 			}
 			
 			result.add(cartItem);
@@ -190,14 +197,23 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 		{
 			CartItem cartItem = getItem(i);
 			
-			if (!cartItem.isSelected())
+			if (cartItem instanceof CartItemSeparator)
 			{
-				if (result.length() != 0)
-				{
-					result.append("\r\n");
-				}
+				CartItemSeparator separator = (CartItemSeparator)cartItem;
 				
-				result.append(cartItem.getName()).append(": ").append(cartItem.getQuantity());
+				if (!separator.isInCart())
+				{
+					if (result.length() != 0)
+					{
+						result.append("\n");
+					}
+					
+					result.append(separator.getTitle()).append(":\n");
+				}
+			}
+			else if (!cartItem.isSelected())
+			{
+				result.append("   * ").append(cartItem.getName()).append(" (").append(cartItem.getQuantity()).append(")\n");
 			}
 		}
 		
@@ -206,16 +222,30 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 	
 	public class CartItemSeparator extends CartItem
 	{
+		private final boolean inCart;
 		private final String title;
+		private final String color;
 		
-		public CartItemSeparator(String title)
+		public CartItemSeparator(Category category, boolean inCart)
 		{
-			this.title = title;
+			this.inCart = inCart;
+			this.title = category.getName();
+			this.color = category.getColor();
+		}
+		
+		public boolean isInCart()
+		{
+			return this.inCart;
 		}
 		
 		public String getTitle()
 		{
 			return this.title;
+		}
+		
+		public int getColor()
+		{
+			return Color.parseColor("#" + this.color);
 		}
 	}
 }
