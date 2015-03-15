@@ -29,6 +29,23 @@ public class CustomEditText extends EditText
 		}
 	}
 	
+	public void setErrorText(String text)
+	{
+		requestFocus();
+		setError(text);
+	}
+	
+	public void removeErrorText()
+	{
+		setError(null);
+	}
+	
+	public void setTextValue(String text)
+	{
+		setText(text);
+		setSelection(text.length());
+	}
+	
 	public String getTextValue()
 	{
 		return getText().toString().trim();

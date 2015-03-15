@@ -7,11 +7,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -28,22 +25,20 @@ import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
 
-public class ManageCategoriesActivity extends Activity
+public class ManageCategoriesActivity extends BaseActivity
 {
 	public static final String RESULT_CATEGORY = "category";
 	
 	private ListCategoryAdapter listCategoryAdapter;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	protected void init()
 	{
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_manage_categories);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		this.listCategoryAdapter = new ListCategoryAdapter(this);
 		
-		ListView listView = (ListView)findViewById(R.id.category_list);
+		ListView listView = getListView(R.id.category_list);
 		listView.setAdapter(this.listCategoryAdapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener()
@@ -68,8 +63,7 @@ public class ManageCategoriesActivity extends Activity
 			}
 		});
 		
-		TextView createCategory = (TextView)findViewById(R.id.create_category);
-		createCategory.setOnClickListener(new View.OnClickListener()
+		setButtonAction(R.id.create_category, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -127,17 +121,13 @@ public class ManageCategoriesActivity extends Activity
 	private void updateCategory(final Category category)
 	{
 		CustomDialog dialog = new CustomDialog(this, getString(R.string.label_product_category));
+		dialog.setLayout(R.layout.dialog_create_category);
 		
-		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_create_category, null);
-		dialog.setView(layout);
-		
-		final CustomEditText categoryName = (CustomEditText)layout.findViewById(R.id.name);
+		final CustomEditText categoryName = dialog.getCustomEditText(R.id.name);
 		
 		if (category != null)
 		{
-			categoryName.setText(category.getName());
-			categoryName.setSelection(category.getName().length());
+			categoryName.setTextValue(category.getName());
 		}
 		
 		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
@@ -186,12 +176,9 @@ public class ManageCategoriesActivity extends Activity
 	private void removeCategory(final Category category)
 	{
 		CustomDialog dialog = new CustomDialog(this, category.getName());
+		dialog.setLayout(R.layout.dialog_content_text);
 		
-		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_content_text, null);
-		dialog.setView(layout);
-		
-		TextView text = (TextView)layout.findViewById(R.id.text);
+		TextView text = dialog.getCustomTextView(R.id.text);
 		text.setText(R.string.confirmation_remove_category);
 		
 		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
@@ -220,12 +207,9 @@ public class ManageCategoriesActivity extends Activity
 	private void showError()
 	{
 		CustomDialog dialog = new CustomDialog(this, getString(R.string.label_error));
+		dialog.setLayout(R.layout.dialog_content_text);
 		
-		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_content_text, null);
-		dialog.setView(layout);
-		
-		TextView text = (TextView)layout.findViewById(R.id.text);
+		TextView text = dialog.getCustomTextView(R.id.text);
 		text.setText(R.string.error_category_in_use);
 		
 		dialog.setPositiveButton(R.string.button_accept, null);
@@ -237,8 +221,8 @@ public class ManageCategoriesActivity extends Activity
 	{
 		this.listCategoryAdapter.refresh();
 		
-		ListView listView = (ListView)findViewById(R.id.category_list);
-		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
+		ListView listView = getListView(R.id.category_list);
+		TextView emptyLabel = getCustomTextView(R.id.empty_label);
 		
 		if (this.listCategoryAdapter.getCount() > 0)
 		{

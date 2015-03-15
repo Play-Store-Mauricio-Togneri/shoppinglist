@@ -1,19 +1,9 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +14,7 @@ import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public class UpdateProductActivity extends Activity
+public class UpdateProductActivity extends BaseActivity
 {
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
 	private static final int SELECT_IMAGE_REQUEST = 123;
@@ -35,25 +25,23 @@ public class UpdateProductActivity extends Activity
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	protected void init()
 	{
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update_product);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		long productId = getIntent().getLongExtra(UpdateProductActivity.PARAMETER_PRODUCT_ID, 0);
+		long productId = getParameter(UpdateProductActivity.PARAMETER_PRODUCT_ID, 0);
 		
 		if (productId != 0)
 		{
 			this.product = Product.byId(productId);
 		}
 		
-		init(this.product);
+		initUI(this.product);
 	}
 	
-	private void init(Product product)
+	private void initUI(Product product)
 	{
-		TextView toolbarTitle = (TextView)findViewById(R.id.toolbar_title);
+		TextView toolbarTitle = getCustomTextView(R.id.toolbar_title);
 		
 		if (product != null)
 		{
@@ -69,7 +57,7 @@ public class UpdateProductActivity extends Activity
 		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(this);
 		this.spinnerCategoryAdapter.refresh();
 		
-		Spinner productCategory = (Spinner)findViewById(R.id.category);
+		Spinner productCategory = getSpinner(R.id.category);
 		productCategory.setAdapter(this.spinnerCategoryAdapter);
 		
 		if (product != null)
@@ -79,8 +67,7 @@ public class UpdateProductActivity extends Activity
 		
 		// ---------------------------
 		
-		TextView buttonManageCategories = (TextView)findViewById(R.id.button_manage_categories);
-		buttonManageCategories.setOnClickListener(new View.OnClickListener()
+		setButtonAction(R.id.button_manage_categories, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -91,17 +78,16 @@ public class UpdateProductActivity extends Activity
 		
 		// ---------------------------
 		
-		EditText productName = (EditText)findViewById(R.id.name);
+		CustomEditText productName = getCustomEditText(R.id.name);
 		
 		if (product != null)
 		{
-			productName.setText(product.getName());
-			productName.setSelection(product.getName().length());
+			productName.setTextValue(product.getName());
 		}
 		
 		// ---------------------------
 		
-		ProductImage productImage = (ProductImage)findViewById(R.id.thumbnail);
+		ProductImage productImage = getProductImage(R.id.thumbnail);
 		productImage.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -117,12 +103,12 @@ public class UpdateProductActivity extends Activity
 		}
 		else
 		{
-			setProductImage(getImageFromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.product_generic)));
+			setProductImage(getImageFromBitmap(R.drawable.product_generic));
 		}
 		
 		// ---------------------------
 		
-		TextView buttonUpdateText = (TextView)findViewById(R.id.button_update_text);
+		TextView buttonUpdateText = getCustomTextView(R.id.button_update_text);
 		
 		if (product != null)
 		{
@@ -135,8 +121,7 @@ public class UpdateProductActivity extends Activity
 		
 		// ---------------------------
 		
-		LinearLayout buttonUpdate = (LinearLayout)findViewById(R.id.button_update);
-		buttonUpdate.setOnClickListener(new View.OnClickListener()
+		setButtonAction(R.id.button_update, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -148,37 +133,22 @@ public class UpdateProductActivity extends Activity
 	
 	private void setProductImage(byte[] image)
 	{
-		Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+		this.selectedImage = getImageFromBitmap(getResizedBitmap(image, Product.IMAGE_SIZE, Product.IMAGE_SIZE));
 		
-		if ((bitmap.getWidth() != Product.IMAGE_SIZE) || (bitmap.getHeight() != Product.IMAGE_SIZE))
-		{
-			bitmap = Bitmap.createScaledBitmap(bitmap, Product.IMAGE_SIZE, Product.IMAGE_SIZE, false);
-		}
-		
-		this.selectedImage = getImageFromBitmap(bitmap);
-		
-		ProductImage productImage = (ProductImage)findViewById(R.id.thumbnail);
+		ProductImage productImage = getProductImage(R.id.thumbnail);
 		productImage.setImage(this.selectedImage);
-	}
-	
-	private byte[] getImageFromBitmap(Bitmap bitmap)
-	{
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-		
-		return stream.toByteArray();
 	}
 	
 	private Category getProductCategory()
 	{
-		Spinner productCategory = (Spinner)findViewById(R.id.category);
+		Spinner productCategory = getSpinner(R.id.category);
 		
 		return (Category)productCategory.getSelectedItem();
 	}
 	
 	private String getProductName()
 	{
-		CustomEditText productName = (CustomEditText)findViewById(R.id.name);
+		CustomEditText productName = getCustomEditText(R.id.name);
 		
 		return productName.getTextValue();
 	}
@@ -197,8 +167,7 @@ public class UpdateProductActivity extends Activity
 		{
 			try
 			{
-				Uri imageUri = data.getData();
-				byte[] image = getImage(imageUri);
+				byte[] image = getBytesFromUri(data.getData());
 				setProductImage(image);
 			}
 			catch (Exception e)
@@ -216,36 +185,11 @@ public class UpdateProductActivity extends Activity
 				
 				if (category != null)
 				{
-					Spinner productCategory = (Spinner)findViewById(R.id.category);
+					Spinner productCategory = getSpinner(R.id.category);
 					productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(category));
 				}
 			}
 		}
-	}
-	
-	private byte[] getImage(Uri uri) throws IOException
-	{
-		InputStream inputStream = getContentResolver().openInputStream(uri);
-		byte[] inputData = getBytes(inputStream);
-		
-		inputStream.close();
-		
-		return inputData;
-	}
-	
-	private byte[] getBytes(InputStream inputStream) throws IOException
-	{
-		ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
-		byte[] buffer = new byte[1024];
-		
-		int read = 0;
-		
-		while ((read = inputStream.read(buffer)) != -1)
-		{
-			byteBuffer.write(buffer, 0, read);
-		}
-		
-		return byteBuffer.toByteArray();
 	}
 	
 	private void update()
@@ -295,15 +239,14 @@ public class UpdateProductActivity extends Activity
 	
 	private void setNameInputError(int textId)
 	{
-		CustomEditText productName = (CustomEditText)findViewById(R.id.name);
-		productName.requestFocus();
-		productName.setError(getString(textId));
+		CustomEditText productName = getCustomEditText(R.id.name);
+		productName.setErrorText(getString(textId));
 	}
 	
 	private void removeInputNameError()
 	{
-		CustomEditText productName = (CustomEditText)findViewById(R.id.name);
-		productName.setError(null);
+		CustomEditText productName = getCustomEditText(R.id.name);
+		productName.removeErrorText();
 	}
 	
 	private void editProduct(Product product)

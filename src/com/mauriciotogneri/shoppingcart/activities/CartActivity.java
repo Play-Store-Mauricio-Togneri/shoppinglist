@@ -2,22 +2,18 @@ package com.mauriciotogneri.shoppingcart.activities;
 
 import java.io.ByteArrayOutputStream;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
@@ -26,20 +22,18 @@ import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public class CartActivity extends Activity
+public class CartActivity extends BaseActivity
 {
 	private ListCartItemAdapter listCartItemAdapter;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	protected void init()
 	{
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cart);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		this.listCartItemAdapter = new ListCartItemAdapter(this);
 		
-		ListView listView = (ListView)findViewById(R.id.cart_list);
+		ListView listView = getListView(R.id.cart_list);
 		listView.setAdapter(this.listCartItemAdapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener()
@@ -68,8 +62,7 @@ public class CartActivity extends Activity
 			}
 		});
 		
-		TextView shareButton = (TextView)findViewById(R.id.share_cart);
-		shareButton.setOnClickListener(new View.OnClickListener()
+		setButtonAction(R.id.share_cart, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -78,8 +71,7 @@ public class CartActivity extends Activity
 			}
 		});
 		
-		TextView addProductButton = (TextView)findViewById(R.id.add_product);
-		addProductButton.setOnClickListener(new View.OnClickListener()
+		setButtonAction(R.id.add_product, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -135,11 +127,14 @@ public class CartActivity extends Activity
 	
 	private void shareCart()
 	{
-		Intent shareIntent = new Intent();
-		shareIntent.setAction(Intent.ACTION_SEND);
-		shareIntent.putExtra(Intent.EXTRA_TEXT, this.listCartItemAdapter.getShareContent());
-		shareIntent.setType("text/plain");
-		startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share_cart)));
+		if (!this.listCartItemAdapter.isEmpty())
+		{
+			share(R.string.share_cart, this.listCartItemAdapter.getShareContent());
+		}
+		else
+		{
+			Toast.makeText(this, R.string.error_cart_empty, Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	private void selectCartItem(CartItem cartItem)
@@ -154,8 +149,8 @@ public class CartActivity extends Activity
 	{
 		this.listCartItemAdapter.refresh(sort);
 		
-		ListView listView = (ListView)findViewById(R.id.cart_list);
-		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
+		ListView listView = getListView(R.id.cart_list);
+		TextView emptyLabel = getCustomTextView(R.id.empty_label);
 		
 		if (this.listCartItemAdapter.getCount() > 0)
 		{
@@ -173,15 +168,12 @@ public class CartActivity extends Activity
 	private void displayCartItem(final CartItem cartItem)
 	{
 		CustomDialog dialog = new CustomDialog(this, cartItem.getName());
+		dialog.setLayout(R.layout.dialog_cart_item);
 		
-		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
-		dialog.setView(layout);
-		
-		ProductImage productImage = (ProductImage)layout.findViewById(R.id.thumbnail);
+		ProductImage productImage = dialog.getProductImage(R.id.thumbnail);
 		productImage.setImage(cartItem.getImage());
 		
-		final NumberPicker quantity = (NumberPicker)layout.findViewById(R.id.quantity);
+		final NumberPicker quantity = dialog.getNumberPicker(R.id.quantity);
 		quantity.setMinValue(1);
 		quantity.setMaxValue(100);
 		quantity.setValue(cartItem.getQuantity());
@@ -227,8 +219,7 @@ public class CartActivity extends Activity
 	
 	private void addProduct()
 	{
-		Intent intent = new Intent(this, AddProductActivity.class);
-		startActivity(intent);
+		startActivity(AddProductActivity.class);
 	}
 	
 	@Override

@@ -3,14 +3,10 @@ package com.mauriciotogneri.shoppingcart.activities;
 import java.util.ArrayList;
 import java.util.List;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -31,23 +27,21 @@ import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public class AddProductActivity extends Activity
+public class AddProductActivity extends BaseActivity
 {
 	private ListProductAdapter listProductAdapter;
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	protected void init()
 	{
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_product);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
 		this.listProductAdapter = new ListProductAdapter(this);
 		
 		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(this);
 		
-		Spinner category = (Spinner)findViewById(R.id.category);
+		Spinner category = getSpinner(R.id.category);
 		category.setAdapter(this.spinnerCategoryAdapter);
 		category.setOnItemSelectedListener(new OnItemSelectedListener()
 		{
@@ -63,7 +57,7 @@ public class AddProductActivity extends Activity
 			}
 		});
 		
-		ListView listView = (ListView)findViewById(R.id.product_list);
+		ListView listView = getListView(R.id.product_list);
 		listView.setAdapter(this.listProductAdapter);
 		
 		listView.setOnItemClickListener(new OnItemClickListener()
@@ -88,8 +82,7 @@ public class AddProductActivity extends Activity
 			}
 		});
 		
-		TextView createProduct = (TextView)findViewById(R.id.create_product);
-		createProduct.setOnClickListener(new View.OnClickListener()
+		setButtonAction(R.id.create_product, new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -103,15 +96,12 @@ public class AddProductActivity extends Activity
 	private void selectProduct(final Product product)
 	{
 		CustomDialog dialog = new CustomDialog(this, product.getName());
+		dialog.setLayout(R.layout.dialog_cart_item);
 		
-		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_cart_item, null);
-		dialog.setView(layout);
-		
-		ProductImage productImage = (ProductImage)layout.findViewById(R.id.thumbnail);
+		ProductImage productImage = dialog.getProductImage(R.id.thumbnail);
 		productImage.setImage(product.getImage());
 		
-		final NumberPicker quantity = (NumberPicker)layout.findViewById(R.id.quantity);
+		final NumberPicker quantity = dialog.getNumberPicker(R.id.quantity);
 		quantity.setMinValue(1);
 		quantity.setMaxValue(100);
 		quantity.setValue(1);
@@ -174,8 +164,7 @@ public class AddProductActivity extends Activity
 	
 	private void createProduct()
 	{
-		Intent intent = new Intent(this, UpdateProductActivity.class);
-		startActivity(intent);
+		startActivity(UpdateProductActivity.class);
 	}
 	
 	private void editProduct(Product product)
@@ -189,12 +178,9 @@ public class AddProductActivity extends Activity
 	private void removeProduct(final Product product)
 	{
 		CustomDialog dialog = new CustomDialog(this, product.getName());
+		dialog.setLayout(R.layout.dialog_content_text);
 		
-		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_content_text, null);
-		dialog.setView(layout);
-		
-		TextView text = (TextView)layout.findViewById(R.id.text);
+		TextView text = dialog.getCustomTextView(R.id.text);
 		text.setText(R.string.confirmation_remove_product);
 		
 		dialog.setPositiveButton(R.string.button_accept, new OnClickListener()
@@ -223,12 +209,9 @@ public class AddProductActivity extends Activity
 	private void showError()
 	{
 		CustomDialog dialog = new CustomDialog(this, getString(R.string.label_error));
+		dialog.setLayout(R.layout.dialog_content_text);
 		
-		LayoutInflater inflater = LayoutInflater.from(this);
-		View layout = inflater.inflate(R.layout.dialog_content_text, null);
-		dialog.setView(layout);
-		
-		TextView text = (TextView)layout.findViewById(R.id.text);
+		TextView text = dialog.getCustomTextView(R.id.text);
 		text.setText(R.string.error_product_in_use);
 		
 		dialog.setPositiveButton(R.string.button_accept, null);
@@ -238,12 +221,12 @@ public class AddProductActivity extends Activity
 	
 	private void refreshList()
 	{
-		Spinner categoryField = (Spinner)findViewById(R.id.category);
+		Spinner categoryField = getSpinner(R.id.category);
 		Category category = (Category)categoryField.getSelectedItem();
 		this.listProductAdapter.refresh(category);
 		
-		ListView listView = (ListView)findViewById(R.id.product_list);
-		TextView emptyLabel = (TextView)findViewById(R.id.empty_label);
+		ListView listView = getListView(R.id.product_list);
+		TextView emptyLabel = getCustomTextView(R.id.empty_label);
 		
 		if (this.listProductAdapter.getCount() > 0)
 		{
