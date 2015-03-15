@@ -41,9 +41,9 @@ public class AddProductActivity extends BaseActivity
 		
 		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(this);
 		
-		Spinner category = getSpinner(R.id.category);
-		category.setAdapter(this.spinnerCategoryAdapter);
-		category.setOnItemSelectedListener(new OnItemSelectedListener()
+		Spinner categorySpinner = getSpinner(R.id.category);
+		categorySpinner.setAdapter(this.spinnerCategoryAdapter);
+		categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener()
 		{
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -164,7 +164,11 @@ public class AddProductActivity extends BaseActivity
 	
 	private void createProduct()
 	{
-		startActivity(UpdateProductActivity.class);
+		Spinner categorySpinner = getSpinner(R.id.category);
+		
+		Intent intent = new Intent(this, UpdateProductActivity.class);
+		intent.putExtra(UpdateProductActivity.PARAMETER_CATEGORY, (Category)categorySpinner.getSelectedItem());
+		startActivity(intent);
 	}
 	
 	private void editProduct(Product product)

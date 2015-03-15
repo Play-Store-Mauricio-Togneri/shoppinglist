@@ -17,6 +17,8 @@ import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 public class UpdateProductActivity extends BaseActivity
 {
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
+	public static final String PARAMETER_CATEGORY = "category";
+	
 	private static final int SELECT_IMAGE_REQUEST = 123;
 	private static final int SELECT_CATEGORY_REQUEST = 456;
 	
@@ -29,17 +31,18 @@ public class UpdateProductActivity extends BaseActivity
 	{
 		setContentView(R.layout.activity_update_product);
 		
-		long productId = getParameter(UpdateProductActivity.PARAMETER_PRODUCT_ID, 0);
+		long productId = getParameter(UpdateProductActivity.PARAMETER_PRODUCT_ID, 0L);
+		Category initialCategory = getParameter(UpdateProductActivity.PARAMETER_CATEGORY, null);
 		
 		if (productId != 0)
 		{
 			this.product = Product.byId(productId);
 		}
 		
-		initUI(this.product);
+		initUI(this.product, initialCategory);
 	}
 	
-	private void initUI(Product product)
+	private void initUI(Product product, Category initialCategory)
 	{
 		TextView toolbarTitle = getCustomTextView(R.id.toolbar_title);
 		
@@ -63,6 +66,10 @@ public class UpdateProductActivity extends BaseActivity
 		if (product != null)
 		{
 			productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(product.getCategory()));
+		}
+		else if (initialCategory != null)
+		{
+			productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(initialCategory));
 		}
 		
 		// ---------------------------
