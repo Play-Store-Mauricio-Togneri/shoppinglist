@@ -15,7 +15,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
@@ -156,13 +155,13 @@ public class ManageCategoriesActivity extends BaseActivity
 					else
 					{
 						updateCategory(category);
-						Toast.makeText(ManageCategoriesActivity.this, R.string.error_category_already_exists, Toast.LENGTH_SHORT).show();
+						showToast(R.string.error_category_already_exists);
 					}
 				}
 				else
 				{
 					updateCategory(category);
-					Toast.makeText(ManageCategoriesActivity.this, R.string.error_invalid_name, Toast.LENGTH_SHORT).show();
+					showToast(R.string.error_invalid_name);
 				}
 			}
 		});

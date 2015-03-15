@@ -3,16 +3,22 @@ package com.mauriciotogneri.shoppingcart.activities;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
 import com.mauriciotogneri.shoppingcart.widgets.CustomTextView;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
@@ -139,5 +145,21 @@ public abstract class BaseActivity extends Activity
 	{
 		View toolbarButton = findViewById(buttonId);
 		toolbarButton.setOnClickListener(callback);
+	}
+	
+	@SuppressLint("InflateParams")
+	protected void showToast(int messageId)
+	{
+		LayoutInflater inflater = getLayoutInflater();
+		View layout = inflater.inflate(R.layout.custom_toast, null);
+		
+		TextView text = (TextView)layout.findViewById(R.id.message);
+		text.setText(messageId);
+		
+		Toast toast = new Toast(getApplicationContext());
+		toast.setGravity(Gravity.BOTTOM, 0, 50);
+		toast.setDuration(Toast.LENGTH_SHORT);
+		toast.setView(layout);
+		toast.show();
 	}
 }

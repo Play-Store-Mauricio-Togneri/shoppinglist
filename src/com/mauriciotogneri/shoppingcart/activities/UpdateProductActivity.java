@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
@@ -179,7 +178,7 @@ public class UpdateProductActivity extends BaseActivity
 			}
 			catch (Exception e)
 			{
-				Toast.makeText(this, R.string.error_invalid_image, Toast.LENGTH_SHORT).show();
+				showToast(R.string.error_invalid_image);
 			}
 		}
 		else if (requestCode == UpdateProductActivity.SELECT_CATEGORY_REQUEST)
@@ -222,7 +221,7 @@ public class UpdateProductActivity extends BaseActivity
 		
 		if (getProductCategory() == null)
 		{
-			Toast.makeText(this, R.string.error_invalid_category, Toast.LENGTH_SHORT).show();
+			showToast(R.string.error_invalid_category);
 		}
 		else if (TextUtils.isEmpty(getProductName()))
 		{
@@ -234,7 +233,7 @@ public class UpdateProductActivity extends BaseActivity
 		}
 		else if (this.selectedImage == null)
 		{
-			Toast.makeText(this, R.string.error_invalid_image, Toast.LENGTH_SHORT).show();
+			showToast(R.string.error_invalid_image);
 		}
 		else
 		{

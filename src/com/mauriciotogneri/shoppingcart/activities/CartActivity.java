@@ -13,7 +13,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
@@ -133,7 +132,7 @@ public class CartActivity extends BaseActivity
 		}
 		else
 		{
-			Toast.makeText(this, R.string.error_cart_empty, Toast.LENGTH_SHORT).show();
+			showToast(R.string.error_cart_empty);
 		}
 	}
 	
