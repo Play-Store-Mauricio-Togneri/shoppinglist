@@ -32,6 +32,11 @@ public class CartItem extends Model
 		return this.product.getName();
 	}
 	
+	public String getCategoryName()
+	{
+		return this.product.getCategory().getName();
+	}
+	
 	public byte[] getImage()
 	{
 		return this.product.getImage();

@@ -31,7 +31,7 @@ public class MenuItemAdapter extends ArrayAdapter<Option>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.menu_item_row, null);
+			convertView = this.inflater.inflate(R.layout.menu_item_row, parent, false);
 		}
 		
 		TextView icon = (TextView)convertView.findViewById(R.id.icon);

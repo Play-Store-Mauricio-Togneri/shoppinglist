@@ -36,7 +36,7 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.list_product_row, null);
+			convertView = this.inflater.inflate(R.layout.list_product_row, parent, false);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.name);

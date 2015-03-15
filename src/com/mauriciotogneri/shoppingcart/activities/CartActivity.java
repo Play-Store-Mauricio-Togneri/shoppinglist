@@ -15,6 +15,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter;
+import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter.CartItemSeparator;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -41,7 +42,11 @@ public class CartActivity extends BaseActivity
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
-				selectCartItem(cartItem);
+				
+				if (!(cartItem instanceof CartItemSeparator))
+				{
+					selectCartItem(cartItem);
+				}
 			}
 		});
 		
@@ -52,7 +57,7 @@ public class CartActivity extends BaseActivity
 			{
 				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
 				
-				if (!cartItem.isSelected())
+				if (!cartItem.isSelected() && (!(cartItem instanceof CartItemSeparator)))
 				{
 					displayCartItem(cartItem);
 				}
@@ -128,7 +133,7 @@ public class CartActivity extends BaseActivity
 	{
 		if (!this.listCartItemAdapter.isEmpty())
 		{
-			share(R.string.share_cart, this.listCartItemAdapter.getShareContent());
+			share(R.string.label_share_cart, this.listCartItemAdapter.getShareContent());
 		}
 		else
 		{
@@ -226,7 +231,6 @@ public class CartActivity extends BaseActivity
 	{
 		super.onResume();
 		
-		this.listCartItemAdapter.refresh();
 		updateList(true);
 	}
 	

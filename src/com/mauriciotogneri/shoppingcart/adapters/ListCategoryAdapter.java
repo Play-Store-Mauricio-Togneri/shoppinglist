@@ -34,7 +34,7 @@ public class ListCategoryAdapter extends ArrayAdapter<Category>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.list_category_row, null);
+			convertView = this.inflater.inflate(R.layout.list_category_row, parent, false);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.name);

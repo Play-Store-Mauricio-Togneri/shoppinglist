@@ -7,6 +7,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,40 +39,49 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 		View convertView = originalView;
 		CartItem cartItem = getItem(position);
 		
-		if (convertView == null)
+		if (cartItem instanceof CartItemSeparator)
 		{
-			convertView = this.inflater.inflate(R.layout.list_cart_item_row, null);
-		}
-		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
-		name.setText(cartItem.getName());
-		
-		if (cartItem.isSelected())
-		{
-			name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			CartItemSeparator separator = (CartItemSeparator)cartItem;
+			
+			convertView = this.inflater.inflate(R.layout.list_cart_item_separator, parent, false);
+			
+			TextView title = (TextView)convertView.findViewById(R.id.title);
+			title.setText(separator.getTitle());
 		}
 		else
 		{
-			name.setPaintFlags(name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+			convertView = this.inflater.inflate(R.layout.list_cart_item_row, parent, false);
+			
+			TextView name = (TextView)convertView.findViewById(R.id.name);
+			name.setText(cartItem.getName());
+			
+			if (cartItem.isSelected())
+			{
+				name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			}
+			else
+			{
+				name.setPaintFlags(name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+			}
+			
+			TextView quantity = (TextView)convertView.findViewById(R.id.quantity);
+			quantity.setText(this.context.getString(R.string.label_quantity) + "   " + cartItem.getQuantity());
+			
+			if (cartItem.isSelected())
+			{
+				quantity.setPaintFlags(quantity.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			}
+			else
+			{
+				quantity.setPaintFlags(quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+			}
+			
+			ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
+			productImage.setImage(cartItem.getImage(), cartItem.isSelected());
+			
+			CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
+			selected.setChecked(cartItem.isSelected());
 		}
-		
-		TextView quantity = (TextView)convertView.findViewById(R.id.quantity);
-		quantity.setText(this.context.getString(R.string.label_quantity) + "   " + cartItem.getQuantity());
-		
-		if (cartItem.isSelected())
-		{
-			quantity.setPaintFlags(quantity.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-		}
-		else
-		{
-			quantity.setPaintFlags(quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-		}
-		
-		ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
-		productImage.setImage(cartItem.getImage(), cartItem.isSelected());
-		
-		CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
-		selected.setChecked(cartItem.isSelected());
 		
 		return convertView;
 	}
@@ -80,22 +90,23 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 	{
 		if (sort)
 		{
+			List<CartItem> cartItems = Model.all(CartItem.class);
+			
 			List<CartItem> notSelected = new ArrayList<CartItem>();
 			List<CartItem> selected = new ArrayList<CartItem>();
 			
-			int limit = getCount();
-			
-			for (int i = 0; i < limit; i++)
+			for (CartItem cartItem : cartItems)
 			{
-				CartItem cartItem = getItem(i);
-				
-				if (cartItem.isSelected())
+				if (!(cartItem instanceof CartItemSeparator))
 				{
-					selected.add(cartItem);
-				}
-				else
-				{
-					notSelected.add(cartItem);
+					if (cartItem.isSelected())
+					{
+						selected.add(cartItem);
+					}
+					else
+					{
+						notSelected.add(cartItem);
+					}
 				}
 			}
 			
@@ -104,7 +115,7 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 				@Override
 				public int compare(CartItem lhs, CartItem rhs)
 				{
-					return lhs.getName().compareTo(rhs.getName());
+					return lhs.getCategoryName().compareTo(rhs.getCategoryName());
 				}
 			});
 			
@@ -117,20 +128,41 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 				}
 			});
 			
+			notSelected = getGroupedCartItems(notSelected);
+			
 			clear();
 			addAll(notSelected);
-			addAll(selected);
+			
+			if (!selected.isEmpty())
+			{
+				selected.add(0, new CartItemSeparator(getContext().getString(R.string.label_already_in_cart)));
+				addAll(selected);
+			}
 		}
 		
 		notifyDataSetChanged();
 	}
 	
-	public void refresh()
+	private List<CartItem> getGroupedCartItems(List<CartItem> cartItems)
 	{
-		List<CartItem> cartItems = Model.all(CartItem.class);
+		List<CartItem> result = new ArrayList<CartItem>();
 		
-		clear();
-		addAll(cartItems);
+		String lastTitle = "";
+		
+		for (CartItem cartItem : cartItems)
+		{
+			String currentTitle = cartItem.getCategoryName();
+			
+			if (TextUtils.isEmpty(lastTitle) || (!currentTitle.equals(lastTitle)))
+			{
+				lastTitle = currentTitle;
+				result.add(new CartItemSeparator(lastTitle));
+			}
+			
+			result.add(cartItem);
+		}
+		
+		return result;
 	}
 	
 	public void removeSelectedItems()
@@ -170,5 +202,20 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 		}
 		
 		return result.toString();
+	}
+	
+	public class CartItemSeparator extends CartItem
+	{
+		private final String title;
+		
+		public CartItemSeparator(String title)
+		{
+			this.title = title;
+		}
+		
+		public String getTitle()
+		{
+			return this.title;
+		}
 	}
 }

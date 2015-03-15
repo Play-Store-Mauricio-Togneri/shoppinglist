@@ -36,7 +36,7 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.spinner_category_header, null);
+			convertView = this.inflater.inflate(R.layout.spinner_category_header, parent, false);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.title);
@@ -54,7 +54,7 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.spinner_category_dropdown, null);
+			convertView = this.inflater.inflate(R.layout.spinner_category_dropdown, parent, false);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.title);
