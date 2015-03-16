@@ -14,10 +14,12 @@ public class Product extends Model
 	private String name;
 	
 	@Column(name = "category")
-	private Category category;
+	private long categoryId;
 	
 	@Column(name = "image")
 	private String image;
+	
+	private Category category;
 	
 	public Product()
 	{
@@ -26,8 +28,16 @@ public class Product extends Model
 	public Product(String name, Category category, byte[] image)
 	{
 		this.name = name;
-		this.category = category;
+		this.categoryId = category.getId();
 		this.image = Base64.encodeToString(image, Base64.DEFAULT);
+	}
+	
+	private void setCategory()
+	{
+		if (this.category == null)
+		{
+			this.category = new Select().from(Category.class).where("id = ?", this.categoryId).executeSingle();
+		}
 	}
 	
 	public String getName()
@@ -37,11 +47,15 @@ public class Product extends Model
 	
 	public Category getCategory()
 	{
+		setCategory();
+		
 		return this.category;
 	}
 	
 	public boolean isCategory(Category category)
 	{
+		setCategory();
+		
 		return this.category.getName().equals(category.getName());
 	}
 	
@@ -60,8 +74,9 @@ public class Product extends Model
 	public void update(String name, Category category, byte[] image)
 	{
 		this.name = name;
-		this.category = category;
+		this.categoryId = category.getId();
 		this.image = Base64.encodeToString(image, Base64.DEFAULT);
+		this.category = null;
 		
 		save();
 	}

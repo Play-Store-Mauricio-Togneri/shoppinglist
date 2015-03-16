@@ -8,7 +8,7 @@ import com.activeandroid.query.Select;
 public class CartItem extends Model
 {
 	@Column(name = "product")
-	private Product product;
+	private long productId;
 	
 	@Column(name = "quantity")
 	private int quantity;
@@ -16,29 +16,45 @@ public class CartItem extends Model
 	@Column(name = "selected")
 	private boolean selected;
 	
+	private Product product;
+	
 	public CartItem()
 	{
 	}
 	
 	public CartItem(Product product, int quantity, boolean selected)
 	{
-		this.product = product;
+		this.productId = product.getId();
 		this.quantity = quantity;
 		this.selected = selected;
 	}
 	
+	private void setProduct()
+	{
+		if (this.product == null)
+		{
+			this.product = new Select().from(Product.class).where("id = ?", this.productId).executeSingle();
+		}
+	}
+	
 	public String getName()
 	{
+		setProduct();
+		
 		return this.product.getName();
 	}
 	
 	public String getCategoryName()
 	{
+		setProduct();
+		
 		return this.product.getCategory().getName();
 	}
 	
 	public byte[] getImage()
 	{
+		setProduct();
+		
 		return this.product.getImage();
 	}
 	
@@ -64,6 +80,8 @@ public class CartItem extends Model
 	
 	public Category getCategory()
 	{
+		setProduct();
+		
 		return this.product.getCategory();
 	}
 	
