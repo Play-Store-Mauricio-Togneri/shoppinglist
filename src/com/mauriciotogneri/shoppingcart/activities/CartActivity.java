@@ -1,11 +1,10 @@
 package com.mauriciotogneri.shoppingcart.activities;
 
-import java.io.ByteArrayOutputStream;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,14 +16,15 @@ import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter.CartItemSeparator;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
-import com.mauriciotogneri.shoppingcart.model.Category;
-import com.mauriciotogneri.shoppingcart.model.Product;
+import com.mauriciotogneri.shoppingcart.utils.DatabaseInitializer;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
 public class CartActivity extends BaseActivity
 {
 	private ListCartItemAdapter listCartItemAdapter;
+	
+	private static final String ATTRIBUTE_FIRST_LAUNCH = "first_launch";
 	
 	@Override
 	protected void init()
@@ -83,50 +83,6 @@ public class CartActivity extends BaseActivity
 				addProduct();
 			}
 		});
-		
-		initDatabase();
-	}
-	
-	private void initDatabase()
-	{
-		Category drinks = new Category("Drinks", Category.COLOR_1);
-		drinks.save();
-		
-		Category food = new Category("Food", Category.COLOR_2);
-		food.save();
-		
-		Category kitchen = new Category("Kitchen", Category.COLOR_3);
-		kitchen.save();
-		
-		// --------------------------------
-		
-		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.product_generic);
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-		byte[] bitmapdata = stream.toByteArray();
-		
-		Product cocaCola = new Product("Coca-Cola", drinks, bitmapdata);
-		cocaCola.save();
-		
-		Product milk = new Product("Milk", drinks, bitmapdata);
-		milk.save();
-		
-		Product bananas = new Product("Bananas", food, bitmapdata);
-		bananas.save();
-		
-		Product cereals = new Product("Cereals", food, bitmapdata);
-		cereals.save();
-		
-		Product bag = new Product("Bag", kitchen, bitmapdata);
-		bag.save();
-		
-		// --------------------------------
-		
-		CartItem bananas1 = new CartItem(bananas, 12, false);
-		bananas1.save();
-		
-		CartItem bag1 = new CartItem(bag, 34, false);
-		bag1.save();
 	}
 	
 	private void shareCart()
@@ -232,6 +188,16 @@ public class CartActivity extends BaseActivity
 		super.onResume();
 		
 		updateList(true);
+		
+		SharedPreferences preferencces = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		if (preferencces.getBoolean(CartActivity.ATTRIBUTE_FIRST_LAUNCH, true))
+		{
+			DatabaseInitializer databaseInitializer = new DatabaseInitializer(this);
+			databaseInitializer.execute();
+			
+			preferencces.edit().putBoolean(CartActivity.ATTRIBUTE_FIRST_LAUNCH, false).commit();
+		}
 	}
 	
 	@Override

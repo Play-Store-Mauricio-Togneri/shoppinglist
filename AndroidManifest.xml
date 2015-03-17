@@ -50,7 +50,7 @@
             android:screenOrientation="portrait"
             android:keepScreenOn="true" />
         
-        <meta-data android:name="AA_DB_NAME" android:value="/sdcard/shoppingcart.db" />
+        <meta-data android:name="AA_DB_NAME" android:value="shoppingcart.db" />
         <meta-data android:name="AA_DB_VERSION" android:value="1" />
         <meta-data android:name="AA_MODELS"
                    android:value="com.mauriciotogneri.shoppingcart.model.Category, com.mauriciotogneri.shoppingcart.model.Product, com.mauriciotogneri.shoppingcart.model.CartItem" />
