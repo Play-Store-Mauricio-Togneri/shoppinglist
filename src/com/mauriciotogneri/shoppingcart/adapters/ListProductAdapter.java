@@ -50,13 +50,12 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 	
 	public void refresh(Category category)
 	{
-		clear();
-		
-		List<Product> products = Model.all(Product.class);
-		
 		if (category != null)
 		{
+			clear();
+			
 			List<Product> filtered = new ArrayList<Product>();
+			List<Product> products = Model.all(Product.class);
 			
 			for (Product product : products)
 			{
@@ -67,21 +66,17 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 			}
 			
 			addAll(filtered);
-		}
-		else
-		{
-			addAll(products);
-		}
-		
-		sort(new Comparator<Product>()
-		{
-			@Override
-			public int compare(Product lhs, Product rhs)
+			
+			sort(new Comparator<Product>()
 			{
-				return lhs.getName().compareTo(rhs.getName());
-			}
-		});
-		
-		notifyDataSetChanged();
+				@Override
+				public int compare(Product lhs, Product rhs)
+				{
+					return lhs.getName().compareTo(rhs.getName());
+				}
+			});
+			
+			notifyDataSetChanged();
+		}
 	}
 }

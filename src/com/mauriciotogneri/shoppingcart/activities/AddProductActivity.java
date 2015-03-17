@@ -229,18 +229,21 @@ public class AddProductActivity extends BaseActivity
 		Category category = (Category)categoryField.getSelectedItem();
 		this.listProductAdapter.refresh(category);
 		
-		ListView listView = getListView(R.id.product_list);
-		TextView emptyLabel = getCustomTextView(R.id.empty_label);
-		
-		if (this.listProductAdapter.getCount() > 0)
+		if (category != null)
 		{
-			listView.setVisibility(View.VISIBLE);
-			emptyLabel.setVisibility(View.GONE);
-		}
-		else
-		{
-			listView.setVisibility(View.GONE);
-			emptyLabel.setVisibility(View.VISIBLE);
+			ListView listView = getListView(R.id.product_list);
+			TextView emptyLabel = getCustomTextView(R.id.empty_label);
+			
+			if (this.listProductAdapter.getCount() > 0)
+			{
+				listView.setVisibility(View.VISIBLE);
+				emptyLabel.setVisibility(View.GONE);
+			}
+			else
+			{
+				listView.setVisibility(View.GONE);
+				emptyLabel.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 	
