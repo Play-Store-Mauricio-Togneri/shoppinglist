@@ -84,7 +84,7 @@ public class CartActivity extends BaseActivity
 			}
 		});
 		
-		// initDatabase();
+		initDatabase();
 	}
 	
 	private void initDatabase()
