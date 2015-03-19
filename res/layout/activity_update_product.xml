@@ -96,7 +96,7 @@
                 android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
                 android:padding="10dp"
                 android:textColor="#007AB0"
-                android:maxLength="20"
+                android:maxLength="30"
                 custom:font="opensans" />
 
             <com.mauriciotogneri.shoppingcart.widgets.CustomTextView

@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:background="@layout/bolder_input"
         android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
-        android:maxLength="15"
+        android:maxLength="30"
         android:padding="10dp"
         android:textColor="#007AB0"
         custom:font="opensans" />

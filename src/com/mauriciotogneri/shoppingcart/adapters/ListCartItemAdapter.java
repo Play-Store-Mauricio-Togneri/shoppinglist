@@ -15,11 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.orm.query.Select;
 
 public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 {
@@ -95,7 +95,7 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 	{
 		if (sort)
 		{
-			List<CartItem> cartItems = Model.all(CartItem.class);
+			List<CartItem> cartItems = Select.from(CartItem.class).list();
 			
 			List<CartItem> notSelected = new ArrayList<CartItem>();
 			List<CartItem> selected = new ArrayList<CartItem>();

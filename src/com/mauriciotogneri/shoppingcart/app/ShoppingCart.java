@@ -1,10 +1,9 @@
 package com.mauriciotogneri.shoppingcart.app;
 
 import android.os.StrictMode;
-import com.activeandroid.ActiveAndroid;
 import com.mauriciotogneri.shoppingcart.widgets.Fonts;
 
-public class ShoppingCart extends com.activeandroid.app.Application
+public class ShoppingCart extends com.orm.SugarApp
 {
 	@Override
 	public void onCreate()
@@ -21,7 +20,6 @@ public class ShoppingCart extends com.activeandroid.app.Application
 		vmBuilder.penaltyLog();
 		StrictMode.setVmPolicy(vmBuilder.build());
 		
-		ActiveAndroid.initialize(this);
 		Fonts.init(this);
 	}
 }

@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.orm.query.Select;
 
 public class ListProductAdapter extends ArrayAdapter<Product>
 {
@@ -55,7 +55,7 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 			clear();
 			
 			List<Product> filtered = new ArrayList<Product>();
-			List<Product> products = Model.all(Product.class);
+			List<Product> products = Select.from(Product.class).list();
 			
 			for (Product product : products)
 			{

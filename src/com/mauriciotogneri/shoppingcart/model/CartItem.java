@@ -1,22 +1,12 @@
 package com.mauriciotogneri.shoppingcart.model;
 
-import java.util.List;
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.query.Select;
+import com.orm.SugarRecord;
 
-public class CartItem extends Model
+public class CartItem extends SugarRecord<CartItem>
 {
-	@Column(name = "product")
-	private long productId;
-	
-	@Column(name = "quantity")
-	private int quantity;
-	
-	@Column(name = "selected")
-	private boolean selected;
-	
 	private Product product;
+	private int quantity;
+	private boolean selected;
 	
 	public CartItem()
 	{
@@ -24,37 +14,23 @@ public class CartItem extends Model
 	
 	public CartItem(Product product, int quantity, boolean selected)
 	{
-		this.productId = product.getId();
+		this.product = product;
 		this.quantity = quantity;
 		this.selected = selected;
 	}
 	
-	private void setProduct()
-	{
-		if (this.product == null)
-		{
-			this.product = new Select().from(Product.class).where("id = ?", this.productId).executeSingle();
-		}
-	}
-	
 	public String getName()
 	{
-		setProduct();
-		
 		return this.product.getName();
 	}
 	
 	public String getCategoryName()
 	{
-		setProduct();
-		
 		return this.product.getCategory().getName();
 	}
 	
 	public byte[] getImage()
 	{
-		setProduct();
-		
 		return this.product.getImage();
 	}
 	
@@ -80,8 +56,6 @@ public class CartItem extends Model
 	
 	public Category getCategory()
 	{
-		setProduct();
-		
 		return this.product.getCategory();
 	}
 	
@@ -92,8 +66,8 @@ public class CartItem extends Model
 	
 	public static boolean exists(Product product)
 	{
-		List<CartItem> cartItems = new Select().from(CartItem.class).where("product = ?", product.getId()).execute();
+		Product produt = SugarRecord.findById(Product.class, product.getId());
 		
-		return (cartItems != null) && (!cartItems.isEmpty());
+		return (produt != null);
 	}
 }

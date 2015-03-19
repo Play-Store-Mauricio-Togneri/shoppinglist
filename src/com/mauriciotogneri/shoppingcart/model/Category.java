@@ -1,12 +1,11 @@
 package com.mauriciotogneri.shoppingcart.model;
 
 import java.io.Serializable;
+import java.util.List;
 import android.graphics.Color;
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.query.Select;
+import com.orm.SugarRecord;
 
-public class Category extends Model implements Serializable
+public class Category extends SugarRecord<Category> implements Serializable
 {
 	private static final long serialVersionUID = -5621512578788797213L;
 	
@@ -19,10 +18,7 @@ public class Category extends Model implements Serializable
 	public static final String COLOR_7 = "FFBB33";
 	public static final String COLOR_8 = "B67BD2";
 	
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "color")
 	private String color;
 	
 	public Category()
@@ -66,8 +62,8 @@ public class Category extends Model implements Serializable
 	
 	public static boolean exists(String name)
 	{
-		Category category = new Select().from(Category.class).where("name = ?", name).executeSingle();
+		List<Category> categories = SugarRecord.find(Category.class, "name = ?", name);
 		
-		return (category != null);
+		return (!categories.isEmpty());
 	}
 }

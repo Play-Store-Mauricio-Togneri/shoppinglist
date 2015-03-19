@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import com.activeandroid.Model;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Category;
+import com.orm.query.Select;
 
 public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 {
@@ -86,7 +86,7 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 	{
 		clear();
 		
-		List<Category> categories = Model.all(Category.class);
+		List<Category> categories = Select.from(Category.class).list();
 		addAll(categories);
 		
 		sort(new Comparator<Category>()
