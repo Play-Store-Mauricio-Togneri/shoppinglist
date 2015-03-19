@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -50,17 +49,8 @@ public class ListCategoryAdapter extends ArrayAdapter<Category>
 	{
 		clear();
 		
-		List<Category> categories = Select.from(Category.class).list();
+		List<Category> categories = Select.from(Category.class).orderBy("name").list();
 		addAll(categories);
-		
-		sort(new Comparator<Category>()
-		{
-			@Override
-			public int compare(Category lhs, Category rhs)
-			{
-				return lhs.getName().compareTo(rhs.getName());
-			}
-		});
 		
 		notifyDataSetChanged();
 	}

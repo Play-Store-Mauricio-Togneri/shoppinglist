@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -55,26 +54,20 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 			clear();
 			
 			List<Product> filtered = new ArrayList<Product>();
-			List<Product> products = Select.from(Product.class).list();
+			List<Product> products = Select.from(Product.class).where("category = ?", new String[]
+				{
+					String.valueOf(category.getId())
+				}).orderBy("name").list();
 			
 			for (Product product : products)
 			{
-				if (product.isCategory(category) && (!product.isInCart()))
+				if (!product.isInCart())
 				{
 					filtered.add(product);
 				}
 			}
 			
 			addAll(filtered);
-			
-			sort(new Comparator<Product>()
-			{
-				@Override
-				public int compare(Product lhs, Product rhs)
-				{
-					return lhs.getName().compareTo(rhs.getName());
-				}
-			});
 			
 			notifyDataSetChanged();
 		}
