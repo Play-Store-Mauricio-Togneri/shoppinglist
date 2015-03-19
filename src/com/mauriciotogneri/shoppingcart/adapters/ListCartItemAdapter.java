@@ -41,54 +41,84 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 		View convertView = originalView;
 		CartItem cartItem = getItem(position);
 		
-		if (cartItem instanceof CartItemSeparator)
+		if (convertView == null)
 		{
-			CartItemSeparator separator = (CartItemSeparator)cartItem;
-			
-			convertView = this.inflater.inflate(R.layout.list_cart_item_separator, parent, false);
-			
-			LinearLayout separatorLayout = (LinearLayout)convertView.findViewById(R.id.separator);
-			separatorLayout.setBackgroundColor(separator.getColor());
-			
-			TextView title = (TextView)convertView.findViewById(R.id.title);
-			title.setText(separator.getTitle());
+			convertView = this.inflater.inflate(R.layout.list_cart_item_row, parent, false);
+		}
+		
+		LinearLayout categoryHeader = (LinearLayout)convertView.findViewById(R.id.category_header);
+		
+		if (position == 0)
+		{
+			setCategoryHeader(categoryHeader, cartItem, convertView);
 		}
 		else
 		{
-			convertView = this.inflater.inflate(R.layout.list_cart_item_row, parent, false);
+			CartItem previousCartItem = getItem(position - 1);
 			
-			TextView name = (TextView)convertView.findViewById(R.id.name);
-			name.setText(cartItem.getName());
+			boolean sameCategory = previousCartItem.getCategory().getName().equals(cartItem.getCategory().getName());
+			boolean bothNotSelected = (!cartItem.isSelected()) && (!previousCartItem.isSelected());
+			boolean firstItemSelected = cartItem.isSelected() && (!previousCartItem.isSelected());
 			
-			if (cartItem.isSelected())
+			if ((!sameCategory && bothNotSelected) || (firstItemSelected))
 			{
-				name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+				setCategoryHeader(categoryHeader, cartItem, convertView);
 			}
 			else
 			{
-				name.setPaintFlags(name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+				categoryHeader.setVisibility(View.GONE);
 			}
-			
-			TextView quantity = (TextView)convertView.findViewById(R.id.quantity);
-			quantity.setText(this.context.getString(R.string.label_quantity) + "   " + cartItem.getQuantity());
-			
-			if (cartItem.isSelected())
-			{
-				quantity.setPaintFlags(quantity.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-			}
-			else
-			{
-				quantity.setPaintFlags(quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-			}
-			
-			ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
-			productImage.setImage(cartItem.getImage(), cartItem.isSelected());
-			
-			CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
-			selected.setChecked(cartItem.isSelected());
 		}
 		
+		TextView name = (TextView)convertView.findViewById(R.id.name);
+		name.setText(cartItem.getName());
+		
+		if (cartItem.isSelected())
+		{
+			name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+		}
+		else
+		{
+			name.setPaintFlags(name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+		}
+		
+		TextView quantity = (TextView)convertView.findViewById(R.id.quantity);
+		quantity.setText(this.context.getString(R.string.label_quantity) + "   " + cartItem.getQuantity());
+		
+		if (cartItem.isSelected())
+		{
+			quantity.setPaintFlags(quantity.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+		}
+		else
+		{
+			quantity.setPaintFlags(quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+		}
+		
+		ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
+		productImage.setImage(cartItem.getImage(), cartItem.isSelected());
+		
+		CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
+		selected.setChecked(cartItem.isSelected());
+		
 		return convertView;
+	}
+	
+	private void setCategoryHeader(LinearLayout categoryHeader, CartItem cartItem, View convertView)
+	{
+		categoryHeader.setVisibility(View.VISIBLE);
+		
+		TextView title = (TextView)convertView.findViewById(R.id.category_name);
+		
+		if (cartItem.isSelected())
+		{
+			categoryHeader.setBackgroundColor(Color.parseColor("#" + Category.COLOR_1));
+			title.setText(R.string.label_already_in_cart);
+		}
+		else
+		{
+			categoryHeader.setBackgroundColor(cartItem.getCategory().getIntColor());
+			title.setText(cartItem.getCategory().getName());
+		}
 	}
 	
 	public void refresh(boolean sort)
@@ -102,16 +132,13 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 			
 			for (CartItem cartItem : cartItems)
 			{
-				if (!(cartItem instanceof CartItemSeparator))
+				if (cartItem.isSelected())
 				{
-					if (cartItem.isSelected())
-					{
-						selected.add(cartItem);
-					}
-					else
-					{
-						notSelected.add(cartItem);
-					}
+					selected.add(cartItem);
+				}
+				else
+				{
+					notSelected.add(cartItem);
 				}
 			}
 			
@@ -133,43 +160,16 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 				}
 			});
 			
-			notSelected = getGroupedCartItems(notSelected);
-			
 			clear();
 			addAll(notSelected);
 			
 			if (!selected.isEmpty())
 			{
-				Category separatorCategory = new Category(getContext().getString(R.string.label_already_in_cart), Category.COLOR_1);
-				
-				selected.add(0, new CartItemSeparator(separatorCategory, true));
 				addAll(selected);
 			}
 		}
 		
 		notifyDataSetChanged();
-	}
-	
-	private List<CartItem> getGroupedCartItems(List<CartItem> cartItems)
-	{
-		List<CartItem> result = new ArrayList<CartItem>();
-		
-		Category lastCategory = null;
-		
-		for (CartItem cartItem : cartItems)
-		{
-			Category currentCategory = cartItem.getCategory();
-			
-			if ((lastCategory == null) || (!currentCategory.getName().equals(lastCategory.getName())))
-			{
-				lastCategory = currentCategory;
-				result.add(new CartItemSeparator(lastCategory, false));
-			}
-			
-			result.add(cartItem);
-		}
-		
-		return result;
 	}
 	
 	public void removeSelectedItems()
@@ -197,55 +197,12 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 		{
 			CartItem cartItem = getItem(i);
 			
-			if (cartItem instanceof CartItemSeparator)
-			{
-				CartItemSeparator separator = (CartItemSeparator)cartItem;
-				
-				if (!separator.isInCart())
-				{
-					if (result.length() != 0)
-					{
-						result.append("\n");
-					}
-					
-					result.append(separator.getTitle()).append(":\n");
-				}
-			}
-			else if (!cartItem.isSelected())
+			if (!cartItem.isSelected())
 			{
 				result.append("   * ").append(cartItem.getName()).append(" (").append(cartItem.getQuantity()).append(")\n");
 			}
 		}
 		
 		return result.toString();
-	}
-	
-	public class CartItemSeparator extends CartItem
-	{
-		private final boolean inCart;
-		private final String title;
-		private final String color;
-		
-		public CartItemSeparator(Category category, boolean inCart)
-		{
-			this.inCart = inCart;
-			this.title = category.getName();
-			this.color = category.getColor();
-		}
-		
-		public boolean isInCart()
-		{
-			return this.inCart;
-		}
-		
-		public String getTitle()
-		{
-			return this.title;
-		}
-		
-		public int getColor()
-		{
-			return Color.parseColor("#" + this.color);
-		}
 	}
 }

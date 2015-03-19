@@ -3,53 +3,82 @@
     xmlns:custom="http://schemas.android.com/apk/res/com.mauriciotogneri.shoppingcart"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp"
-    android:background="@layout/background_list_row" >
-
-    <com.mauriciotogneri.shoppingcart.widgets.ProductImage
-        android:id="@+id/thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/image_description" />
+    android:orientation="vertical" >
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:orientation="vertical" >
+        android:id="@+id/category_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#B4B4B4"
+        android:clickable="false"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:visibility="gone" >
 
         <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            android:id="@+id/name"
+            android:id="@+id/category_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="10dp"
+            android:gravity="center"
             android:textColor="@color/default_text_color"
             android:textSize="@dimen/default_font_size"
-            custom:font="opensans" />
-
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-            android:id="@+id/quantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@string/label_quantity"
-            android:textColor="@color/default_text_color"
-            android:textSize="16sp"
+            android:textStyle="bold"
             custom:font="opensans" />
         
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/selected"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:clickable="false"
-        android:focusable="false" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@layout/background_list_row"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <com.mauriciotogneri.shoppingcart.widgets.ProductImage
+            android:id="@+id/thumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_description" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/default_text_color"
+                android:textSize="@dimen/default_font_size"
+                custom:font="opensans" />
+
+            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                android:id="@+id/quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/label_quantity"
+                android:textColor="@color/default_text_color"
+                android:textSize="16sp"
+                custom:font="opensans" />
+            
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/selected"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:clickable="false"
+            android:focusable="false" />
+        
+    </LinearLayout>
 
 </LinearLayout>

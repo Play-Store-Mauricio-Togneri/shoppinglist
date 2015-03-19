@@ -14,7 +14,6 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter;
-import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter.CartItemSeparator;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.utils.DatabaseInitializer;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
@@ -42,11 +41,7 @@ public class CartActivity extends BaseActivity
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
-				
-				if (!(cartItem instanceof CartItemSeparator))
-				{
-					selectCartItem(cartItem);
-				}
+				selectCartItem(cartItem);
 			}
 		});
 		
@@ -57,7 +52,7 @@ public class CartActivity extends BaseActivity
 			{
 				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
 				
-				if (!cartItem.isSelected() && (!(cartItem instanceof CartItemSeparator)))
+				if (!cartItem.isSelected())
 				{
 					displayCartItem(cartItem);
 				}
