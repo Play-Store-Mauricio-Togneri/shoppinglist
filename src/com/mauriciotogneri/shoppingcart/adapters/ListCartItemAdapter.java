@@ -192,6 +192,7 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 		StringBuilder result = new StringBuilder();
 		
 		int limit = getCount();
+		String lastCategory = "";
 		
 		for (int i = 0; i < limit; i++)
 		{
@@ -199,7 +200,19 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 			
 			if (!cartItem.isSelected())
 			{
-				result.append("   * ").append(cartItem.getName()).append(" (").append(cartItem.getQuantity()).append(")\n");
+				if (!cartItem.getCategory().getName().equals(lastCategory))
+				{
+					lastCategory = cartItem.getCategory().getName();
+					
+					if (result.length() != 0)
+					{
+						result.append("\n");
+					}
+					
+					result.append(lastCategory).append(":\n");
+				}
+				
+				result.append("   - ").append(cartItem.getName()).append(" (").append(cartItem.getQuantity()).append(")\n");
 			}
 		}
 		

@@ -82,9 +82,11 @@ public class CartActivity extends BaseActivity
 	
 	private void shareCart()
 	{
-		if (!this.listCartItemAdapter.isEmpty())
+		String shareContent = this.listCartItemAdapter.getShareContent();
+		
+		if (!shareContent.isEmpty())
 		{
-			share(R.string.label_share_cart, this.listCartItemAdapter.getShareContent());
+			share(R.string.label_share_cart, shareContent);
 		}
 		else
 		{

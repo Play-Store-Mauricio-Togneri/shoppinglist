@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppingcart.model;
 
 import com.orm.SugarRecord;
+import com.orm.query.Select;
 
 public class CartItem extends SugarRecord<CartItem>
 {
@@ -66,8 +67,11 @@ public class CartItem extends SugarRecord<CartItem>
 	
 	public static boolean exists(Product product)
 	{
-		Product produt = SugarRecord.findById(Product.class, product.getId());
+		CartItem cartItem = Select.from(CartItem.class).where("product = ?", new String[]
+			{
+				String.valueOf(product.getId())
+			}).first();
 		
-		return (produt != null);
+		return (cartItem != null);
 	}
 }
