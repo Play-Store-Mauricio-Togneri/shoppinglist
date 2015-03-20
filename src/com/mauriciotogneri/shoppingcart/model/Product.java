@@ -55,7 +55,6 @@ public class Product extends SugarRecord<Product>
 		this.name = name;
 		this.category = category;
 		this.image = Base64.encodeToString(image, Base64.DEFAULT);
-		this.category = null;
 		
 		save();
 	}
