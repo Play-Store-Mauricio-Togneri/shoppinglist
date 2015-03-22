@@ -3,38 +3,56 @@ package com.mauriciotogneri.shoppingcart.activities;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
-import com.mauriciotogneri.shoppingcart.widgets.CustomTextView;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.mauriciotogneri.shoppingcart.views.BaseView;
 
-public abstract class BaseActivity extends Activity
+public abstract class BaseActivity<V extends BaseView> extends Activity
 {
+	protected V view;
+	
 	@Override
 	protected final void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		
-		init();
+		try
+		{
+			this.view = getViewClass().newInstance();
+			this.view.init(getLayoutInflater(), null);
+			setContentView(this.view.getView());
+			initialize();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
-	protected abstract void init();
+	@Override
+	protected final void onDestroy()
+	{
+		onFinish();
+		this.view = null;
+		
+		super.onDestroy();
+	}
+	
+	protected abstract Class<V> getViewClass();
+	
+	protected void initialize()
+	{
+	}
+	
+	protected void onFinish()
+	{
+	}
 	
 	@SuppressWarnings("unchecked")
 	protected <Type> Type getParameter(String key, Type defaultValue)
@@ -49,31 +67,6 @@ public abstract class BaseActivity extends Activity
 		{
 			return defaultValue;
 		}
-	}
-	
-	protected ListView getListView(int listViewId)
-	{
-		return (ListView)findViewById(listViewId);
-	}
-	
-	protected CustomTextView getCustomTextView(int textViewId)
-	{
-		return (CustomTextView)findViewById(textViewId);
-	}
-	
-	protected CustomEditText getCustomEditText(int editTextId)
-	{
-		return (CustomEditText)findViewById(editTextId);
-	}
-	
-	public ProductImage getProductImage(int imageId)
-	{
-		return (ProductImage)findViewById(imageId);
-	}
-	
-	protected Spinner getSpinner(int spinnerId)
-	{
-		return (Spinner)findViewById(spinnerId);
 	}
 	
 	protected void startActivity(Class<?> cls)
@@ -139,27 +132,5 @@ public abstract class BaseActivity extends Activity
 		}
 		
 		return bitmap;
-	}
-	
-	protected void setButtonAction(int buttonId, View.OnClickListener callback)
-	{
-		View toolbarButton = findViewById(buttonId);
-		toolbarButton.setOnClickListener(callback);
-	}
-	
-	@SuppressLint("InflateParams")
-	protected void showToast(int messageId)
-	{
-		LayoutInflater inflater = getLayoutInflater();
-		View layout = inflater.inflate(R.layout.custom_toast, null);
-		
-		TextView text = (TextView)layout.findViewById(R.id.message);
-		text.setText(messageId);
-		
-		Toast toast = new Toast(getApplicationContext());
-		toast.setGravity(Gravity.BOTTOM, 0, 50);
-		toast.setDuration(Toast.LENGTH_SHORT);
-		toast.setView(layout);
-		toast.show();
 	}
 }

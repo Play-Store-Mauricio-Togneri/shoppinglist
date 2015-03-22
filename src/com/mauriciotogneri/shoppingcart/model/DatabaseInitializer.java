@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.utils;
+package com.mauriciotogneri.shoppingcart.model;
 
 import java.io.ByteArrayOutputStream;
 import android.app.ProgressDialog;
@@ -7,8 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.model.Category;
-import com.mauriciotogneri.shoppingcart.model.Product;
 
 public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 {

@@ -3,17 +3,12 @@ package com.mauriciotogneri.shoppingcart.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.Spinner;
-import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
-import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.mauriciotogneri.shoppingcart.views.UpdateProductView;
 
-public class UpdateProductActivity extends BaseActivity
+public class UpdateProductActivity extends BaseActivity<UpdateProductView> implements UpdateProductView.Events
 {
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
 	public static final String PARAMETER_CATEGORY = "category";
@@ -23,13 +18,10 @@ public class UpdateProductActivity extends BaseActivity
 	
 	private Product product = null;
 	private byte[] selectedImage = null;
-	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
 	@Override
-	protected void init()
+	protected void initialize()
 	{
-		setContentView(R.layout.activity_update_product);
-		
 		long productId = getParameter(UpdateProductActivity.PARAMETER_PRODUCT_ID, 0L);
 		Category initialCategory = getParameter(UpdateProductActivity.PARAMETER_CATEGORY, null);
 		
@@ -38,132 +30,22 @@ public class UpdateProductActivity extends BaseActivity
 			this.product = Product.byId(productId);
 		}
 		
-		initUI(this.product, initialCategory);
-	}
-	
-	private void initUI(Product product, Category initialCategory)
-	{
-		TextView toolbarTitle = getCustomTextView(R.id.toolbar_title);
-		
-		if (product != null)
+		if (this.product != null)
 		{
-			toolbarTitle.setText(R.string.toolbar_title_edit_product);
-		}
-		else
-		{
-			toolbarTitle.setText(R.string.toolbar_title_create_product);
-		}
-		
-		// ---------------------------
-		
-		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(this);
-		this.spinnerCategoryAdapter.refresh();
-		
-		Spinner productCategory = getSpinner(R.id.category);
-		productCategory.setAdapter(this.spinnerCategoryAdapter);
-		
-		if (product != null)
-		{
-			productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(product.getCategory()));
-		}
-		else if (initialCategory != null)
-		{
-			productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(initialCategory));
-		}
-		
-		// ---------------------------
-		
-		setButtonAction(R.id.button_manage_categories, new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				manageCategories();
-			}
-		});
-		
-		// ---------------------------
-		
-		CustomEditText productName = getCustomEditText(R.id.name);
-		
-		if (product != null)
-		{
-			productName.setTextValue(product.getName());
-		}
-		
-		// ---------------------------
-		
-		ProductImage productImage = getProductImage(R.id.thumbnail);
-		productImage.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				updateImage();
-			}
-		});
-		
-		if (product != null)
-		{
-			setProductImage(product.getImage());
+			setProductImage(this.product.getImage());
 		}
 		else
 		{
 			setProductImage(getImageFromBitmap(R.drawable.product_generic));
 		}
 		
-		// ---------------------------
-		
-		TextView buttonUpdateText = getCustomTextView(R.id.button_update_text);
-		
-		if (product != null)
-		{
-			buttonUpdateText.setText(R.string.button_edit);
-		}
-		else
-		{
-			buttonUpdateText.setText(R.string.button_create);
-		}
-		
-		// ---------------------------
-		
-		setButtonAction(R.id.button_update, new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				update();
-			}
-		});
+		this.view.initialize(this, this.product, initialCategory, this);
 	}
 	
 	private void setProductImage(byte[] image)
 	{
 		this.selectedImage = getImageFromBitmap(getResizedBitmap(image, Product.IMAGE_SIZE, Product.IMAGE_SIZE));
-		
-		ProductImage productImage = getProductImage(R.id.thumbnail);
-		productImage.setImage(this.selectedImage);
-	}
-	
-	private Category getProductCategory()
-	{
-		Spinner productCategory = getSpinner(R.id.category);
-		
-		return (Category)productCategory.getSelectedItem();
-	}
-	
-	private String getProductName()
-	{
-		CustomEditText productName = getCustomEditText(R.id.name);
-		
-		return productName.getTextValue();
-	}
-	
-	private void updateImage()
-	{
-		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-		intent.setType("image/*");
-		startActivityForResult(intent, UpdateProductActivity.SELECT_IMAGE_REQUEST);
+		this.view.setProductImage(this.selectedImage);
 	}
 	
 	@Override
@@ -178,12 +60,12 @@ public class UpdateProductActivity extends BaseActivity
 			}
 			catch (Exception e)
 			{
-				showToast(R.string.error_invalid_image);
+				this.view.showToast(this, R.string.error_invalid_image);
 			}
 		}
 		else if (requestCode == UpdateProductActivity.SELECT_CATEGORY_REQUEST)
 		{
-			this.spinnerCategoryAdapter.refresh();
+			this.view.refreshCategories();
 			
 			if (resultCode == Activity.RESULT_OK)
 			{
@@ -191,14 +73,14 @@ public class UpdateProductActivity extends BaseActivity
 				
 				if (category != null)
 				{
-					Spinner productCategory = getSpinner(R.id.category);
-					productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(category));
+					this.view.setCategory(category);
 				}
 			}
 		}
 	}
 	
-	private void update()
+	@Override
+	public void onUpdateProduct()
 	{
 		if (isFormValid())
 		{
@@ -213,27 +95,51 @@ public class UpdateProductActivity extends BaseActivity
 		}
 	}
 	
+	private void editProduct(Product product)
+	{
+		String name = this.view.getProductName();
+		Category category = this.view.getProductCategory();
+		
+		product.update(name, category, this.selectedImage);
+		
+		finish();
+	}
+	
+	private void createProduct()
+	{
+		String name = this.view.getProductName();
+		Category category = this.view.getProductCategory();
+		
+		Product product = new Product(name, category, this.selectedImage);
+		product.save();
+		
+		finish();
+	}
+	
 	private boolean isFormValid()
 	{
 		boolean valid = false;
 		
-		removeInputNameError();
+		this.view.removeInputNameError();
 		
-		if (getProductCategory() == null)
+		String name = this.view.getProductName();
+		Category category = this.view.getProductCategory();
+		
+		if (category == null)
 		{
-			showToast(R.string.error_invalid_category);
+			this.view.showToast(this, R.string.error_invalid_category);
 		}
-		else if (TextUtils.isEmpty(getProductName()))
+		else if (TextUtils.isEmpty(name))
 		{
-			setNameInputError(R.string.error_invalid_name);
+			this.view.setNameInputError(this, R.string.error_invalid_name);
 		}
-		else if (((this.product == null) || (!this.product.getName().equals(getProductName()))) && (Product.exists(getProductName(), getProductCategory())))
+		else if (((this.product == null) || (!this.product.getName().equals(name))) && (Product.exists(name, category)))
 		{
-			setNameInputError(R.string.error_product_already_exists);
+			this.view.setNameInputError(this, R.string.error_product_already_exists);
 		}
 		else if (this.selectedImage == null)
 		{
-			showToast(R.string.error_invalid_image);
+			this.view.showToast(this, R.string.error_invalid_image);
 		}
 		else
 		{
@@ -243,42 +149,24 @@ public class UpdateProductActivity extends BaseActivity
 		return valid;
 	}
 	
-	private void setNameInputError(int textId)
+	@Override
+	public void onUpdateImage()
 	{
-		CustomEditText productName = getCustomEditText(R.id.name);
-		productName.setErrorText(getString(textId));
+		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+		intent.setType("image/*");
+		startActivityForResult(intent, UpdateProductActivity.SELECT_IMAGE_REQUEST);
 	}
 	
-	private void removeInputNameError()
-	{
-		CustomEditText productName = getCustomEditText(R.id.name);
-		productName.removeErrorText();
-	}
-	
-	private void editProduct(Product product)
-	{
-		String name = getProductName();
-		Category category = getProductCategory();
-		
-		product.update(name, category, this.selectedImage);
-		
-		finish();
-	}
-	
-	private void createProduct()
-	{
-		String name = getProductName();
-		Category category = getProductCategory();
-		
-		Product product = new Product(name, category, this.selectedImage);
-		product.save();
-		
-		finish();
-	}
-	
-	private void manageCategories()
+	@Override
+	public void onManageCategories()
 	{
 		Intent intent = new Intent(this, ManageCategoriesActivity.class);
 		startActivityForResult(intent, UpdateProductActivity.SELECT_CATEGORY_REQUEST);
+	}
+	
+	@Override
+	protected Class<UpdateProductView> getViewClass()
+	{
+		return UpdateProductView.class;
 	}
 }
