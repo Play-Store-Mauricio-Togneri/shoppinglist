@@ -1,14 +1,21 @@
 package com.mauriciotogneri.shoppingcart.app;
 
+import org.acra.ACRA;
+import org.acra.annotation.ReportsCrashes;
+import org.acra.sender.HttpSender.Type;
 import android.os.StrictMode;
 import com.mauriciotogneri.shoppingcart.widgets.Fonts;
 
+@ReportsCrashes(formUri = "http://zeronest.com/acra/report.php", reportType = Type.FORM, formKey = "")
 public class ShoppingCart extends com.orm.SugarApp
 {
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
+		
+		ACRA.init(this);
+		ACRA.getErrorReporter().putCustomData("PACKAGE_NAME", getPackageName());
 		
 		StrictMode.ThreadPolicy.Builder threadBuilder = new StrictMode.ThreadPolicy.Builder();
 		threadBuilder.detectAll();
