@@ -2,6 +2,8 @@ package com.mauriciotogneri.shoppingcart.views;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
@@ -44,6 +46,21 @@ public class UpdateProductView extends BaseView
 		{
 			productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(initialCategory));
 		}
+		
+		productCategory.setOnItemSelectedListener(new OnItemSelectedListener()
+		{
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+			{
+				Category category = (Category)parent.getItemAtPosition(position);
+				observer.onCategorySelected(category);
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			}
+		});
 		
 		// ---------------------------
 		
@@ -148,7 +165,7 @@ public class UpdateProductView extends BaseView
 	@Override
 	protected int getViewId()
 	{
-		return R.layout.activity_update_product;
+		return R.layout.fragment_update_product;
 	}
 	
 	public interface Observer
@@ -158,5 +175,7 @@ public class UpdateProductView extends BaseView
 		void onUpdateImage();
 		
 		void onUpdateProduct();
+		
+		void onCategorySelected(Category category);
 	}
 }

@@ -1,21 +1,17 @@
-package com.mauriciotogneri.shoppingcart.activities;
+package com.mauriciotogneri.shoppingcart.fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.text.TextUtils;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.views.ManageCategoriesView;
 
-public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesView.Observer
+public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView> implements ManageCategoriesView.Observer
 {
-	public static final String RESULT_CATEGORY = "category";
-	
 	@Override
 	protected void initialize()
 	{
-		this.view.initialize(this, this);
+		this.view.initialize(getContext(), this);
 	}
 	
 	@Override
@@ -34,16 +30,16 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 				}
 				else
 				{
-					this.view.editCategory(this, category, this);
-					this.view.showToast(this, R.string.error_category_already_exists);
+					this.view.editCategory(getContext(), category, this);
+					this.view.showToast(getContext(), R.string.error_category_already_exists);
 				}
 			}
 			else
 			{
 				if ((!category.getName().equals(name)) && Category.exists(name))
 				{
-					this.view.editCategory(this, category, this);
-					this.view.showToast(this, R.string.error_category_already_exists);
+					this.view.editCategory(getContext(), category, this);
+					this.view.showToast(getContext(), R.string.error_category_already_exists);
 				}
 				else
 				{
@@ -54,8 +50,8 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 		}
 		else
 		{
-			this.view.editCategory(this, category, this);
-			this.view.showToast(this, R.string.error_invalid_name);
+			this.view.editCategory(getContext(), category, this);
+			this.view.showToast(getContext(), R.string.error_invalid_name);
 		}
 	}
 	
@@ -69,17 +65,15 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 		}
 		else
 		{
-			this.view.showError(this);
+			this.view.showError(getContext());
 		}
 	}
 	
 	@Override
 	public void onCategorySelected(Category category)
 	{
-		Intent intent = new Intent();
-		intent.putExtra(ManageCategoriesActivity.RESULT_CATEGORY, category);
-		setResult(Activity.RESULT_OK, intent);
-		finish();
+		setResult(category);
+		close();
 	}
 	
 	@Override

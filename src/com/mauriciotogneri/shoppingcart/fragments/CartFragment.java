@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.activities;
+package com.mauriciotogneri.shoppingcart.fragments;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -7,14 +7,14 @@ import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.DatabaseInitializer;
 import com.mauriciotogneri.shoppingcart.views.CartView;
 
-public class CartActivity extends BaseActivity<CartView> implements CartView.Observer
+public class CartFragment extends BaseFragment<CartView> implements CartView.Observer
 {
 	private static final String ATTRIBUTE_FIRST_LAUNCH = "first_launch";
 	
 	@Override
 	protected void initialize()
 	{
-		this.view.initialize(this, this);
+		this.view.initialize(getContext(), this);
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class CartActivity extends BaseActivity<CartView> implements CartView.Obs
 		}
 		else
 		{
-			this.view.showToast(this, R.string.error_cart_empty);
+			this.view.showToast(getContext(), R.string.error_cart_empty);
 		}
 	}
 	
@@ -62,24 +62,23 @@ public class CartActivity extends BaseActivity<CartView> implements CartView.Obs
 	@Override
 	public void onAddProduct()
 	{
-		startActivity(AddProductActivity.class);
+		AddProductFragment fragment = new AddProductFragment();
+		startFragment(fragment);
 	}
 	
 	@Override
-	protected void onResume()
+	public void onActivate()
 	{
-		super.onResume();
-		
 		this.view.refreshList(true);
 		
-		SharedPreferences preferencces = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences preferencces = PreferenceManager.getDefaultSharedPreferences(getContext());
 		
-		if (preferencces.getBoolean(CartActivity.ATTRIBUTE_FIRST_LAUNCH, true))
+		if (preferencces.getBoolean(CartFragment.ATTRIBUTE_FIRST_LAUNCH, true))
 		{
-			DatabaseInitializer databaseInitializer = new DatabaseInitializer(this);
+			DatabaseInitializer databaseInitializer = new DatabaseInitializer(getContext());
 			databaseInitializer.execute();
 			
-			preferencces.edit().putBoolean(CartActivity.ATTRIBUTE_FIRST_LAUNCH, false).commit();
+			preferencces.edit().putBoolean(CartFragment.ATTRIBUTE_FIRST_LAUNCH, false).commit();
 		}
 	}
 	

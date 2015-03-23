@@ -145,7 +145,7 @@ public class CartView extends BaseView
 	@Override
 	protected int getViewId()
 	{
-		return R.layout.activity_cart;
+		return R.layout.fragment_cart;
 	}
 	
 	public interface Observer

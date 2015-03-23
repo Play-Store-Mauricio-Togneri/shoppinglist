@@ -1,67 +1,110 @@
-package com.mauriciotogneri.shoppingcart.activities;
+package com.mauriciotogneri.shoppingcart.fragments;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.WindowManager;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.mauriciotogneri.shoppingcart.activities.MainActivity;
 import com.mauriciotogneri.shoppingcart.views.BaseView;
 
-public abstract class BaseActivity<V extends BaseView> extends Activity
+public abstract class BaseFragment<V extends BaseView> extends Fragment
 {
+	protected MainActivity activity;
 	protected V view;
+	private Object result = null;
 	
 	@Override
-	protected final void onCreate(Bundle savedInstanceState)
+	public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		View result = null;
 		
 		try
 		{
 			this.view = getViewClass().newInstance();
-			this.view.init(getLayoutInflater(), null);
-			setContentView(this.view.getView());
-			initialize();
+			this.view.init(inflater, container);
+			result = this.view.getView();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+		
+		return result;
 	}
 	
 	@Override
-	protected final void onDestroy()
+	public final void onDestroyView()
 	{
 		onFinish();
 		this.view = null;
 		
-		super.onDestroy();
+		super.onDestroyView();
 	}
 	
 	protected abstract Class<V> getViewClass();
-	
-	protected void initialize()
-	{
-	}
 	
 	protected void onFinish()
 	{
 	}
 	
+	protected void initialize()
+	{
+	}
+	
+	public void onActivate()
+	{
+	}
+	
+	public void onActivate(@SuppressWarnings("unused") Object result)
+	{
+	}
+	
+	protected Context getContext()
+	{
+		return this.activity;
+	}
+	
+	@Override
+	public final void onActivityCreated(Bundle savedInstanceState)
+	{
+		super.onActivityCreated(savedInstanceState);
+		
+		initialize();
+		onActivate();
+	}
+	
+	@Override
+	public final void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+	}
+	
+	@Override
+	public final void onAttach(Activity activity)
+	{
+		super.onAttach(activity);
+		
+		this.activity = (MainActivity)activity;
+	}
+	
 	@SuppressWarnings("unchecked")
 	protected <Type> Type getParameter(String key, Type defaultValue)
 	{
-		Bundle extras = getIntent().getExtras();
+		Bundle extras = getArguments();
 		
 		if ((extras != null) && extras.containsKey(key))
 		{
-			return (Type)getIntent().getExtras().get(key);
+			return (Type)extras.get(key);
 		}
 		else
 		{
@@ -69,10 +112,24 @@ public abstract class BaseActivity<V extends BaseView> extends Activity
 		}
 	}
 	
-	protected void startActivity(Class<?> cls)
+	protected void startFragment(BaseFragment<?> fragment)
 	{
-		Intent intent = new Intent(this, cls);
-		startActivity(intent);
+		this.activity.addFragment(fragment);
+	}
+	
+	protected void close()
+	{
+		this.activity.removeFragment();
+	}
+	
+	protected void setResult(Object result)
+	{
+		this.result = result;
+	}
+	
+	public Object getResult()
+	{
+		return this.result;
 	}
 	
 	protected void share(int titleId, String content)
@@ -99,7 +156,7 @@ public abstract class BaseActivity<V extends BaseView> extends Activity
 	
 	protected byte[] getBytesFromUri(Uri uri) throws IOException
 	{
-		InputStream inputStream = getContentResolver().openInputStream(uri);
+		InputStream inputStream = this.activity.getContentResolver().openInputStream(uri);
 		byte[] inputData = getBytes(inputStream);
 		
 		inputStream.close();

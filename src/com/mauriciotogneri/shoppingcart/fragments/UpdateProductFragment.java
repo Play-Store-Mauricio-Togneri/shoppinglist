@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.activities;
+package com.mauriciotogneri.shoppingcart.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,13 +8,12 @@ import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.views.UpdateProductView;
 
-public class UpdateProductActivity extends BaseActivity<UpdateProductView> implements UpdateProductView.Observer
+public class UpdateProductFragment extends BaseFragment<UpdateProductView> implements UpdateProductView.Observer
 {
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
 	public static final String PARAMETER_CATEGORY = "category";
 	
 	private static final int SELECT_IMAGE_REQUEST = 123;
-	private static final int SELECT_CATEGORY_REQUEST = 456;
 	
 	private Product product = null;
 	private byte[] selectedImage = null;
@@ -22,8 +21,8 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 	@Override
 	protected void initialize()
 	{
-		long productId = getParameter(UpdateProductActivity.PARAMETER_PRODUCT_ID, 0L);
-		Category initialCategory = getParameter(UpdateProductActivity.PARAMETER_CATEGORY, null);
+		long productId = getParameter(UpdateProductFragment.PARAMETER_PRODUCT_ID, 0L);
+		Category initialCategory = getParameter(UpdateProductFragment.PARAMETER_CATEGORY, null);
 		
 		if (productId != 0)
 		{
@@ -39,7 +38,7 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 			setProductImage(getImageFromBitmap(R.drawable.product_generic));
 		}
 		
-		this.view.initialize(this, this.product, initialCategory, this);
+		this.view.initialize(getContext(), this.product, initialCategory, this);
 	}
 	
 	private void setProductImage(byte[] image)
@@ -49,9 +48,9 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if ((requestCode == UpdateProductActivity.SELECT_IMAGE_REQUEST) && (resultCode == Activity.RESULT_OK))
+		if ((requestCode == UpdateProductFragment.SELECT_IMAGE_REQUEST) && (resultCode == Activity.RESULT_OK))
 		{
 			try
 			{
@@ -60,21 +59,7 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 			}
 			catch (Exception e)
 			{
-				this.view.showToast(this, R.string.error_invalid_image);
-			}
-		}
-		else if (requestCode == UpdateProductActivity.SELECT_CATEGORY_REQUEST)
-		{
-			this.view.refreshCategories();
-			
-			if (resultCode == Activity.RESULT_OK)
-			{
-				Category category = (Category)data.getSerializableExtra(ManageCategoriesActivity.RESULT_CATEGORY);
-				
-				if (category != null)
-				{
-					this.view.setCategory(category);
-				}
+				this.view.showToast(getContext(), R.string.error_invalid_image);
 			}
 		}
 	}
@@ -102,7 +87,7 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 		
 		product.update(name, category, this.selectedImage);
 		
-		finish();
+		close();
 	}
 	
 	private void createProduct()
@@ -113,7 +98,7 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 		Product product = new Product(name, category, this.selectedImage);
 		product.save();
 		
-		finish();
+		close();
 	}
 	
 	private boolean isFormValid()
@@ -127,19 +112,19 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 		
 		if (category == null)
 		{
-			this.view.showToast(this, R.string.error_invalid_category);
+			this.view.showToast(getContext(), R.string.error_invalid_category);
 		}
 		else if (TextUtils.isEmpty(name))
 		{
-			this.view.setNameInputError(this, R.string.error_invalid_name);
+			this.view.setNameInputError(getContext(), R.string.error_invalid_name);
 		}
 		else if (((this.product == null) || (!this.product.getName().equals(name))) && (Product.exists(name, category)))
 		{
-			this.view.setNameInputError(this, R.string.error_product_already_exists);
+			this.view.setNameInputError(getContext(), R.string.error_product_already_exists);
 		}
 		else if (this.selectedImage == null)
 		{
-			this.view.showToast(this, R.string.error_invalid_image);
+			this.view.showToast(getContext(), R.string.error_invalid_image);
 		}
 		else
 		{
@@ -152,16 +137,39 @@ public class UpdateProductActivity extends BaseActivity<UpdateProductView> imple
 	@Override
 	public void onUpdateImage()
 	{
+		this.view.removeInputNameError();
+		
 		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		intent.setType("image/*");
-		startActivityForResult(intent, UpdateProductActivity.SELECT_IMAGE_REQUEST);
+		startActivityForResult(intent, UpdateProductFragment.SELECT_IMAGE_REQUEST);
 	}
 	
 	@Override
 	public void onManageCategories()
 	{
-		Intent intent = new Intent(this, ManageCategoriesActivity.class);
-		startActivityForResult(intent, UpdateProductActivity.SELECT_CATEGORY_REQUEST);
+		this.view.removeInputNameError();
+		
+		ManageCategoriesFragment fragment = new ManageCategoriesFragment();
+		startFragment(fragment);
+	}
+	
+	@Override
+	public void onActivate(Object result)
+	{
+		this.view.refreshCategories();
+		
+		Category category = (Category)result;
+		
+		if (category != null)
+		{
+			this.view.setCategory(category);
+		}
+	}
+	
+	@Override
+	public void onCategorySelected(Category category)
+	{
+		setResult(category);
 	}
 	
 	@Override

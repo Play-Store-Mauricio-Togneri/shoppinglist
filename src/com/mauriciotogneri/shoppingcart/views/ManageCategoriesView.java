@@ -254,7 +254,7 @@ public class ManageCategoriesView extends BaseView
 	@Override
 	protected int getViewId()
 	{
-		return R.layout.activity_manage_categories;
+		return R.layout.fragment_manage_categories;
 	}
 	
 	public interface Observer

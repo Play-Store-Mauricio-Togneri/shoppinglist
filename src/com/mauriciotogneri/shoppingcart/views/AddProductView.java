@@ -222,10 +222,16 @@ public class AddProductView extends BaseView
 		return (Category)categorySpinner.getSelectedItem();
 	}
 	
+	public void setCategory(Category category)
+	{
+		Spinner productCategory = getSpinner(R.id.category);
+		productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(category));
+	}
+	
 	@Override
 	protected int getViewId()
 	{
-		return R.layout.activity_add_product;
+		return R.layout.fragment_add_product;
 	}
 	
 	public interface Observer
