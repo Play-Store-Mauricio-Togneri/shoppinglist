@@ -8,7 +8,7 @@ import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.views.UpdateProductView;
 
-public class UpdateProductActivity extends BaseActivity<UpdateProductView> implements UpdateProductView.Events
+public class UpdateProductActivity extends BaseActivity<UpdateProductView> implements UpdateProductView.Observer
 {
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
 	public static final String PARAMETER_CATEGORY = "category";

@@ -30,7 +30,7 @@ public class ManageCategoriesView extends BaseView
 	
 	private String selectedColor = "";
 	
-	public void initialize(final Context context, final Events events)
+	public void initialize(final Context context, final Observer observer)
 	{
 		this.listCategoryAdapter = new ListCategoryAdapter(context);
 		
@@ -43,7 +43,7 @@ public class ManageCategoriesView extends BaseView
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				Category category = (Category)parent.getItemAtPosition(position);
-				events.onCategorySelected(category);
+				observer.onCategorySelected(category);
 			}
 		});
 		
@@ -53,7 +53,7 @@ public class ManageCategoriesView extends BaseView
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				Category category = (Category)parent.getItemAtPosition(position);
-				displayCategoryOptions(context, category, events);
+				displayCategoryOptions(context, category, observer);
 				
 				return true;
 			}
@@ -64,7 +64,7 @@ public class ManageCategoriesView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				editCategory(context, null, events);
+				editCategory(context, null, observer);
 			}
 		});
 		
@@ -72,7 +72,7 @@ public class ManageCategoriesView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void displayCategoryOptions(final Context context, final Category category, final Events events)
+	private void displayCategoryOptions(final Context context, final Category category, final Observer observer)
 	{
 		final int EDIT_CATEGORY = 0;
 		final int REMOVE_CATEGORY = 1;
@@ -92,11 +92,11 @@ public class ManageCategoriesView extends BaseView
 				switch (index)
 				{
 					case EDIT_CATEGORY:
-						editCategory(context, category, events);
+						editCategory(context, category, observer);
 						break;
 					
 					case REMOVE_CATEGORY:
-						removeCategory(context, category, events);
+						removeCategory(context, category, observer);
 						break;
 				}
 			}
@@ -105,7 +105,7 @@ public class ManageCategoriesView extends BaseView
 		dialog.display();
 	}
 	
-	public void editCategory(Context context, final Category category, final Events events)
+	public void editCategory(Context context, final Category category, final Observer observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, context.getString(R.string.label_product_category));
 		dialog.setLayout(R.layout.dialog_create_category);
@@ -133,7 +133,7 @@ public class ManageCategoriesView extends BaseView
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				events.onEditCategory(category, categoryName.getTextValue(), ManageCategoriesView.this.selectedColor);
+				observer.onEditCategory(category, categoryName.getTextValue(), ManageCategoriesView.this.selectedColor);
 			}
 		});
 		
@@ -143,7 +143,7 @@ public class ManageCategoriesView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void removeCategory(final Context context, final Category category, final Events events)
+	private void removeCategory(final Context context, final Category category, final Observer observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, category.getName());
 		dialog.setLayout(R.layout.dialog_content_text);
@@ -156,7 +156,7 @@ public class ManageCategoriesView extends BaseView
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				events.onRemoveCategory(category);
+				observer.onRemoveCategory(category);
 			}
 		});
 		
@@ -257,7 +257,7 @@ public class ManageCategoriesView extends BaseView
 		return R.layout.activity_manage_categories;
 	}
 	
-	public interface Events
+	public interface Observer
 	{
 		void onCategorySelected(Category category);
 		

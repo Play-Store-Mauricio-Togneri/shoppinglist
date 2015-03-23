@@ -8,7 +8,7 @@ import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.views.ManageCategoriesView;
 
-public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesView.Events
+public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesView.Observer
 {
 	public static final String RESULT_CATEGORY = "category";
 	

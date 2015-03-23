@@ -5,7 +5,7 @@ import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.views.AddProductView;
 
-public class AddProductActivity extends BaseActivity<AddProductView> implements AddProductView.Events
+public class AddProductActivity extends BaseActivity<AddProductView> implements AddProductView.Observer
 {
 	@Override
 	protected void initialize()

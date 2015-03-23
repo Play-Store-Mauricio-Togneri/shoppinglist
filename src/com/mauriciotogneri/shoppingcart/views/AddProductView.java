@@ -31,7 +31,7 @@ public class AddProductView extends BaseView
 	private ListProductAdapter listProductAdapter;
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
-	public void initialize(final Context context, final Events events)
+	public void initialize(final Context context, final Observer observer)
 	{
 		this.listProductAdapter = new ListProductAdapter(context);
 		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(context);
@@ -61,7 +61,7 @@ public class AddProductView extends BaseView
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				Product product = (Product)parent.getItemAtPosition(position);
-				selectProduct(context, product, events);
+				selectProduct(context, product, observer);
 			}
 		});
 		
@@ -71,7 +71,7 @@ public class AddProductView extends BaseView
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				Product product = (Product)parent.getItemAtPosition(position);
-				displayProductOptions(context, product, events);
+				displayProductOptions(context, product, observer);
 				
 				return true;
 			}
@@ -82,13 +82,13 @@ public class AddProductView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				events.onCreateProduct();
+				observer.onCreateProduct();
 			}
 		});
 	}
 	
 	@SuppressLint("InflateParams")
-	private void selectProduct(Context context, final Product product, final Events events)
+	private void selectProduct(Context context, final Product product, final Observer observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, product.getName());
 		dialog.setLayout(R.layout.dialog_cart_item);
@@ -106,7 +106,7 @@ public class AddProductView extends BaseView
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				events.onAddProduct(product, quantity.getValue());
+				observer.onAddProduct(product, quantity.getValue());
 			}
 		});
 		
@@ -116,7 +116,7 @@ public class AddProductView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void displayProductOptions(final Context context, final Product product, final Events events)
+	private void displayProductOptions(final Context context, final Product product, final Observer observer)
 	{
 		final int EDIT_PRODUCT = 0;
 		final int REMOVE_PRODCUT = 1;
@@ -136,11 +136,11 @@ public class AddProductView extends BaseView
 				switch (index)
 				{
 					case EDIT_PRODUCT:
-						events.onEditProduct(product);
+						observer.onEditProduct(product);
 						break;
 					
 					case REMOVE_PRODCUT:
-						removeProduct(context, product, events);
+						removeProduct(context, product, observer);
 						break;
 				}
 			}
@@ -150,7 +150,7 @@ public class AddProductView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void removeProduct(Context context, final Product product, final Events events)
+	private void removeProduct(Context context, final Product product, final Observer observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, product.getName());
 		dialog.setLayout(R.layout.dialog_content_text);
@@ -163,7 +163,7 @@ public class AddProductView extends BaseView
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				events.onRemoveProduct(product);
+				observer.onRemoveProduct(product);
 			}
 		});
 		
@@ -228,7 +228,7 @@ public class AddProductView extends BaseView
 		return R.layout.activity_add_product;
 	}
 	
-	public interface Events
+	public interface Observer
 	{
 		void onAddProduct(Product product, int value);
 		

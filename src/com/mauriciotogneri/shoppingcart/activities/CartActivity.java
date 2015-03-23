@@ -7,7 +7,7 @@ import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.DatabaseInitializer;
 import com.mauriciotogneri.shoppingcart.views.CartView;
 
-public class CartActivity extends BaseActivity<CartView> implements CartView.Events
+public class CartActivity extends BaseActivity<CartView> implements CartView.Observer
 {
 	private static final String ATTRIBUTE_FIRST_LAUNCH = "first_launch";
 	

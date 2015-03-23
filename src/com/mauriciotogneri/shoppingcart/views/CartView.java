@@ -20,7 +20,7 @@ public class CartView extends BaseView
 {
 	private ListCartItemAdapter listCartItemAdapter;
 	
-	public void initialize(final Context context, final Events events)
+	public void initialize(final Context context, final Observer observer)
 	{
 		this.listCartItemAdapter = new ListCartItemAdapter(context);
 		
@@ -33,7 +33,7 @@ public class CartView extends BaseView
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
 				CartItem cartItem = (CartItem)parent.getItemAtPosition(position);
-				events.onCartItemSelected(cartItem);
+				observer.onCartItemSelected(cartItem);
 			}
 		});
 		
@@ -46,7 +46,7 @@ public class CartView extends BaseView
 				
 				if (!cartItem.isSelected())
 				{
-					displayCartItem(context, cartItem, events);
+					displayCartItem(context, cartItem, observer);
 				}
 				
 				return true;
@@ -58,7 +58,7 @@ public class CartView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				events.onShare();
+				observer.onShare();
 			}
 		});
 		
@@ -67,7 +67,7 @@ public class CartView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				events.onAddProduct();
+				observer.onAddProduct();
 			}
 		});
 	}
@@ -106,7 +106,7 @@ public class CartView extends BaseView
 		}
 	}
 	
-	private void displayCartItem(Context context, final CartItem cartItem, final Events events)
+	private void displayCartItem(Context context, final CartItem cartItem, final Observer observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, cartItem.getName());
 		dialog.setLayout(R.layout.dialog_cart_item);
@@ -124,7 +124,7 @@ public class CartView extends BaseView
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				events.onQuantityUpdated(cartItem, quantity.getValue());
+				observer.onQuantityUpdated(cartItem, quantity.getValue());
 			}
 		});
 		
@@ -135,7 +135,7 @@ public class CartView extends BaseView
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				events.onCartItemRemoved(cartItem);
+				observer.onCartItemRemoved(cartItem);
 			}
 		});
 		
@@ -148,7 +148,7 @@ public class CartView extends BaseView
 		return R.layout.activity_cart;
 	}
 	
-	public interface Events
+	public interface Observer
 	{
 		void onCartItemSelected(CartItem cartItem);
 		

@@ -15,7 +15,7 @@ public class UpdateProductView extends BaseView
 {
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
-	public void initialize(Context context, Product product, Category initialCategory, final Events events)
+	public void initialize(Context context, Product product, Category initialCategory, final Observer observer)
 	{
 		TextView toolbarTitle = getCustomTextView(R.id.toolbar_title);
 		
@@ -52,7 +52,7 @@ public class UpdateProductView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				events.onManageCategories();
+				observer.onManageCategories();
 			}
 		});
 		
@@ -73,7 +73,7 @@ public class UpdateProductView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				events.onUpdateImage();
+				observer.onUpdateImage();
 			}
 		});
 		
@@ -97,7 +97,7 @@ public class UpdateProductView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				events.onUpdateProduct();
+				observer.onUpdateProduct();
 			}
 		});
 	}
@@ -151,7 +151,7 @@ public class UpdateProductView extends BaseView
 		return R.layout.activity_update_product;
 	}
 	
-	public interface Events
+	public interface Observer
 	{
 		void onManageCategories();
 		
