@@ -2,6 +2,9 @@ package com.mauriciotogneri.shoppingcart.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Category;
@@ -13,7 +16,8 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
 	public static final String PARAMETER_CATEGORY = "category";
 	
-	private static final int SELECT_IMAGE_REQUEST = 123;
+	private static final int SELECT_IMAGE_GALERY = 123;
+	private static final int SELECT_IMAGE_CAMERA = 456;
 	
 	private Product product = null;
 	private byte[] selectedImage = null;
@@ -50,11 +54,25 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if ((requestCode == UpdateProductFragment.SELECT_IMAGE_REQUEST) && (resultCode == Activity.RESULT_OK))
+		if ((requestCode == UpdateProductFragment.SELECT_IMAGE_GALERY) && (resultCode == Activity.RESULT_OK))
 		{
 			try
 			{
 				byte[] image = getBytesFromUri(data.getData());
+				setProductImage(image);
+			}
+			catch (Exception e)
+			{
+				this.view.showToast(getContext(), R.string.error_invalid_image);
+			}
+		}
+		else if ((requestCode == UpdateProductFragment.SELECT_IMAGE_CAMERA) && (resultCode == Activity.RESULT_OK))
+		{
+			try
+			{
+				Bundle extras = data.getExtras();
+				Bitmap bitmap = (Bitmap)extras.get("data");
+				byte[] image = getImageFromBitmap(bitmap);
 				setProductImage(image);
 			}
 			catch (Exception e)
@@ -135,13 +153,26 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 	}
 	
 	@Override
-	public void onUpdateImage()
+	public void onUpdateImageGalery()
 	{
 		this.view.removeInputNameError();
 		
 		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 		intent.setType("image/*");
-		startActivityForResult(intent, UpdateProductFragment.SELECT_IMAGE_REQUEST);
+		startActivityForResult(intent, UpdateProductFragment.SELECT_IMAGE_GALERY);
+	}
+	
+	@Override
+	public void onUpdateImageCamera()
+	{
+		this.view.removeInputNameError();
+		
+		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		
+		if (takePictureIntent.resolveActivity(this.activity.getPackageManager()) != null)
+		{
+			startActivityForResult(takePictureIntent, UpdateProductFragment.SELECT_IMAGE_CAMERA);
+		}
 	}
 	
 	@Override

@@ -1,15 +1,23 @@
 package com.mauriciotogneri.shoppingcart.views;
 
+import java.util.ArrayList;
+import java.util.List;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
+import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
+import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
@@ -17,7 +25,7 @@ public class UpdateProductView extends BaseView
 {
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
-	public void initialize(Context context, Product product, Category initialCategory, final Observer observer)
+	public void initialize(final Context context, Product product, Category initialCategory, final Observer observer)
 	{
 		TextView toolbarTitle = getCustomTextView(R.id.toolbar_title);
 		
@@ -90,7 +98,7 @@ public class UpdateProductView extends BaseView
 			@Override
 			public void onClick(View view)
 			{
-				observer.onUpdateImage();
+				chooseImageSource(context, observer);
 			}
 		});
 		
@@ -117,6 +125,39 @@ public class UpdateProductView extends BaseView
 				observer.onUpdateProduct();
 			}
 		});
+	}
+	
+	private void chooseImageSource(Context context, final Observer observer)
+	{
+		final int SOURCE_GALERY = 0;
+		final int SOURCE_GAMERA = 1;
+		
+		List<Option> optionsList = new ArrayList<Option>();
+		optionsList.add(new Option(context.getString(R.string.icon_galery), context.getString(R.string.label_source_galery)));
+		optionsList.add(new Option(context.getString(R.string.icon_camera), context.getString(R.string.label_source_camera)));
+		
+		CustomDialog dialog = new CustomDialog(context, context.getString(R.string.label_select_picture_source));
+		
+		ListAdapter menuItemAdapter = new MenuItemAdapter(context, optionsList);
+		dialog.setAdapter(menuItemAdapter, new OnClickListener()
+		{
+			@Override
+			public void onClick(DialogInterface dialog, int index)
+			{
+				switch (index)
+				{
+					case SOURCE_GALERY:
+						observer.onUpdateImageGalery();
+						break;
+					
+					case SOURCE_GAMERA:
+						observer.onUpdateImageCamera();
+						break;
+				}
+			}
+		});
+		
+		dialog.display();
 	}
 	
 	public void setProductImage(byte[] image)
@@ -172,7 +213,9 @@ public class UpdateProductView extends BaseView
 	{
 		void onManageCategories();
 		
-		void onUpdateImage();
+		void onUpdateImageGalery();
+		
+		void onUpdateImageCamera();
 		
 		void onUpdateProduct();
 		

@@ -11,6 +11,9 @@
     <string name="label_product_name">Name</string>
     <string name="label_product_picture">Picture</string>
     <string name="label_error">Error</string>
+    <string name="label_select_picture_source">Select picture source</string>
+    <string name="label_source_galery">Galery</string>
+    <string name="label_source_camera">Camera</string>
     <string name="label_share_cart">Share list with</string>
     <string name="label_already_in_cart">Already in cart</string>
     <string name="label_initializing_database">Initializing database&#8230;</string>
@@ -28,6 +31,8 @@
     <string name="icon_update">\uE013</string>
     <string name="icon_menu">\uE012</string>
     <string name="icon_share">\uE066</string>
+    <string name="icon_camera">\uE046</string>
+    <string name="icon_galery">\uE060</string>
     
     <string name="toolbar_title_main">Shopping List</string>
     <string name="toolbar_title_add_product">Add product</string>
