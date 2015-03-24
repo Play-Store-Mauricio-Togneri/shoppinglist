@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppingcart.fragments;
 
 import android.os.Bundle;
+import com.mauriciotogneri.shoppingcart.dao.CartItemDao;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -46,7 +47,9 @@ public class AddProductFragment extends BaseFragment<AddProductView> implements 
 	@Override
 	public void onRemoveProduct(Product product)
 	{
-		if (!CartItem.exists(product))
+		CartItemDao cartItemDao = new CartItemDao();
+		
+		if (!cartItemDao.exists(product))
 		{
 			product.delete();
 			this.view.refreshList();

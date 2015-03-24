@@ -1,8 +1,6 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,10 +14,10 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.dao.CartItemDao;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
-import com.orm.query.Select;
 
 public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 {
@@ -125,48 +123,11 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 	{
 		if (sort)
 		{
-			List<CartItem> cartItems = Select.from(CartItem.class).list();
-			
-			List<CartItem> notSelected = new ArrayList<CartItem>();
-			List<CartItem> selected = new ArrayList<CartItem>();
-			
-			for (CartItem cartItem : cartItems)
-			{
-				if (cartItem.isSelected())
-				{
-					selected.add(cartItem);
-				}
-				else
-				{
-					notSelected.add(cartItem);
-				}
-			}
-			
-			Collections.sort(notSelected, new Comparator<CartItem>()
-			{
-				@Override
-				public int compare(CartItem lhs, CartItem rhs)
-				{
-					return lhs.getCategoryName().compareTo(rhs.getCategoryName());
-				}
-			});
-			
-			Collections.sort(selected, new Comparator<CartItem>()
-			{
-				@Override
-				public int compare(CartItem lhs, CartItem rhs)
-				{
-					return lhs.getName().compareTo(rhs.getName());
-				}
-			});
+			CartItemDao cartItemDao = new CartItemDao();
+			List<CartItem> list = cartItemDao.getCartItems();
 			
 			clear();
-			addAll(notSelected);
-			
-			if (!selected.isEmpty())
-			{
-				addAll(selected);
-			}
+			addAll(list);
 		}
 		
 		notifyDataSetChanged();

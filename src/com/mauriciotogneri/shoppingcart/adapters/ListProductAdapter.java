@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
-import com.orm.query.Select;
 
 public class ListProductAdapter extends ArrayAdapter<Product>
 {
@@ -51,23 +51,11 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 	{
 		if (category != null)
 		{
+			ProductDao productDao = new ProductDao();
+			List<Product> list = productDao.getProducts(category);
+			
 			clear();
-			
-			List<Product> filtered = new ArrayList<Product>();
-			List<Product> products = Select.from(Product.class).where("category = ?", new String[]
-				{
-					String.valueOf(category.getId())
-				}).orderBy("name").list();
-			
-			for (Product product : products)
-			{
-				if (!product.isInCart())
-				{
-					filtered.add(product);
-				}
-			}
-			
-			addAll(filtered);
+			addAll(list);
 			
 			notifyDataSetChanged();
 		}

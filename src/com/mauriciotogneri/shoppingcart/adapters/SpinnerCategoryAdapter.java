@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.dao.CategoryDao;
 import com.mauriciotogneri.shoppingcart.model.Category;
-import com.orm.query.Select;
 
 public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 {
@@ -83,11 +83,11 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 	
 	public void refresh()
 	{
+		CategoryDao categoryDao = new CategoryDao();
+		List<Category> list = categoryDao.getCategories();
+		
 		clear();
-		
-		List<Category> categories = Select.from(Category.class).orderBy("name").list();
-		addAll(categories);
-		
+		addAll(list);
 		notifyDataSetChanged();
 	}
 }

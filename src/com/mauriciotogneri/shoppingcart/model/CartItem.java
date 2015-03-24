@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppingcart.model;
 
 import com.orm.SugarRecord;
-import com.orm.query.Select;
 
 public class CartItem extends SugarRecord<CartItem>
 {
@@ -63,15 +62,5 @@ public class CartItem extends SugarRecord<CartItem>
 	public void invertSelection()
 	{
 		this.selected = !this.selected;
-	}
-	
-	public static boolean exists(Product product)
-	{
-		CartItem cartItem = Select.from(CartItem.class).where("product = ?", new String[]
-			{
-				String.valueOf(product.getId())
-			}).first();
-		
-		return (cartItem != null);
 	}
 }

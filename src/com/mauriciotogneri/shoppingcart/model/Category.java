@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppingcart.model;
 
 import java.io.Serializable;
-import java.util.List;
 import android.graphics.Color;
 import com.orm.SugarRecord;
 
@@ -58,12 +57,5 @@ public class Category extends SugarRecord<Category> implements Serializable
 	public String toString()
 	{
 		return this.name;
-	}
-	
-	public static boolean exists(String name)
-	{
-		List<Category> categories = SugarRecord.find(Category.class, "name = ?", name);
-		
-		return (!categories.isEmpty());
 	}
 }

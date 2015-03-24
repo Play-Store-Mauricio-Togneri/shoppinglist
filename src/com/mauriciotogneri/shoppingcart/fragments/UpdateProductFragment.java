@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.views.UpdateProductView;
@@ -30,7 +31,8 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 		
 		if (productId != 0)
 		{
-			this.product = Product.byId(productId);
+			ProductDao productDao = new ProductDao();
+			this.product = productDao.byId(productId);
 		}
 		
 		if (this.product != null)
@@ -128,6 +130,8 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 		String name = this.view.getProductName();
 		Category category = this.view.getProductCategory();
 		
+		ProductDao productDao = new ProductDao();
+		
 		if (category == null)
 		{
 			this.view.showToast(getContext(), R.string.error_invalid_category);
@@ -136,7 +140,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 		{
 			this.view.setNameInputError(getContext(), R.string.error_invalid_name);
 		}
-		else if (((this.product == null) || (!this.product.getName().equals(name))) && (Product.exists(name, category)))
+		else if (((this.product == null) || (!this.product.getName().equals(name))) && (productDao.exists(name, category)))
 		{
 			this.view.setNameInputError(getContext(), R.string.error_product_already_exists);
 		}

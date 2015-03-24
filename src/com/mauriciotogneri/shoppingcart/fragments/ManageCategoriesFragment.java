@@ -2,8 +2,9 @@ package com.mauriciotogneri.shoppingcart.fragments;
 
 import android.text.TextUtils;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.dao.CategoryDao;
+import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.Category;
-import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.views.ManageCategoriesView;
 
 public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView> implements ManageCategoriesView.Observer
@@ -21,7 +22,9 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 		{
 			if (category == null)
 			{
-				if (!Category.exists(name))
+				CategoryDao categoryDao = new CategoryDao();
+				
+				if (!categoryDao.exists(name))
 				{
 					Category newCategory = new Category(name, color);
 					newCategory.save();
@@ -36,7 +39,9 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 			}
 			else
 			{
-				if ((!category.getName().equals(name)) && Category.exists(name))
+				CategoryDao categoryDao = new CategoryDao();
+				
+				if ((!category.getName().equals(name)) && categoryDao.exists(name))
 				{
 					this.view.editCategory(getContext(), category, this);
 					this.view.showToast(getContext(), R.string.error_category_already_exists);
@@ -58,7 +63,9 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 	@Override
 	public void onRemoveCategory(Category category)
 	{
-		if (!Product.exists(category))
+		ProductDao productDao = new ProductDao();
+		
+		if (!productDao.exists(category))
 		{
 			category.delete();
 			this.view.refreshList();
