@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.Product;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 
 public class ListProductAdapter extends ArrayAdapter<Product>
 {
@@ -39,7 +39,7 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 		TextView name = (TextView)convertView.findViewById(R.id.name);
 		name.setText(product.getName());
 		
-		ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
+		CustomImageView productImage = (CustomImageView)convertView.findViewById(R.id.thumbnail);
 		productImage.setImage(product.getImage());
 		
 		return convertView;

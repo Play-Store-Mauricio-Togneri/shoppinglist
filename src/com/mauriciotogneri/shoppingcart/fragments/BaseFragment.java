@@ -15,9 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.mauriciotogneri.shoppingcart.activities.MainActivity;
-import com.mauriciotogneri.shoppingcart.views.BaseView;
+import com.mauriciotogneri.shoppingcart.views.BaseViewInterface;
 
-public abstract class BaseFragment<V extends BaseView> extends Fragment
+public abstract class BaseFragment<V extends BaseViewInterface> extends Fragment
 {
 	protected MainActivity activity;
 	protected V view;
@@ -26,20 +26,9 @@ public abstract class BaseFragment<V extends BaseView> extends Fragment
 	@Override
 	public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		View result = null;
+		this.view = getViewInstance();
 		
-		try
-		{
-			this.view = getViewClass().newInstance();
-			this.view.init(inflater, container);
-			result = this.view.getView();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return result;
+		return this.view.init(inflater, container);
 	}
 	
 	@Override
@@ -51,7 +40,7 @@ public abstract class BaseFragment<V extends BaseView> extends Fragment
 		super.onDestroyView();
 	}
 	
-	protected abstract Class<V> getViewClass();
+	protected abstract V getViewInstance();
 	
 	protected void onFinish()
 	{

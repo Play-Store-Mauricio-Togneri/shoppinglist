@@ -8,9 +8,11 @@ import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
-import com.mauriciotogneri.shoppingcart.views.AddProductView;
+import com.mauriciotogneri.shoppingcart.views.addproduct.AddProductView;
+import com.mauriciotogneri.shoppingcart.views.addproduct.AddProductViewInterface;
+import com.mauriciotogneri.shoppingcart.views.addproduct.AddProductViewObserver;
 
-public class AddProductFragment extends BaseFragment<AddProductView> implements AddProductView.Observer
+public class AddProductFragment extends BaseFragment<AddProductViewInterface> implements AddProductViewObserver
 {
 	@Override
 	protected void initialize()
@@ -81,9 +83,9 @@ public class AddProductFragment extends BaseFragment<AddProductView> implements 
 	}
 	
 	@Override
-	protected Class<AddProductView> getViewClass()
+	protected AddProductView getViewInstance()
 	{
-		return AddProductView.class;
+		return new AddProductView();
 	}
 	
 	@Override

@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 
 public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 {
@@ -91,7 +91,7 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 			quantity.setPaintFlags(quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
 		}
 		
-		ProductImage productImage = (ProductImage)convertView.findViewById(R.id.thumbnail);
+		CustomImageView productImage = (CustomImageView)convertView.findViewById(R.id.thumbnail);
 		productImage.setImage(cartItem.getImage(), cartItem.isSelected());
 		
 		CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);

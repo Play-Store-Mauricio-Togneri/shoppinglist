@@ -6,9 +6,11 @@ import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.dao.CategoryDao;
 import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.Category;
-import com.mauriciotogneri.shoppingcart.views.ManageCategoriesView;
+import com.mauriciotogneri.shoppingcart.views.managecategories.ManageCategoriesView;
+import com.mauriciotogneri.shoppingcart.views.managecategories.ManageCategoriesViewInterface;
+import com.mauriciotogneri.shoppingcart.views.managecategories.ManageCategoriesViewObserver;
 
-public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView> implements ManageCategoriesView.Observer
+public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewInterface> implements ManageCategoriesViewObserver
 {
 	@Override
 	protected void initialize()
@@ -101,8 +103,8 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 	}
 	
 	@Override
-	protected Class<ManageCategoriesView> getViewClass()
+	protected ManageCategoriesView getViewInstance()
 	{
-		return ManageCategoriesView.class;
+		return new ManageCategoriesView();
 	}
 }

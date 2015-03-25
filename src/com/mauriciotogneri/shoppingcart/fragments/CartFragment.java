@@ -7,9 +7,11 @@ import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.dao.CartItemDao;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.DatabaseInitializer;
-import com.mauriciotogneri.shoppingcart.views.CartView;
+import com.mauriciotogneri.shoppingcart.views.cart.CartView;
+import com.mauriciotogneri.shoppingcart.views.cart.CartViewInterface;
+import com.mauriciotogneri.shoppingcart.views.cart.CartViewObserver;
 
-public class CartFragment extends BaseFragment<CartView> implements CartView.Observer
+public class CartFragment extends BaseFragment<CartViewInterface> implements CartViewObserver
 {
 	private static final String ATTRIBUTE_FIRST_LAUNCH = "first_launch";
 	
@@ -104,8 +106,8 @@ public class CartFragment extends BaseFragment<CartView> implements CartView.Obs
 	}
 	
 	@Override
-	protected Class<CartView> getViewClass()
+	protected CartViewInterface getViewInstance()
 	{
-		return CartView.class;
+		return new CartView();
 	}
 }

@@ -12,9 +12,11 @@ import com.mauriciotogneri.shoppingcart.dao.CategoryDao;
 import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
-import com.mauriciotogneri.shoppingcart.views.UpdateProductView;
+import com.mauriciotogneri.shoppingcart.views.updateproduct.UpdateProductView;
+import com.mauriciotogneri.shoppingcart.views.updateproduct.UpdateProductViewInterface;
+import com.mauriciotogneri.shoppingcart.views.updateproduct.UpdateProductViewObserver;
 
-public class UpdateProductFragment extends BaseFragment<UpdateProductView> implements UpdateProductView.Observer
+public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterface> implements UpdateProductViewObserver
 {
 	public static final String PARAMETER_PRODUCT_ID = "product_id";
 	public static final String PARAMETER_CATEGORY = "category";
@@ -221,8 +223,8 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 	}
 	
 	@Override
-	protected Class<UpdateProductView> getViewClass()
+	protected UpdateProductView getViewInstance()
 	{
-		return UpdateProductView.class;
+		return new UpdateProductView();
 	}
 }
