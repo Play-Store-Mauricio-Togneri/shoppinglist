@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:orientation="horizontal" >
 
-    <com.mauriciotogneri.shoppingcart.widgets.ProductImage
+    <com.mauriciotogneri.shoppingcart.widgets.CustomImageView
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

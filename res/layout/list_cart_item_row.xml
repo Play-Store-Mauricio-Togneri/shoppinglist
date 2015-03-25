@@ -34,7 +34,7 @@
         android:orientation="horizontal"
         android:padding="10dp" >
 
-        <com.mauriciotogneri.shoppingcart.widgets.ProductImage
+        <com.mauriciotogneri.shoppingcart.widgets.CustomImageView
             android:id="@+id/thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
