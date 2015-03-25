@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.dao.ProductDao;
-import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
@@ -47,17 +45,10 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 		return convertView;
 	}
 	
-	public void refresh(Category category)
+	public void refresh(List<Product> list)
 	{
-		if (category != null)
-		{
-			ProductDao productDao = new ProductDao();
-			List<Product> list = productDao.getProducts(category);
-			
-			clear();
-			addAll(list);
-			
-			notifyDataSetChanged();
-		}
+		clear();
+		addAll(list);
+		notifyDataSetChanged();
 	}
 }

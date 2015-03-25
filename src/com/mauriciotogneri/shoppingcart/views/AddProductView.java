@@ -43,7 +43,8 @@ public class AddProductView extends BaseView
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
 			{
-				refreshList();
+				Category category = (Category)parent.getItemAtPosition(position);
+				observer.onCategorySelected(category);
 			}
 			
 			@Override
@@ -186,33 +187,28 @@ public class AddProductView extends BaseView
 		dialog.display();
 	}
 	
-	public void refreshList()
+	public void refreshList(List<Product> list)
 	{
-		Spinner categoryField = getSpinner(R.id.category);
-		Category category = (Category)categoryField.getSelectedItem();
-		this.listProductAdapter.refresh(category);
+		this.listProductAdapter.refresh(list);
 		
-		if (category != null)
+		ListView listView = getListView(R.id.product_list);
+		TextView emptyLabel = getCustomTextView(R.id.empty_label);
+		
+		if (this.listProductAdapter.getCount() > 0)
 		{
-			ListView listView = getListView(R.id.product_list);
-			TextView emptyLabel = getCustomTextView(R.id.empty_label);
-			
-			if (this.listProductAdapter.getCount() > 0)
-			{
-				listView.setVisibility(View.VISIBLE);
-				emptyLabel.setVisibility(View.GONE);
-			}
-			else
-			{
-				listView.setVisibility(View.GONE);
-				emptyLabel.setVisibility(View.VISIBLE);
-			}
+			listView.setVisibility(View.VISIBLE);
+			emptyLabel.setVisibility(View.GONE);
+		}
+		else
+		{
+			listView.setVisibility(View.GONE);
+			emptyLabel.setVisibility(View.VISIBLE);
 		}
 	}
 	
-	public void refreshCategories()
+	public void refreshCategories(List<Category> list)
 	{
-		this.spinnerCategoryAdapter.refresh();
+		this.spinnerCategoryAdapter.refresh(list);
 	}
 	
 	public Category getSelectedCategory()
@@ -243,5 +239,7 @@ public class AddProductView extends BaseView
 		void onEditProduct(Product product);
 		
 		void onRemoveProduct(Product product);
+		
+		void onCategorySelected(Category category);
 	}
 }

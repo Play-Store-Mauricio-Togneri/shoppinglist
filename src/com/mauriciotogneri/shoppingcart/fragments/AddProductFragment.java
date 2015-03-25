@@ -1,7 +1,10 @@
 package com.mauriciotogneri.shoppingcart.fragments;
 
+import java.util.List;
 import android.os.Bundle;
 import com.mauriciotogneri.shoppingcart.dao.CartItemDao;
+import com.mauriciotogneri.shoppingcart.dao.CategoryDao;
+import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -21,7 +24,7 @@ public class AddProductFragment extends BaseFragment<AddProductView> implements 
 		CartItem cartItem = new CartItem(product, value, false);
 		cartItem.save();
 		
-		this.view.refreshList();
+		refreshList(this.view.getSelectedCategory());
 	}
 	
 	@Override
@@ -52,7 +55,7 @@ public class AddProductFragment extends BaseFragment<AddProductView> implements 
 		if (!cartItemDao.exists(product))
 		{
 			product.delete();
-			this.view.refreshList();
+			refreshList(this.view.getSelectedCategory());
 		}
 		else
 		{
@@ -63,20 +66,40 @@ public class AddProductFragment extends BaseFragment<AddProductView> implements 
 	@Override
 	public void onActivate()
 	{
-		this.view.refreshCategories();
-		this.view.refreshList();
+		CategoryDao categoryDao = new CategoryDao();
+		List<Category> list = categoryDao.getCategories();
+		
+		this.view.refreshCategories(list);
+		refreshList(this.view.getSelectedCategory());
 	}
 	
 	@Override
 	public void onActivate(Object result)
 	{
 		this.view.setCategory((Category)result);
-		this.view.refreshList();
+		refreshList(this.view.getSelectedCategory());
 	}
 	
 	@Override
 	protected Class<AddProductView> getViewClass()
 	{
 		return AddProductView.class;
+	}
+	
+	@Override
+	public void onCategorySelected(Category category)
+	{
+		refreshList(category);
+	}
+	
+	private void refreshList(Category category)
+	{
+		if (category != null)
+		{
+			ProductDao productDao = new ProductDao();
+			List<Product> list = productDao.getProducts(category);
+			
+			this.view.refreshList(list);
+		}
 	}
 }

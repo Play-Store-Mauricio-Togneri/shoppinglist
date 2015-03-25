@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.fragments;
 
+import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.dao.CategoryDao;
 import com.mauriciotogneri.shoppingcart.dao.ProductDao;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
@@ -44,7 +46,9 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 			setProductImage(getImageFromBitmap(R.drawable.product_generic));
 		}
 		
-		this.view.initialize(getContext(), this.product, initialCategory, this);
+		List<Category> list = getCategories();
+		
+		this.view.initialize(getContext(), this.product, initialCategory, list, this);
 	}
 	
 	private void setProductImage(byte[] image)
@@ -191,7 +195,9 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 	@Override
 	public void onActivate(Object result)
 	{
-		this.view.refreshCategories();
+		List<Category> list = getCategories();
+		
+		this.view.refreshCategories(list);
 		
 		Category category = (Category)result;
 		
@@ -199,6 +205,13 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductView> imple
 		{
 			this.view.setCategory(category);
 		}
+	}
+	
+	private List<Category> getCategories()
+	{
+		CategoryDao categoryDao = new CategoryDao();
+		
+		return categoryDao.getCategories();
 	}
 	
 	@Override

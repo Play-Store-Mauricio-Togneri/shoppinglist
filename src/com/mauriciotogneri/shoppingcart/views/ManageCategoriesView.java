@@ -30,7 +30,7 @@ public class ManageCategoriesView extends BaseView
 	
 	private String selectedColor = "";
 	
-	public void initialize(final Context context, final Observer observer)
+	public void initialize(final Context context, List<Category> list, final Observer observer)
 	{
 		this.listCategoryAdapter = new ListCategoryAdapter(context);
 		
@@ -68,7 +68,7 @@ public class ManageCategoriesView extends BaseView
 			}
 		});
 		
-		refreshList();
+		refreshList(list);
 	}
 	
 	@SuppressLint("InflateParams")
@@ -232,9 +232,9 @@ public class ManageCategoriesView extends BaseView
 		this.selectedColor = String.format("%06X", 0xFFFFFF & colorDrawable.getColor());
 	}
 	
-	public void refreshList()
+	public void refreshList(List<Category> list)
 	{
-		this.listCategoryAdapter.refresh();
+		this.listCategoryAdapter.refresh(list);
 		
 		ListView listView = getListView(R.id.category_list);
 		TextView emptyLabel = getCustomTextView(R.id.empty_label);

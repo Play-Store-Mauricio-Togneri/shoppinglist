@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.fragments;
 
+import java.util.List;
 import android.text.TextUtils;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.dao.CategoryDao;
@@ -12,7 +13,9 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 	@Override
 	protected void initialize()
 	{
-		this.view.initialize(getContext(), this);
+		List<Category> list = getCategories();
+		
+		this.view.initialize(getContext(), list, this);
 	}
 	
 	@Override
@@ -29,7 +32,7 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 					Category newCategory = new Category(name, color);
 					newCategory.save();
 					
-					this.view.refreshList();
+					refreshList();
 				}
 				else
 				{
@@ -49,7 +52,7 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 				else
 				{
 					category.update(name, color);
-					this.view.refreshList();
+					refreshList();
 				}
 			}
 		}
@@ -68,12 +71,26 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesView>
 		if (!productDao.exists(category))
 		{
 			category.delete();
-			this.view.refreshList();
+			refreshList();
 		}
 		else
 		{
 			this.view.showError(getContext());
 		}
+	}
+	
+	private void refreshList()
+	{
+		List<Category> list = getCategories();
+		
+		this.view.refreshList(list);
+	}
+	
+	private List<Category> getCategories()
+	{
+		CategoryDao categoryDao = new CategoryDao();
+		
+		return categoryDao.getCategories();
 	}
 	
 	@Override

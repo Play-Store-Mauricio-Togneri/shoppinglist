@@ -25,7 +25,7 @@ public class UpdateProductView extends BaseView
 {
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
-	public void initialize(final Context context, Product product, Category initialCategory, final Observer observer)
+	public void initialize(final Context context, Product product, Category initialCategory, List<Category> list, final Observer observer)
 	{
 		TextView toolbarTitle = getCustomTextView(R.id.toolbar_title);
 		
@@ -41,7 +41,7 @@ public class UpdateProductView extends BaseView
 		// ---------------------------
 		
 		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(context);
-		this.spinnerCategoryAdapter.refresh();
+		this.spinnerCategoryAdapter.refresh(list);
 		
 		Spinner productCategory = getSpinner(R.id.category);
 		productCategory.setAdapter(this.spinnerCategoryAdapter);
@@ -192,9 +192,9 @@ public class UpdateProductView extends BaseView
 		return productName.getTextValue();
 	}
 	
-	public void refreshCategories()
+	public void refreshCategories(List<Category> list)
 	{
-		this.spinnerCategoryAdapter.refresh();
+		this.spinnerCategoryAdapter.refresh(list);
 	}
 	
 	public void setCategory(Category category)

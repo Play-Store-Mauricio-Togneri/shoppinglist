@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
-import com.mauriciotogneri.shoppingcart.dao.CartItemDao;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
@@ -119,17 +118,15 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 		}
 	}
 	
-	public void refresh(boolean sort)
+	public void refresh(List<CartItem> list)
 	{
-		if (sort)
-		{
-			CartItemDao cartItemDao = new CartItemDao();
-			List<CartItem> list = cartItemDao.getCartItems();
-			
-			clear();
-			addAll(list);
-		}
-		
+		clear();
+		addAll(list);
+		notifyDataSetChanged();
+	}
+	
+	public void refresh()
+	{
 		notifyDataSetChanged();
 	}
 	

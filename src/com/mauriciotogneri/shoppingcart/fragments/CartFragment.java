@@ -1,8 +1,10 @@
 package com.mauriciotogneri.shoppingcart.fragments;
 
+import java.util.List;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.dao.CartItemDao;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.DatabaseInitializer;
 import com.mauriciotogneri.shoppingcart.views.CartView;
@@ -32,13 +34,26 @@ public class CartFragment extends BaseFragment<CartView> implements CartView.Obs
 		}
 	}
 	
+	private void updateList()
+	{
+		CartItemDao cartItemDao = new CartItemDao();
+		List<CartItem> list = cartItemDao.getCartItems();
+		
+		this.view.refreshList(list);
+	}
+	
+	private void refreshList()
+	{
+		this.view.refreshList();
+	}
+	
 	@Override
 	public void onCartItemSelected(CartItem cartItem)
 	{
 		cartItem.invertSelection();
 		cartItem.save();
 		
-		this.view.refreshList(true);
+		updateList();
 	}
 	
 	@Override
@@ -47,7 +62,7 @@ public class CartFragment extends BaseFragment<CartView> implements CartView.Obs
 		cartItem.setQuantity(value);
 		cartItem.save();
 		
-		this.view.refreshList(false);
+		refreshList();
 	}
 	
 	@Override
@@ -56,7 +71,7 @@ public class CartFragment extends BaseFragment<CartView> implements CartView.Obs
 		cartItem.delete();
 		
 		this.view.removeCartItem(cartItem);
-		this.view.refreshList(false);
+		refreshList();
 	}
 	
 	@Override
@@ -69,7 +84,7 @@ public class CartFragment extends BaseFragment<CartView> implements CartView.Obs
 	@Override
 	public void onActivate()
 	{
-		this.view.refreshList(true);
+		updateList();
 		
 		SharedPreferences preferencces = PreferenceManager.getDefaultSharedPreferences(getContext());
 		

@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppingcart.views;
 
+import java.util.List;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -87,10 +88,22 @@ public class CartView extends BaseView
 		return this.listCartItemAdapter.getShareContent();
 	}
 	
-	public void refreshList(boolean sort)
+	public void refreshList(List<CartItem> list)
 	{
-		this.listCartItemAdapter.refresh(sort);
+		this.listCartItemAdapter.refresh(list);
 		
+		checkEmptyList();
+	}
+	
+	public void refreshList()
+	{
+		this.listCartItemAdapter.refresh();
+		
+		checkEmptyList();
+	}
+	
+	private void checkEmptyList()
+	{
 		ListView listView = getListView(R.id.cart_list);
 		TextView emptyLabel = getCustomTextView(R.id.empty_label);
 		
