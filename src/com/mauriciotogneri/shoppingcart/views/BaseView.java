@@ -11,59 +11,63 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
+import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 import com.mauriciotogneri.shoppingcart.widgets.CustomTextView;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
 
-public abstract class BaseView
+public abstract class BaseView implements BaseViewInterface
 {
-	protected View view;
+	private View view;
 	private LayoutInflater inflater;
 	
-	public final void init(LayoutInflater inflater, ViewGroup container)
+	@Override
+	public final View init(LayoutInflater inflater, ViewGroup container)
 	{
 		this.inflater = inflater;
 		this.view = inflater.inflate(getViewId(), container, false);
-	}
-	
-	public View getView()
-	{
+		
 		return this.view;
 	}
 	
-	protected abstract int getViewId();
-	
-	protected ListView getListView(int listViewId)
+	@Override
+	public ListView getListView(int listViewId)
 	{
 		return (ListView)this.view.findViewById(listViewId);
 	}
 	
-	protected CustomTextView getCustomTextView(int textViewId)
+	@Override
+	public CustomTextView getCustomTextView(int textViewId)
 	{
 		return (CustomTextView)this.view.findViewById(textViewId);
 	}
 	
-	protected CustomEditText getCustomEditText(int editTextId)
+	@Override
+	public CustomEditText getCustomEditText(int editTextId)
 	{
 		return (CustomEditText)this.view.findViewById(editTextId);
 	}
 	
-	public ProductImage getProductImage(int imageId)
+	@Override
+	public CustomImageView getCustomImageView(int imageId)
 	{
-		return (ProductImage)this.view.findViewById(imageId);
+		return (CustomImageView)this.view.findViewById(imageId);
 	}
 	
-	protected Spinner getSpinner(int spinnerId)
+	@Override
+	public Spinner getSpinner(int spinnerId)
 	{
 		return (Spinner)this.view.findViewById(spinnerId);
 	}
 	
-	protected void setButtonAction(int buttonId, View.OnClickListener callback)
+	@Override
+	public void setButtonAction(int buttonId, View.OnClickListener callback)
 	{
 		View toolbarButton = this.view.findViewById(buttonId);
 		toolbarButton.setOnClickListener(callback);
 	}
 	
+	@Override
 	@SuppressLint("InflateParams")
 	public void showToast(Context context, int messageId)
 	{
@@ -77,5 +81,20 @@ public abstract class BaseView
 		toast.setDuration(Toast.LENGTH_SHORT);
 		toast.setView(layout);
 		toast.show();
+	}
+	
+	@Override
+	@SuppressLint("InflateParams")
+	public void showError(Context context, int messageId)
+	{
+		CustomDialog dialog = new CustomDialog(context, context.getString(R.string.label_error));
+		dialog.setLayout(R.layout.dialog_content_text);
+		
+		TextView text = dialog.getCustomTextView(R.id.text);
+		text.setText(messageId);
+		
+		dialog.setPositiveButton(R.string.button_accept, null);
+		
+		dialog.display();
 	}
 }

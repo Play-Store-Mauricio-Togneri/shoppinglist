@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.views;
+package com.mauriciotogneri.shoppingcart.views.updateproduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +17,17 @@ import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
+import com.mauriciotogneri.shoppingcart.views.BaseView;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 
-public class UpdateProductView extends BaseView
+public class UpdateProductView extends BaseView implements UpdateProductViewInterface
 {
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
-	public void initialize(final Context context, Product product, Category initialCategory, List<Category> list, final Observer observer)
+	@Override
+	public void initialize(final Context context, Product product, Category initialCategory, List<Category> list, final UpdateProductViewObserver observer)
 	{
 		TextView toolbarTitle = getCustomTextView(R.id.toolbar_title);
 		
@@ -92,7 +94,7 @@ public class UpdateProductView extends BaseView
 		
 		// ---------------------------
 		
-		ProductImage productImage = getProductImage(R.id.thumbnail);
+		CustomImageView productImage = getCustomImageView(R.id.thumbnail);
 		productImage.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -127,7 +129,7 @@ public class UpdateProductView extends BaseView
 		});
 	}
 	
-	private void chooseImageSource(Context context, final Observer observer)
+	private void chooseImageSource(Context context, final UpdateProductViewObserver observer)
 	{
 		final int SOURCE_GALERY = 0;
 		final int SOURCE_GAMERA = 1;
@@ -160,24 +162,28 @@ public class UpdateProductView extends BaseView
 		dialog.display();
 	}
 	
+	@Override
 	public void setProductImage(byte[] image)
 	{
-		ProductImage productImage = getProductImage(R.id.thumbnail);
+		CustomImageView productImage = getCustomImageView(R.id.thumbnail);
 		productImage.setImage(image);
 	}
 	
+	@Override
 	public void setNameInputError(Context context, int textId)
 	{
 		CustomEditText productName = getCustomEditText(R.id.name);
 		productName.setErrorText(context.getString(textId));
 	}
 	
+	@Override
 	public void removeInputNameError()
 	{
 		CustomEditText productName = getCustomEditText(R.id.name);
 		productName.removeErrorText();
 	}
 	
+	@Override
 	public Category getProductCategory()
 	{
 		Spinner productCategory = getSpinner(R.id.category);
@@ -185,6 +191,7 @@ public class UpdateProductView extends BaseView
 		return (Category)productCategory.getSelectedItem();
 	}
 	
+	@Override
 	public String getProductName()
 	{
 		CustomEditText productName = getCustomEditText(R.id.name);
@@ -192,11 +199,13 @@ public class UpdateProductView extends BaseView
 		return productName.getTextValue();
 	}
 	
+	@Override
 	public void refreshCategories(List<Category> list)
 	{
 		this.spinnerCategoryAdapter.refresh(list);
 	}
 	
+	@Override
 	public void setCategory(Category category)
 	{
 		Spinner productCategory = getSpinner(R.id.category);
@@ -204,21 +213,8 @@ public class UpdateProductView extends BaseView
 	}
 	
 	@Override
-	protected int getViewId()
+	public int getViewId()
 	{
 		return R.layout.fragment_update_product;
-	}
-	
-	public interface Observer
-	{
-		void onManageCategories();
-		
-		void onUpdateImageGalery();
-		
-		void onUpdateImageCamera();
-		
-		void onUpdateProduct();
-		
-		void onCategorySelected(Category category);
 	}
 }

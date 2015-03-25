@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.views;
+package com.mauriciotogneri.shoppingcart.views.cart;
 
 import java.util.List;
 import android.content.Context;
@@ -14,14 +14,16 @@ import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
+import com.mauriciotogneri.shoppingcart.views.BaseView;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 
-public class CartView extends BaseView
+public class CartView extends BaseView implements CartViewInterface
 {
 	private ListCartItemAdapter listCartItemAdapter;
 	
-	public void initialize(final Context context, final Observer observer)
+	@Override
+	public void initialize(final Context context, final CartViewObserver observer)
 	{
 		this.listCartItemAdapter = new ListCartItemAdapter(context);
 		
@@ -73,21 +75,25 @@ public class CartView extends BaseView
 		});
 	}
 	
+	@Override
 	public void removeCartItem(CartItem cartItem)
 	{
 		this.listCartItemAdapter.remove(cartItem);
 	}
 	
+	@Override
 	public void removeSelectedItems()
 	{
 		this.listCartItemAdapter.removeSelectedItems();
 	}
 	
+	@Override
 	public String getShareContent()
 	{
 		return this.listCartItemAdapter.getShareContent();
 	}
 	
+	@Override
 	public void refreshList(List<CartItem> list)
 	{
 		this.listCartItemAdapter.refresh(list);
@@ -95,6 +101,7 @@ public class CartView extends BaseView
 		checkEmptyList();
 	}
 	
+	@Override
 	public void refreshList()
 	{
 		this.listCartItemAdapter.refresh();
@@ -119,12 +126,12 @@ public class CartView extends BaseView
 		}
 	}
 	
-	private void displayCartItem(Context context, final CartItem cartItem, final Observer observer)
+	private void displayCartItem(Context context, final CartItem cartItem, final CartViewObserver observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, cartItem.getName());
 		dialog.setLayout(R.layout.dialog_cart_item);
 		
-		ProductImage productImage = dialog.getProductImage(R.id.thumbnail);
+		CustomImageView productImage = dialog.getCustomImageView(R.id.thumbnail);
 		productImage.setImage(cartItem.getImage());
 		
 		final NumberPicker quantity = dialog.getNumberPicker(R.id.quantity);
@@ -156,21 +163,8 @@ public class CartView extends BaseView
 	}
 	
 	@Override
-	protected int getViewId()
+	public int getViewId()
 	{
 		return R.layout.fragment_cart;
-	}
-	
-	public interface Observer
-	{
-		void onCartItemSelected(CartItem cartItem);
-		
-		void onShare();
-		
-		void onAddProduct();
-		
-		void onQuantityUpdated(CartItem cartItem, int value);
-		
-		void onCartItemRemoved(CartItem cartItem);
 	}
 }

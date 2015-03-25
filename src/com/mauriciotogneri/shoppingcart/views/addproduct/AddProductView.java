@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.views;
+package com.mauriciotogneri.shoppingcart.views.addproduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +23,17 @@ import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.model.Product;
+import com.mauriciotogneri.shoppingcart.views.BaseView;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
-import com.mauriciotogneri.shoppingcart.widgets.ProductImage;
+import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 
-public class AddProductView extends BaseView
+public class AddProductView extends BaseView implements AddProductViewInterface
 {
 	private ListProductAdapter listProductAdapter;
 	private SpinnerCategoryAdapter spinnerCategoryAdapter;
 	
-	public void initialize(final Context context, final Observer observer)
+	@Override
+	public void initialize(final Context context, final AddProductViewObserver observer)
 	{
 		this.listProductAdapter = new ListProductAdapter(context);
 		this.spinnerCategoryAdapter = new SpinnerCategoryAdapter(context);
@@ -89,12 +91,12 @@ public class AddProductView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void selectProduct(Context context, final Product product, final Observer observer)
+	private void selectProduct(Context context, final Product product, final AddProductViewObserver observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, product.getName());
 		dialog.setLayout(R.layout.dialog_cart_item);
 		
-		ProductImage productImage = dialog.getProductImage(R.id.thumbnail);
+		CustomImageView productImage = dialog.getCustomImageView(R.id.thumbnail);
 		productImage.setImage(product.getImage());
 		
 		final NumberPicker quantity = dialog.getNumberPicker(R.id.quantity);
@@ -117,7 +119,7 @@ public class AddProductView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void displayProductOptions(final Context context, final Product product, final Observer observer)
+	private void displayProductOptions(final Context context, final Product product, final AddProductViewObserver observer)
 	{
 		final int EDIT_PRODUCT = 0;
 		final int REMOVE_PRODCUT = 1;
@@ -151,7 +153,7 @@ public class AddProductView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void removeProduct(Context context, final Product product, final Observer observer)
+	private void removeProduct(Context context, final Product product, final AddProductViewObserver observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, product.getName());
 		dialog.setLayout(R.layout.dialog_content_text);
@@ -173,20 +175,13 @@ public class AddProductView extends BaseView
 		dialog.display();
 	}
 	
-	@SuppressLint("InflateParams")
+	@Override
 	public void showError(Context context)
 	{
-		CustomDialog dialog = new CustomDialog(context, context.getString(R.string.label_error));
-		dialog.setLayout(R.layout.dialog_content_text);
-		
-		TextView text = dialog.getCustomTextView(R.id.text);
-		text.setText(R.string.error_product_in_use);
-		
-		dialog.setPositiveButton(R.string.button_accept, null);
-		
-		dialog.display();
+		showError(context, R.string.error_product_in_use);
 	}
 	
+	@Override
 	public void refreshList(List<Product> list)
 	{
 		this.listProductAdapter.refresh(list);
@@ -206,11 +201,13 @@ public class AddProductView extends BaseView
 		}
 	}
 	
+	@Override
 	public void refreshCategories(List<Category> list)
 	{
 		this.spinnerCategoryAdapter.refresh(list);
 	}
 	
+	@Override
 	public Category getSelectedCategory()
 	{
 		Spinner categorySpinner = getSpinner(R.id.category);
@@ -218,6 +215,7 @@ public class AddProductView extends BaseView
 		return (Category)categorySpinner.getSelectedItem();
 	}
 	
+	@Override
 	public void setCategory(Category category)
 	{
 		Spinner productCategory = getSpinner(R.id.category);
@@ -225,21 +223,8 @@ public class AddProductView extends BaseView
 	}
 	
 	@Override
-	protected int getViewId()
+	public int getViewId()
 	{
 		return R.layout.fragment_add_product;
-	}
-	
-	public interface Observer
-	{
-		void onAddProduct(Product product, int value);
-		
-		void onCreateProduct();
-		
-		void onEditProduct(Product product);
-		
-		void onRemoveProduct(Product product);
-		
-		void onCategorySelected(Category category);
 	}
 }

@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppingcart.views;
+package com.mauriciotogneri.shoppingcart.views.managecategories;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +20,18 @@ import com.mauriciotogneri.shoppingcart.adapters.ListCategoryAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 import com.mauriciotogneri.shoppingcart.model.Category;
+import com.mauriciotogneri.shoppingcart.views.BaseView;
 import com.mauriciotogneri.shoppingcart.widgets.CustomDialog;
 import com.mauriciotogneri.shoppingcart.widgets.CustomEditText;
 import com.mauriciotogneri.shoppingcart.widgets.CustomTextView;
 
-public class ManageCategoriesView extends BaseView
+public class ManageCategoriesView extends BaseView implements ManageCategoriesViewInterface
 {
 	private ListCategoryAdapter listCategoryAdapter;
-	
 	private String selectedColor = "";
 	
-	public void initialize(final Context context, List<Category> list, final Observer observer)
+	@Override
+	public void initialize(final Context context, List<Category> list, final ManageCategoriesViewObserver observer)
 	{
 		this.listCategoryAdapter = new ListCategoryAdapter(context);
 		
@@ -72,7 +73,7 @@ public class ManageCategoriesView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void displayCategoryOptions(final Context context, final Category category, final Observer observer)
+	private void displayCategoryOptions(final Context context, final Category category, final ManageCategoriesViewObserver observer)
 	{
 		final int EDIT_CATEGORY = 0;
 		final int REMOVE_CATEGORY = 1;
@@ -105,7 +106,8 @@ public class ManageCategoriesView extends BaseView
 		dialog.display();
 	}
 	
-	public void editCategory(Context context, final Category category, final Observer observer)
+	@Override
+	public void editCategory(Context context, final Category category, final ManageCategoriesViewObserver observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, context.getString(R.string.label_product_category));
 		dialog.setLayout(R.layout.dialog_create_category);
@@ -143,7 +145,7 @@ public class ManageCategoriesView extends BaseView
 	}
 	
 	@SuppressLint("InflateParams")
-	private void removeCategory(final Context context, final Category category, final Observer observer)
+	private void removeCategory(final Context context, final Category category, final ManageCategoriesViewObserver observer)
 	{
 		CustomDialog dialog = new CustomDialog(context, category.getName());
 		dialog.setLayout(R.layout.dialog_content_text);
@@ -165,18 +167,10 @@ public class ManageCategoriesView extends BaseView
 		dialog.display();
 	}
 	
-	@SuppressLint("InflateParams")
+	@Override
 	public void showError(Context context)
 	{
-		CustomDialog dialog = new CustomDialog(context, context.getString(R.string.label_error));
-		dialog.setLayout(R.layout.dialog_content_text);
-		
-		TextView text = dialog.getCustomTextView(R.id.text);
-		text.setText(R.string.error_category_in_use);
-		
-		dialog.setPositiveButton(R.string.button_accept, null);
-		
-		dialog.display();
+		showError(context, R.string.error_category_in_use);
 	}
 	
 	private void setColorButtonCallback(final CustomDialog dialog, final int textViewId, String colorCode, String selectedColor)
@@ -232,6 +226,7 @@ public class ManageCategoriesView extends BaseView
 		this.selectedColor = String.format("%06X", 0xFFFFFF & colorDrawable.getColor());
 	}
 	
+	@Override
 	public void refreshList(List<Category> list)
 	{
 		this.listCategoryAdapter.refresh(list);
@@ -252,17 +247,8 @@ public class ManageCategoriesView extends BaseView
 	}
 	
 	@Override
-	protected int getViewId()
+	public int getViewId()
 	{
 		return R.layout.fragment_manage_categories;
-	}
-	
-	public interface Observer
-	{
-		void onCategorySelected(Category category);
-		
-		void onEditCategory(Category category, String name, String color);
-		
-		void onRemoveCategory(Category category);
 	}
 }
