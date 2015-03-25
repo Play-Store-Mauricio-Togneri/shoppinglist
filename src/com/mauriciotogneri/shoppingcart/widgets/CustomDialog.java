@@ -48,9 +48,9 @@ public class CustomDialog extends AlertDialog.Builder
 		return (CustomTextView)this.layout.findViewById(textViewId);
 	}
 	
-	public ProductImage getProductImage(int imageId)
+	public CustomImageView getCustomImageView(int imageId)
 	{
-		return (ProductImage)this.layout.findViewById(imageId);
+		return (CustomImageView)this.layout.findViewById(imageId);
 	}
 	
 	public NumberPicker getNumberPicker(int numberPickerId)

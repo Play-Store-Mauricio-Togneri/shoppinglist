@@ -8,9 +8,9 @@ import android.graphics.ColorMatrixColorFilter;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class ProductImage extends ImageView
+public class CustomImageView extends ImageView
 {
-	public ProductImage(Context context, AttributeSet attrs)
+	public CustomImageView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 	}
