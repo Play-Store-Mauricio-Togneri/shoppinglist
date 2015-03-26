@@ -4,6 +4,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -55,7 +56,9 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 	
 	private void setProductImage(byte[] image)
 	{
-		this.selectedImage = getImageFromBitmap(getResizedBitmap(image, Product.IMAGE_SIZE, Product.IMAGE_SIZE));
+		Bitmap genericBitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.product_generic);
+		
+		this.selectedImage = getImageFromBitmap(getResizedBitmap(image, genericBitmap.getWidth(), genericBitmap.getHeight()));
 		this.view.setProductImage(this.selectedImage);
 	}
 	

@@ -5,8 +5,6 @@ import com.orm.SugarRecord;
 
 public class Product extends SugarRecord<Product>
 {
-	public static final int IMAGE_SIZE = 96;
-	
 	private String name;
 	private Category category;
 	private String image;
