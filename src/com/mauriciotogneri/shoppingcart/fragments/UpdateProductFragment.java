@@ -200,7 +200,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 	@Override
 	public void onActivate(Object result)
 	{
-		onActivate();
+		refreshCategories();
 		
 		Category category = (Category)result;
 		
@@ -212,6 +212,12 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 	
 	@Override
 	public void onActivate()
+	{
+		refreshCategories();
+		onCategorySelected(this.view.getProductCategory());
+	}
+	
+	private void refreshCategories()
 	{
 		List<Category> list = getCategories();
 		this.view.refreshCategories(list);
