@@ -65,27 +65,27 @@ public class AddProductFragment extends BaseFragment<AddProductViewInterface> im
 		}
 	}
 	
-	@Override
-	public void onActivate()
+	private void refreshCategories()
 	{
 		CategoryDao categoryDao = new CategoryDao();
 		List<Category> list = categoryDao.getCategories();
 		
 		this.view.refreshCategories(list);
+	}
+	
+	@Override
+	public void onActivate()
+	{
+		refreshCategories();
 		refreshList(this.view.getSelectedCategory());
 	}
 	
 	@Override
 	public void onActivate(Object result)
 	{
+		refreshCategories();
 		this.view.setCategory((Category)result);
 		refreshList(this.view.getSelectedCategory());
-	}
-	
-	@Override
-	protected AddProductView getViewInstance()
-	{
-		return new AddProductView();
 	}
 	
 	@Override
@@ -103,5 +103,11 @@ public class AddProductFragment extends BaseFragment<AddProductViewInterface> im
 			
 			this.view.refreshList(list);
 		}
+	}
+	
+	@Override
+	protected AddProductViewInterface getViewInstance()
+	{
+		return new AddProductView();
 	}
 }

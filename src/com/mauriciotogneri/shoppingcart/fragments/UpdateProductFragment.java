@@ -200,9 +200,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 	@Override
 	public void onActivate(Object result)
 	{
-		List<Category> list = getCategories();
-		
-		this.view.refreshCategories(list);
+		onActivate();
 		
 		Category category = (Category)result;
 		
@@ -210,6 +208,13 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 		{
 			this.view.setCategory(category);
 		}
+	}
+	
+	@Override
+	public void onActivate()
+	{
+		List<Category> list = getCategories();
+		this.view.refreshCategories(list);
 	}
 	
 	private List<Category> getCategories()
@@ -226,7 +231,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 	}
 	
 	@Override
-	protected UpdateProductView getViewInstance()
+	protected UpdateProductViewInterface getViewInstance()
 	{
 		return new UpdateProductView();
 	}

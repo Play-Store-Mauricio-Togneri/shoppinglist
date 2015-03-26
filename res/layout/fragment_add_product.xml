@@ -55,14 +55,21 @@
         android:layout_height="0.5dp"
         android:background="@color/boder_color" />
     
-    <ListView
-        android:id="@+id/product_list"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/default_background_color" />
-
-    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-        android:id="@+id/empty_label"
-        style="@style/LabelEmptyList" />
+        android:background="@color/default_background_color">
+    
+	    <ListView
+	        android:id="@+id/product_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:background="@color/default_background_color" />
+	
+	    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+	        android:id="@+id/empty_label"
+	        style="@style/LabelEmptyList" />
+    
+    </FrameLayout>
 
 </LinearLayout>

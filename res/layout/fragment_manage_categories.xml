@@ -16,15 +16,22 @@
             android:text="@string/icon_add" />
         
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/category_list"
+    
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/default_background_color" />
-
-    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
-        android:id="@+id/empty_label"
-        style="@style/LabelEmptyList" />
+        android:background="@color/default_background_color">
+    
+        <ListView
+            android:id="@+id/category_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/default_background_color" />
+    
+        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            android:id="@+id/empty_label"
+            style="@style/LabelEmptyList" />
+    
+    </FrameLayout>
 
 </LinearLayout>

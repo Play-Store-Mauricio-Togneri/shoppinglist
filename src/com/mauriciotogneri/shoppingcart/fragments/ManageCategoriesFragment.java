@@ -103,7 +103,7 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewI
 	}
 	
 	@Override
-	protected ManageCategoriesView getViewInstance()
+	protected ManageCategoriesViewInterface getViewInstance()
 	{
 		return new ManageCategoriesView();
 	}
