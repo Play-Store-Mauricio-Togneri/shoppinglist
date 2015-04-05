@@ -26,7 +26,7 @@ public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
 	
 	protected abstract V getViewHolder(View view);
 	
-	protected abstract void fillView(V viewHolder, T item);
+	protected abstract void fillView(V viewHolder, T item, int position);
 	
 	@Override
 	@SuppressWarnings("unchecked")
@@ -51,7 +51,7 @@ public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
 		
 		T item = getItem(position);
 		
-		fillView(viewHolder, item);
+		fillView(viewHolder, item, position);
 		
 		return rowView;
 	}

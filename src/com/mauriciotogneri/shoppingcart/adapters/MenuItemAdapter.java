@@ -22,7 +22,7 @@ public class MenuItemAdapter extends BaseListAdapter<Option, ViewHolder>
 	}
 	
 	@Override
-	protected void fillView(ViewHolder viewHolder, Option option)
+	protected void fillView(ViewHolder viewHolder, Option option, int position)
 	{
 		viewHolder.icon.setText(option.icon);
 		viewHolder.title.setText(option.title);

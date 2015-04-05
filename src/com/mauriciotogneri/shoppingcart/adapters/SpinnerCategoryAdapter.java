@@ -25,7 +25,7 @@ public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder
 	}
 	
 	@Override
-	protected void fillView(ViewHolder viewHolder, Category category)
+	protected void fillView(ViewHolder viewHolder, Category category, int position)
 	{
 		viewHolder.title.setText(category.getName());
 	}

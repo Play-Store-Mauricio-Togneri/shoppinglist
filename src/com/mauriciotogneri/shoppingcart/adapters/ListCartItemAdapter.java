@@ -2,52 +2,38 @@ package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.adapters.ListCartItemAdapter.ViewHolder;
 import com.mauriciotogneri.shoppingcart.model.CartItem;
 import com.mauriciotogneri.shoppingcart.model.Category;
 import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 
-public class ListCartItemAdapter extends ArrayAdapter<CartItem>
+public class ListCartItemAdapter extends BaseListAdapter<CartItem, ViewHolder>
 {
-	private final Context context;
-	private final LayoutInflater inflater;
-	
 	public ListCartItemAdapter(Context context)
 	{
-		super(context, android.R.layout.simple_list_item_1, new ArrayList<CartItem>());
-		
-		this.context = context;
-		this.inflater = LayoutInflater.from(context);
+		super(context, R.layout.list_cart_item_row, new ArrayList<CartItem>());
 	}
 	
 	@Override
-	@SuppressLint("InflateParams")
-	public View getView(int position, View originalView, ViewGroup parent)
+	protected ViewHolder getViewHolder(View view)
 	{
-		View convertView = originalView;
-		CartItem cartItem = getItem(position);
-		
-		if (convertView == null)
-		{
-			convertView = this.inflater.inflate(R.layout.list_cart_item_row, parent, false);
-		}
-		
-		LinearLayout categoryHeader = (LinearLayout)convertView.findViewById(R.id.category_header);
-		
+		return new ViewHolder(view);
+	}
+	
+	@Override
+	protected void fillView(ViewHolder viewHolder, CartItem cartItem, int position)
+	{
 		if (position == 0)
 		{
-			setCategoryHeader(categoryHeader, cartItem, convertView);
+			setCategoryHeader(viewHolder, cartItem);
 		}
 		else
 		{
@@ -59,62 +45,74 @@ public class ListCartItemAdapter extends ArrayAdapter<CartItem>
 			
 			if ((!sameCategory && bothNotSelected) || (firstItemSelected))
 			{
-				setCategoryHeader(categoryHeader, cartItem, convertView);
+				setCategoryHeader(viewHolder, cartItem);
 			}
 			else
 			{
-				categoryHeader.setVisibility(View.GONE);
+				viewHolder.categoryHeader.setVisibility(View.GONE);
 			}
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
-		name.setText(cartItem.getName());
+		viewHolder.name.setText(cartItem.getName());
 		
 		if (cartItem.isSelected())
 		{
-			name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 		}
 		else
 		{
-			name.setPaintFlags(name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+			viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
 		}
 		
-		TextView quantity = (TextView)convertView.findViewById(R.id.quantity);
-		quantity.setText(this.context.getString(R.string.label_quantity) + "   " + cartItem.getQuantity());
+		viewHolder.quantity.setText(getContext().getString(R.string.label_quantity) + "   " + cartItem.getQuantity());
 		
 		if (cartItem.isSelected())
 		{
-			quantity.setPaintFlags(quantity.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			viewHolder.quantity.setPaintFlags(viewHolder.quantity.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 		}
 		else
 		{
-			quantity.setPaintFlags(quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+			viewHolder.quantity.setPaintFlags(viewHolder.quantity.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
 		}
 		
-		CustomImageView productImage = (CustomImageView)convertView.findViewById(R.id.thumbnail);
-		productImage.setImage(cartItem.getImage(), cartItem.isSelected());
+		viewHolder.thumbnail.setImage(cartItem.getImage(), cartItem.isSelected());
 		
-		CheckBox selected = (CheckBox)convertView.findViewById(R.id.selected);
-		selected.setChecked(cartItem.isSelected());
-		
-		return convertView;
+		viewHolder.selected.setChecked(cartItem.isSelected());
 	}
 	
-	private void setCategoryHeader(LinearLayout categoryHeader, CartItem cartItem, View convertView)
+	private void setCategoryHeader(ViewHolder viewHolder, CartItem cartItem)
 	{
-		categoryHeader.setVisibility(View.VISIBLE);
-		
-		TextView title = (TextView)convertView.findViewById(R.id.category_name);
+		viewHolder.categoryHeader.setVisibility(View.VISIBLE);
 		
 		if (cartItem.isSelected())
 		{
-			categoryHeader.setBackgroundColor(Color.parseColor("#" + Category.COLOR_1));
-			title.setText(R.string.label_already_in_cart);
+			viewHolder.categoryHeader.setBackgroundColor(Color.parseColor("#" + Category.COLOR_1));
+			viewHolder.categoryName.setText(R.string.label_already_in_cart);
 		}
 		else
 		{
-			categoryHeader.setBackgroundColor(cartItem.getCategory().getIntColor());
-			title.setText(cartItem.getCategory().getName());
+			viewHolder.categoryHeader.setBackgroundColor(cartItem.getCategory().getIntColor());
+			viewHolder.categoryName.setText(cartItem.getCategory().getName());
+		}
+	}
+	
+	protected static class ViewHolder
+	{
+		public LinearLayout categoryHeader;
+		public TextView categoryName;
+		public CustomImageView thumbnail;
+		public TextView name;
+		public TextView quantity;
+		public CheckBox selected;
+		
+		public ViewHolder(View view)
+		{
+			this.categoryHeader = (LinearLayout)view.findViewById(R.id.category_header);
+			this.categoryName = (TextView)view.findViewById(R.id.category_name);
+			this.thumbnail = (CustomImageView)view.findViewById(R.id.thumbnail);
+			this.name = (TextView)view.findViewById(R.id.name);
+			this.quantity = (TextView)view.findViewById(R.id.quantity);
+			this.selected = (CheckBox)view.findViewById(R.id.selected);
 		}
 	}
 	
