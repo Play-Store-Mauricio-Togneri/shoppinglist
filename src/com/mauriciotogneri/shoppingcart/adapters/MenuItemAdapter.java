@@ -3,38 +3,29 @@ package com.mauriciotogneri.shoppingcart.adapters;
 import java.util.List;
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
 import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
+import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.ViewHolder;
 
-public class MenuItemAdapter extends ArrayAdapter<Option>
+public class MenuItemAdapter extends BaseListAdapter<Option, ViewHolder>
 {
 	public MenuItemAdapter(Context context, List<Option> options)
 	{
-		super(context, R.layout.menu_item_row, R.id.title, options);
+		super(context, R.layout.menu_item_row, options);
 	}
 	
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
+	protected ViewHolder getViewHolder(View view)
 	{
-		View rowView = super.getView(position, convertView, parent);
-		
-		ViewHolder viewHolder = (ViewHolder)rowView.getTag();
-		
-		if (viewHolder == null)
-		{
-			viewHolder = new ViewHolder(rowView);
-			rowView.setTag(viewHolder);
-		}
-		
-		Option option = getItem(position);
-		
+		return new ViewHolder(view);
+	}
+	
+	@Override
+	protected void fillView(ViewHolder viewHolder, Option option)
+	{
 		viewHolder.icon.setText(option.icon);
 		viewHolder.title.setText(option.title);
-		
-		return rowView;
 	}
 	
 	public static class Option
@@ -49,7 +40,7 @@ public class MenuItemAdapter extends ArrayAdapter<Option>
 		}
 	}
 	
-	private static class ViewHolder
+	protected static class ViewHolder
 	{
 		public TextView icon;
 		public TextView title;

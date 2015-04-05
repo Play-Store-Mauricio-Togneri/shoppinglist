@@ -1,41 +1,31 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.adapters.ListCategoryAdapter.ViewHolder;
 import com.mauriciotogneri.shoppingcart.model.Category;
 
-public class ListCategoryAdapter extends ArrayAdapter<Category>
+public class ListCategoryAdapter extends BaseListAdapter<Category, ViewHolder>
 {
 	public ListCategoryAdapter(Context context)
 	{
-		super(context, R.layout.list_category_row, R.id.name, new ArrayList<Category>());
+		super(context, R.layout.list_category_row);
 	}
 	
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent)
+	protected ViewHolder getViewHolder(View view)
 	{
-		View rowView = super.getView(position, convertView, parent);
-		
-		ViewHolder viewHolder = (ViewHolder)rowView.getTag();
-		
-		if (viewHolder == null)
-		{
-			viewHolder = new ViewHolder(rowView);
-			rowView.setTag(viewHolder);
-		}
-		
-		Category category = getItem(position);
-		
+		return new ViewHolder(view);
+	}
+	
+	@Override
+	protected void fillView(ViewHolder viewHolder, Category category)
+	{
 		viewHolder.name.setText(category.getName());
 		viewHolder.color.setBackgroundColor(category.getIntColor());
-		
-		return rowView;
 	}
 	
 	public void refresh(List<Category> list)
@@ -45,7 +35,7 @@ public class ListCategoryAdapter extends ArrayAdapter<Category>
 		notifyDataSetChanged();
 	}
 	
-	private static class ViewHolder
+	protected static class ViewHolder
 	{
 		public TextView name;
 		public TextView color;

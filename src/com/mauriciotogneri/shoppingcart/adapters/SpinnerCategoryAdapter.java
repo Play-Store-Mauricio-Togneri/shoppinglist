@@ -14,33 +14,42 @@ import com.mauriciotogneri.shoppingcart.model.Category;
 
 public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 {
-	private final LayoutInflater inflater;
-	
 	public SpinnerCategoryAdapter(Context context)
 	{
-		super(context, R.layout.spinner_category_header, new ArrayList<Category>());
-		
-		this.inflater = LayoutInflater.from(context);
+		super(context, R.layout.spinner_category_header, R.id.title, new ArrayList<Category>());
 		
 		setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 	
 	@Override
 	@SuppressLint("InflateParams")
-	public View getView(int position, View originalView, ViewGroup parent)
+	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View convertView = originalView;
-		Category category = getItem(position);
+		View rowView = super.getView(position, convertView, parent);
 		
-		if (convertView == null)
+		ViewHolder viewHolder = (ViewHolder)rowView.getTag();
+		
+		if (viewHolder == null)
 		{
-			convertView = this.inflater.inflate(R.layout.spinner_category_header, parent, false);
+			viewHolder = new ViewHolder(rowView);
+			rowView.setTag(viewHolder);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.title);
-		name.setText(category.getName());
+		Category category = getItem(position);
 		
-		return convertView;
+		viewHolder.title.setText(category.getName());
+		
+		return rowView;
+	}
+	
+	private static class ViewHolder
+	{
+		public TextView title;
+		
+		public ViewHolder(View view)
+		{
+			this.title = (TextView)view.findViewById(R.id.title);
+		}
 	}
 	
 	@Override
@@ -52,7 +61,8 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
 		
 		if (convertView == null)
 		{
-			convertView = this.inflater.inflate(R.layout.spinner_category_dropdown, parent, false);
+			LayoutInflater inflater = LayoutInflater.from(getContext());
+			convertView = inflater.inflate(R.layout.spinner_category_dropdown, parent, false);
 		}
 		
 		TextView name = (TextView)convertView.findViewById(R.id.title);
