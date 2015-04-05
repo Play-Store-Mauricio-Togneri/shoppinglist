@@ -37,8 +37,8 @@ public class ListCategoryAdapter extends BaseListAdapter<Category, ViewHolder>
 	
 	protected static class ViewHolder
 	{
-		public TextView name;
-		public TextView color;
+		public final TextView name;
+		public final TextView color;
 		
 		public ViewHolder(View view)
 		{

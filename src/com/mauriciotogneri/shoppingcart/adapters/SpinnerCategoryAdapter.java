@@ -32,7 +32,7 @@ public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder
 	
 	protected static class ViewHolder
 	{
-		public TextView title;
+		public final TextView title;
 		
 		public ViewHolder(View view)
 		{

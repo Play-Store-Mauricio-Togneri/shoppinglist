@@ -42,8 +42,8 @@ public class MenuItemAdapter extends BaseListAdapter<Option, ViewHolder>
 	
 	protected static class ViewHolder
 	{
-		public TextView icon;
-		public TextView title;
+		public final TextView icon;
+		public final TextView title;
 		
 		public ViewHolder(View view)
 		{

@@ -98,12 +98,12 @@ public class ListCartItemAdapter extends BaseListAdapter<CartItem, ViewHolder>
 	
 	protected static class ViewHolder
 	{
-		public LinearLayout categoryHeader;
-		public TextView categoryName;
-		public CustomImageView thumbnail;
-		public TextView name;
-		public TextView quantity;
-		public CheckBox selected;
+		public final LinearLayout categoryHeader;
+		public final TextView categoryName;
+		public final CustomImageView thumbnail;
+		public final TextView name;
+		public final TextView quantity;
+		public final CheckBox selected;
 		
 		public ViewHolder(View view)
 		{

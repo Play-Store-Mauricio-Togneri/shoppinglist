@@ -38,8 +38,8 @@ public class ListProductAdapter extends BaseListAdapter<Product, ViewHolder>
 	
 	protected static class ViewHolder
 	{
-		public TextView name;
-		public CustomImageView thumbnail;
+		public final TextView name;
+		public final CustomImageView thumbnail;
 		
 		public ViewHolder(View view)
 		{
