@@ -1,48 +1,38 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
-import java.util.ArrayList;
 import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mauriciotogneri.shoppingcart.R;
+import com.mauriciotogneri.shoppingcart.adapters.SpinnerCategoryAdapter.ViewHolder;
 import com.mauriciotogneri.shoppingcart.model.Category;
 
-public class SpinnerCategoryAdapter extends ArrayAdapter<Category>
+public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder>
 {
 	public SpinnerCategoryAdapter(Context context)
 	{
-		super(context, R.layout.spinner_category_header, R.id.title, new ArrayList<Category>());
+		super(context, R.layout.spinner_category_header);
 		
 		setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 	
 	@Override
-	@SuppressLint("InflateParams")
-	public View getView(int position, View convertView, ViewGroup parent)
+	protected ViewHolder getViewHolder(View view)
 	{
-		View rowView = super.getView(position, convertView, parent);
-		
-		ViewHolder viewHolder = (ViewHolder)rowView.getTag();
-		
-		if (viewHolder == null)
-		{
-			viewHolder = new ViewHolder(rowView);
-			rowView.setTag(viewHolder);
-		}
-		
-		Category category = getItem(position);
-		
-		viewHolder.title.setText(category.getName());
-		
-		return rowView;
+		return new ViewHolder(view);
 	}
 	
-	private static class ViewHolder
+	@Override
+	protected void fillView(ViewHolder viewHolder, Category category)
+	{
+		viewHolder.title.setText(category.getName());
+	}
+	
+	protected static class ViewHolder
 	{
 		public TextView title;
 		
