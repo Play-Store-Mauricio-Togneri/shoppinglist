@@ -2,9 +2,7 @@ package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -15,34 +13,30 @@ import com.mauriciotogneri.shoppingcart.widgets.CustomImageView;
 
 public class ListProductAdapter extends ArrayAdapter<Product>
 {
-	private final LayoutInflater inflater;
-	
 	public ListProductAdapter(Context context)
 	{
-		super(context, android.R.layout.simple_list_item_1, new ArrayList<Product>());
-		
-		this.inflater = LayoutInflater.from(context);
+		super(context, R.layout.list_product_row, R.id.name, new ArrayList<Product>());
 	}
 	
 	@Override
-	@SuppressLint("InflateParams")
-	public View getView(int position, View originalView, ViewGroup parent)
+	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View convertView = originalView;
-		Product product = getItem(position);
+		View rowView = super.getView(position, convertView, parent);
 		
-		if (convertView == null)
+		ViewHolder viewHolder = (ViewHolder)rowView.getTag();
+		
+		if (viewHolder == null)
 		{
-			convertView = this.inflater.inflate(R.layout.list_product_row, parent, false);
+			viewHolder = new ViewHolder(rowView);
+			rowView.setTag(viewHolder);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
-		name.setText(product.getName());
+		Product product = getItem(position);
 		
-		CustomImageView productImage = (CustomImageView)convertView.findViewById(R.id.thumbnail);
-		productImage.setImage(product.getImage());
+		viewHolder.name.setText(product.getName());
+		viewHolder.thumbnail.setImage(product.getImage());
 		
-		return convertView;
+		return rowView;
 	}
 	
 	public void refresh(List<Product> list)
@@ -50,5 +44,17 @@ public class ListProductAdapter extends ArrayAdapter<Product>
 		clear();
 		addAll(list);
 		notifyDataSetChanged();
+	}
+	
+	private static class ViewHolder
+	{
+		public TextView name;
+		public CustomImageView thumbnail;
+		
+		public ViewHolder(View view)
+		{
+			this.name = (TextView)view.findViewById(R.id.name);
+			this.thumbnail = (CustomImageView)view.findViewById(R.id.thumbnail);
+		}
 	}
 }

@@ -2,9 +2,7 @@ package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -14,34 +12,30 @@ import com.mauriciotogneri.shoppingcart.model.Category;
 
 public class ListCategoryAdapter extends ArrayAdapter<Category>
 {
-	private final LayoutInflater inflater;
-	
 	public ListCategoryAdapter(Context context)
 	{
-		super(context, android.R.layout.simple_list_item_1, new ArrayList<Category>());
-		
-		this.inflater = LayoutInflater.from(context);
+		super(context, R.layout.list_category_row, R.id.name, new ArrayList<Category>());
 	}
 	
 	@Override
-	@SuppressLint("InflateParams")
-	public View getView(int position, View originalView, ViewGroup parent)
+	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View convertView = originalView;
-		Category category = getItem(position);
+		View rowView = super.getView(position, convertView, parent);
 		
-		if (convertView == null)
+		ViewHolder viewHolder = (ViewHolder)rowView.getTag();
+		
+		if (viewHolder == null)
 		{
-			convertView = this.inflater.inflate(R.layout.list_category_row, parent, false);
+			viewHolder = new ViewHolder(rowView);
+			rowView.setTag(viewHolder);
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.name);
-		name.setText(category.getName());
+		Category category = getItem(position);
 		
-		TextView color = (TextView)convertView.findViewById(R.id.color);
-		color.setBackgroundColor(category.getIntColor());
+		viewHolder.name.setText(category.getName());
+		viewHolder.color.setBackgroundColor(category.getIntColor());
 		
-		return convertView;
+		return rowView;
 	}
 	
 	public void refresh(List<Category> list)
@@ -49,5 +43,17 @@ public class ListCategoryAdapter extends ArrayAdapter<Category>
 		clear();
 		addAll(list);
 		notifyDataSetChanged();
+	}
+	
+	private static class ViewHolder
+	{
+		public TextView name;
+		public TextView color;
+		
+		public ViewHolder(View view)
+		{
+			this.name = (TextView)view.findViewById(R.id.name);
+			this.color = (TextView)view.findViewById(R.id.color);
+		}
 	}
 }

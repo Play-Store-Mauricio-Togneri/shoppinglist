@@ -1,9 +1,7 @@
 package com.mauriciotogneri.shoppingcart.adapters;
 
 import java.util.List;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -13,34 +11,30 @@ import com.mauriciotogneri.shoppingcart.adapters.MenuItemAdapter.Option;
 
 public class MenuItemAdapter extends ArrayAdapter<Option>
 {
-	private final LayoutInflater inflater;
-	
 	public MenuItemAdapter(Context context, List<Option> options)
 	{
-		super(context, android.R.layout.simple_list_item_1, options);
-		
-		this.inflater = LayoutInflater.from(context);
+		super(context, R.layout.menu_item_row, R.id.title, options);
 	}
 	
 	@Override
-	@SuppressLint("InflateParams")
-	public View getView(int position, View originalView, ViewGroup parent)
+	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		View convertView = originalView;
-		Option option = getItem(position);
+		View rowView = super.getView(position, convertView, parent);
 		
-		if (convertView == null)
+		ViewHolder viewHolder = (ViewHolder)rowView.getTag();
+		
+		if (viewHolder == null)
 		{
-			convertView = this.inflater.inflate(R.layout.menu_item_row, parent, false);
+			viewHolder = new ViewHolder(rowView);
+			rowView.setTag(viewHolder);
 		}
 		
-		TextView icon = (TextView)convertView.findViewById(R.id.icon);
-		icon.setText(option.icon);
+		Option option = getItem(position);
 		
-		TextView title = (TextView)convertView.findViewById(R.id.title);
-		title.setText(option.title);
+		viewHolder.icon.setText(option.icon);
+		viewHolder.title.setText(option.title);
 		
-		return convertView;
+		return rowView;
 	}
 	
 	public static class Option
@@ -52,6 +46,18 @@ public class MenuItemAdapter extends ArrayAdapter<Option>
 		{
 			this.icon = icon;
 			this.title = title;
+		}
+	}
+	
+	private static class ViewHolder
+	{
+		public TextView icon;
+		public TextView title;
+		
+		public ViewHolder(View view)
+		{
+			this.icon = (TextView)view.findViewById(R.id.icon);
+			this.title = (TextView)view.findViewById(R.id.title);
 		}
 	}
 }
