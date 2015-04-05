@@ -16,8 +16,6 @@ public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder
 	public SpinnerCategoryAdapter(Context context)
 	{
 		super(context, R.layout.spinner_category_header);
-		
-		setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 	
 	@Override
@@ -44,21 +42,30 @@ public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder
 	
 	@Override
 	@SuppressLint("InflateParams")
-	public View getDropDownView(int position, View originalView, ViewGroup parent)
+	public View getDropDownView(int position, View convertView, ViewGroup parent)
 	{
-		View convertView = originalView;
-		Category category = getItem(position);
+		ViewHolder viewHolder;
 		
-		if (convertView == null)
+		View rowView = convertView;
+		
+		if (rowView == null)
 		{
 			LayoutInflater inflater = LayoutInflater.from(getContext());
-			convertView = inflater.inflate(R.layout.spinner_category_dropdown, parent, false);
+			rowView = inflater.inflate(R.layout.spinner_category_dropdown, parent, false);
+			
+			viewHolder = getViewHolder(rowView);
+			rowView.setTag(viewHolder);
+		}
+		else
+		{
+			viewHolder = (ViewHolder)rowView.getTag();
 		}
 		
-		TextView name = (TextView)convertView.findViewById(R.id.title);
-		name.setText(category.getName());
+		Category category = getItem(position);
 		
-		return convertView;
+		viewHolder.title.setText(category.getName());
+		
+		return rowView;
 	}
 	
 	public int getPositionOf(Category category)
