@@ -134,6 +134,11 @@ public abstract class BaseFragment<V extends BaseViewInterface> extends Fragment
         return stream.toByteArray();
     }
 
+    protected Bitmap getBitmapFromBytes(byte[] image)
+    {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+
     protected byte[] getImageFromBitmap(int resourceId)
     {
         return getImageFromBitmap(BitmapFactory.decodeResource(getResources(), resourceId));
@@ -162,17 +167,5 @@ public abstract class BaseFragment<V extends BaseViewInterface> extends Fragment
         }
 
         return byteBuffer.toByteArray();
-    }
-
-    protected Bitmap getResizedBitmap(byte[] image, int width, int height)
-    {
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-
-        if ((bitmap.getWidth() != width) || (bitmap.getHeight() != height))
-        {
-            bitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
-        }
-
-        return bitmap;
     }
 }
