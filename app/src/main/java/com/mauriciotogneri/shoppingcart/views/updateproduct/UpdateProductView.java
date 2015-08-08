@@ -135,7 +135,7 @@ public class UpdateProductView extends BaseView implements UpdateProductViewInte
 		final int SOURCE_GAMERA = 1;
 		
 		List<Option> optionsList = new ArrayList<Option>();
-		optionsList.add(new Option(context.getString(R.string.icon_galery), context.getString(R.string.label_source_galery)));
+		optionsList.add(new Option(context.getString(R.string.icon_gallery), context.getString(R.string.label_source_gallery)));
 		optionsList.add(new Option(context.getString(R.string.icon_camera), context.getString(R.string.label_source_camera)));
 		
 		CustomDialog dialog = new CustomDialog(context, context.getString(R.string.label_select_picture_source));

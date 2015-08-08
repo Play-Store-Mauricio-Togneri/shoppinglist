@@ -1,14 +1,15 @@
 package com.mauriciotogneri.shoppingcart.widgets;
 
-import java.util.HashMap;
-import java.util.Map;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Fonts
 {
-	private static final Map<String, Typeface> fonts = new HashMap<String, Typeface>();
+	private static final Map<String, Typeface> fonts = new HashMap<>();
 	private static final String FONTS_PATH = "fonts/";
 	
 	public static final String OPEN_SANS = "0";
