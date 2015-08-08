@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@layout/background_list_row"
+    android:background="@drawable/background_list_row"
     android:orientation="horizontal"
-    android:padding="15dp" >
+    android:padding="15dp">
 
     <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginRight="15dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="glyphicons" />
-    
+        custom:font="glyphicons"/>
+
     <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -25,6 +26,6 @@
         android:gravity="center_vertical"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="opensans" />
+        custom:font="opensans"/>
 
 </LinearLayout>

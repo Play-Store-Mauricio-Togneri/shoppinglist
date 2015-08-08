@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,7 +10,7 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingStart="20dp"
-    android:paddingTop="10dp" >
+    android:paddingTop="10dp">
 
     <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:layout_width="wrap_content"
@@ -18,83 +19,83 @@
         android:text="@string/label_product_name"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="opensans" />
+        custom:font="opensans"/>
 
     <com.mauriciotogneri.shoppinglist.widgets.CustomEditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@layout/bolder_input"
+        android:background="@drawable/bolder_input"
         android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
         android:maxLength="30"
         android:padding="10dp"
         android:textColor="#007AB0"
-        custom:font="opensans" />
+        custom:font="opensans"/>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="20dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:gravity="center" >
+            android:gravity="center">
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_1"
-                style="@style/ColorButton" />
+                style="@style/ColorButton"/>
 
-            <View style="@style/ColorSeparator" />
+            <View style="@style/ColorSeparator"/>
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_2"
-                style="@style/ColorButton" />
+                style="@style/ColorButton"/>
 
-            <View style="@style/ColorSeparator" />
+            <View style="@style/ColorSeparator"/>
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_3"
-                style="@style/ColorButton" />
+                style="@style/ColorButton"/>
 
-            <View style="@style/ColorSeparator" />
+            <View style="@style/ColorSeparator"/>
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_4"
-                style="@style/ColorButton" />
-            
+                style="@style/ColorButton"/>
+
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" >
+            android:gravity="center">
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_5"
-                style="@style/ColorButton" />
+                style="@style/ColorButton"/>
 
-            <View style="@style/ColorSeparator" />
+            <View style="@style/ColorSeparator"/>
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_6"
-                style="@style/ColorButton" />
+                style="@style/ColorButton"/>
 
-            <View style="@style/ColorSeparator" />
+            <View style="@style/ColorSeparator"/>
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_7"
-                style="@style/ColorButton" />
+                style="@style/ColorButton"/>
 
-            <View style="@style/ColorSeparator" />
+            <View style="@style/ColorSeparator"/>
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_8"
-                style="@style/ColorButton" />
-            
+                style="@style/ColorButton"/>
+
         </TableRow>
-        
+
     </TableLayout>
 
 </LinearLayout>

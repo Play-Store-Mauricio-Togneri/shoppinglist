@@ -80,7 +80,7 @@ public class ManageCategoriesView extends BaseView implements ManageCategoriesVi
         final int EDIT_CATEGORY = 0;
         final int REMOVE_CATEGORY = 1;
 
-        List<Option> optionsList = new ArrayList<Option>();
+        List<Option> optionsList = new ArrayList<>();
         optionsList.add(new Option(context.getString(R.string.icon_edit), context.getString(R.string.button_edit)));
         optionsList.add(new Option(context.getString(R.string.icon_remove), context.getString(R.string.button_remove)));
 

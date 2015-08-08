@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/category_header"
@@ -13,7 +14,7 @@
         android:clickable="false"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             android:id="@+id/category_name"
@@ -23,22 +24,22 @@
             android:textColor="@color/default_text_color"
             android:textSize="@dimen/default_font_size"
             android:textStyle="bold"
-            custom:font="opensans" />
-        
+            custom:font="opensans"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@layout/background_list_row"
+        android:background="@drawable/background_list_row"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:padding="10dp">
 
         <com.mauriciotogneri.shoppinglist.widgets.CustomImageView
             android:id="@+id/thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:contentDescription="@string/image_description" />
+            android:contentDescription="@string/image_description"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -47,7 +48,7 @@
             android:layout_marginStart="15dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/name"
@@ -57,7 +58,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/default_text_color"
                 android:textSize="@dimen/default_font_size"
-                custom:font="opensans" />
+                custom:font="opensans"/>
 
             <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/quantity"
@@ -67,8 +68,8 @@
                 android:text="@string/label_quantity"
                 android:textColor="@color/default_text_color"
                 android:textSize="16sp"
-                custom:font="opensans" />
-            
+                custom:font="opensans"/>
+
         </LinearLayout>
 
         <CheckBox
@@ -77,8 +78,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:clickable="false"
-            android:focusable="false" />
-        
+            android:focusable="false"/>
+
     </LinearLayout>
 
 </LinearLayout>

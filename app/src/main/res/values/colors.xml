@@ -4,6 +4,6 @@
     <color name="default_text_color">#505050</color>
     <color name="default_background_color">#F0F0F0</color>
     <color name="toolbar_background_color">#00A0E6</color>
-    <color name="boder_color">#AAAAAA</color>
+    <color name="border_color">#AAAAAA</color>
     
 </resources>

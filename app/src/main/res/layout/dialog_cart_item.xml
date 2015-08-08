@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
     android:layout_gravity="center"
-    android:orientation="horizontal" >
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <com.mauriciotogneri.shoppinglist.widgets.CustomImageView
         android:id="@+id/thumbnail"
@@ -13,24 +14,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:contentDescription="@string/image_description"
-        android:src="@drawable/app_icon" />
+        android:src="@drawable/app_icon"/>
 
     <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginRight="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="15dp"
         android:text="@string/label_quantity"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="opensans" />
+        custom:font="opensans"/>
 
     <NumberPicker
         android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusable="false" />
+        android:focusable="false"/>
 
 </LinearLayout>

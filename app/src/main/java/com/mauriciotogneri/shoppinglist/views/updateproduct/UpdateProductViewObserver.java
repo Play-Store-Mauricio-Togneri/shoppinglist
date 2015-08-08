@@ -4,13 +4,13 @@ import com.mauriciotogneri.shoppinglist.model.Category;
 
 public interface UpdateProductViewObserver
 {
-	void onManageCategories();
-	
-	void onUpdateImageGalery();
-	
-	void onUpdateImageCamera();
-	
-	void onUpdateProduct();
-	
-	void onCategorySelected(Category category);
+    void onManageCategories();
+
+    void onUpdateImageGallery();
+
+    void onUpdateImageCamera();
+
+    void onUpdateProduct();
+
+    void onCategorySelected(Category category);
 }
