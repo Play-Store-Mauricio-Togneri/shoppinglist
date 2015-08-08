@@ -5,13 +5,13 @@
     
     <LinearLayout style="@style/Toolbar" >
 
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             style="@style/ToolbarTitle"
             android:text="@string/toolbar_title_add_product" />
 
         <View style="@style/HorizontalSeparator" />
 
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             style="@style/ToolbarButton"
             android:id="@+id/create_product"
             android:text="@string/icon_add" />
@@ -24,7 +24,7 @@
     	android:orientation="horizontal"
     	android:background="#FFFFFF">
         
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/label_product_category"
@@ -66,7 +66,7 @@
 	        android:layout_height="match_parent"
 	        android:background="@color/default_background_color" />
 	
-	    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+	    <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
 	        android:id="@+id/empty_label"
 	        style="@style/LabelEmptyList" />
     

@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="15dp" >
 
-    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+    <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:textSize="@dimen/default_font_size"
         custom:font="glyphicons" />
     
-    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+    <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

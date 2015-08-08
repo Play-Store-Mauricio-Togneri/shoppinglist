@@ -7,7 +7,7 @@ android
 
     defaultConfig
     {
-        applicationId "com.mauriciotogneri.shoppingcart"
+        applicationId "com.mauriciotogneri.shoppinglist"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1

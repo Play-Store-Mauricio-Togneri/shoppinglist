@@ -4,13 +4,13 @@
     
     <LinearLayout style="@style/Toolbar" >
 
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             style="@style/ToolbarTitle"
             android:text="@string/toolbar_title_manage_categories" />
 
         <View style="@style/HorizontalSeparator" />
 
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             style="@style/ToolbarButton"
             android:id="@+id/create_category"
             android:text="@string/icon_add" />
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:background="@color/default_background_color" />
     
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             android:id="@+id/empty_label"
             style="@style/LabelEmptyList" />
     

@@ -11,7 +11,7 @@
     android:paddingStart="20dp"
     android:paddingTop="10dp" >
 
-    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+    <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -20,7 +20,7 @@
         android:textSize="@dimen/default_font_size"
         custom:font="opensans" />
 
-    <com.mauriciotogneri.shoppingcart.widgets.CustomEditText
+    <com.mauriciotogneri.shoppinglist.widgets.CustomEditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,25 +42,25 @@
             android:layout_marginBottom="20dp"
             android:gravity="center" >
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_1"
                 style="@style/ColorButton" />
 
             <View style="@style/ColorSeparator" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_2"
                 style="@style/ColorButton" />
 
             <View style="@style/ColorSeparator" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_3"
                 style="@style/ColorButton" />
 
             <View style="@style/ColorSeparator" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_4"
                 style="@style/ColorButton" />
             
@@ -71,25 +71,25 @@
             android:layout_height="wrap_content"
             android:gravity="center" >
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_5"
                 style="@style/ColorButton" />
 
             <View style="@style/ColorSeparator" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_6"
                 style="@style/ColorButton" />
 
             <View style="@style/ColorSeparator" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_7"
                 style="@style/ColorButton" />
 
             <View style="@style/ColorSeparator" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/color_8"
                 style="@style/ColorButton" />
             

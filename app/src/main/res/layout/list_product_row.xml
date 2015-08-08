@@ -7,7 +7,7 @@
     android:padding="10dp"
     android:background="@layout/background_list_row" >
     
-    <com.mauriciotogneri.shoppingcart.widgets.CustomImageView
+    <com.mauriciotogneri.shoppinglist.widgets.CustomImageView
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -22,7 +22,7 @@
         android:gravity="center_vertical"
         android:orientation="vertical" >
 
-        <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+        <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
