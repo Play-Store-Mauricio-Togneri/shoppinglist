@@ -10,7 +10,7 @@
     android:paddingTop="13dp"
     android:paddingBottom="13dp" >
 
-    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+    <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

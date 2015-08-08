@@ -10,7 +10,7 @@
     
     <View style="@style/HorizontalSeparator" />
 
-    <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+    <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

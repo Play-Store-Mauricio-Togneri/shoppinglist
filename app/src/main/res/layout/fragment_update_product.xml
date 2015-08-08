@@ -10,7 +10,7 @@
 
         <LinearLayout style="@style/Toolbar" >
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:id="@+id/toolbar_title"
                 style="@style/ToolbarTitle" />
             
@@ -22,7 +22,7 @@
             android:orientation="vertical"
             android:padding="20dp" >
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -56,7 +56,7 @@
                     
                 </LinearLayout>
 
-                <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                     android:id="@+id/button_manage_categories"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -76,7 +76,7 @@
                 
             </LinearLayout>
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -87,7 +87,7 @@
                 android:textSize="@dimen/default_font_size"
                 custom:font="opensans" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomEditText
+            <com.mauriciotogneri.shoppinglist.widgets.CustomEditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 android:maxLength="30"
                 custom:font="opensans" />
 
-            <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+            <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal" >
 
-                <com.mauriciotogneri.shoppingcart.widgets.CustomImageView
+                <com.mauriciotogneri.shoppinglist.widgets.CustomImageView
                     android:id="@+id/thumbnail"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -135,7 +135,7 @@
                 android:clickable="true"
                 android:orientation="horizontal" >
 
-                <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -150,7 +150,7 @@
                     android:textSize="@dimen/default_font_size"
                     custom:font="glyphicons" />
 
-                <com.mauriciotogneri.shoppingcart.widgets.CustomTextView
+                <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
                     android:id="@+id/button_update_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
