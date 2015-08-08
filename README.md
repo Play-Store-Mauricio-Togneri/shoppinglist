@@ -1,2 +1,3 @@
-# Shopping Cart
-A shopping cart application
+# Shopping List
+
+A shopping list application.
