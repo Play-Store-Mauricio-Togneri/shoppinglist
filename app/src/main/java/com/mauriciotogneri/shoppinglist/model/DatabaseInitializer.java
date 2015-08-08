@@ -86,6 +86,9 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
         Product corn = new Product(context.getString(R.string.product_corn), condimentsOthers, getImageBytes(this.context, R.drawable.product_corn));
         corn.save();
 
+        Product oil = new Product(context.getString(R.string.product_oil), condimentsOthers, getImageBytes(this.context, R.drawable.product_oil));
+        oil.save();
+
         Product risotto = new Product(context.getString(R.string.product_risotto), condimentsOthers, getImageBytes(this.context, R.drawable.product_risotto));
         risotto.save();
 
@@ -97,9 +100,6 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         Product sugar = new Product(context.getString(R.string.product_sugar), condimentsOthers, getImageBytes(this.context, R.drawable.product_sugar));
         sugar.save();
-
-        Product oil = new Product(context.getString(R.string.product_oil), condimentsOthers, getImageBytes(this.context, R.drawable.product_oil));
-        oil.save();
 
         Product tomatoSauce = new Product(context.getString(R.string.product_tomatoSauce), condimentsOthers, getImageBytes(this.context, R.drawable.product_tomato_sauce));
         tomatoSauce.save();
