@@ -194,6 +194,7 @@ public class AddProductView extends BaseView implements AddProductViewInterface
         if (this.listProductAdapter.getCount() > 0)
         {
             listView.setVisibility(View.VISIBLE);
+            listView.setSelection(0);
             emptyLabel.setVisibility(View.GONE);
         }
         else
