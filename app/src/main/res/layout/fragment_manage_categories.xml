@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Screen" >
-    
-    <LinearLayout style="@style/Toolbar" >
+<LinearLayout
+    style="@style/Screen"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout style="@style/Toolbar">
 
         <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             style="@style/ToolbarTitle"
-            android:text="@string/toolbar_title_manage_categories" />
+            android:text="@string/toolbar_title_manage_categories"/>
 
-        <View style="@style/HorizontalSeparator" />
+        <View style="@style/HorizontalSeparator"/>
 
         <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
-            style="@style/ToolbarButton"
             android:id="@+id/create_category"
-            android:text="@string/icon_add" />
-        
+            style="@style/ToolbarButton"
+            android:text="@string/icon_add"/>
+
     </LinearLayout>
-    
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/default_background_color">
-    
+
         <ListView
             android:id="@+id/category_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/default_background_color" />
-    
+            android:background="@color/default_background_color"/>
+
         <com.mauriciotogneri.shoppinglist.widgets.CustomTextView
             android:id="@+id/empty_label"
-            style="@style/LabelEmptyList" />
-    
+            style="@style/LabelEmptyList"/>
+
     </FrameLayout>
 
 </LinearLayout>

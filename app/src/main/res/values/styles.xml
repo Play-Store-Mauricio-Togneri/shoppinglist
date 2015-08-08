@@ -5,13 +5,13 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
-    
+
     <style name="Screen">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
     </style>
-    
+
     <style name="LabelEmptyList">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -22,7 +22,7 @@
         <item name="android:visibility">gone</item>
         <item name="font">opensans</item>
     </style>
-    
+
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
@@ -30,7 +30,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
     </style>
-    
+
     <style name="HorizontalSeparator">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
@@ -47,7 +47,7 @@
         <item name="android:paddingRight">15dp</item>
         <item name="font">opensans</item>
     </style>
-    
+
     <style name="ToolbarButton">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">20sp</item>
@@ -56,10 +56,10 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:gravity">center</item>
         <item name="android:clickable">true</item>
-        <item name="android:background">@layout/background_toolbar_button</item>
+        <item name="android:background">@drawable/background_toolbar_button</item>
         <item name="font">glyphicons</item>
     </style>
-    
+
     <style name="ColorButton">
         <item name="android:layout_width">55dp</item>
         <item name="android:layout_height">55dp</item>
@@ -68,7 +68,7 @@
         <item name="android:textColor">#606060</item>
         <item name="android:textSize">@dimen/default_font_size</item>
     </style>
-    
+
     <style name="ColorSeparator">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">1dp</item>

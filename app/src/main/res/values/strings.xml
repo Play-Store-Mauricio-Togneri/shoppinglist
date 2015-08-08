@@ -2,13 +2,13 @@
 <resources>
 
     <string name="app_name">Shopping List</string>
-    
+
     <string name="image_description"/>
-    
+
     <string name="label_list_empty">Empty List</string>
     <string name="label_quantity">Quantity:</string>
     <string name="label_product_category">Category</string>
-    <string name="label_product_new_category">New Category</string>
+    <string name="label_product_new_category">New category</string>
     <string name="label_product_name">Name</string>
     <string name="label_product_picture">Picture</string>
     <string name="label_error">Error</string>
@@ -18,13 +18,13 @@
     <string name="label_share_cart">Share list with</string>
     <string name="label_already_in_cart">Already in cart</string>
     <string name="label_initializing_database">Initializing database&#8230;</string>
-    
+
     <string name="button_accept">Accept</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_edit">Edit</string>
     <string name="button_remove">Remove</string>
     <string name="button_create">Create</string>
-    
+
     <string name="icon_add">\u002B</string>
     <string name="icon_dropdown">\uE259</string>
     <string name="icon_remove">\uE020</string>
@@ -34,16 +34,16 @@
     <string name="icon_share">\uE066</string>
     <string name="icon_camera">\uE046</string>
     <string name="icon_gallery">\uE060</string>
-    
+
     <string name="toolbar_title_main">Shopping List</string>
     <string name="toolbar_title_add_product">Add product</string>
     <string name="toolbar_title_create_product">Create product</string>
     <string name="toolbar_title_edit_product">Edit product</string>
     <string name="toolbar_title_manage_categories">Manage categories</string>
-    
+
     <string name="confirmation_remove_product">Do you want to remove the product?</string>
     <string name="confirmation_remove_category">Do you want to remove the category?</string>
-    
+
     <string name="error_invalid_category">Invalid category</string>
     <string name="error_invalid_name">Invalid name</string>
     <string name="error_invalid_image">Invalid image</string>
