@@ -167,6 +167,6 @@ public class CartView extends BaseView implements CartViewInterface
     @Override
     public int getViewId()
     {
-        return R.layout.fragment_cart;
+        return R.layout.screen_cart;
     }
 }

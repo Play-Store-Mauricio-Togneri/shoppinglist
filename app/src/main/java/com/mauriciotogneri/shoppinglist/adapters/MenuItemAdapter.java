@@ -14,7 +14,7 @@ public class MenuItemAdapter extends BaseListAdapter<Option, ViewHolder>
 {
     public MenuItemAdapter(Context context, List<Option> options)
     {
-        super(context, R.layout.menu_item_row, options);
+        super(context, R.layout.row_menu_item, options);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class ListCategoryAdapter extends BaseListAdapter<Category, ViewHolder>
 {
     public ListCategoryAdapter(Context context)
     {
-        super(context, R.layout.list_category_row);
+        super(context, R.layout.row_category);
     }
 
     @Override

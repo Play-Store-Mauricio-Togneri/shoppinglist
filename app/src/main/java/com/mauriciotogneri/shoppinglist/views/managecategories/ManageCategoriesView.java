@@ -251,6 +251,6 @@ public class ManageCategoriesView extends BaseView implements ManageCategoriesVi
     @Override
     public int getViewId()
     {
-        return R.layout.fragment_manage_categories;
+        return R.layout.screen_manage_categories;
     }
 }

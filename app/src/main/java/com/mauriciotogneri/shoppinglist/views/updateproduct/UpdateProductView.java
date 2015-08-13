@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,21 +56,6 @@ public class UpdateProductView extends BaseView implements UpdateProductViewInte
         {
             productCategory.setSelection(this.spinnerCategoryAdapter.getPositionOf(initialCategory));
         }
-
-        productCategory.setOnItemSelectedListener(new OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                Category category = (Category) parent.getItemAtPosition(position);
-                observer.onCategorySelected(category);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-            }
-        });
 
         // ---------------------------
 
@@ -217,6 +200,6 @@ public class UpdateProductView extends BaseView implements UpdateProductViewInte
     @Override
     public int getViewId()
     {
-        return R.layout.fragment_update_product;
+        return R.layout.screen_update_product;
     }
 }

@@ -20,14 +20,34 @@ import java.util.List;
 
 public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterface> implements UpdateProductViewObserver
 {
-    public static final String PARAMETER_PRODUCT_ID = "product_id";
-    public static final String PARAMETER_CATEGORY = "category";
+    private static final String PARAMETER_PRODUCT_ID = "product_id";
+    private static final String PARAMETER_CATEGORY = "category";
 
     private static final int SELECT_IMAGE_GALLERY = 123;
     private static final int SELECT_IMAGE_CAMERA = 456;
 
     private Product product = null;
     private byte[] selectedImage = null;
+
+    public static UpdateProductFragment getInstance(Category category)
+    {
+        UpdateProductFragment fragment = new UpdateProductFragment();
+        Bundle parameters = new Bundle();
+        parameters.putSerializable(UpdateProductFragment.PARAMETER_CATEGORY, category);
+        fragment.setArguments(parameters);
+
+        return fragment;
+    }
+
+    public static UpdateProductFragment getInstance(long productId)
+    {
+        UpdateProductFragment fragment = new UpdateProductFragment();
+        Bundle parameters = new Bundle();
+        parameters.putLong(UpdateProductFragment.PARAMETER_PRODUCT_ID, productId);
+        fragment.setArguments(parameters);
+
+        return fragment;
+    }
 
     @Override
     protected void initialize()
@@ -213,7 +233,6 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     public void onActivate()
     {
         refreshCategories();
-        onCategorySelected(this.view.getProductCategory());
     }
 
     private void refreshCategories()
@@ -227,12 +246,6 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
         CategoryDao categoryDao = new CategoryDao();
 
         return categoryDao.getCategories();
-    }
-
-    @Override
-    public void onCategorySelected(Category category)
-    {
-        setResult(category);
     }
 
     @Override
