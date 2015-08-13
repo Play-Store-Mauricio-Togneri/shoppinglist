@@ -17,7 +17,7 @@ public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder
 {
     public SpinnerCategoryAdapter(Context context)
     {
-        super(context, R.layout.spinner_category_header);
+        super(context, R.layout.view_category_header);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder
         if (rowView == null)
         {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            rowView = inflater.inflate(R.layout.spinner_category_dropdown, parent, false);
+            rowView = inflater.inflate(R.layout.view_category_dropdown, parent, false);
 
             viewHolder = getViewHolder(rowView);
             rowView.setTag(viewHolder);

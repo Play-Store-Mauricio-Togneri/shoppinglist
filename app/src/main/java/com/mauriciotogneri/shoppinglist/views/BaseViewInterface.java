@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist.views;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public interface BaseViewInterface
     CustomImageView getCustomImageView(int imageId);
 
     Spinner getSpinner(int spinnerId);
+
+    ViewPager getViewPager(int viewPagerId);
 
     void setButtonAction(int buttonId, View.OnClickListener callback);
 

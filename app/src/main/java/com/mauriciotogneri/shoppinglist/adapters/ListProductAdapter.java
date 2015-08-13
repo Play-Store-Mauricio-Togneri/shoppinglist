@@ -15,7 +15,7 @@ public class ListProductAdapter extends BaseListAdapter<Product, ViewHolder>
 {
     public ListProductAdapter(Context context)
     {
-        super(context, R.layout.list_product_row);
+        super(context, R.layout.row_product);
     }
 
     @Override

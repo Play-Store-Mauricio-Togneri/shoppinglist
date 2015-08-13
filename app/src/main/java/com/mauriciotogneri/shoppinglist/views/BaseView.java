@@ -2,6 +2,7 @@ package com.mauriciotogneri.shoppinglist.views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,12 @@ public abstract class BaseView implements BaseViewInterface
     }
 
     @Override
+    public ViewPager getViewPager(int viewPagerId)
+    {
+        return (ViewPager) this.view.findViewById(viewPagerId);
+    }
+
+    @Override
     public void setButtonAction(int buttonId, View.OnClickListener callback)
     {
         View toolbarButton = this.view.findViewById(buttonId);
@@ -72,7 +79,7 @@ public abstract class BaseView implements BaseViewInterface
     @SuppressLint("InflateParams")
     public void showToast(Context context, int messageId)
     {
-        View layout = this.inflater.inflate(R.layout.custom_toast, null);
+        View layout = this.inflater.inflate(R.layout.view_toast, null);
 
         TextView text = (TextView) layout.findViewById(R.id.message);
         text.setText(messageId);

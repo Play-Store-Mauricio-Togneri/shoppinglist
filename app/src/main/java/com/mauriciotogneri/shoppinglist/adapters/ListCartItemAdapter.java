@@ -21,7 +21,7 @@ public class ListCartItemAdapter extends BaseListAdapter<CartItem, ViewHolder>
 {
     public ListCartItemAdapter(Context context)
     {
-        super(context, R.layout.list_cart_item_row, new ArrayList<CartItem>());
+        super(context, R.layout.row_cart_item, new ArrayList<CartItem>());
     }
 
     @Override
