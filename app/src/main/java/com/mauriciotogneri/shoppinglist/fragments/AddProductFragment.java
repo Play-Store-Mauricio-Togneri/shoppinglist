@@ -16,7 +16,7 @@ public class AddProductFragment extends BaseFragment<AddProductViewInterface> im
         CategoryDao categoryDao = new CategoryDao();
         List<Category> categoryList = categoryDao.getCategories();
 
-        this.view.initialize(getContext(), getFragmentManager(), categoryList, this);
+        this.view.initialize(getContext(), getChildFragmentManager(), categoryList, this);
     }
 
     @Override
