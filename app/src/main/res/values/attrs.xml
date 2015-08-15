@@ -2,12 +2,12 @@
 <resources>
 
     <attr name="font" format="string">
-        <enum name="opensans" value="0" />
-        <enum name="glyphicons" value="1" />
+        <enum name="opensans" value="0"/>
+        <enum name="glyphicons" value="1"/>
     </attr>
 
     <declare-styleable name="CustomTextView">
-        <attr name="font" />
+        <attr name="font"/>
     </declare-styleable>
 
 </resources>
