@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.adapters;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.util.TypedValue;
 
 import com.mauriciotogneri.shoppinglist.fragments.ProductListFragment;
 import com.mauriciotogneri.shoppinglist.model.Category;
@@ -20,12 +22,14 @@ import java.util.List;
 
 public class ProductPagerAdapter extends FragmentStatePagerAdapter
 {
+    private final Context context;
     private final List<Category> categoryList;
 
-    public ProductPagerAdapter(FragmentManager fragmentManager, List<Category> categoryList)
+    public ProductPagerAdapter(Context context, FragmentManager fragmentManager, List<Category> categoryList)
     {
         super(fragmentManager);
 
+        this.context = context;
         this.categoryList = categoryList;
     }
 
@@ -53,18 +57,19 @@ public class ProductPagerAdapter extends FragmentStatePagerAdapter
     {
         Category category = categoryList.get(position);
         String title = category.getName();
+        int fontSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics());
 
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(title);
 
         Typeface font = Fonts.getFont(Fonts.OPEN_SANS);
         ForegroundColorSpan fcs = new ForegroundColorSpan(category.getIntColor());
-        AbsoluteSizeSpan ass = new AbsoluteSizeSpan(25);
+        AbsoluteSizeSpan ass = new AbsoluteSizeSpan(fontSize);
         StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD);
 
-        spannableStringBuilder.setSpan(new CustomTypefaceSpan(font), 0, title.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.setSpan(new CustomTypefaceSpan(font), 0, title.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         spannableStringBuilder.setSpan(fcs, 0, title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         spannableStringBuilder.setSpan(bss, 0, title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        spannableStringBuilder.setSpan(ass, 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);//resize size
+        spannableStringBuilder.setSpan(ass, 0, title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
 
         return spannableStringBuilder;
     }
