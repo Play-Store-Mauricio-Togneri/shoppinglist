@@ -21,7 +21,7 @@ public class AddProductView extends BaseView implements AddProductViewInterface
     @Override
     public void initialize(final Context context, FragmentManager fragmentManager, List<Category> categoryList, final AddProductViewObserver observer)
     {
-        this.productPagerAdapter = new ProductPagerAdapter(fragmentManager, categoryList);
+        this.productPagerAdapter = new ProductPagerAdapter(context, fragmentManager, categoryList);
         this.viewPager = getViewPager(R.id.pager);
         this.viewPager.setAdapter(productPagerAdapter);
         this.viewPager.setOffscreenPageLimit(categoryList.size());
