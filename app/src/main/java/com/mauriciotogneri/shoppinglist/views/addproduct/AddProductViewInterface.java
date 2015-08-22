@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface AddProductViewInterface extends BaseViewInterface
 {
-    void initialize(Context context, FragmentManager fragmentManager, List<Category> categoryList, AddProductViewObserver observer);
+    void initialize(Context context, FragmentManager fragmentManager, List<Category> categoryList, int selected, AddProductViewObserver observer);
 
     Category getSelectedCategory();
 }
