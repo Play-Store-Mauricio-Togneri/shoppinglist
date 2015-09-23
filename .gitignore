@@ -23,7 +23,12 @@ gradlew.bat
 
 # Android Studio
 /.idea
+.idea
 **/*.iml
+*.iml
+/.idea/workspace.xml
+/.idea/libraries
+/captures
 
 # OSX files
 .DS_Store
@@ -33,3 +38,6 @@ gradlew.bat
 /build
 /app/build
 **/build
+
+# Other files
+forward.sh
