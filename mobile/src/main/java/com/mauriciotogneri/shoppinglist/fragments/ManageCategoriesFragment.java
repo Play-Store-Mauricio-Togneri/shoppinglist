@@ -1,0 +1,112 @@
+package com.mauriciotogneri.shoppinglist.fragments;
+
+import android.text.TextUtils;
+
+import com.mauriciotogneri.shoppinglist.R;
+import com.mauriciotogneri.shoppinglist.dao.CategoryDao;
+import com.mauriciotogneri.shoppinglist.dao.ProductDao;
+import com.mauriciotogneri.shoppinglist.model.Category;
+import com.mauriciotogneri.shoppinglist.views.managecategories.ManageCategoriesView;
+import com.mauriciotogneri.shoppinglist.views.managecategories.ManageCategoriesViewInterface;
+import com.mauriciotogneri.shoppinglist.views.managecategories.ManageCategoriesViewObserver;
+
+import java.util.List;
+
+public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewInterface> implements ManageCategoriesViewObserver
+{
+    @Override
+    protected void initialize()
+    {
+        List<Category> list = getCategories();
+
+        view.initialize(getContext(), list, this);
+    }
+
+    @Override
+    public void onEditCategory(Category category, String name, String color)
+    {
+        if (!TextUtils.isEmpty(name))
+        {
+            if (category == null)
+            {
+                CategoryDao categoryDao = new CategoryDao();
+
+                if (!categoryDao.exists(name))
+                {
+                    Category newCategory = new Category(name, color);
+                    newCategory.save();
+
+                    refreshList();
+                }
+                else
+                {
+                    view.editCategory(getContext(), null, this);
+                    view.showToast(R.string.error_category_already_exists);
+                }
+            }
+            else
+            {
+                CategoryDao categoryDao = new CategoryDao();
+
+                if ((!category.getName().equals(name)) && categoryDao.exists(name))
+                {
+                    view.editCategory(getContext(), category, this);
+                    view.showToast(R.string.error_category_already_exists);
+                }
+                else
+                {
+                    category.update(name, color);
+                    refreshList();
+                }
+            }
+        }
+        else
+        {
+            view.editCategory(getContext(), category, this);
+            view.showToast(R.string.error_invalid_name);
+        }
+    }
+
+    @Override
+    public void onRemoveCategory(Category category)
+    {
+        ProductDao productDao = new ProductDao();
+
+        if (!productDao.exists(category))
+        {
+            category.delete();
+            refreshList();
+        }
+        else
+        {
+            view.showError();
+        }
+    }
+
+    private void refreshList()
+    {
+        List<Category> list = getCategories();
+
+        view.refreshList(list);
+    }
+
+    private List<Category> getCategories()
+    {
+        CategoryDao categoryDao = new CategoryDao();
+
+        return categoryDao.getCategories();
+    }
+
+    @Override
+    public void onCategorySelected(Category category)
+    {
+        setResult(category);
+        close();
+    }
+
+    @Override
+    protected ManageCategoriesViewInterface getViewInstance()
+    {
+        return new ManageCategoriesView();
+    }
+}

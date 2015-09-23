@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shopping List</string>
+
+    <string name="dummy_text">-----</string>
+
+    <string name="label_error">Error</string>
+
+    <string name="button_accept">Accept</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_edit">Edit</string>
+    <string name="button_remove">Remove</string>
+    <string name="button_create">Create</string>
+
+</resources>
