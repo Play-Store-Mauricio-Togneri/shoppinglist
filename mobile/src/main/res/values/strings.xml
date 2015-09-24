@@ -30,6 +30,7 @@
     <string name="toolbar_title_manage_categories">Manage categories</string>
 
     <string name="confirmation_remove_product">Do you want to remove the product?</string>
+    <string name="confirmation_remove_car_item">Do you want to remove the product from the cart?</string>
     <string name="confirmation_remove_category">Do you want to remove the category?</string>
 
     <string name="error_invalid_category">Invalid category</string>

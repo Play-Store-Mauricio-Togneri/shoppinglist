@@ -39,7 +39,7 @@ public class CartFragment extends BaseFragment<CartViewInterface> implements Car
         CartItemDao cartItemDao = new CartItemDao();
         List<CartItem> list = cartItemDao.getCartItems();
 
-        view.refreshList(list);
+        view.fillList(list);
     }
 
     @Override

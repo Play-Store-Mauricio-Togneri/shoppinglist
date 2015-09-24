@@ -239,7 +239,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     private void refreshCategories()
     {
         List<Category> list = getCategories();
-        view.refreshCategories(list);
+        view.fillCategories(list);
     }
 
     private List<Category> getCategories()

@@ -30,16 +30,16 @@
 
         <com.mauriciotogneri.common.widgets.CustomImageView
             android:id="@+id/thumbnail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/product_beer"/>
 
         <com.mauriciotogneri.common.widgets.CustomTextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="20dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="center_vertical"

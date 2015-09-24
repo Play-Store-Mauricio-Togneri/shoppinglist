@@ -70,7 +70,7 @@ public class ManageCategoriesView extends BaseView<UiContainer> implements Manag
             }
         });
 
-        refreshList(list);
+        fillList(list);
     }
 
     @SuppressLint("InflateParams")
@@ -137,9 +137,9 @@ public class ManageCategoriesView extends BaseView<UiContainer> implements Manag
     }
 
     @Override
-    public void refreshList(List<Category> list)
+    public void fillList(List<Category> list)
     {
-        listCategoryAdapter.refresh(list);
+        listCategoryAdapter.update(list);
 
         if (listCategoryAdapter.getCount() > 0)
         {

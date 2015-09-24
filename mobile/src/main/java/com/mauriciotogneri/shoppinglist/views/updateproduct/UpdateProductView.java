@@ -43,7 +43,7 @@ public class UpdateProductView extends BaseView<UiContainer> implements UpdatePr
         // ---------------------------
 
         spinnerCategoryAdapter = new SpinnerCategoryAdapter(context);
-        spinnerCategoryAdapter.refresh(list);
+        spinnerCategoryAdapter.update(list);
 
         ui.productCategory.setAdapter(spinnerCategoryAdapter);
 
@@ -172,9 +172,9 @@ public class UpdateProductView extends BaseView<UiContainer> implements UpdatePr
     }
 
     @Override
-    public void refreshCategories(List<Category> list)
+    public void fillCategories(List<Category> list)
     {
-        spinnerCategoryAdapter.refresh(list);
+        spinnerCategoryAdapter.update(list);
     }
 
     @Override

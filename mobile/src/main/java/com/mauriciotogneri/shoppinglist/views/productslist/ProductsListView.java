@@ -119,9 +119,9 @@ public class ProductsListView extends BaseView<UiContainer> implements ProductsL
     }
 
     @Override
-    public void refreshList(List<Product> list)
+    public void fillList(List<Product> list)
     {
-        listProductAdapter.refresh(list);
+        listProductAdapter.update(list);
 
         if (listProductAdapter.getCount() > 0)
         {

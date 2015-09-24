@@ -86,7 +86,7 @@ public class ProductListFragment extends BaseFragment<ProductsListViewInterface>
             ProductDao productDao = new ProductDao();
             List<Product> list = productDao.getProducts(category);
 
-            view.refreshList(list);
+            view.fillList(list);
         }
     }
 
