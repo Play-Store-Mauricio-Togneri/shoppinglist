@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.mauriciotogneri.common.base.BaseListAdapter;
 import com.mauriciotogneri.common.widgets.CustomImageView;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CartAdapter.ViewHolder;

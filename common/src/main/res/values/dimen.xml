@@ -2,7 +2,6 @@
 <resources>
 
     <dimen name="default_font_size">18sp</dimen>
-
     <dimen name="thumbnail_size">56dp</dimen>
 
 </resources>

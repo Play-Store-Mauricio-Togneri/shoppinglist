@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mauriciotogneri.common.base.BaseListAdapter;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.ListProductAdapter.ViewHolder;
 import com.mauriciotogneri.shoppinglist.model.Product;

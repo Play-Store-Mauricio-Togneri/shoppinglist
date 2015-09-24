@@ -1,18 +1,18 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.WindowManager;
 
+import com.mauriciotogneri.common.base.BaseFragment;
+import com.mauriciotogneri.common.base.BaseFragmentActivity;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.fragments.BaseFragment;
 import com.mauriciotogneri.shoppinglist.fragments.CartFragment;
 
 import java.util.Stack;
 
-public class MainActivity extends FragmentActivity
+public class MainActivity extends BaseFragmentActivity
 {
     private final Stack<BaseFragment<?>> fragments = new Stack<>();
 
@@ -33,6 +33,7 @@ public class MainActivity extends FragmentActivity
         fragments.add(homeFragment);
     }
 
+    @Override
     public void addFragment(BaseFragment<?> fragment)
     {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -44,6 +45,7 @@ public class MainActivity extends FragmentActivity
         fragments.add(fragment);
     }
 
+    @Override
     public void removeFragment()
     {
         BaseFragment<?> currentFragment = fragments.pop();

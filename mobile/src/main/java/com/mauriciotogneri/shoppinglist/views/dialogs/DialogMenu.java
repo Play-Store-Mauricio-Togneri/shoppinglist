@@ -2,9 +2,9 @@ package com.mauriciotogneri.shoppinglist.views.dialogs;
 
 import android.content.Context;
 
-import com.mauriciotogneri.common.widgets.CustomDialog;
+import com.mauriciotogneri.common.base.BaseDialog;
 
-public class DialogMenu extends CustomDialog
+public class DialogMenu extends BaseDialog
 {
     public DialogMenu(Context context, String title)
     {

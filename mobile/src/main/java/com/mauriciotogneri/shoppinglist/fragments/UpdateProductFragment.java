@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import com.mauriciotogneri.common.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.dao.CategoryDao;
 import com.mauriciotogneri.shoppinglist.dao.ProductDao;

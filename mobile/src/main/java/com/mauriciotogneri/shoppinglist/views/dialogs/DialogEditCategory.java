@@ -8,13 +8,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.TextView;
 
-import com.mauriciotogneri.common.widgets.CustomDialog;
+import com.mauriciotogneri.common.base.BaseDialog;
 import com.mauriciotogneri.common.widgets.CustomEditText;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.views.managecategories.ManageCategoriesViewObserver;
 
-public class DialogEditCategory extends CustomDialog
+public class DialogEditCategory extends BaseDialog
 {
     private String selectedColor = "";
 

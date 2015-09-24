@@ -2,6 +2,7 @@ package com.mauriciotogneri.shoppinglist.fragments;
 
 import android.os.Bundle;
 
+import com.mauriciotogneri.common.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
 import com.mauriciotogneri.shoppinglist.dao.ProductDao;
 import com.mauriciotogneri.shoppinglist.model.CartItem;

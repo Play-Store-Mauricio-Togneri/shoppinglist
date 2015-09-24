@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mauriciotogneri.common.base.BaseListAdapter;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.SpinnerCategoryAdapter.ViewHolder;
 import com.mauriciotogneri.shoppinglist.model.Category;
