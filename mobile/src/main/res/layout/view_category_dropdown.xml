@@ -6,6 +6,7 @@
     android:background="@drawable/background_list_row"
     android:orientation="horizontal">
 
-    <include layout="@layout/view_category_title"/>
+    <include
+        layout="@layout/view_category_title"/>
 
 </LinearLayout>

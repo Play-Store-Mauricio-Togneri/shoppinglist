@@ -10,6 +10,8 @@
         android:id="@+id/category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:background="@color/toolbar_background_color"
         android:clickable="false"
         android:gravity="center"
@@ -30,8 +32,8 @@
 
         <com.mauriciotogneri.common.widgets.CustomImageView
             android:id="@+id/thumbnail"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/thumbnail_size"
+            android:layout_height="@dimen/thumbnail_size"
             android:src="@drawable/product_beer"/>
 
         <com.mauriciotogneri.common.widgets.CustomTextView

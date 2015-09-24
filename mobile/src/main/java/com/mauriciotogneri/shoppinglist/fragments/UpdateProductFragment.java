@@ -35,7 +35,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     {
         UpdateProductFragment fragment = new UpdateProductFragment();
         Bundle parameters = new Bundle();
-        parameters.putSerializable(UpdateProductFragment.PARAMETER_CATEGORY, category);
+        parameters.putSerializable(PARAMETER_CATEGORY, category);
         fragment.setArguments(parameters);
 
         return fragment;
@@ -45,7 +45,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     {
         UpdateProductFragment fragment = new UpdateProductFragment();
         Bundle parameters = new Bundle();
-        parameters.putLong(UpdateProductFragment.PARAMETER_PRODUCT_ID, productId);
+        parameters.putLong(PARAMETER_PRODUCT_ID, productId);
         fragment.setArguments(parameters);
 
         return fragment;
@@ -54,8 +54,8 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     @Override
     protected void initialize()
     {
-        long productId = getParameter(UpdateProductFragment.PARAMETER_PRODUCT_ID, 0L);
-        Category initialCategory = getParameter(UpdateProductFragment.PARAMETER_CATEGORY, null);
+        long productId = getParameter(PARAMETER_PRODUCT_ID, 0L);
+        Category initialCategory = getParameter(PARAMETER_CATEGORY, null);
 
         if (productId != 0)
         {
@@ -84,13 +84,13 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    public void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
-        if ((requestCode == UpdateProductFragment.SELECT_IMAGE_GALLERY) && (resultCode == Activity.RESULT_OK))
+        if ((requestCode == SELECT_IMAGE_GALLERY) && (resultCode == Activity.RESULT_OK))
         {
             try
             {
-                byte[] image = ImageHelper.getImageBytesFromUri(getContext(), data.getData());
+                byte[] image = ImageHelper.getImageBytesFromUri(getContext(), intent.getData());
                 setProductImage(image);
             }
             catch (Exception e)
@@ -98,11 +98,11 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
                 view.showToast(R.string.error_invalid_image);
             }
         }
-        else if ((requestCode == UpdateProductFragment.SELECT_IMAGE_CAMERA) && (resultCode == Activity.RESULT_OK))
+        else if ((requestCode == SELECT_IMAGE_CAMERA) && (resultCode == Activity.RESULT_OK))
         {
             try
             {
-                Bundle extras = data.getExtras();
+                Bundle extras = intent.getExtras();
                 Bitmap bitmap = (Bitmap) extras.get("data");
                 byte[] image = ImageHelper.getImageBytesFromBitmap(bitmap);
                 setProductImage(image);
@@ -193,7 +193,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent, UpdateProductFragment.SELECT_IMAGE_GALLERY);
+        startActivityForResult(intent, SELECT_IMAGE_GALLERY);
     }
 
     @Override
@@ -205,7 +205,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 
         if (takePictureIntent.resolveActivity(activity.getPackageManager()) != null)
         {
-            startActivityForResult(takePictureIntent, UpdateProductFragment.SELECT_IMAGE_CAMERA);
+            startActivityForResult(takePictureIntent, SELECT_IMAGE_CAMERA);
         }
     }
 
@@ -221,7 +221,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     @Override
     public void onActivate(Object result)
     {
-        refreshCategories();
+        reloadCategories();
 
         Category category = (Category) result;
 
@@ -234,10 +234,10 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
     @Override
     public void onActivate()
     {
-        refreshCategories();
+        reloadCategories();
     }
 
-    private void refreshCategories()
+    private void reloadCategories()
     {
         List<Category> list = getCategories();
         view.fillCategories(list);

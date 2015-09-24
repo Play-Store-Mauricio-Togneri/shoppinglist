@@ -113,9 +113,4 @@ public class DialogEditCategory extends BaseDialog
     {
         return R.layout.dialog_create_category;
     }
-
-    public interface OnAccept
-    {
-        void onAccept(Category category, String name, String selectedColor);
-    }
 }
