@@ -3,13 +3,13 @@
     style="@style/Screen"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF">
+    android:background="@android:color/white">
 
     <LinearLayout
-        style="@style/Screen"
-        android:background="#FFFFFF">
+        style="@style/Screen">
 
-        <LinearLayout style="@style/Toolbar">
+        <LinearLayout
+            style="@style/Toolbar">
 
             <com.mauriciotogneri.common.widgets.CustomTextView
                 android:id="@+id/toolbar_title"
@@ -27,7 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/label_product_category"
                 android:textColor="@color/default_text_color"
@@ -53,7 +52,7 @@
                         android:id="@+id/category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#FFFFFF"/>
+                        android:background="@android:color/white"/>
 
                 </LinearLayout>
 
@@ -61,7 +60,6 @@
                     android:id="@+id/button_manage_categories"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
                     android:background="@drawable/background_screen_button"
                     android:clickable="true"
@@ -80,7 +78,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/label_product_name"
                 android:textColor="@color/default_text_color"
@@ -94,16 +91,15 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/bolder_input"
                 android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
-                android:maxLength="30"
+                android:maxLength="40"
                 android:padding="10dp"
-                android:textColor="#007AB0"
+                android:textColor="@color/special_text_color"
                 custom:font="opensans"/>
 
             <com.mauriciotogneri.common.widgets.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:text="@string/label_product_picture"
                 android:textColor="@color/default_text_color"
@@ -145,7 +141,7 @@
                     android:paddingRight="15dp"
                     android:paddingTop="12dp"
                     android:text="@string/icon_update"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/default_font_size"
                     custom:font="glyphicons"/>
 
@@ -156,13 +152,13 @@
                     android:gravity="center"
                     android:paddingBottom="12dp"
                     android:paddingEnd="15dp"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="15dp"
+                    android:paddingStart="0dp"
                     android:paddingTop="12dp"
-                    android:text="@android:string/untitled"
-                    android:textColor="#FFFFFF"
+                    android:text="@string/dummy_text"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/default_font_size"
-                    custom:font="opensans"/>
+                    custom:font="opensans"
+                    custom:paddingEnd="15dp"/>
 
             </LinearLayout>
 

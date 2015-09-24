@@ -16,19 +16,24 @@
 
     <com.mauriciotogneri.common.widgets.CustomTextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
         android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/dummy_text"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
         custom:font="opensans"/>
 
-    <View style="@style/ColorSeparator"/>
+    <View
+        style="@style/ColorSeparator"/>
 
     <com.mauriciotogneri.common.widgets.CustomTextView
         android:id="@+id/color"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="#FF0000"/>
+        android:background="@android:color/black"/>
 
 </LinearLayout>

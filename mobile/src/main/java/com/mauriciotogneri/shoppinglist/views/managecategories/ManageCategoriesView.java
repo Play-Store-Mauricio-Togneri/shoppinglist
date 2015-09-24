@@ -129,6 +129,7 @@ public class ManageCategoriesView extends BaseView<UiContainer> implements Manag
         dialog.display();
     }
 
+    @Override
     public void showError()
     {
         DialogError dialog = new DialogError(getContext());

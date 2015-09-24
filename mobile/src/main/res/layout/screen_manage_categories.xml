@@ -3,7 +3,8 @@
     style="@style/Screen"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout style="@style/Toolbar">
+    <LinearLayout
+        style="@style/Toolbar">
 
         <com.mauriciotogneri.common.widgets.CustomTextView
             style="@style/ToolbarTitle"

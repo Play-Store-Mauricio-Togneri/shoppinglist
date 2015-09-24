@@ -3,13 +3,15 @@
     style="@style/Screen"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout style="@style/Toolbar">
+    <LinearLayout
+        style="@style/Toolbar">
 
         <com.mauriciotogneri.common.widgets.CustomTextView
             style="@style/ToolbarTitle"
             android:text="@string/toolbar_title_main"/>
 
-        <View style="@style/HorizontalSeparator"/>
+        <View
+            style="@style/HorizontalSeparator"/>
 
         <com.mauriciotogneri.common.widgets.CustomTextView
             android:id="@+id/share_cart"
