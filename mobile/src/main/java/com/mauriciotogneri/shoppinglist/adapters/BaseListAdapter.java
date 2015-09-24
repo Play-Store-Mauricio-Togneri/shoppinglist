@@ -29,12 +29,12 @@ public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
 
     protected abstract void fillView(V viewHolder, T item, int position);
 
-    public void refresh()
+    public void update()
     {
         notifyDataSetChanged();
     }
 
-    public void refresh(List<T> list)
+    public void update(List<T> list)
     {
         clear();
         addAll(list);

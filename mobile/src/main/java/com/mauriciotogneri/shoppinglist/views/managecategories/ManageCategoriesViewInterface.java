@@ -16,5 +16,5 @@ public interface ManageCategoriesViewInterface<UI extends BaseUiContainer> exten
 
     void showError();
 
-    void refreshList(List<Category> list);
+    void fillList(List<Category> list);
 }

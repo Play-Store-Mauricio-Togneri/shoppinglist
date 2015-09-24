@@ -18,5 +18,5 @@ public interface CartViewInterface<UI extends BaseUiContainer> extends BaseViewI
 
     String getShareContent();
 
-    void refreshList(List<CartItem> list);
+    void fillList(List<CartItem> list);
 }

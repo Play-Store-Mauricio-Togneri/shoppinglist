@@ -9,15 +9,15 @@ import android.widget.TextView;
 
 import com.mauriciotogneri.common.widgets.CustomImageView;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.adapters.ListCartItemAdapter.ViewHolder;
+import com.mauriciotogneri.shoppinglist.adapters.CartAdapter.ViewHolder;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
 import com.mauriciotogneri.shoppinglist.model.Category;
 
 import java.util.ArrayList;
 
-public class ListCartItemAdapter extends BaseListAdapter<CartItem, ViewHolder>
+public class CartAdapter extends BaseListAdapter<CartItem, ViewHolder>
 {
-    public ListCartItemAdapter(Context context)
+    public CartAdapter(Context context)
     {
         super(context, R.layout.row_cart_item, new ArrayList<CartItem>());
     }

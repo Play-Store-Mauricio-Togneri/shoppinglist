@@ -87,7 +87,7 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewI
     {
         List<Category> list = getCategories();
 
-        view.refreshList(list);
+        view.fillList(list);
     }
 
     private List<Category> getCategories()

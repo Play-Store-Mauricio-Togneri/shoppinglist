@@ -23,7 +23,7 @@ public interface UpdateProductViewInterface<UI extends BaseUiContainer> extends 
 
     String getProductName();
 
-    void refreshCategories(List<Category> list);
+    void fillCategories(List<Category> list);
 
     void setCategory(Category category);
 }

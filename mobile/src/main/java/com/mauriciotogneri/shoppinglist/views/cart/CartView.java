@@ -1,6 +1,8 @@
 package com.mauriciotogneri.shoppinglist.views.cart;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -11,22 +13,23 @@ import android.widget.TextView;
 import com.mauriciotogneri.common.base.BaseUiContainer;
 import com.mauriciotogneri.common.base.BaseView;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.adapters.ListCartItemAdapter;
+import com.mauriciotogneri.shoppinglist.adapters.CartAdapter;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
 import com.mauriciotogneri.shoppinglist.views.cart.CartView.UiContainer;
+import com.mauriciotogneri.shoppinglist.views.dialogs.DialogConfirmation;
 
 import java.util.List;
 
 public class CartView extends BaseView<UiContainer> implements CartViewInterface<UiContainer>
 {
-    private ListCartItemAdapter listCartItemAdapter;
+    private CartAdapter adapter;
 
     @Override
     public void initialize(final Context context, final CartViewObserver observer)
     {
-        listCartItemAdapter = new ListCartItemAdapter(context);
+        adapter = new CartAdapter(context);
 
-        ui.list.setAdapter(listCartItemAdapter);
+        ui.list.setAdapter(adapter);
 
         ui.list.setOnItemClickListener(new OnItemClickListener()
         {
@@ -47,7 +50,7 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
 
                 if (!cartItem.isSelected())
                 {
-                    displayCartItem(context, cartItem, observer);
+                    removeCartItem(context, cartItem, observer);
                 }
 
                 return true;
@@ -76,9 +79,8 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
     @Override
     public void removeCartItem(CartItem cartItem)
     {
-        listCartItemAdapter.remove(cartItem);
-
-        listCartItemAdapter.refresh();
+        adapter.remove(cartItem);
+        adapter.update();
 
         checkEmptyList();
     }
@@ -86,26 +88,26 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
     @Override
     public void removeSelectedItems()
     {
-        listCartItemAdapter.removeSelectedItems();
+        adapter.removeSelectedItems();
     }
 
     @Override
     public String getShareContent()
     {
-        return listCartItemAdapter.getShareContent();
+        return adapter.getShareContent();
     }
 
     @Override
-    public void refreshList(List<CartItem> list)
+    public void fillList(List<CartItem> list)
     {
-        listCartItemAdapter.refresh(list);
+        adapter.update(list);
 
         checkEmptyList();
     }
 
     private void checkEmptyList()
     {
-        if (listCartItemAdapter.getCount() > 0)
+        if (adapter.getCount() > 0)
         {
             ui.list.setVisibility(View.VISIBLE);
             ui.emptyLabel.setVisibility(View.GONE);
@@ -117,12 +119,18 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
         }
     }
 
-    private void displayCartItem(Context context, CartItem cartItem, CartViewObserver observer)
+    private void removeCartItem(Context context, final CartItem cartItem, final CartViewObserver observer)
     {
-        // TODO: confirm to delete the cart item
-        //DialogCartItem dialog = new DialogCartItem(context, cartItem.getName());
-        //dialog.initialize(cartItem, observer);
-        //dialog.display();
+        DialogConfirmation dialog = new DialogConfirmation(context, cartItem.getName());
+        dialog.initialize(R.string.confirmation_remove_car_item, new OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                observer.onCartItemRemoved(cartItem);
+            }
+        });
+        dialog.display();
     }
 
     @Override
