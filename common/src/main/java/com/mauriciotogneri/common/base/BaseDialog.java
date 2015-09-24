@@ -1,4 +1,4 @@
-package com.mauriciotogneri.common.widgets;
+package com.mauriciotogneri.common.base;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -11,13 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mauriciotogneri.common.R;
+import com.mauriciotogneri.common.widgets.Fonts;
 
-public abstract class CustomDialog extends AlertDialog.Builder
+public abstract class BaseDialog extends AlertDialog.Builder
 {
     protected View view;
 
     @SuppressLint("InflateParams")
-    public CustomDialog(Context context, String title)
+    public BaseDialog(Context context, String title)
     {
         super(context);
 

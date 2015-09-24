@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppinglist.fragments;
+package com.mauriciotogneri.common.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,12 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mauriciotogneri.common.base.BaseViewInterface;
-import com.mauriciotogneri.shoppinglist.activities.MainActivity;
-
 public abstract class BaseFragment<V extends BaseViewInterface> extends Fragment
 {
-    protected MainActivity activity;
+    protected BaseFragmentActivity activity;
     protected V view;
     private Object result = null;
 
@@ -72,7 +69,7 @@ public abstract class BaseFragment<V extends BaseViewInterface> extends Fragment
     {
         super.onAttach(parent);
 
-        activity = (MainActivity) parent;
+        activity = (BaseFragmentActivity) parent;
     }
 
     @SuppressWarnings("unchecked")

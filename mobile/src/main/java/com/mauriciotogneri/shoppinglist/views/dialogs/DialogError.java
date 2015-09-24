@@ -3,10 +3,10 @@ package com.mauriciotogneri.shoppinglist.views.dialogs;
 import android.content.Context;
 import android.widget.TextView;
 
-import com.mauriciotogneri.common.widgets.CustomDialog;
+import com.mauriciotogneri.common.base.BaseDialog;
 import com.mauriciotogneri.shoppinglist.R;
 
-public class DialogError extends CustomDialog
+public class DialogError extends BaseDialog
 {
     public DialogError(Context context)
     {

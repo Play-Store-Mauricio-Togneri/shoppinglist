@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.widget.TextView;
 
-import com.mauriciotogneri.common.widgets.CustomDialog;
+import com.mauriciotogneri.common.base.BaseDialog;
 import com.mauriciotogneri.shoppinglist.R;
 
-public class DialogConfirmation extends CustomDialog
+public class DialogConfirmation extends BaseDialog
 {
     public DialogConfirmation(Context context, String title)
     {

@@ -2,6 +2,7 @@ package com.mauriciotogneri.shoppinglist.fragments;
 
 import android.text.TextUtils;
 
+import com.mauriciotogneri.common.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.dao.CategoryDao;
 import com.mauriciotogneri.shoppinglist.dao.ProductDao;

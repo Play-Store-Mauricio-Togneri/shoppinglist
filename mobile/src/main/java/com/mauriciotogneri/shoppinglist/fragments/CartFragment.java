@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.fragments;
 
+import com.mauriciotogneri.common.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
