@@ -6,6 +6,6 @@
     <color name="default_background_color">#F0F0F0</color>
     <color name="toolbar_background_color">#00A0E6</color>
     <color name="border_color">#AAAAAA</color>
-    <color name="toast_background">#444444</color>
+    <color name="toast_background">#888888</color>
 
 </resources>

@@ -1,6 +1,5 @@
 package com.mauriciotogneri.shoppinglist.views.productslist;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -12,6 +11,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mauriciotogneri.common.base.BaseDialog;
+import com.mauriciotogneri.common.base.BaseDialog.OnAccept;
 import com.mauriciotogneri.common.base.BaseUiContainer;
 import com.mauriciotogneri.common.base.BaseView;
 import com.mauriciotogneri.shoppinglist.R;
@@ -61,7 +62,6 @@ public class ProductsListView extends BaseView<UiContainer> implements ProductsL
         });
     }
 
-    @SuppressLint("InflateParams")
     private void displayProductOptions(final Context context, final Product product, final ProductsListViewObserver observer)
     {
         final int EDIT_PRODUCT = 0;
@@ -95,15 +95,15 @@ public class ProductsListView extends BaseView<UiContainer> implements ProductsL
         dialog.display();
     }
 
-    @SuppressLint("InflateParams")
     private void removeProduct(Context context, final Product product, final ProductsListViewObserver observer)
     {
         DialogConfirmation dialog = new DialogConfirmation(context, product.getName());
-        dialog.initialize(R.string.confirmation_remove_product, new OnClickListener()
+        dialog.initialize(R.string.confirmation_remove_product, new OnAccept()
         {
             @Override
-            public void onClick(DialogInterface dialog, int which)
+            public void onAccept(BaseDialog dialog)
             {
+                dialog.close();
                 observer.onRemoveProduct(product);
             }
         });

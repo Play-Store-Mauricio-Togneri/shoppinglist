@@ -8,12 +8,12 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.common.base.BaseFragment;
+import com.mauriciotogneri.common.utils.ImageHelper;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.dao.CategoryDao;
 import com.mauriciotogneri.shoppinglist.dao.ProductDao;
 import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.model.Product;
-import com.mauriciotogneri.common.utils.ImageHelper;
 import com.mauriciotogneri.shoppinglist.views.updateproduct.UpdateProductView;
 import com.mauriciotogneri.shoppinglist.views.updateproduct.UpdateProductViewInterface;
 import com.mauriciotogneri.shoppinglist.views.updateproduct.UpdateProductViewObserver;

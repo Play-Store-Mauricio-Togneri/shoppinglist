@@ -25,10 +25,8 @@
         android:text="@string/dummy_text"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="opensans"/>
-
-    <View
-        style="@style/ColorSeparator"/>
+        custom:font="opensans"
+        custom:paddingEnd="10dp"/>
 
     <com.mauriciotogneri.common.widgets.CustomTextView
         android:id="@+id/color"

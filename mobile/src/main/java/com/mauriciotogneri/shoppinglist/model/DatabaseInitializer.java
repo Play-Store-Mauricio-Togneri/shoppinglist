@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.common.utils.ImageHelper;
+import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.utils.Preferences;
 
 public class DatabaseInitializer extends AsyncTask<Void, Void, Void>

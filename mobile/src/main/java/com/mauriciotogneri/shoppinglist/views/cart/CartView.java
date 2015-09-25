@@ -1,8 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views.cart;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -10,6 +8,8 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mauriciotogneri.common.base.BaseDialog;
+import com.mauriciotogneri.common.base.BaseDialog.OnAccept;
 import com.mauriciotogneri.common.base.BaseUiContainer;
 import com.mauriciotogneri.common.base.BaseView;
 import com.mauriciotogneri.shoppinglist.R;
@@ -122,11 +122,12 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
     private void removeCartItem(Context context, final CartItem cartItem, final CartViewObserver observer)
     {
         DialogConfirmation dialog = new DialogConfirmation(context, cartItem.getName());
-        dialog.initialize(R.string.confirmation_remove_car_item, new OnClickListener()
+        dialog.initialize(R.string.confirmation_remove_car_item, new OnAccept()
         {
             @Override
-            public void onClick(DialogInterface dialog, int which)
+            public void onAccept(BaseDialog dialog)
             {
+                dialog.close();
                 observer.onCartItemRemoved(cartItem);
             }
         });

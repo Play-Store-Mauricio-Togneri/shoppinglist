@@ -12,8 +12,6 @@ public interface ManageCategoriesViewInterface<UI extends BaseUiContainer> exten
 {
     void initialize(Context context, List<Category> list, ManageCategoriesViewObserver observer);
 
-    void editCategory(Context context, Category category, ManageCategoriesViewObserver observer);
-
     void showError();
 
     void fillList(List<Category> list);

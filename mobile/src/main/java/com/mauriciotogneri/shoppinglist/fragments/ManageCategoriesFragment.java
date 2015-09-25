@@ -24,7 +24,7 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewI
     }
 
     @Override
-    public void onEditCategory(Category category, String name, String color)
+    public boolean onEditCategory(Category category, String name, String color)
     {
         if (!TextUtils.isEmpty(name))
         {
@@ -38,10 +38,11 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewI
                     newCategory.save();
 
                     refreshList();
+
+                    return true;
                 }
                 else
                 {
-                    view.editCategory(getContext(), null, this);
                     view.showToast(R.string.error_category_already_exists);
                 }
             }
@@ -51,21 +52,23 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewI
 
                 if ((!category.getName().equals(name)) && categoryDao.exists(name))
                 {
-                    view.editCategory(getContext(), category, this);
                     view.showToast(R.string.error_category_already_exists);
                 }
                 else
                 {
                     category.update(name, color);
                     refreshList();
+
+                    return true;
                 }
             }
         }
         else
         {
-            view.editCategory(getContext(), category, this);
             view.showToast(R.string.error_invalid_name);
         }
+
+        return false;
     }
 
     @Override
