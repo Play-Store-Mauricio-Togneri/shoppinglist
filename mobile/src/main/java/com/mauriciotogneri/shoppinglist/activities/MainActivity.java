@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import com.mauriciotogneri.common.base.BaseFragment;
 import com.mauriciotogneri.common.base.BaseFragmentActivity;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.fragments.CartFragment;
+import com.mauriciotogneri.shoppinglist.services.WearableService;
 
 import java.util.Stack;
 
@@ -31,6 +33,9 @@ public class MainActivity extends BaseFragmentActivity
         fragmentTransaction.commit();
 
         fragments.add(homeFragment);
+
+        Intent intent = new Intent(this, WearableService.class);
+        startService(intent);
     }
 
     @Override
