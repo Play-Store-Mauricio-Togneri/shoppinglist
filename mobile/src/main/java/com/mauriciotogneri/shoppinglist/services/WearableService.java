@@ -4,23 +4,28 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
+import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.wearable.Message;
+import com.mauriciotogneri.common.wearable.WearableApi.Messages;
+import com.mauriciotogneri.common.wearable.WearableApi.Paths;
 import com.mauriciotogneri.common.wearable.WearableConnectivity;
 import com.mauriciotogneri.common.wearable.WearableConnectivity.WearableEvents;
-import com.mauriciotogneri.shoppinglist.utils.Preferences;
+import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
+import com.mauriciotogneri.shoppinglist.model.CartItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WearableService extends Service implements WearableEvents
 {
     private WearableConnectivity connectivity;
-    private Preferences preferences;
 
     @Override
     public void onCreate()
     {
         super.onCreate();
-
-        preferences = Preferences.getInstance(this);
 
         connectivity = new WearableConnectivity(this, this);
         connectivity.connect();
@@ -58,55 +63,32 @@ public class WearableService extends Service implements WearableEvents
         String path = message.getPath();
         String payload = message.getPayloadAsString();
 
-        //        if (TextUtils.equals(path, Paths.GET_FAVORITE_STOPS))
-        //        {
-        //            getFavoriteStops(nodeId);
-        //        }
+        if (TextUtils.equals(path, Paths.GET_CART))
+        {
+            getCart(nodeId);
+        }
+        else if (TextUtils.equals(path, Paths.MARK_CART_ELEMENT))
+        {
+            markCartElement(nodeId, payload);
+        }
     }
 
-    //    private void getFavoriteStops(String nodeId)
-    //    {
-    //        List<Stop> stops = preferences.getFavoriteStops();
-    //
-    //        connectivity.sendMessage(Messages.resultFavoriteStops(nodeId, stops));
-    //    }
-    //
-    //    private void getDepartures(final String nodeId, final String stopCode)
-    //    {
-    //        final TpgApi tpgApi = TpgApi.getInstance(this);
-    //
-    //        tpgApi.getLinesColors(new OnRequestResult<GetLinesColors>()
-    //        {
-    //            @Override
-    //            public void onSuccess(final GetLinesColors linesColors)
-    //            {
-    //                tpgApi.getNextDepartures(stopCode, new OnRequestResult<GetNextDepartures>()
-    //                {
-    //                    @Override
-    //                    public void onSuccess(GetNextDepartures nextDepartures)
-    //                    {
-    //                        nextDepartures.setColors(linesColors);
-    //                        nextDepartures.removeInvalidDepartures();
-    //
-    //                        connectivity.sendMessage(Messages.resultDepartures(nodeId, nextDepartures.departures));
-    //                    }
-    //
-    //                    @Override
-    //                    public void onFailure()
-    //                    {
-    //                    }
-    //                });
-    //            }
-    //
-    //            @Override
-    //            public void onFailure()
-    //            {
-    //            }
-    //        });
-    //    }
-    //
-    //    private void increaseStopHitCount(String stopCode)
-    //    {
-    //        preferences.increaseHitCount(stopCode);
-    //    }
+    private void getCart(String nodeId)
+    {
+        CartItemDao cartItemDao = new CartItemDao();
+        List<CartItem> list = cartItemDao.getCartItems();
+        ArrayList<CartElement> result = new ArrayList<>();
+
+        for (CartItem cartItem : list)
+        {
+            result.add(new CartElement(cartItem.getName()));
+        }
+
+        connectivity.sendMessage(Messages.resultCart(nodeId, result));
+    }
+
+    private void markCartElement(String nodeId, String payload)
+    {
+
+    }
 }
