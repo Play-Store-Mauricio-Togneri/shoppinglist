@@ -4,6 +4,7 @@
     <string name="label_list_empty">Empty List</string>
     <string name="label_product_category">Category</string>
     <string name="label_product_new_category">New category</string>
+    <string name="label_product_edit_category">Edit category</string>
     <string name="label_product_name">Name</string>
     <string name="label_product_picture">Picture</string>
     <string name="label_select_picture_source">Select picture source</string>

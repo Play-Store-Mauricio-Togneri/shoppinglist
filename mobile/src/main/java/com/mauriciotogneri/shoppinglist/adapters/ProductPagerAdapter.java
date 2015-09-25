@@ -13,10 +13,10 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.TypedValue;
 
-import com.mauriciotogneri.shoppinglist.fragments.ProductListFragment;
-import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.common.widgets.CustomTypefaceSpan;
 import com.mauriciotogneri.common.widgets.Fonts;
+import com.mauriciotogneri.shoppinglist.fragments.ProductListFragment;
+import com.mauriciotogneri.shoppinglist.model.Category;
 
 import java.util.List;
 

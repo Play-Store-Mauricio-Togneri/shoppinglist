@@ -6,7 +6,7 @@ public interface ManageCategoriesViewObserver
 {
     void onCategorySelected(Category category);
 
-    void onEditCategory(Category category, String name, String color);
+    boolean onEditCategory(Category category, String name, String color);
 
     void onRemoveCategory(Category category);
 }

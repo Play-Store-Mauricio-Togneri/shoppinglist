@@ -1,6 +1,5 @@
 package com.mauriciotogneri.shoppinglist.views.managecategories;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -12,6 +11,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mauriciotogneri.common.base.BaseDialog;
+import com.mauriciotogneri.common.base.BaseDialog.OnAccept;
 import com.mauriciotogneri.common.base.BaseUiContainer;
 import com.mauriciotogneri.common.base.BaseView;
 import com.mauriciotogneri.shoppinglist.R;
@@ -73,7 +74,6 @@ public class ManageCategoriesView extends BaseView<UiContainer> implements Manag
         fillList(list);
     }
 
-    @SuppressLint("InflateParams")
     private void displayCategoryOptions(final Context context, final Category category, final ManageCategoriesViewObserver observer)
     {
         final int EDIT_CATEGORY = 0;
@@ -106,23 +106,24 @@ public class ManageCategoriesView extends BaseView<UiContainer> implements Manag
         dialog.display();
     }
 
-    @Override
-    public void editCategory(Context context, Category category, ManageCategoriesViewObserver observer)
+    private void editCategory(Context context, Category category, ManageCategoriesViewObserver observer)
     {
-        DialogEditCategory dialog = new DialogEditCategory(context);
+        int title = (category == null) ? R.string.label_product_new_category : R.string.label_product_edit_category;
+
+        DialogEditCategory dialog = new DialogEditCategory(context, title);
         dialog.initialize(category, observer);
         dialog.display();
     }
 
-    @SuppressLint("InflateParams")
     private void removeCategory(Context context, final Category category, final ManageCategoriesViewObserver observer)
     {
         DialogConfirmation dialog = new DialogConfirmation(context, category.getName());
-        dialog.initialize(R.string.confirmation_remove_category, new OnClickListener()
+        dialog.initialize(R.string.confirmation_remove_category, new OnAccept()
         {
             @Override
-            public void onClick(DialogInterface dialog, int which)
+            public void onAccept(BaseDialog dialog)
             {
+                dialog.close();
                 observer.onRemoveCategory(category);
             }
         });

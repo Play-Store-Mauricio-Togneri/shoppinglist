@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views.dialogs;
 
 import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
 import android.widget.TextView;
 
 import com.mauriciotogneri.common.base.BaseDialog;
@@ -14,12 +13,14 @@ public class DialogConfirmation extends BaseDialog
         super(context, title);
     }
 
-    public void initialize(int messageId, OnClickListener callback)
+    public void initialize(int messageId, OnAccept callback)
     {
         TextView text = (TextView) view.findViewById(R.id.text);
         text.setText(messageId);
 
-        setPositiveButton(R.string.button_accept, callback);
+        setPositiveButton(R.string.button_accept, null);
+        setPositiveButtonAction(callback);
+
         setNegativeButton(R.string.button_cancel, null);
     }
 

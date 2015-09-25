@@ -17,7 +17,7 @@
         android:gravity="center"
         android:padding="8dp"
         android:text="@string/dummy_text"
-        android:textColor="@color/default_text_color"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/default_font_size"
         android:textStyle="bold"
         custom:font="opensans"/>

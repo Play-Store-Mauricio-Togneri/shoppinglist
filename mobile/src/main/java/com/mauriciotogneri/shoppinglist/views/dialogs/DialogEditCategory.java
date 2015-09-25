@@ -1,8 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views.dialogs;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
@@ -18,9 +16,9 @@ public class DialogEditCategory extends BaseDialog
 {
     private String selectedColor = "";
 
-    public DialogEditCategory(Context context)
+    public DialogEditCategory(Context context, int title)
     {
-        super(context, context.getString(R.string.label_product_new_category));
+        super(context, context.getString(title));
     }
 
     public void initialize(final Category category, final ManageCategoriesViewObserver observer)
@@ -43,12 +41,18 @@ public class DialogEditCategory extends BaseDialog
         setColorButtonCallback(R.id.color_7, Category.COLOR_7, selectedColor);
         setColorButtonCallback(R.id.color_8, Category.COLOR_8, selectedColor);
 
-        setPositiveButton(R.string.button_accept, new OnClickListener()
+        setPositiveButton(R.string.button_accept, null);
+        setPositiveButtonAction(new OnAccept()
         {
             @Override
-            public void onClick(DialogInterface dialog, int which)
+            public void onAccept(BaseDialog dialog)
             {
-                observer.onEditCategory(category, categoryName.getTextValue(), selectedColor);
+                boolean closeDialog = observer.onEditCategory(category, categoryName.getTextValue(), selectedColor);
+
+                if (closeDialog)
+                {
+                    dialog.close();
+                }
             }
         });
 

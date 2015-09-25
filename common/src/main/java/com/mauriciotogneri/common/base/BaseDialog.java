@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +18,8 @@ import com.mauriciotogneri.common.widgets.Fonts;
 public abstract class BaseDialog extends AlertDialog.Builder
 {
     protected View view;
+    private AlertDialog dialog;
+    private OnAccept positiveButtonAction;
 
     @SuppressLint("InflateParams")
     public BaseDialog(Context context, String title)
@@ -38,19 +42,27 @@ public abstract class BaseDialog extends AlertDialog.Builder
             view = inflater.inflate(viewId, null);
             setView(view);
         }
-
-        initialize();
     }
 
     protected abstract int getViewId();
 
-    protected void initialize()
+    protected void setPositiveButtonAction(OnAccept positiveButtonAction)
     {
+        this.positiveButtonAction = positiveButtonAction;
+    }
+
+    public void close()
+    {
+        if (dialog != null)
+        {
+            dialog.dismiss();
+        }
     }
 
     public void display()
     {
-        AlertDialog dialog = create();
+        dialog = create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         dialog.show();
 
         Button buttonNegative = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
@@ -60,18 +72,28 @@ public abstract class BaseDialog extends AlertDialog.Builder
             buttonNegative.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
         }
 
-        Button buttonNeutral = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
-
-        if (buttonNeutral != null)
-        {
-            buttonNeutral.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
-        }
-
         Button buttonPositive = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
 
         if (buttonPositive != null)
         {
             buttonPositive.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
+
+            if (positiveButtonAction != null)
+            {
+                buttonPositive.setOnClickListener(new OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        positiveButtonAction.onAccept(BaseDialog.this);
+                    }
+                });
+            }
         }
+    }
+
+    public interface OnAccept
+    {
+        void onAccept(BaseDialog dialog);
     }
 }
