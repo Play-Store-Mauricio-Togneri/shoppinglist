@@ -2,6 +2,7 @@ package com.mauriciotogneri.shoppinglist.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,7 +79,7 @@ public class SpinnerCategoryAdapter extends BaseListAdapter<Category, ViewHolder
         {
             Category current = getItem(i);
 
-            if (current.getName().equals(category.getName()))
+            if (TextUtils.equals(current.getName(), category.getName()))
             {
                 result = i;
                 break;

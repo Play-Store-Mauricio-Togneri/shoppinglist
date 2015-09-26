@@ -6,6 +6,7 @@ import android.support.wearable.view.WearableListView;
 import android.support.wearable.view.WearableListView.ClickListener;
 import android.support.wearable.view.WearableListView.OnScrollListener;
 import android.support.wearable.view.WearableListView.ViewHolder;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -115,7 +116,7 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
                 {
                     if (!lhs.isSelected)
                     {
-                        if (!lhs.category.equals(rhs.category))
+                        if (!TextUtils.equals(lhs.category, rhs.category))
                         {
                             return lhs.category.compareTo(rhs.category);
                         }

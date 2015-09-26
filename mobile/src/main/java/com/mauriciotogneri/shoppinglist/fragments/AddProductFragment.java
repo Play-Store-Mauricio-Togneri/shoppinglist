@@ -1,5 +1,7 @@
 package com.mauriciotogneri.shoppinglist.fragments;
 
+import android.text.TextUtils;
+
 import com.mauriciotogneri.common.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.dao.CategoryDao;
 import com.mauriciotogneri.shoppinglist.model.Category;
@@ -44,7 +46,7 @@ public class AddProductFragment extends BaseFragment<AddProductViewInterface> im
         {
             Category current = categoryList.get(i);
 
-            if (current.getName().equals(category.getName()))
+            if (TextUtils.equals(current.getName(), category.getName()))
             {
                 return i;
             }

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 
 import com.mauriciotogneri.common.utils.ImageHelper;
 import com.mauriciotogneri.shoppinglist.R;
+import com.mauriciotogneri.shoppinglist.utils.ColorHelper;
 import com.mauriciotogneri.shoppinglist.utils.Preferences;
 
 public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
@@ -32,7 +33,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
     {
         // =========================== Fruits & Vegetables =========================== \\
 
-        Category fruitsVegetables = new Category(context.getString(R.string.category_fruitsAndVegetables), Category.COLOR_3);
+        Category fruitsVegetables = new Category(context.getString(R.string.category_fruitsAndVegetables), ColorHelper.getColorAsHex(context, R.color.color_2));
         fruitsVegetables.save();
 
         Product apples = new Product(context.getString(R.string.product_apples), fruitsVegetables, ImageHelper.getImageBytesFromResource(context, R.drawable.product_apples));
@@ -58,7 +59,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         // =========================== Bread & Grain Products =========================== \\
 
-        Category breadGrainProducts = new Category(context.getString(R.string.category_breadAndGrain), Category.COLOR_6);
+        Category breadGrainProducts = new Category(context.getString(R.string.category_breadAndGrain), ColorHelper.getColorAsHex(context, R.color.color_6));
         breadGrainProducts.save();
 
         Product baguette = new Product(context.getString(R.string.product_baguette), breadGrainProducts, ImageHelper.getImageBytesFromResource(context, R.drawable.product_baguette));
@@ -78,7 +79,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         // =========================== Condiments & Others =========================== \\
 
-        Category condimentsOthers = new Category(context.getString(R.string.category_condimentsAndOthers), Category.COLOR_1);
+        Category condimentsOthers = new Category(context.getString(R.string.category_condimentsAndOthers), ColorHelper.getColorAsHex(context, R.color.color_8));
         condimentsOthers.save();
 
         Product coffeeCream = new Product(context.getString(R.string.product_coffeeCream), condimentsOthers, ImageHelper.getImageBytesFromResource(context, R.drawable.product_coffee_cream));
@@ -107,7 +108,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         // =========================== Milk & Cheese =========================== \\
 
-        Category milkCheese = new Category(context.getString(R.string.category_milkAndCheese), Category.COLOR_7);
+        Category milkCheese = new Category(context.getString(R.string.category_milkAndCheese), ColorHelper.getColorAsHex(context, R.color.color_4));
         milkCheese.save();
 
         Product butter = new Product(context.getString(R.string.product_butter), milkCheese, ImageHelper.getImageBytesFromResource(context, R.drawable.product_butter));
@@ -130,7 +131,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         // =========================== Meat & Fish =========================== \\
 
-        Category meatFish = new Category(context.getString(R.string.category_meatAndFish), Category.COLOR_4);
+        Category meatFish = new Category(context.getString(R.string.category_meatAndFish), ColorHelper.getColorAsHex(context, R.color.color_3));
         meatFish.save();
 
         Product chicken = new Product(context.getString(R.string.product_chicken), meatFish, ImageHelper.getImageBytesFromResource(context, R.drawable.product_chicken));
@@ -159,7 +160,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         // =========================== Frozen =========================== \\
 
-        Category frozen = new Category(context.getString(R.string.category_frozen), Category.COLOR_2);
+        Category frozen = new Category(context.getString(R.string.category_frozen), ColorHelper.getColorAsHex(context, R.color.color_1));
         frozen.save();
 
         Product fishSticks = new Product(context.getString(R.string.product_fishSticks), frozen, ImageHelper.getImageBytesFromResource(context, R.drawable.product_fish_sticks));
@@ -182,7 +183,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         // =========================== Beverage =========================== \\
 
-        Category beverage = new Category(context.getString(R.string.category_beverage), Category.COLOR_5);
+        Category beverage = new Category(context.getString(R.string.category_beverage), ColorHelper.getColorAsHex(context, R.color.color_5));
         beverage.save();
 
         Product beer = new Product(context.getString(R.string.product_beer), beverage, ImageHelper.getImageBytesFromResource(context, R.drawable.product_beer));
@@ -202,7 +203,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
 
         // =========================== Household =========================== \\
 
-        Category household = new Category(context.getString(R.string.category_household), Category.COLOR_8);
+        Category household = new Category(context.getString(R.string.category_household), ColorHelper.getColorAsHex(context, R.color.color_7));
         household.save();
 
         Product airFreshener = new Product(context.getString(R.string.product_airFreshener), household, ImageHelper.getImageBytesFromResource(context, R.drawable.product_air_freshener));

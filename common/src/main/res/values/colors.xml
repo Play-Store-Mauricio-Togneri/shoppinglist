@@ -9,4 +9,14 @@
     <color name="horizontal_line">#E0E0E0</color>
     <color name="toast_background">#888888</color>
 
+    <color name="color_1">#7EA2F2</color>
+    <color name="color_2">#73CC84</color>
+    <color name="color_3">#DA635D</color>
+    <color name="color_4">#FFC552</color>
+    <color name="color_5">#F5A4DF</color>
+    <color name="color_6">#D6916B</color>
+    <color name="color_7">#C77CDE</color>
+    <color name="color_8">#76DBD5</color>
+    <color name="color_neutral">#B4B4B4</color>
+
 </resources>

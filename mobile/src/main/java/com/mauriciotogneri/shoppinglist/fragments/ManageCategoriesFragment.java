@@ -50,7 +50,7 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewI
             {
                 CategoryDao categoryDao = new CategoryDao();
 
-                if ((!category.getName().equals(name)) && categoryDao.exists(name))
+                if ((!TextUtils.equals(category.getName(), name)) && categoryDao.exists(name))
                 {
                     view.showToast(R.string.error_category_already_exists);
                 }
