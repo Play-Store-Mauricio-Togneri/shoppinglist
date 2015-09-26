@@ -170,7 +170,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
         {
             view.setNameInputError(getContext(), R.string.error_invalid_name);
         }
-        else if (((product == null) || (!product.getName().equals(name))) && (productDao.exists(name, category)))
+        else if (((product == null) || (!TextUtils.equals(product.getName(), name))) && (productDao.exists(name, category)))
         {
             view.setNameInputError(getContext(), R.string.error_product_already_exists);
         }

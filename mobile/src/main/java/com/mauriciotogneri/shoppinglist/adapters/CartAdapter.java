@@ -1,8 +1,8 @@
 package com.mauriciotogneri.shoppinglist.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -12,7 +12,7 @@ import com.mauriciotogneri.common.widgets.CustomImageView;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CartAdapter.ViewHolder;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
-import com.mauriciotogneri.shoppinglist.model.Category;
+import com.mauriciotogneri.shoppinglist.utils.ColorHelper;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public class CartAdapter extends BaseListAdapter<CartItem, ViewHolder>
         {
             CartItem previousCartItem = getItem(position - 1);
 
-            boolean sameCategory = previousCartItem.getCategory().getName().equals(cartItem.getCategory().getName());
+            boolean sameCategory = TextUtils.equals(previousCartItem.getCategory().getName(), cartItem.getCategory().getName());
             boolean bothNotSelected = (!cartItem.isSelected()) && (!previousCartItem.isSelected());
             boolean firstItemSelected = cartItem.isSelected() && (!previousCartItem.isSelected());
 
@@ -76,7 +76,7 @@ public class CartAdapter extends BaseListAdapter<CartItem, ViewHolder>
 
         if (cartItem.isSelected())
         {
-            viewHolder.categoryName.setBackgroundColor(Color.parseColor("#" + Category.COLOR_1));
+            viewHolder.categoryName.setBackgroundColor(ColorHelper.getColorAsInt(getContext(), R.color.color_neutral));
             viewHolder.categoryName.setText(R.string.label_already_in_cart);
         }
         else
@@ -130,7 +130,7 @@ public class CartAdapter extends BaseListAdapter<CartItem, ViewHolder>
 
             if (!cartItem.isSelected())
             {
-                if (!cartItem.getCategory().getName().equals(lastCategory))
+                if (!TextUtils.equals(cartItem.getCategory().getName(), lastCategory))
                 {
                     lastCategory = cartItem.getCategory().getName();
 

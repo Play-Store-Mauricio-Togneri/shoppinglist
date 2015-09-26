@@ -10,15 +10,6 @@ public class Category extends SugarRecord<Category> implements Serializable
 {
     private static final long serialVersionUID = -5621512578788797213L;
 
-    public static final String COLOR_1 = "B4B4B4";
-    public static final String COLOR_2 = "3CAAE6";
-    public static final String COLOR_3 = "64C864";
-    public static final String COLOR_4 = "F0583D";
-    public static final String COLOR_5 = "F05A8C";
-    public static final String COLOR_6 = "D6916B";
-    public static final String COLOR_7 = "FFBB33";
-    public static final String COLOR_8 = "B67BD2";
-
     private String name;
     private String color;
 
@@ -44,7 +35,7 @@ public class Category extends SugarRecord<Category> implements Serializable
 
     public int getIntColor()
     {
-        return Color.parseColor("#" + color);
+        return Color.parseColor(color);
     }
 
     public void update(String newName, String newColor)
