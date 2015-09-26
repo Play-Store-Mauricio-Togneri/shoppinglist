@@ -14,5 +14,7 @@ public interface ProductsListViewInterface<UI extends BaseUiContainer> extends B
 
     void showError();
 
+    void removeProduct(Product product);
+
     void fillList(List<Product> list);
 }

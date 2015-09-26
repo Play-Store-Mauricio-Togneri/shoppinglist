@@ -26,7 +26,7 @@ import java.util.List;
 
 public class UpdateProductView extends BaseView<UiContainer> implements UpdateProductViewInterface<UiContainer>
 {
-    private SpinnerCategoryAdapter spinnerCategoryAdapter;
+    private SpinnerCategoryAdapter adapter;
 
     @Override
     public void initialize(final Context context, Product product, Category initialCategory, List<Category> list, final UpdateProductViewObserver observer)
@@ -42,18 +42,18 @@ public class UpdateProductView extends BaseView<UiContainer> implements UpdatePr
 
         // ---------------------------
 
-        spinnerCategoryAdapter = new SpinnerCategoryAdapter(context);
-        spinnerCategoryAdapter.update(list);
+        adapter = new SpinnerCategoryAdapter(context);
+        adapter.update(list);
 
-        ui.productCategory.setAdapter(spinnerCategoryAdapter);
+        ui.productCategory.setAdapter(adapter);
 
         if (product != null)
         {
-            ui.productCategory.setSelection(spinnerCategoryAdapter.getPositionOf(product.getCategory()));
+            ui.productCategory.setSelection(adapter.getPositionOf(product.getCategory()));
         }
         else if (initialCategory != null)
         {
-            ui.productCategory.setSelection(spinnerCategoryAdapter.getPositionOf(initialCategory));
+            ui.productCategory.setSelection(adapter.getPositionOf(initialCategory));
         }
 
         // ---------------------------
@@ -174,13 +174,13 @@ public class UpdateProductView extends BaseView<UiContainer> implements UpdatePr
     @Override
     public void fillCategories(List<Category> list)
     {
-        spinnerCategoryAdapter.update(list);
+        adapter.update(list);
     }
 
     @Override
     public void setCategory(Category category)
     {
-        ui.productCategory.setSelection(spinnerCategoryAdapter.getPositionOf(category));
+        ui.productCategory.setSelection(adapter.getPositionOf(category));
     }
 
     @Override

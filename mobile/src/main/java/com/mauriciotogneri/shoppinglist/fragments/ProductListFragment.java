@@ -40,7 +40,7 @@ public class ProductListFragment extends BaseFragment<ProductsListViewInterface>
         CartItem cartItem = new CartItem(product, false);
         cartItem.save();
 
-        refreshList();
+        view.removeProduct(product);
     }
 
     @Override
@@ -58,7 +58,8 @@ public class ProductListFragment extends BaseFragment<ProductsListViewInterface>
         if (!cartItemDao.exists(product))
         {
             product.delete();
-            refreshList();
+
+            view.removeProduct(product);
         }
         else
         {
@@ -68,12 +69,6 @@ public class ProductListFragment extends BaseFragment<ProductsListViewInterface>
 
     @Override
     public void onActivate()
-    {
-        refreshList();
-    }
-
-    @Override
-    public void onActivate(Object result)
     {
         refreshList();
     }

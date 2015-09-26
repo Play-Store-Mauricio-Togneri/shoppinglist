@@ -31,14 +31,14 @@ import java.util.List;
 
 public class ManageCategoriesView extends BaseView<UiContainer> implements ManageCategoriesViewInterface<UiContainer>
 {
-    private ListCategoryAdapter listCategoryAdapter;
+    private ListCategoryAdapter adapter;
 
     @Override
     public void initialize(final Context context, List<Category> list, final ManageCategoriesViewObserver observer)
     {
-        listCategoryAdapter = new ListCategoryAdapter(context);
+        adapter = new ListCategoryAdapter(context);
 
-        ui.list.setAdapter(listCategoryAdapter);
+        ui.list.setAdapter(adapter);
 
         ui.list.setOnItemClickListener(new OnItemClickListener()
         {
@@ -141,9 +141,14 @@ public class ManageCategoriesView extends BaseView<UiContainer> implements Manag
     @Override
     public void fillList(List<Category> list)
     {
-        listCategoryAdapter.update(list);
+        adapter.update(list);
 
-        if (listCategoryAdapter.getCount() > 0)
+        checkEmptyList();
+    }
+
+    private void checkEmptyList()
+    {
+        if (!adapter.isEmpty())
         {
             ui.list.setVisibility(View.VISIBLE);
             ui.emptyLabel.setVisibility(View.GONE);

@@ -30,14 +30,14 @@ import java.util.List;
 
 public class ProductsListView extends BaseView<UiContainer> implements ProductsListViewInterface<UiContainer>
 {
-    private ListProductAdapter listProductAdapter;
+    private ListProductAdapter adapter;
 
     @Override
     public void initialize(final Context context, final ProductsListViewObserver observer)
     {
-        listProductAdapter = new ListProductAdapter(context);
+        adapter = new ListProductAdapter(context);
 
-        ui.list.setAdapter(listProductAdapter);
+        ui.list.setAdapter(adapter);
 
         ui.list.setOnItemClickListener(new OnItemClickListener()
         {
@@ -119,14 +119,25 @@ public class ProductsListView extends BaseView<UiContainer> implements ProductsL
     }
 
     @Override
+    public void removeProduct(Product product)
+    {
+        adapter.remove(product);
+        adapter.notifyDataSetChanged();
+        checkEmptyList();
+    }
+
+    @Override
     public void fillList(List<Product> list)
     {
-        listProductAdapter.update(list);
+        adapter.update(list);
+        checkEmptyList();
+    }
 
-        if (listProductAdapter.getCount() > 0)
+    private void checkEmptyList()
+    {
+        if (!adapter.isEmpty())
         {
             ui.list.setVisibility(View.VISIBLE);
-            ui.list.setSelection(0);
             ui.emptyLabel.setVisibility(View.GONE);
         }
         else
