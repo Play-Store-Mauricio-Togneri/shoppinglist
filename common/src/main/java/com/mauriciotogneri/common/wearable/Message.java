@@ -1,30 +1,21 @@
 package com.mauriciotogneri.common.wearable;
 
-import com.mauriciotogneri.common.utils.EncodingHelper;
-
 public class Message
 {
     private final String nodeId;
     private final String path;
-    private final String payload;
+    private final byte[] payload;
 
-    public Message(String nodeId, String path, String payload)
+    public Message(String nodeId, String path, byte[] payload)
     {
         this.nodeId = nodeId;
         this.path = path;
         this.payload = payload;
     }
 
-    public Message(String nodeId, String path, byte[] payload)
-    {
-        this.nodeId = nodeId;
-        this.path = path;
-        this.payload = EncodingHelper.getBytesAsString(payload);
-    }
-
     public Message(String nodeId, String path)
     {
-        this(nodeId, path, "");
+        this(nodeId, path, null);
     }
 
     public String getNodeId()
@@ -37,13 +28,8 @@ public class Message
         return path;
     }
 
-    public String getPayloadAsString()
+    public byte[] getPayload()
     {
         return payload;
-    }
-
-    public byte[] getPayloadAsBytes()
-    {
-        return EncodingHelper.getStringAsBytes(payload);
     }
 }

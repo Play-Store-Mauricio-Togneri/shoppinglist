@@ -2,6 +2,7 @@ package com.mauriciotogneri.shoppinglist.dao;
 
 import com.mauriciotogneri.shoppinglist.model.CartItem;
 import com.mauriciotogneri.shoppinglist.model.Product;
+import com.orm.SugarRecord;
 import com.orm.query.Select;
 
 import java.util.ArrayList;
@@ -64,5 +65,16 @@ public class CartItemDao
         CartItem cartItem = Select.from(CartItem.class).where("product = ?", new String[] {String.valueOf(product.getId())}).first();
 
         return (cartItem != null);
+    }
+
+    public void mark(long id, boolean isSelected)
+    {
+        CartItem cartItem = SugarRecord.findById(CartItem.class, id);
+
+        if (cartItem != null)
+        {
+            cartItem.setSelected(isSelected);
+            cartItem.save();
+        }
     }
 }

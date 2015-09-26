@@ -1,6 +1,13 @@
 package com.mauriciotogneri.shoppinglist.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
+
 import com.mauriciotogneri.common.base.BaseFragment;
+import com.mauriciotogneri.common.wearable.WearableApi;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
@@ -14,10 +21,21 @@ import java.util.List;
 
 public class CartFragment extends BaseFragment<CartViewInterface> implements CartViewObserver
 {
+    private BroadcastReceiver receiver;
+
     @Override
     protected void initialize()
     {
         view.initialize(getContext(), this);
+
+        receiver = new BroadcastReceiver()
+        {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                onActivate();
+            }
+        };
     }
 
     @Override
@@ -85,6 +103,31 @@ public class CartFragment extends BaseFragment<CartViewInterface> implements Car
     protected void onFinish()
     {
         view.removeSelectedItems();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        onActivate();
+
+        if (receiver != null)
+        {
+            IntentFilter filter = new IntentFilter(WearableApi.ACTION_UPDATE_LIST);
+            LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, filter);
+        }
+    }
+
+    @Override
+    public void onPause()
+    {
+        if (receiver != null)
+        {
+            LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
+        }
+
+        super.onPause();
     }
 
     @Override

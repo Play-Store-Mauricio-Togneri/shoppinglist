@@ -8,6 +8,7 @@ import android.support.wearable.view.WearableListView.OnScrollListener;
 import android.support.wearable.view.WearableListView.ViewHolder;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.base.BaseUiContainer;
@@ -17,6 +18,7 @@ import com.mauriciotogneri.shoppinglist.adapters.CartAdapter;
 import com.mauriciotogneri.shoppinglist.adapters.CartAdapter.CartViewHolder;
 import com.mauriciotogneri.shoppinglist.views.cart.CartView.UiContainer;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class CartView extends BaseView<UiContainer> implements CartViewInterface<UiContainer>
@@ -42,6 +44,7 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
     {
         ui.progressBar.setVisibility(View.VISIBLE);
         ui.content.setVisibility(View.GONE);
+        ui.emptyLabel.setVisibility(View.GONE);
 
         adapter = new CartAdapter(getContext());
 
@@ -93,34 +96,64 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
     @Override
     public void markCartElement(CartElement cartElement)
     {
-        // adapter.remove(cartElement);
-        // adapter.update();
+        cartElement.isSelected = !cartElement.isSelected;
 
-        checkEmptyList();
+        adapter.sort(new Comparator<CartElement>()
+        {
+            @Override
+            public int compare(CartElement lhs, CartElement rhs)
+            {
+                if (lhs.isSelected && !rhs.isSelected)
+                {
+                    return 1;
+                }
+                else if (!lhs.isSelected && rhs.isSelected)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (!lhs.isSelected)
+                    {
+                        if (!lhs.category.equals(rhs.category))
+                        {
+                            return lhs.category.compareTo(rhs.category);
+                        }
+                        else
+                        {
+                            return lhs.name.compareTo(rhs.name);
+                        }
+                    }
+                    else
+                    {
+                        return lhs.name.compareTo(rhs.name);
+                    }
+                }
+            }
+        });
     }
 
     @Override
     public void displayData(List<CartElement> list)
     {
         ui.progressBar.setVisibility(View.GONE);
-        ui.content.setVisibility(View.VISIBLE);
 
         adapter.setData(list);
 
-        checkEmptyList();
+        checkEmptyList(list.isEmpty());
     }
 
-    private void checkEmptyList()
+    private void checkEmptyList(boolean isEmpty)
     {
-        if (adapter.getItemCount() > 0)
+        if (isEmpty)
         {
-            //ui.list.setVisibility(View.VISIBLE);
-            //ui.emptyLabel.setVisibility(View.GONE);
+            ui.content.setVisibility(View.GONE);
+            ui.emptyLabel.setVisibility(View.VISIBLE);
         }
         else
         {
-            //ui.list.setVisibility(View.GONE);
-            //ui.emptyLabel.setVisibility(View.VISIBLE);
+            ui.content.setVisibility(View.VISIBLE);
+            ui.emptyLabel.setVisibility(View.GONE);
         }
     }
 
@@ -143,7 +176,7 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
         private ProgressBar progressBar;
         private WearableListView list;
         private View header;
-        //private  TextView emptyLabel;
+        private TextView emptyLabel;
 
         public UiContainer(BaseView baseView)
         {
@@ -158,7 +191,7 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
             this.progressBar = (ProgressBar) findViewById(R.id.progress_bar);
             this.list = (WearableListView) findViewById(R.id.list);
             this.header = findViewById(R.id.header);
-            //this.emptyLabel = (TextView) findViewById(R.id.empty_label);
+            this.emptyLabel = (TextView) findViewById(R.id.empty_label);
         }
     }
 }

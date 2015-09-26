@@ -2,6 +2,8 @@ package com.mauriciotogneri.shoppinglist.activities;
 
 import android.text.TextUtils;
 
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.wearable.MessageApi.SendMessageResult;
 import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.base.BaseActivity;
 import com.mauriciotogneri.common.utils.Serializer;
@@ -11,6 +13,7 @@ import com.mauriciotogneri.common.wearable.WearableApi.Paths;
 import com.mauriciotogneri.common.wearable.WearableConnectivity;
 import com.mauriciotogneri.common.wearable.WearableConnectivity.OnDeviceNodeDetected;
 import com.mauriciotogneri.common.wearable.WearableConnectivity.WearableEvents;
+import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.views.cart.CartView;
 import com.mauriciotogneri.shoppinglist.views.cart.CartViewInterface;
 import com.mauriciotogneri.shoppinglist.views.cart.CartViewObserver;
@@ -55,15 +58,7 @@ public class CartActivity extends BaseActivity<CartViewInterface> implements Wea
     {
         if (TextUtils.equals(message.getPath(), Paths.RESULT_CART))
         {
-            String aaa = message.getPayloadAsString();
-
-            List<CartElement> list = Serializer.deserialize(aaa);
-            //            list.add(new CartElement("AAAAAAAA"));
-            //            list.add(new CartElement("BBBBBBBB"));
-            //            list.add(new CartElement("CCCCCCCC"));
-            //            list.add(new CartElement("DDDDDDDD"));
-            //            list.add(new CartElement("EEEEEEEE"));
-
+            List<CartElement> list = Serializer.deserialize(message.getPayload());
             view.displayData(list);
         }
     }
@@ -71,13 +66,15 @@ public class CartActivity extends BaseActivity<CartViewInterface> implements Wea
     @Override
     public void onCartElementSelected(CartElement cartElement)
     {
+        view.markCartElement(cartElement);
+
         connectivity.sendMessage(Messages.markCartElement(nodeId, cartElement));
     }
 
     @Override
     public void onConnectedFail()
     {
-        // TODO
+        view.showToast(R.string.error_connection);
     }
 
     @Override
@@ -87,7 +84,14 @@ public class CartActivity extends BaseActivity<CartViewInterface> implements Wea
 
         if (connectivity != null)
         {
-            connectivity.disconnect();
+            connectivity.sendMessage(Messages.clearSelected(nodeId), new ResultCallback<SendMessageResult>()
+            {
+                @Override
+                public void onResult(SendMessageResult sendMessageResult)
+                {
+                    connectivity.disconnect();
+                }
+            });
         }
     }
 

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class Serializer
 {
-    public static String serialize(Serializable object)
+    public static byte[] serialize(Serializable object)
     {
         ByteArrayOutputStream bos = null;
         ObjectOutput out = null;
@@ -22,12 +22,7 @@ public class Serializer
             out.writeObject(object);
             out.flush();
 
-            byte[] aaa = bos.toByteArray();
-
-            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(aaa));
-            Object ccc = in.readObject();
-
-            return bos.toString("UTF-8");
+            return bos.toByteArray();
         }
         catch (Exception e)
         {
@@ -43,14 +38,14 @@ public class Serializer
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T deserialize(String data)
+    public static <T> T deserialize(byte[] data)
     {
         ByteArrayInputStream bis = null;
         ObjectInput in = null;
 
         try
         {
-            bis = new ByteArrayInputStream(data.getBytes("UTF-8"));
+            bis = new ByteArrayInputStream(data);
             in = new ObjectInputStream(bis);
 
             return (T) in.readObject();
