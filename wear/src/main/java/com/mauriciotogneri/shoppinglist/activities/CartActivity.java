@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.wearable.MessageApi.SendMessageResult;
 import com.mauriciotogneri.common.api.CartElement;
-import com.mauriciotogneri.common.base.BaseActivity;
 import com.mauriciotogneri.common.utils.Serializer;
 import com.mauriciotogneri.common.wearable.Message;
 import com.mauriciotogneri.common.wearable.WearableApi.Messages;

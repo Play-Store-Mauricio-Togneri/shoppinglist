@@ -1,11 +1,13 @@
-package com.mauriciotogneri.common.base;
+package com.mauriciotogneri.shoppinglist.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.wearable.activity.WearableActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class BaseActivity<V extends BaseViewInterface> extends Activity
+import com.mauriciotogneri.common.base.BaseViewInterface;
+
+public abstract class BaseActivity<V extends BaseViewInterface> extends WearableActivity
 {
     protected V view;
 
@@ -18,6 +20,8 @@ public abstract class BaseActivity<V extends BaseViewInterface> extends Activity
         ViewGroup container = (ViewGroup) getWindow().getDecorView().findViewById(android.R.id.content);
         View layout = this.view.init(getLayoutInflater(), container);
         setContentView(layout);
+
+        setAmbientEnabled();
 
         initialize();
     }
