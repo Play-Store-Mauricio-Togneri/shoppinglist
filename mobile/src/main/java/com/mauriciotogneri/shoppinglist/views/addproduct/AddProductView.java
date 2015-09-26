@@ -19,14 +19,14 @@ import java.util.List;
 
 public class AddProductView extends BaseView<UiContainer> implements AddProductViewInterface<UiContainer>
 {
-    private ProductPagerAdapter productPagerAdapter;
+    private ProductPagerAdapter adapter;
 
     @Override
     public void initialize(final Context context, FragmentManager fragmentManager, List<Category> categoryList, int selected, final AddProductViewObserver observer)
     {
-        productPagerAdapter = new ProductPagerAdapter(context, fragmentManager, categoryList);
+        adapter = new ProductPagerAdapter(context, fragmentManager, categoryList);
 
-        ui.pager.setAdapter(productPagerAdapter);
+        ui.pager.setAdapter(adapter);
         ui.pager.setOffscreenPageLimit(categoryList.size());
         ui.pager.setCurrentItem(selected);
 
@@ -43,7 +43,7 @@ public class AddProductView extends BaseView<UiContainer> implements AddProductV
     @Override
     public Category getSelectedCategory()
     {
-        ProductListFragment productListFragment = (ProductListFragment) productPagerAdapter.getItem(ui.pager.getCurrentItem());
+        ProductListFragment productListFragment = (ProductListFragment) adapter.getItem(ui.pager.getCurrentItem());
 
         return productListFragment.getCategory();
     }

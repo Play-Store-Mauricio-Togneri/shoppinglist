@@ -107,7 +107,7 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
 
     private void checkEmptyList()
     {
-        if (adapter.getCount() > 0)
+        if (!adapter.isEmpty())
         {
             ui.list.setVisibility(View.VISIBLE);
             ui.emptyLabel.setVisibility(View.GONE);

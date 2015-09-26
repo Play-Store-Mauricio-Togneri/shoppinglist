@@ -33,9 +33,17 @@ public class CartFragment extends BaseFragment<CartViewInterface> implements Car
             @Override
             public void onReceive(Context context, Intent intent)
             {
-                onActivate();
+                reloadList();
             }
         };
+
+        Preferences preferences = Preferences.getInstance(getContext());
+
+        if (preferences.isFirstLaunch())
+        {
+            DatabaseInitializer databaseInitializer = new DatabaseInitializer(getContext());
+            databaseInitializer.execute();
+        }
     }
 
     @Override
@@ -53,7 +61,7 @@ public class CartFragment extends BaseFragment<CartViewInterface> implements Car
         }
     }
 
-    private void reloadList()
+    private synchronized void reloadList()
     {
         CartItemDao cartItemDao = new CartItemDao();
         List<CartItem> list = cartItemDao.getCartItems();
@@ -89,14 +97,6 @@ public class CartFragment extends BaseFragment<CartViewInterface> implements Car
     public void onActivate()
     {
         reloadList();
-
-        Preferences preferences = Preferences.getInstance(getContext());
-
-        if (preferences.isFirstLaunch())
-        {
-            DatabaseInitializer databaseInitializer = new DatabaseInitializer(getContext());
-            databaseInitializer.execute();
-        }
     }
 
     @Override
@@ -110,7 +110,7 @@ public class CartFragment extends BaseFragment<CartViewInterface> implements Car
     {
         super.onResume();
 
-        onActivate();
+        reloadList();
 
         if (receiver != null)
         {

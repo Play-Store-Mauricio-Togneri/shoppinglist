@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/background_list_row"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="15dp">
 
@@ -13,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="15dp"
-        android:gravity="center_vertical"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
         custom:font="glyphicons"/>
@@ -22,7 +22,6 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
         custom:font="opensans"/>
