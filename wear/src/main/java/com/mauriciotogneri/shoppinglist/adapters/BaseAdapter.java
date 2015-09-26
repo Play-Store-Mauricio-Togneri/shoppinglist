@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public abstract class BaseAdapter<T, H extends BaseViewHolder<T>> extends WearableListView.Adapter
@@ -31,6 +33,12 @@ public abstract class BaseAdapter<T, H extends BaseViewHolder<T>> extends Wearab
     {
         items.clear();
         items.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void sort(Comparator<T> comparator)
+    {
+        Collections.sort(items, comparator);
         notifyDataSetChanged();
     }
 

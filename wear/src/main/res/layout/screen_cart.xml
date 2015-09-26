@@ -19,6 +19,15 @@
             android:layout_gravity="center"
             android:visibility="gone"/>
 
+        <TextView
+            android:id="@+id/empty_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/label_empty_list"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/default_font_size"/>
+
         <RelativeLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
@@ -43,7 +52,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/app_name"
-                    android:textColor="@color/default_text_color"
+                    android:textColor="@color/special_text_color"
                     android:textSize="@dimen/default_font_size"
                     android:textStyle="bold"/>
 

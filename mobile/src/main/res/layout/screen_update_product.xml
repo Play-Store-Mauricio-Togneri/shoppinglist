@@ -116,8 +116,8 @@
 
                 <com.mauriciotogneri.common.widgets.CustomImageView
                     android:id="@+id/thumbnail"
-                    android:layout_width="@dimen/thumbnail_size"
-                    android:layout_height="@dimen/thumbnail_size"/>
+                    android:layout_width="@dimen/thumbnail_size_normal"
+                    android:layout_height="@dimen/thumbnail_size_normal"/>
 
             </LinearLayout>
 

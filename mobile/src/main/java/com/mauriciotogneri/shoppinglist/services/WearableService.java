@@ -4,10 +4,13 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.common.api.CartElement;
+import com.mauriciotogneri.common.utils.Serializer;
 import com.mauriciotogneri.common.wearable.Message;
+import com.mauriciotogneri.common.wearable.WearableApi;
 import com.mauriciotogneri.common.wearable.WearableApi.Messages;
 import com.mauriciotogneri.common.wearable.WearableApi.Paths;
 import com.mauriciotogneri.common.wearable.WearableConnectivity;
@@ -61,7 +64,7 @@ public class WearableService extends Service implements WearableEvents
     {
         String nodeId = message.getNodeId();
         String path = message.getPath();
-        String payload = message.getPayloadAsString();
+        byte[] payload = message.getPayload();
 
         if (TextUtils.equals(path, Paths.GET_CART))
         {
@@ -69,7 +72,11 @@ public class WearableService extends Service implements WearableEvents
         }
         else if (TextUtils.equals(path, Paths.MARK_CART_ELEMENT))
         {
-            markCartElement(nodeId, payload);
+            markCartElement(payload);
+        }
+        else if (TextUtils.equals(path, Paths.CLEAR_SELECTED))
+        {
+            clearSelected();
         }
     }
 
@@ -81,14 +88,44 @@ public class WearableService extends Service implements WearableEvents
 
         for (CartItem cartItem : list)
         {
-            result.add(new CartElement(cartItem.getName()));
+            result.add(new CartElement(cartItem.getId(), cartItem.getName(), cartItem.getCategory().getName(), cartItem.getImage(), cartItem.isSelected()));
         }
 
         connectivity.sendMessage(Messages.resultCart(nodeId, result));
     }
 
-    private void markCartElement(String nodeId, String payload)
+    private void markCartElement(byte[] payload)
     {
+        CartElement cartElement = Serializer.deserialize(payload);
 
+        if (cartElement != null)
+        {
+            CartItemDao cartItemDao = new CartItemDao();
+            cartItemDao.mark(cartElement.id, cartElement.isSelected);
+        }
+
+        updateList();
+    }
+
+    private void clearSelected()
+    {
+        CartItemDao cartItemDao = new CartItemDao();
+        List<CartItem> list = cartItemDao.getCartItems();
+
+        for (CartItem cartItem : list)
+        {
+            if (cartItem.isSelected())
+            {
+                cartItem.delete();
+            }
+        }
+
+        updateList();
+    }
+
+    private void updateList()
+    {
+        Intent intent = new Intent(WearableApi.ACTION_UPDATE_LIST);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }

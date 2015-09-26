@@ -1,10 +1,12 @@
 package com.mauriciotogneri.shoppinglist.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.View;
 import android.widget.TextView;
 
 import com.mauriciotogneri.common.api.CartElement;
+import com.mauriciotogneri.common.widgets.CustomImageView;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CartAdapter.CartViewHolder;
 
@@ -20,9 +22,16 @@ public class CartAdapter extends BaseAdapter<CartElement, CartViewHolder>
     {
         viewHolder.name.setText(cartElement.name);
 
-        // viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-        // viewHolder.thumbnail.setImage(cartElement.getImage(), cartElement.isSelected());
-        // viewHolder.selected.setChecked(cartElement.isSelected());
+        if (cartElement.isSelected)
+        {
+            viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() | (Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+        else
+        {
+            viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+
+        viewHolder.thumbnail.setImage(cartElement.picture, cartElement.isSelected);
     }
 
     @Override
@@ -37,20 +46,16 @@ public class CartAdapter extends BaseAdapter<CartElement, CartViewHolder>
         return R.layout.row_cart_item;
     }
 
-    public void removeSelectedItems()
-    {
-        // TODO
-    }
-
     public static class CartViewHolder extends BaseViewHolder<CartElement>
     {
-        //public final CustomImageView thumbnail;
+        public final CustomImageView thumbnail;
         public final TextView name;
 
         public CartViewHolder(View itemView)
         {
             super(itemView);
 
+            this.thumbnail = (CustomImageView) itemView.findViewById(R.id.thumbnail);
             this.name = (TextView) itemView.findViewById(R.id.product_name);
         }
     }

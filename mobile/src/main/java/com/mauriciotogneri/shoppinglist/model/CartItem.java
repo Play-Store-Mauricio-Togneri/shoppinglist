@@ -42,6 +42,11 @@ public class CartItem extends SugarRecord<CartItem>
         return product.getCategory();
     }
 
+    public void setSelected(boolean value)
+    {
+        selected = value;
+    }
+
     public void invertSelection()
     {
         selected = !selected;

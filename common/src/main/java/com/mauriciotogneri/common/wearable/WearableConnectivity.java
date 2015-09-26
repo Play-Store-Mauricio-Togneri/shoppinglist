@@ -137,7 +137,7 @@ public class WearableConnectivity
 
                 try
                 {
-                    PendingResult<SendMessageResult> pendingResult = Wearable.MessageApi.sendMessage(apiClient, message.getNodeId(), message.getPath(), message.getPayloadAsBytes());
+                    PendingResult<SendMessageResult> pendingResult = Wearable.MessageApi.sendMessage(apiClient, message.getNodeId(), message.getPath(), message.getPayload());
 
                     if (callback != null)
                     {
