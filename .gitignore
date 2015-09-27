@@ -16,11 +16,6 @@ gen/
 local.properties
 gradle.properties
 
-# Gradle
-gradle/
-gradlew
-gradlew.bat
-
 # Android Studio
 /.idea
 .idea
