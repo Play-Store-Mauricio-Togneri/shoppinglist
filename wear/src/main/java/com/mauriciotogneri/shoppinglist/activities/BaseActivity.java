@@ -16,12 +16,12 @@ public abstract class BaseActivity<V extends BaseViewInterface> extends Wearable
     {
         super.onCreate(savedInstanceState);
 
+        setAmbientEnabled();
+
         this.view = getViewInstance();
         ViewGroup container = (ViewGroup) getWindow().getDecorView().findViewById(android.R.id.content);
         View layout = this.view.init(getLayoutInflater(), container);
         setContentView(layout);
-
-        setAmbientEnabled();
 
         initialize();
     }
