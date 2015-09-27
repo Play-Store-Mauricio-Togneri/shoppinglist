@@ -175,14 +175,16 @@ public class WearableConnectivity
                         if (node.isNearby())
                         {
                             onDeviceNodeDetected.onDefaultDeviceNode(node.getId());
-                            break;
+                            return;
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    onDeviceNodeDetected.onDefaultDeviceNode(null);
+                    e.printStackTrace();
                 }
+
+                onDeviceNodeDetected.onDefaultDeviceNode(null);
             }
         });
     }

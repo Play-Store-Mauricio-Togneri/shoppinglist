@@ -1,5 +1,7 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 
 import com.google.android.gms.common.api.ResultCallback;
@@ -17,6 +19,7 @@ import com.mauriciotogneri.shoppinglist.views.cart.CartView;
 import com.mauriciotogneri.shoppinglist.views.cart.CartViewInterface;
 import com.mauriciotogneri.shoppinglist.views.cart.CartViewObserver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends BaseActivity<CartViewInterface> implements WearableEvents, CartViewObserver
@@ -45,9 +48,25 @@ public class CartActivity extends BaseActivity<CartViewInterface> implements Wea
             @Override
             public void onDefaultDeviceNode(String deviceNodeId)
             {
-                nodeId = deviceNodeId;
+                if (!TextUtils.isEmpty(deviceNodeId))
+                {
+                    nodeId = deviceNodeId;
 
-                connectivity.sendMessage(Messages.getCart(nodeId));
+                    connectivity.sendMessage(Messages.getCart(nodeId));
+                }
+                else
+                {
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.post(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            view.displayData(new ArrayList<CartElement>());
+                            view.showToast(R.string.error_connection);
+                        }
+                    });
+                }
             }
         });
     }
