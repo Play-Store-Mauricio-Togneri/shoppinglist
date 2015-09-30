@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 import android.widget.TextView;
@@ -12,13 +13,15 @@ import com.mauriciotogneri.shoppinglist.adapters.CartAdapter.CartViewHolder;
 
 public class CartAdapter extends BaseAdapter<CartElement, CartViewHolder>
 {
+    private boolean onAmbientMode = false;
+
     public CartAdapter(Context context)
     {
         super(context);
     }
 
     @Override
-    protected void fill(CartElement cartElement, CartViewHolder viewHolder)
+    protected synchronized void fill(CartElement cartElement, CartViewHolder viewHolder)
     {
         viewHolder.name.setText(cartElement.name);
 
@@ -31,13 +34,37 @@ public class CartAdapter extends BaseAdapter<CartElement, CartViewHolder>
             viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
 
-        viewHolder.thumbnail.setImage(cartElement.picture, cartElement.isSelected);
+        if (onAmbientMode)
+        {
+            if (cartElement.isSelected)
+            {
+                viewHolder.name.setTextColor(getContext().getResources().getColor(R.color.default_text_color));
+            }
+            else
+            {
+                viewHolder.name.setTextColor(Color.WHITE);
+            }
+
+            viewHolder.thumbnail.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            viewHolder.name.setTextColor(getContext().getResources().getColor(R.color.default_text_color));
+
+            viewHolder.thumbnail.setVisibility(View.VISIBLE);
+            viewHolder.thumbnail.setImage(cartElement.picture, cartElement.isSelected);
+        }
     }
 
     @Override
     protected CartViewHolder getViewHolder(View view)
     {
         return new CartViewHolder(view);
+    }
+
+    public synchronized void setOnAmbientMode(boolean value)
+    {
+        onAmbientMode = value;
     }
 
     @Override

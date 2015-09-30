@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -38,6 +39,22 @@ public class CartActivity extends BaseActivity<CartViewInterface> implements Wea
     {
         connectivity = new WearableConnectivity(this, this);
         connectivity.connect();
+    }
+
+    @Override
+    public void onEnterAmbient(Bundle ambientDetails)
+    {
+        super.onEnterAmbient(ambientDetails);
+
+        view.onAmbientMode(true);
+    }
+
+    @Override
+    public void onExitAmbient()
+    {
+        super.onExitAmbient();
+
+        view.onAmbientMode(false);
     }
 
     @Override
