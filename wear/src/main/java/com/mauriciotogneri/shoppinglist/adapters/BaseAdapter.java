@@ -15,11 +15,13 @@ import java.util.List;
 public abstract class BaseAdapter<T, H extends BaseViewHolder<T>> extends WearableListView.Adapter
 {
     private final List<T> items;
+    private final Context context;
     private final LayoutInflater inflater;
 
     public BaseAdapter(Context context)
     {
         this.items = new ArrayList<>();
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -28,6 +30,11 @@ public abstract class BaseAdapter<T, H extends BaseViewHolder<T>> extends Wearab
     protected abstract H getViewHolder(View view);
 
     protected abstract int getLayoutId();
+
+    public Context getContext()
+    {
+        return context;
+    }
 
     public void setData(List<T> list)
     {

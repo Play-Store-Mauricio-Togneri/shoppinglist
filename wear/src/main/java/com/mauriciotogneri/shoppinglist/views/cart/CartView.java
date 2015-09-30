@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views.cart;
 
+import android.graphics.Color;
 import android.support.wearable.view.WatchViewStub;
 import android.support.wearable.view.WatchViewStub.OnLayoutInflatedListener;
 import android.support.wearable.view.WearableListView;
@@ -144,6 +145,24 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
         checkEmptyList(list.isEmpty());
     }
 
+    @Override
+    public void onAmbientMode(boolean onAmbientMode)
+    {
+        if (onAmbientMode)
+        {
+            ui.background.setBackgroundColor(Color.BLACK);
+            ui.headerTitle.setTextColor(getContext().getResources().getColor(R.color.default_text_color));
+        }
+        else
+        {
+            ui.background.setBackgroundColor(Color.WHITE);
+            ui.headerTitle.setTextColor(getContext().getResources().getColor(R.color.special_text_color));
+        }
+
+        adapter.setOnAmbientMode(onAmbientMode);
+        adapter.notifyDataSetChanged();
+    }
+
     private void checkEmptyList(boolean isEmpty)
     {
         if (isEmpty)
@@ -173,10 +192,12 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
     public static class UiContainer extends BaseUiContainer
     {
         private WatchViewStub stub;
+        private View background;
         private View content;
         private ProgressBar progressBar;
         private WearableListView list;
         private View header;
+        private TextView headerTitle;
         private TextView emptyLabel;
 
         public UiContainer(BaseView baseView)
@@ -188,10 +209,12 @@ public class CartView extends BaseView<UiContainer> implements CartViewInterface
 
         public void load()
         {
+            this.background = findViewById(R.id.screen_background);
             this.content = findViewById(R.id.content);
             this.progressBar = (ProgressBar) findViewById(R.id.progress_bar);
             this.list = (WearableListView) findViewById(R.id.list);
             this.header = findViewById(R.id.header);
+            this.headerTitle = (TextView) findViewById(R.id.header_title);
             this.emptyLabel = (TextView) findViewById(R.id.empty_label);
         }
     }

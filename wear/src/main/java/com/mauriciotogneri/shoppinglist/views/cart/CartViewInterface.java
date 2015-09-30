@@ -12,5 +12,7 @@ public interface CartViewInterface<UI extends BaseUiContainer> extends BaseViewI
 
     void displayData(List<CartElement> list);
 
+    void onAmbientMode(boolean onAmbientMode);
+
     void markCartElement(CartElement cartElement);
 }
