@@ -1,4 +1,4 @@
-package com.mauriciotogneri.common.wearable;
+package com.mauriciotogneri.common.message;
 
 public class Message
 {

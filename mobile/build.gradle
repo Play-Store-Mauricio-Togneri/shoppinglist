@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android
 {
-    compileSdkVersion 23
+    compileSdkVersion 22
     buildToolsVersion "23.0.1"
 
     defaultConfig
@@ -10,8 +10,8 @@ android
         applicationId "com.mauriciotogneri.shoppinglist"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
     }
 
     signingConfigs
@@ -48,7 +48,7 @@ dependencies
     // bug in 23+ showing spannable text
     compile 'com.android.support:design:22.2.1'
 
-    compile 'com.github.satyan:sugar:1.3'
+    compile 'com.github.satyan:sugar:1.3.1'
 
     compile 'ch.acra:acra:4.6.2'
 }

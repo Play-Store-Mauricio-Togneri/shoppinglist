@@ -11,10 +11,10 @@ import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.utils.Serializer;
-import com.mauriciotogneri.common.wearable.Message;
-import com.mauriciotogneri.common.wearable.WearableApi;
-import com.mauriciotogneri.common.wearable.WearableApi.Messages;
-import com.mauriciotogneri.common.wearable.WearableApi.Paths;
+import com.mauriciotogneri.common.message.Message;
+import com.mauriciotogneri.common.message.MessageApi;
+import com.mauriciotogneri.common.message.MessageApi.Messages;
+import com.mauriciotogneri.common.message.MessageApi.Paths;
 import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
 
@@ -92,7 +92,7 @@ public class WearableService extends WearableListenerService
 
     private void updateList()
     {
-        Intent intent = new Intent(WearableApi.ACTION_UPDATE_LIST);
+        Intent intent = new Intent(MessageApi.ACTION_UPDATE_LIST);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
