@@ -27,17 +27,14 @@
 
         </activity>
 
-        <receiver
-            android:name=".receivers.AutoStart">
+        <service
+            android:name=".services.WearableService">
 
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER"/>
             </intent-filter>
 
-        </receiver>
-
-        <service
-            android:name=".services.WearableService"/>
+        </service>
 
         <meta-data
             android:name="DATABASE"

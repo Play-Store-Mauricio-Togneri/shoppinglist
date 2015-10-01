@@ -1,70 +1,37 @@
 package com.mauriciotogneri.shoppinglist.services;
 
-import android.app.Service;
 import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Wearable;
+import com.google.android.gms.wearable.WearableListenerService;
 import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.utils.Serializer;
 import com.mauriciotogneri.common.wearable.Message;
 import com.mauriciotogneri.common.wearable.WearableApi;
 import com.mauriciotogneri.common.wearable.WearableApi.Messages;
 import com.mauriciotogneri.common.wearable.WearableApi.Paths;
-import com.mauriciotogneri.common.wearable.WearableConnectivity;
-import com.mauriciotogneri.common.wearable.WearableConnectivity.WearableEvents;
 import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class WearableService extends Service implements WearableEvents
+public class WearableService extends WearableListenerService
 {
-    private WearableConnectivity connectivity;
+    private static final int TIMEOUT = 1000 * 10; // in milliseconds
 
     @Override
-    public void onCreate()
+    public void onMessageReceived(MessageEvent messageEvent)
     {
-        super.onCreate();
-
-        connectivity = new WearableConnectivity(this, this);
-        connectivity.connect();
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent)
-    {
-        return null;
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
-        super.onStartCommand(intent, flags, startId);
-
-        return START_STICKY;
-    }
-
-    @Override
-    public void onConnectedSuccess()
-    {
-    }
-
-    @Override
-    public void onConnectedFail()
-    {
-    }
-
-    @Override
-    public void onMessageReceived(Message message)
-    {
-        String nodeId = message.getNodeId();
-        String path = message.getPath();
-        byte[] payload = message.getPayload();
+        String nodeId = messageEvent.getSourceNodeId();
+        String path = messageEvent.getPath();
+        byte[] payload = messageEvent.getData();
 
         if (TextUtils.equals(path, Paths.GET_CART))
         {
@@ -91,7 +58,7 @@ public class WearableService extends Service implements WearableEvents
             result.add(new CartElement(cartItem.getId(), cartItem.getName(), cartItem.getCategory().getName(), cartItem.getImage(), cartItem.isSelected()));
         }
 
-        connectivity.sendMessage(Messages.resultCart(nodeId, result));
+        reply(Messages.resultCart(nodeId, result));
     }
 
     private void markCartElement(byte[] payload)
@@ -127,5 +94,25 @@ public class WearableService extends Service implements WearableEvents
     {
         Intent intent = new Intent(WearableApi.ACTION_UPDATE_LIST);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void reply(final Message message)
+    {
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                GoogleApiClient client = new GoogleApiClient.Builder(WearableService.this).addApi(Wearable.API).build();
+                ConnectionResult connectionResult = client.blockingConnect(TIMEOUT, TimeUnit.MILLISECONDS);
+
+                if (connectionResult.isSuccess())
+                {
+                    Wearable.MessageApi.sendMessage(client, message.getNodeId(), message.getPath(), message.getPayload());
+                }
+
+                client.disconnect();
+            }
+        }).start();
     }
 }
