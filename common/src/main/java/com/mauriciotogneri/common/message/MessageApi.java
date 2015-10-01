@@ -1,11 +1,11 @@
-package com.mauriciotogneri.common.wearable;
+package com.mauriciotogneri.common.message;
 
 import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.utils.Serializer;
 
 import java.util.ArrayList;
 
-public class WearableApi
+public class MessageApi
 {
     public static final String ACTION_UPDATE_LIST = "update_list";
 

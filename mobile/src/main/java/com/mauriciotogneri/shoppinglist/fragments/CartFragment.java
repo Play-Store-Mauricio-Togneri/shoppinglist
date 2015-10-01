@@ -7,7 +7,7 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.mauriciotogneri.common.base.BaseFragment;
-import com.mauriciotogneri.common.wearable.WearableApi;
+import com.mauriciotogneri.common.message.MessageApi;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
@@ -114,7 +114,7 @@ public class CartFragment extends BaseFragment<CartViewInterface> implements Car
 
         if (receiver != null)
         {
-            IntentFilter filter = new IntentFilter(WearableApi.ACTION_UPDATE_LIST);
+            IntentFilter filter = new IntentFilter(MessageApi.ACTION_UPDATE_LIST);
             LocalBroadcastManager.getInstance(getContext()).registerReceiver(receiver, filter);
         }
     }

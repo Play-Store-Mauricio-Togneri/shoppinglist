@@ -1,4 +1,4 @@
-package com.mauriciotogneri.common.wearable;
+package com.mauriciotogneri.shoppinglist.wearable;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+import com.mauriciotogneri.common.message.Message;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
