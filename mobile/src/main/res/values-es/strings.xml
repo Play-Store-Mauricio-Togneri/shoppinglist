@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="label_product_category">Category</string>
-    <string name="label_product_new_category">New category</string>
-    <string name="label_product_edit_category">Edit category</string>
-    <string name="label_product_name">Name</string>
-    <string name="label_product_picture">Picture</string>
-    <string name="label_select_picture_source">Select picture source</string>
-    <string name="label_source_gallery">Gallery</string>
-    <string name="label_source_camera">Camera</string>
-    <string name="label_share_cart">Share list with</string>
-    <string name="label_already_in_cart">Already in cart</string>
-    <string name="label_initializing_database">Initializing database&#8230;</string>
+    <string name="label_product_category">Categoría</string>
+    <string name="label_product_new_category">Nueva categoría</string>
+    <string name="label_product_edit_category">Editar categoría</string>
+    <string name="label_product_name">Nombre</string>
+    <string name="label_product_picture">Imagen</string>
+    <string name="label_select_picture_source">Seleccionar fuente de imagen</string>
+    <string name="label_source_gallery">Galería</string>
+    <string name="label_source_camera">Cámara</string>
+    <string name="label_share_cart">Compartir lista con</string>
+    <string name="label_already_in_cart">En el carro</string>
+    <string name="label_initializing_database">Inicializando base de datos&#8230;</string>
 
     <string name="toolbar_title_main">Shopping List</string>
-    <string name="toolbar_title_add_product">Add product</string>
-    <string name="toolbar_title_create_product">Create product</string>
-    <string name="toolbar_title_edit_product">Edit product</string>
-    <string name="toolbar_title_manage_categories">Manage categories</string>
+    <string name="toolbar_title_add_product">Añadir producto</string>
+    <string name="toolbar_title_create_product">Crear producto</string>
+    <string name="toolbar_title_edit_product">Editar producto</string>
+    <string name="toolbar_title_manage_categories">Administrar categorías</string>
 
-    <string name="confirmation_remove_product">Do you want to remove the product?</string>
-    <string name="confirmation_remove_car_item">Do you want to remove the product from the cart?</string>
-    <string name="confirmation_remove_category">Do you want to remove the category?</string>
+    <string name="confirmation_remove_product">¿Desea eliminar el producto?</string>
+    <string name="confirmation_remove_car_item">¿Desea eliminar el producto de la lista?</string>
+    <string name="confirmation_remove_category">¿Desea eliminar la categoría?</string>
 
-    <string name="error_invalid_category">Invalid category</string>
-    <string name="error_invalid_name">Invalid name</string>
-    <string name="error_invalid_image">Invalid image</string>
-    <string name="error_product_already_exists">Product already exists</string>
-    <string name="error_category_already_exists">Category already exists</string>
-    <string name="error_cart_empty">The list is empty</string>
-    <string name="error_category_in_use">The category is linked to one or more products.</string>
-    <string name="error_product_in_use">The product cannot be removed.</string>
+    <string name="error_invalid_category">Categoría inválida</string>
+    <string name="error_invalid_name">Nombre inválido</string>
+    <string name="error_invalid_image">Imagen inválida</string>
+    <string name="error_product_already_exists">Producto ya existente</string>
+    <string name="error_category_already_exists">Categoría ya existente</string>
+    <string name="error_cart_empty">La lista está vacía</string>
+    <string name="error_category_in_use">La categoría esta vinculada a uno o más productos.</string>
+    <string name="error_product_in_use">El producto no puede ser eliminado.</string>
 
     <!-- CATEGORIES -->
 
