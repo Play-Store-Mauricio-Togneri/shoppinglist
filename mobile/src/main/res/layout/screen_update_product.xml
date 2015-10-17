@@ -3,6 +3,7 @@
     style="@style/Screen"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white">
 
     <LinearLayout
@@ -154,11 +155,11 @@
                     android:paddingEnd="15dp"
                     android:paddingStart="0dp"
                     android:paddingTop="12dp"
-                    android:text="@string/dummy_text"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/default_font_size"
                     custom:font="opensans"
-                    custom:paddingEnd="15dp"/>
+                    custom:paddingEnd="15dp"
+                    tools:text="@string/dummy_text"/>
 
             </LinearLayout>
 

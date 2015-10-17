@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,17 +11,17 @@
         android:id="@+id/category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="end"
         android:background="@color/toolbar_background_color"
         android:clickable="false"
+        android:ellipsize="end"
         android:gravity="center"
         android:padding="8dp"
-        android:text="@string/dummy_text"
+        android:singleLine="true"
         android:textColor="@android:color/white"
         android:textSize="@dimen/default_font_size"
         android:textStyle="bold"
-        custom:font="opensans"/>
+        custom:font="opensans"
+        tools:text="@string/dummy_text"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,10 +47,10 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:text="@string/dummy_text"
             android:textColor="@color/default_text_color"
             android:textSize="@dimen/default_font_size"
-            custom:font="opensans"/>
+            custom:font="opensans"
+            tools:text="@string/dummy_text"/>
 
         <CheckBox
             android:id="@+id/selected"
