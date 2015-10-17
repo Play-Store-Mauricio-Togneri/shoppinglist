@@ -61,7 +61,7 @@ public class ProductPagerAdapter extends FragmentStatePagerAdapter
 
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(title);
 
-        Typeface font = Fonts.getFont(Fonts.OPEN_SANS);
+        Typeface font = Fonts.getDefaultFont();
         ForegroundColorSpan fcs = new ForegroundColorSpan(category.getIntColor());
         AbsoluteSizeSpan ass = new AbsoluteSizeSpan(fontSize);
         StyleSpan bss = new StyleSpan(Typeface.BOLD);

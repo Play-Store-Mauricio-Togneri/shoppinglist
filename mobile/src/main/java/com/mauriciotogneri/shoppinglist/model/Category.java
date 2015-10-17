@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 public class Category extends SugarRecord<Category> implements Serializable
 {
-    private static final long serialVersionUID = -5621512578788797213L;
-
     private String name;
     private String color;
 

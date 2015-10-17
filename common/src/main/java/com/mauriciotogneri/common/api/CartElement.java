@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class CartElement implements Serializable
 {
-    private static final long serialVersionUID = -5621512578900797213L;
-
     public final long id;
     public final String name;
     public final String category;
