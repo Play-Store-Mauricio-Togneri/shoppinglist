@@ -12,8 +12,8 @@ public class Fonts
     private static final Map<String, Typeface> fonts = new HashMap<>();
     private static final String FONTS_PATH = "fonts/";
 
-    public static final String OPEN_SANS = "0";
-    public static final String GLYPHICONS = "1";
+    private static final String OPEN_SANS = "0";
+    private static final String GLYPHICONS = "1";
 
     public static void init(Context context)
     {
@@ -31,6 +31,11 @@ public class Fonts
         Typeface fontFamily = Fonts.fonts.get(name);
 
         return Typeface.create(fontFamily, style);
+    }
+
+    public static Typeface getDefaultFont()
+    {
+        return Fonts.getFont(OPEN_SANS, Typeface.NORMAL);
     }
 
     public static Typeface getFont(String name)

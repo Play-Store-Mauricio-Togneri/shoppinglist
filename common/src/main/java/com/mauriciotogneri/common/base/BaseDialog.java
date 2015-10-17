@@ -69,7 +69,7 @@ public abstract class BaseDialog extends AlertDialog.Builder
 
         if (buttonNegative != null)
         {
-            buttonNegative.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
+            buttonNegative.setTypeface(Fonts.getDefaultFont());
             buttonNegative.setTextColor(getContext().getResources().getColor(R.color.default_text_color));
         }
 
@@ -77,7 +77,7 @@ public abstract class BaseDialog extends AlertDialog.Builder
 
         if (buttonPositive != null)
         {
-            buttonPositive.setTypeface(Fonts.getFont(Fonts.OPEN_SANS));
+            buttonPositive.setTypeface(Fonts.getDefaultFont());
             buttonPositive.setTextColor(getContext().getResources().getColor(R.color.default_text_color));
 
             if (positiveButtonAction != null)

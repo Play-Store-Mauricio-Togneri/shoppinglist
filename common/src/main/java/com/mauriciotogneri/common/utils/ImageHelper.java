@@ -42,7 +42,10 @@ public class ImageHelper
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         byte[] inputData = getBytes(inputStream);
 
-        inputStream.close();
+        if (inputStream != null)
+        {
+            inputStream.close();
+        }
 
         return inputData;
     }

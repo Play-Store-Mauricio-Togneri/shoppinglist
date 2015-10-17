@@ -34,14 +34,14 @@
 
     <!-- CATEGORIES -->
 
-    <string name="category_fruitsAndVegetables">Fruits &amp; Vegetables</string>
-    <string name="category_breadAndGrain">Bread &amp; Grain Products</string>
-    <string name="category_condimentsAndOthers">Condiments &amp; Others</string>
-    <string name="category_milkAndCheese">Milk &amp; Cheese</string>
-    <string name="category_meatAndFish">Meat &amp; Fish</string>
-    <string name="category_frozen">Frozen</string>
-    <string name="category_beverage">Beverages</string>
-    <string name="category_household">Household</string>
+    <string name="category_fruitsAndVegetables">Frutas y Vegetales</string>
+    <string name="category_breadAndGrain">Productos Integrales</string>
+    <string name="category_condimentsAndOthers">Condimentos y Otros</string>
+    <string name="category_milkAndCheese">Lacteos</string>
+    <string name="category_meatAndFish">Carnes y Pescados</string>
+    <string name="category_frozen">Congelados</string>
+    <string name="category_beverage">Bebidas</string>
+    <string name="category_household">Hogar</string>
 
     <!-- PRODUCTS -->
 
