@@ -3,13 +3,13 @@
 
     <string name="app_name">Shopping List</string>
 
-    <string name="label_error">Error</string>
-    <string name="label_empty_list">Empty list</string>
+    <string name="label_error">Erreur</string>
+    <string name="label_empty_list">Liste vide</string>
 
-    <string name="button_accept">Accept</string>
-    <string name="button_cancel">Cancel</string>
-    <string name="button_edit">Edit</string>
-    <string name="button_remove">Remove</string>
-    <string name="button_create">Create</string>
+    <string name="button_accept">Accepter</string>
+    <string name="button_cancel">Annuler</string>
+    <string name="button_edit">Éditer</string>
+    <string name="button_remove">Supprimer</string>
+    <string name="button_create">Créer</string>
 
 </resources>
