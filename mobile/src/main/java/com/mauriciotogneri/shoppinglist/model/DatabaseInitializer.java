@@ -260,8 +260,8 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void>
         Product spongeMetal = new Product(context.getString(R.string.product_spongeMetal), household, ImageHelper.getImageBytesFromResource(context, R.drawable.product_sponge_metal));
         spongeMetal.save();
 
-        Product swabs = new Product(context.getString(R.string.product_swabs), household, ImageHelper.getImageBytesFromResource(context, R.drawable.product_swabs));
-        swabs.save();
+        Product cottonSwabs = new Product(context.getString(R.string.product_cottonSwabs), household, ImageHelper.getImageBytesFromResource(context, R.drawable.product_cotton_swabs));
+        cottonSwabs.save();
 
         Product toiletPaper = new Product(context.getString(R.string.product_toiletPaper), household, ImageHelper.getImageBytesFromResource(context, R.drawable.product_toilet_paper));
         toiletPaper.save();
