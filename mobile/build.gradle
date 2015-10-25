@@ -8,7 +8,7 @@ android
     defaultConfig
     {
         applicationId "com.mauriciotogneri.shoppinglist"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 4
         versionName "1.0.4"
