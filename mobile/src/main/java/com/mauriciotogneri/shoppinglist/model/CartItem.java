@@ -1,5 +1,7 @@
 package com.mauriciotogneri.shoppinglist.model;
 
+import android.content.Context;
+
 import com.orm.SugarRecord;
 
 public class CartItem extends SugarRecord<CartItem>
@@ -27,9 +29,9 @@ public class CartItem extends SugarRecord<CartItem>
         return product.getCategory().getName();
     }
 
-    public byte[] getImage()
+    public byte[] getImage(Context context)
     {
-        return product.getImage();
+        return product.getImage(context);
     }
 
     public boolean isSelected()

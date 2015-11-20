@@ -65,7 +65,7 @@ public class CartAdapter extends BaseListAdapter<CartItem, ViewHolder>
             viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
 
-        viewHolder.thumbnail.setImage(cartItem.getImage(), cartItem.isSelected());
+        viewHolder.thumbnail.setImage(cartItem.getImage(getContext()), cartItem.isSelected());
 
         viewHolder.selected.setChecked(cartItem.isSelected());
     }

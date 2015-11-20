@@ -27,7 +27,7 @@ public class ListProductAdapter extends BaseListAdapter<Product, ViewHolder>
     protected void fillView(ViewHolder viewHolder, Product product, int position)
     {
         viewHolder.name.setText(product.getName());
-        viewHolder.thumbnail.setImage(product.getImage());
+        viewHolder.thumbnail.setImage(product.getImage(getContext()));
     }
 
     protected static class ViewHolder

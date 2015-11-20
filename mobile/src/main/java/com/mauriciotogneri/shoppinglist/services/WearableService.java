@@ -55,7 +55,7 @@ public class WearableService extends WearableListenerService
 
         for (CartItem cartItem : list)
         {
-            result.add(new CartElement(cartItem.getId(), cartItem.getName(), cartItem.getCategory().getName(), cartItem.getImage(), cartItem.isSelected()));
+            result.add(new CartElement(cartItem.getId(), cartItem.getName(), cartItem.getCategory().getName(), cartItem.getImage(this), cartItem.isSelected()));
         }
 
         reply(Messages.resultCart(nodeId, result));

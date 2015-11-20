@@ -65,7 +65,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
 
         if (product != null)
         {
-            setProductImage(product.getImage());
+            setProductImage(product.getImage(getContext()));
         }
         else
         {
