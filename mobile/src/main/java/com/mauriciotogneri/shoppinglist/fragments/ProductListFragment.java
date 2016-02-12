@@ -3,6 +3,7 @@ package com.mauriciotogneri.shoppinglist.fragments;
 import android.os.Bundle;
 
 import com.mauriciotogneri.common.base.BaseFragment;
+import com.mauriciotogneri.shoppinglist.app.ShoppingList;
 import com.mauriciotogneri.shoppinglist.dao.CartItemDao;
 import com.mauriciotogneri.shoppinglist.dao.ProductDao;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
@@ -39,6 +40,9 @@ public class ProductListFragment extends BaseFragment<ProductsListViewInterface>
     {
         CartItem cartItem = new CartItem(product, false);
         cartItem.save();
+
+        ShoppingList shoppingList = (ShoppingList) getActivity().getApplication();
+        shoppingList.getStats().addedCartItem(cartItem);
 
         view.removeProduct(product);
     }

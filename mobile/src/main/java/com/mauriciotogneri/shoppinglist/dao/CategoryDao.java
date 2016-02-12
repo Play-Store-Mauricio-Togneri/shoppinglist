@@ -4,13 +4,26 @@ import com.mauriciotogneri.shoppinglist.model.Category;
 import com.orm.SugarRecord;
 import com.orm.query.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDao
 {
     public List<Category> getCategories()
     {
-        return Select.from(Category.class).orderBy("name").list();
+        List<Category> categories = Select.from(Category.class).orderBy("name").list();
+
+        List<Category> validCategories = new ArrayList<>();
+
+        for (Category category : categories)
+        {
+            if (category.isValid())
+            {
+                validCategories.add(category);
+            }
+        }
+
+        return validCategories;
     }
 
     public boolean exists(String name)

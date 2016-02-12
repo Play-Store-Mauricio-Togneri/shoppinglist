@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import com.mauriciotogneri.common.base.BaseFragment;
 import com.mauriciotogneri.common.base.BaseFragmentActivity;
 import com.mauriciotogneri.shoppinglist.R;
+import com.mauriciotogneri.shoppinglist.app.ShoppingList;
 import com.mauriciotogneri.shoppinglist.fragments.CartFragment;
 
 import java.util.Stack;
@@ -31,6 +32,9 @@ public class MainActivity extends BaseFragmentActivity
         fragmentTransaction.commit();
 
         fragments.add(homeFragment);
+
+        ShoppingList shoppingList = (ShoppingList) getApplication();
+        shoppingList.getStats().sendAppLaunched();
     }
 
     @Override

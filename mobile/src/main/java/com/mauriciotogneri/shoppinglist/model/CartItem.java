@@ -39,6 +39,11 @@ public class CartItem extends SugarRecord<CartItem>
         return selected;
     }
 
+    public boolean isValid()
+    {
+        return (product != null) && (product.isValid());
+    }
+
     public Category getCategory()
     {
         return product.getCategory();

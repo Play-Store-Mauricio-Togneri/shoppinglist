@@ -22,13 +22,16 @@ public class CartItemDao
 
         for (CartItem cartItem : cartItems)
         {
-            if (cartItem.isSelected())
+            if (cartItem.isValid())
             {
-                selected.add(cartItem);
-            }
-            else
-            {
-                notSelected.add(cartItem);
+                if (cartItem.isSelected())
+                {
+                    selected.add(cartItem);
+                }
+                else
+                {
+                    notSelected.add(cartItem);
+                }
             }
         }
 

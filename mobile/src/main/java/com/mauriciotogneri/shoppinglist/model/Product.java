@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist.model;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Base64;
 
 import com.mauriciotogneri.common.utils.ImageHelper;
@@ -44,6 +45,11 @@ public class Product extends SugarRecord<Product>
         {
             return ImageHelper.getImageBytesFromResource(context, R.drawable.product_generic);
         }
+    }
+
+    public boolean isValid()
+    {
+        return (!TextUtils.isEmpty(name) && (category != null) && (category.isValid()) && !TextUtils.isEmpty(image));
     }
 
     public void update(String newName, Category newCategory, byte[] newImage)
