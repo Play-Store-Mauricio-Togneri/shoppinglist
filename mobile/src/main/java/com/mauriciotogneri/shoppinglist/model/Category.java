@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist.model;
 
 import android.graphics.Color;
+import android.text.TextUtils;
 
 import com.orm.SugarRecord;
 
@@ -34,6 +35,11 @@ public class Category extends SugarRecord<Category> implements Serializable
     public int getIntColor()
     {
         return Color.parseColor(color);
+    }
+
+    public boolean isValid()
+    {
+        return (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(color));
     }
 
     public void update(String newName, String newColor)

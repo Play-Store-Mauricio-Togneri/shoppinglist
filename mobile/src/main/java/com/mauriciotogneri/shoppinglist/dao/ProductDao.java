@@ -18,7 +18,7 @@ public class ProductDao
 
         for (Product product : products)
         {
-            if (!isInCart(product))
+            if (product.isValid() && (!isInCart(product)))
             {
                 result.add(product);
             }
