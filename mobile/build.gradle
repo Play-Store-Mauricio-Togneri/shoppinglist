@@ -10,8 +10,8 @@ android
         applicationId "com.mauriciotogneri.shoppinglist"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 7
+        versionName "1.0.7"
     }
 
     signingConfigs
@@ -51,5 +51,5 @@ dependencies
 
     compile 'com.github.satyan:sugar:1.3.1'
 
-    compile 'ch.acra:acra:4.6.2'
+    compile 'ch.acra:acra:4.8.2'
 }

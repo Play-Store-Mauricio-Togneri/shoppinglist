@@ -4,11 +4,6 @@
     <integer name="ga_sessionTimeout">300</integer>
     <integer name="ga_dispatchPeriod">30</integer>
 
-    <bool name="ga_autoActivityTracking">true</bool>
-    <bool name="ga_reportUncaughtExceptions">true</bool>
-
-    <screenName name="com.mauriciotogneri.shoppinglist.activities.MainActivity">Main Activity</screenName>
-
     <string name="ga_trackingId">UA-73740607-1</string>
 
 </resources>

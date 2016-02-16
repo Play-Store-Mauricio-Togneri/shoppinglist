@@ -5,18 +5,26 @@ import com.google.android.gms.analytics.HitBuilders.EventBuilder;
 import com.google.android.gms.analytics.Tracker;
 import com.mauriciotogneri.shoppinglist.model.CartItem;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Stats
 {
     private final Tracker tracker;
+    private final ExecutorService threadPool;
 
     public Stats(Tracker tracker)
     {
         this.tracker = tracker;
+        this.threadPool = Executors.newFixedThreadPool(10);
     }
 
     public synchronized void sendAppLaunched()
     {
-        Thread thread = new Thread(new Runnable()
+        threadPool.submit(new Runnable()
         {
             @Override
             public void run()
@@ -25,12 +33,28 @@ public class Stats
                 tracker.send(new HitBuilders.ScreenViewBuilder().build());
             }
         });
-        thread.start();
+
+        threadPool.submit(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Date date = new Date();
+                Calendar calendar = GregorianCalendar.getInstance();
+                calendar.setTime(date);
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
+                EventBuilder eventBuilder = new HitBuilders.EventBuilder();
+                eventBuilder.setCategory("TIME_APP_OPEN");
+                eventBuilder.setAction(String.valueOf(hour));
+                tracker.send(eventBuilder.build());
+            }
+        });
     }
 
     public synchronized void addedCartItem(final CartItem cartItem)
     {
-        Thread thread = new Thread(new Runnable()
+        threadPool.submit(new Runnable()
         {
             @Override
             public void run()
@@ -41,6 +65,10 @@ public class Stats
                 tracker.send(eventBuilder.build());
             }
         });
-        thread.start();
+    }
+
+    public void shutdown()
+    {
+        threadPool.shutdown();
     }
 }
