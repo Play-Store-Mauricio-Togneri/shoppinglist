@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.mauriciotogneri.common.widgets.Fonts;
+import com.mauriciotogneri.shoppinglist.BuildConfig;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.utils.Stats;
 import com.orm.SugarApp;
@@ -23,17 +24,19 @@ public class ShoppingList extends SugarApp
         super.onCreate();
 
         ACRA.init(this);
-        ACRA.getErrorReporter().putCustomData("PACKAGE_NAME", getPackageName());
 
-        StrictMode.ThreadPolicy.Builder threadBuilder = new StrictMode.ThreadPolicy.Builder();
-        threadBuilder.detectAll();
-        threadBuilder.penaltyLog();
-        StrictMode.setThreadPolicy(threadBuilder.build());
+        if (BuildConfig.DEBUG)
+        {
+            StrictMode.ThreadPolicy.Builder threadBuilder = new StrictMode.ThreadPolicy.Builder();
+            threadBuilder.detectAll();
+            threadBuilder.penaltyLog();
+            StrictMode.setThreadPolicy(threadBuilder.build());
 
-        StrictMode.VmPolicy.Builder vmBuilder = new StrictMode.VmPolicy.Builder();
-        vmBuilder.detectAll();
-        vmBuilder.penaltyLog();
-        StrictMode.setVmPolicy(vmBuilder.build());
+            StrictMode.VmPolicy.Builder vmBuilder = new StrictMode.VmPolicy.Builder();
+            vmBuilder.detectAll();
+            vmBuilder.penaltyLog();
+            StrictMode.setVmPolicy(vmBuilder.build());
+        }
 
         Fonts.init(this);
     }
