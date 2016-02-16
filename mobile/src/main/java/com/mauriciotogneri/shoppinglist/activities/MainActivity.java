@@ -85,13 +85,4 @@ public class MainActivity extends BaseFragmentActivity
             removeFragment();
         }
     }
-
-    @Override
-    protected void onDestroy()
-    {
-        ShoppingList shoppingList = (ShoppingList) getApplication();
-        shoppingList.getStats().shutdown();
-
-        super.onDestroy();
-    }
 }
