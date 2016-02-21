@@ -75,8 +75,9 @@ public class ManageCategoriesFragment extends BaseFragment<ManageCategoriesViewI
     public void onRemoveCategory(Category category)
     {
         ProductDao productDao = new ProductDao();
+        CategoryDao categoryDao = new CategoryDao();
 
-        if (!productDao.exists(category))
+        if ((!productDao.exists(category)) && (categoryDao.getNumberOfCategories() > 1))
         {
             category.delete();
             refreshList();

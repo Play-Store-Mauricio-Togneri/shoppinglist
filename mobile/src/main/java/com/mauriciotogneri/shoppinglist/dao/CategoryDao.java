@@ -26,6 +26,11 @@ public class CategoryDao
         return validCategories;
     }
 
+    public int getNumberOfCategories()
+    {
+        return getCategories().size();
+    }
+
     public boolean exists(String name)
     {
         List<Category> categories = SugarRecord.find(Category.class, "name = ?", name);
