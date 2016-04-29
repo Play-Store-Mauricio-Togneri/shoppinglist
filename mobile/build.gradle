@@ -3,15 +3,15 @@ apply plugin: 'com.android.application'
 android
 {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig
     {
         applicationId "com.mauriciotogneri.shoppinglist"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 9
-        versionName "1.0.9"
+        versionCode 10
+        versionName "1.1.0"
     }
 
     signingConfigs
@@ -45,7 +45,7 @@ dependencies
     compile project(':common')
     wearApp project(':wear')
 
-    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:design:23.3.0'
 
     compile 'com.google.android.gms:play-services-analytics:8.4.0'
 

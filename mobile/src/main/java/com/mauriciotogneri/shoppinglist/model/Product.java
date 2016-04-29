@@ -43,7 +43,7 @@ public class Product extends SugarRecord<Product>
         }
         catch (Exception e)
         {
-            return ImageHelper.getImageBytesFromResource(context, R.drawable.product_generic);
+            return ImageHelper.getByteArrayFromResource(context, R.drawable.product_generic);
         }
     }
 

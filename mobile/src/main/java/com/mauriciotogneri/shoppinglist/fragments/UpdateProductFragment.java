@@ -69,7 +69,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
         }
         else
         {
-            setProductImage(ImageHelper.getImageBytesFromResource(getContext(), R.drawable.product_generic));
+            setProductImage(ImageHelper.getByteArrayFromResource(getContext(), R.drawable.product_generic));
         }
 
         List<Category> list = getCategories();
@@ -90,7 +90,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
         {
             try
             {
-                byte[] image = ImageHelper.getImageBytesFromUri(getContext(), intent.getData());
+                byte[] image = ImageHelper.getByteArrayFromUri(getContext(), intent.getData());
                 setProductImage(image);
             }
             catch (Exception e)
@@ -104,7 +104,7 @@ public class UpdateProductFragment extends BaseFragment<UpdateProductViewInterfa
             {
                 Bundle extras = intent.getExtras();
                 Bitmap bitmap = (Bitmap) extras.get("data");
-                byte[] image = ImageHelper.getImageBytesFromBitmap(bitmap);
+                byte[] image = ImageHelper.getByteArrayFromBitmap(bitmap);
                 setProductImage(image);
             }
             catch (Exception e)
