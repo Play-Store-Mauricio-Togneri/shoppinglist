@@ -20,7 +20,7 @@ public class CustomImageView extends ImageView
     {
         if ((image != null) && (image.length > 0))
         {
-            Bitmap bitmap = ImageHelper.getBitmapFromBytes(image);
+            Bitmap bitmap = ImageHelper.getBitmapFromByteArray(image);
             setImageBitmap(bitmap);
 
             ColorMatrix matrix = new ColorMatrix();
