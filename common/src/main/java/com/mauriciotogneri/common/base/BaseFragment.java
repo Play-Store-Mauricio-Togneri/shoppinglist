@@ -115,4 +115,10 @@ public abstract class BaseFragment<V extends BaseViewInterface> extends Fragment
         shareIntent.setType("text/plain");
         startActivity(Intent.createChooser(shareIntent, getResources().getText(titleId)));
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        // no call for super(). Bug on API Level > 11.
+    }
 }
