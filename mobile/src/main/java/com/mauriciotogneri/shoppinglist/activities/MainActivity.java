@@ -29,7 +29,7 @@ public class MainActivity extends BaseFragmentActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, homeFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
 
         fragments.add(homeFragment);
 
@@ -44,7 +44,7 @@ public class MainActivity extends BaseFragmentActivity
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.fragment_container, fragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
 
         fragments.add(fragment);
     }
@@ -59,7 +59,7 @@ public class MainActivity extends BaseFragmentActivity
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.remove(currentFragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
 
         BaseFragment<?> previousFragment = fragments.peek();
 
