@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -19,7 +19,7 @@
         android:text="@string/label_product_name"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="opensans"/>
+        app:custom_font="opensans"/>
 
     <com.mauriciotogneri.common.widgets.CustomEditText
         android:id="@+id/name"
@@ -30,7 +30,7 @@
         android:maxLength="40"
         android:padding="10dp"
         android:textColor="#007AB0"
-        custom:font="opensans"/>
+        app:custom_font="opensans"/>
 
     <TableLayout
         android:layout_width="match_parent"

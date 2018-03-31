@@ -1,15 +1,9 @@
-# Local configuration file (sdk path, etc)
-local.properties
+*.iml
 gradle.properties
-
-# Android Studio
-/.idea
-**/*.iml
-
-# Ignore gradle files
 .gradle
-/app/build
-**/build
-
-# Other files
-forward.sh
+/.idea
+/local.properties
+/mobile/build
+/common/build
+/wear/build
+/build
