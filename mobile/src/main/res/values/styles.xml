@@ -20,7 +20,7 @@
         <item name="android:textSize">@dimen/default_font_size</item>
         <item name="android:textColor">@color/default_text_color</item>
         <item name="android:visibility">gone</item>
-        <item name="font">opensans</item>
+        <item name="custom_font">opensans</item>
     </style>
 
     <style name="Toolbar">
@@ -45,7 +45,7 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">15dp</item>
-        <item name="font">opensans</item>
+        <item name="custom_font">opensans</item>
     </style>
 
     <style name="ToolbarButton">
@@ -57,14 +57,14 @@
         <item name="android:gravity">center</item>
         <item name="android:clickable">true</item>
         <item name="android:background">@drawable/background_toolbar_button</item>
-        <item name="font">glyphicons</item>
+        <item name="custom_font">glyphicons</item>
     </style>
 
     <style name="ColorButton">
         <item name="android:layout_width">55dp</item>
         <item name="android:layout_height">55dp</item>
         <item name="android:gravity">center</item>
-        <item name="font">glyphicons</item>
+        <item name="custom_font">glyphicons</item>
         <item name="android:textColor">#F5F5F5</item>
         <item name="android:textSize">@dimen/default_font_size</item>
     </style>

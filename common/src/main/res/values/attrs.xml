@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="font" format="string">
+    <attr name="custom_font" format="string">
         <enum name="opensans" value="0"/>
         <enum name="glyphicons" value="1"/>
     </attr>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_list_row"
@@ -16,7 +16,7 @@
         android:layout_marginEnd="15dp"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="glyphicons"/>
+        app:custom_font="glyphicons"/>
 
     <com.mauriciotogneri.common.widgets.CustomTextView
         android:id="@+id/title"
@@ -24,6 +24,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_font_size"
-        custom:font="opensans"/>
+        app:custom_font="opensans"/>
 
 </LinearLayout>

@@ -2,7 +2,7 @@
 <ScrollView
     style="@style/Screen"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white">
 
@@ -32,7 +32,7 @@
                 android:text="@string/label_product_category"
                 android:textColor="@color/default_text_color"
                 android:textSize="@dimen/default_font_size"
-                custom:font="opensans"/>
+                app:custom_font="opensans"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                     android:text="@string/icon_menu"
                     android:textColor="@color/default_text_color"
                     android:textSize="@dimen/default_font_size"
-                    custom:font="glyphicons"/>
+                    app:custom_font="glyphicons"/>
 
             </LinearLayout>
 
@@ -83,7 +83,7 @@
                 android:text="@string/label_product_name"
                 android:textColor="@color/default_text_color"
                 android:textSize="@dimen/default_font_size"
-                custom:font="opensans"/>
+                app:custom_font="opensans"/>
 
             <com.mauriciotogneri.common.widgets.CustomEditText
                 android:id="@+id/name"
@@ -95,7 +95,7 @@
                 android:maxLength="40"
                 android:padding="10dp"
                 android:textColor="@color/special_text_color"
-                custom:font="opensans"/>
+                app:custom_font="opensans"/>
 
             <com.mauriciotogneri.common.widgets.CustomTextView
                 android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
                 android:text="@string/label_product_picture"
                 android:textColor="@color/default_text_color"
                 android:textSize="@dimen/default_font_size"
-                custom:font="opensans"/>
+                app:custom_font="opensans"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -144,7 +144,7 @@
                     android:text="@string/icon_update"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/default_font_size"
-                    custom:font="glyphicons"/>
+                    app:custom_font="glyphicons"/>
 
                 <com.mauriciotogneri.common.widgets.CustomTextView
                     android:id="@+id/button_update_text"
@@ -157,8 +157,8 @@
                     android:paddingTop="12dp"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/default_font_size"
-                    custom:font="opensans"
-                    custom:paddingEnd="15dp"
+                    app:custom_font="opensans"
+                    app:paddingEnd="15dp"
                     tools:text="@string/dummy_text"/>
 
             </LinearLayout>
