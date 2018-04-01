@@ -1,14 +1,17 @@
-package com.mauriciotogneri.common.base;
+package com.mauriciotogneri.shoppinglist.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.mauriciotogneri.androidutils.uibinder.UiBinder;
+import com.mauriciotogneri.shoppinglist.R;
 
 public abstract class BaseView<O, C>
 {
@@ -52,6 +55,12 @@ public abstract class BaseView<O, C>
 
     protected void initialize()
     {
+    }
+
+    protected void title(@StringRes int resId)
+    {
+        TextView textView = view.findViewById(R.id.toolbar_title);
+        textView.setText(resId);
     }
 
     @SuppressLint("InflateParams")

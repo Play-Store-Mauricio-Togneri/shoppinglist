@@ -1,4 +1,4 @@
-package com.mauriciotogneri.common.base;
+package com.mauriciotogneri.shoppinglist.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -3,7 +3,7 @@
 
     <style name="app.theme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary.dark</item>
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -12,6 +12,16 @@
     </style>
 
     <style name="base">
+    </style>
+
+    <style name="label.empty" parent="base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/label.empty.list</item>
+        <item name="android:textSize">@dimen/default_font_size</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:visibility">gone</item>
     </style>
 
     <!--<style name="Screen">

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Shopping List</string>
+    <string name="application.name">Shopping List</string>
 
-    <string name="label_error">Error</string>
-    <string name="label_empty_list">Lista vacía</string>
+    <string name="label.error">Error</string>
+    <string name="label.empty.list">Lista vacía</string>
 
-    <string name="button_accept">Aceptar</string>
-    <string name="button_cancel">Cancelar</string>
-    <string name="button_edit">Editar</string>
-    <string name="button_remove">Eliminar</string>
-    <string name="button_create">Crear</string>
+    <string name="button.accept">Aceptar</string>
+    <string name="button.cancel">Cancelar</string>
+    <string name="button.edit">Editar</string>
+    <string name="button.remove">Eliminar</string>
+    <string name="button.create">Crear</string>
 
 </resources>
