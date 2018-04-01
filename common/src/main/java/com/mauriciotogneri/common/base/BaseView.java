@@ -2,67 +2,72 @@ package com.mauriciotogneri.common.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.annotation.IdRes;
-import android.view.Gravity;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
-import com.mauriciotogneri.common.R;
+import com.mauriciotogneri.androidutils.uibinder.UiBinder;
 
-public abstract class BaseView<UI extends BaseUiContainer> implements BaseViewInterface<UI>
+public abstract class BaseView<O, C>
 {
     private View view;
-    protected UI ui;
-    private LayoutInflater inflater;
-    private final Handler handler = new Handler(Looper.getMainLooper());
+    private Context context;
+    private final int viewId;
+    protected final C ui;
+    protected final O observer;
 
-    @Override
-    public final View init(LayoutInflater inflater, ViewGroup container)
+    protected BaseView(@LayoutRes int viewId, O observer, C viewContainer)
     {
-        this.inflater = inflater;
-        this.view = inflater.inflate(getViewId(), container, false);
-        this.ui = getUiContainer(this);
+        this.viewId = viewId;
+        this.observer = observer;
+        this.ui = viewContainer;
+    }
+
+    @SuppressWarnings("unchecked")
+    public final View inflate(LayoutInflater inflater, ViewGroup container)
+    {
+        context = inflater.getContext();
+        view = inflater.inflate(viewId, container, false);
+
+        if (container == null)
+        {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            view.setLayoutParams(params);
+        }
+
+        UiBinder uiBinder = new UiBinder();
+        uiBinder.bind(view, this);
+
+        if (ui != null)
+        {
+            uiBinder.bind(view, ui);
+        }
+
+        initialize();
 
         return view;
     }
 
-    @Override
-    public View findViewById(@IdRes int viewId)
+    protected void initialize()
     {
-        return view.findViewById(viewId);
     }
 
-    @Override
-    public Context getContext()
-    {
-        return view.getContext();
-    }
-
-    @Override
     @SuppressLint("InflateParams")
     public void showToast(final int messageId)
     {
-        handler.post(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                View layout = inflater.inflate(R.layout.view_toast, null);
+        /*handler.post(() -> {
+            View layout = inflater.inflate(R.layout.view_toast, null);
 
-                TextView text = (TextView) layout.findViewById(R.id.message);
-                text.setText(messageId);
+            TextView text = layout.findViewById(R.id.message);
+            text.setText(messageId);
 
-                Toast toast = new Toast(getContext().getApplicationContext());
-                toast.setGravity(Gravity.BOTTOM, 0, 50);
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setView(layout);
-                toast.show();
-            }
-        });
+            Toast toast = new Toast(getContext().getApplicationContext());
+            toast.setGravity(Gravity.BOTTOM, 0, 50);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+        });*/
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Shopping List</string>
+    <string name="application.name">Shopping List</string>
 
     <string name="label_error">Error</string>
     <string name="label_empty_list">Empty list</string>
