@@ -19,6 +19,14 @@
             android:layout_height="wrap_content"
             android:divider="@null"/>
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/product.add"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_plus"/>
+
         <TextView
             android:id="@+id/empty.label"
             style="@style/label.empty"/>

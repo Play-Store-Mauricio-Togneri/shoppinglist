@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
+import android.view.View;
 import android.widget.ListView;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
@@ -26,9 +27,10 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
     {
         toolbarTitle(R.string.application_name);
 
+        ui.buttonAdd.setOnClickListener(v -> observer.onAddProduct());
+
         adapter = new CartItemAdapter(context());
         ui.list.setAdapter(adapter);
-
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
             Product product = (Product) adapterView.getItemAtPosition(position);
             observer.onProduceSelected(product);
@@ -67,5 +69,8 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
     {
         @BindView(R.id.product_list)
         public ListView list;
+
+        @BindView(R.id.product_add)
+        public View buttonAdd;
     }
 }
