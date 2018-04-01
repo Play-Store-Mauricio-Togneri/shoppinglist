@@ -2,12 +2,12 @@ package com.mauriciotogneri.shoppinglist.views;
 
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
-import com.mauriciotogneri.shoppinglist.views.MainView.MainViewObserver;
-import com.mauriciotogneri.shoppinglist.views.MainView.ViewContainer;
+import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
+import com.mauriciotogneri.shoppinglist.views.CartView.ViewContainer;
 
-public class MainView extends BaseView<MainViewObserver, ViewContainer>
+public class CartView extends BaseView<CartViewObserver, ViewContainer>
 {
-    public MainView(MainViewObserver observer)
+    public CartView(CartViewObserver observer)
     {
         super(R.layout.screen_main, observer, new ViewContainer());
     }
@@ -18,7 +18,7 @@ public class MainView extends BaseView<MainViewObserver, ViewContainer>
         title(R.string.application_name);
     }
 
-    public interface MainViewObserver
+    public interface CartViewObserver
     {
         void onAddProduct();
     }

@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:background="@color/default_background_color"/>
 
-        <com.mauriciotogneri.common.widgets.CustomTextView
+        <TextView
             android:id="@+id/empty_label"
             style="@style/label.empty"/>
 

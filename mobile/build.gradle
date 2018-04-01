@@ -68,7 +68,5 @@ android
 dependencies
 {
     implementation project(':common')
-    //wearApp project(':wear')
-
-    //implementation 'com.google.android.gms:play-services-wearable:10.2.4'
+    wearApp project(':wear')
 }

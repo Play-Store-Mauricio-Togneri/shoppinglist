@@ -8,7 +8,7 @@ public class CartElement implements Serializable
     public final String name;
     public final String category;
     public final byte[] picture;
-    public boolean isSelected = false;
+    public boolean isSelected;
 
     public CartElement(long id, String name, String category, byte[] picture, boolean isSelected)
     {
