@@ -1,88 +1,26 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
-import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.WindowManager;
-
-import com.mauriciotogneri.common.base.BaseFragment;
-import com.mauriciotogneri.common.base.BaseFragmentActivity;
-import com.mauriciotogneri.shoppinglist.R;
+import com.mauriciotogneri.common.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.app.ShoppingList;
-import com.mauriciotogneri.shoppinglist.fragments.CartFragment;
+import com.mauriciotogneri.shoppinglist.views.MainView;
+import com.mauriciotogneri.shoppinglist.views.MainView.MainViewObserver;
 
-import java.util.Stack;
-
-public class MainActivity extends BaseFragmentActivity
+public class MainActivity extends BaseActivity<MainView> implements MainViewObserver
 {
-    private final Stack<BaseFragment<?>> fragments = new Stack<>();
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    protected void initialize()
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.screen_main);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        CartFragment homeFragment = new CartFragment();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, homeFragment);
-        fragmentTransaction.commitAllowingStateLoss();
-
-        fragments.add(homeFragment);
-
-        ShoppingList shoppingList = (ShoppingList) getApplication();
-        shoppingList.getStats().sendAppLaunched();
+        ShoppingList.analytics().sendAppLaunched();
     }
 
     @Override
-    public void addFragment(BaseFragment<?> fragment)
+    public void onAddProduct()
     {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.fragment_container, fragment);
-        transaction.commitAllowingStateLoss();
-
-        fragments.add(fragment);
     }
 
     @Override
-    public void removeFragment()
+    protected MainView view()
     {
-        BaseFragment<?> currentFragment = fragments.pop();
-        Object result = currentFragment.getResult();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.remove(currentFragment);
-        transaction.commitAllowingStateLoss();
-
-        BaseFragment<?> previousFragment = fragments.peek();
-
-        if (result != null)
-        {
-            previousFragment.onActivate(result);
-        }
-        else
-        {
-            previousFragment.onActivate();
-        }
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        if (fragments.size() == 1)
-        {
-            super.onBackPressed();
-        }
-        else
-        {
-            removeFragment();
-        }
+        return new MainView(this);
     }
 }
