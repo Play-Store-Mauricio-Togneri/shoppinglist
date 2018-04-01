@@ -1,63 +1,54 @@
 package com.mauriciotogneri.shoppinglist.model;
 
-import android.content.Context;
 import android.text.TextUtils;
-import android.util.Base64;
 
-import com.mauriciotogneri.common.utils.ImageHelper;
-import com.mauriciotogneri.shoppinglist.R;
-import com.orm.SugarRecord;
-
-public class Product extends SugarRecord<Product>
+public class Product
 {
-    private String name;
-    private Category category;
-    private String image;
+    private final String name;
+    private final Category category;
+    private final String image;
+    private boolean selected;
 
-    public Product()
-    {
-    }
-
-    public Product(String name, Category category, byte[] image)
+    public Product(String name, Category category, String image, boolean selected)
     {
         this.name = name;
         this.category = category;
-        this.image = Base64.encodeToString(image, Base64.DEFAULT);
+        this.image = image;
+        this.selected = selected;
     }
 
-    public String getName()
+    public String name()
     {
         return name;
     }
 
-    public Category getCategory()
+    public Category category()
     {
         return category;
     }
 
-    public byte[] getImage(Context context)
+    public String image()
     {
-        try
-        {
-            return Base64.decode(image, Base64.DEFAULT);
-        }
-        catch (Exception e)
-        {
-            return ImageHelper.getByteArrayFromResource(context, R.drawable.product_generic);
-        }
+        return image;
+    }
+
+    public boolean isSelected()
+    {
+        return selected;
+    }
+
+    public void selected(boolean value)
+    {
+        selected = value;
+    }
+
+    public void toggleSelection()
+    {
+        selected = !selected;
     }
 
     public boolean isValid()
     {
         return (!TextUtils.isEmpty(name) && (category != null) && (category.isValid()) && !TextUtils.isEmpty(image));
-    }
-
-    public void update(String newName, Category newCategory, byte[] newImage)
-    {
-        name = newName;
-        category = newCategory;
-        image = Base64.encodeToString(newImage, Base64.DEFAULT);
-
-        save();
     }
 }

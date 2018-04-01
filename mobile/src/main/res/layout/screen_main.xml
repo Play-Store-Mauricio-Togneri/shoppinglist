@@ -2,7 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include
         layout="@layout/toolbar"/>
@@ -13,13 +14,13 @@
         android:background="@color/list.background">
 
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/product.list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/default_background_color"/>
 
         <TextView
-            android:id="@+id/empty_label"
+            android:id="@+id/empty.label"
             style="@style/label.empty"/>
 
     </FrameLayout>

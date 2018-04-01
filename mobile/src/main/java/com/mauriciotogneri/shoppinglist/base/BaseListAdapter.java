@@ -7,39 +7,48 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
 {
+    private final LayoutInflater inflater;
     private final int resourceId;
 
     public BaseListAdapter(Context context, int resourceId, List<T> list)
     {
         super(context, resourceId, list);
 
+        this.inflater = LayoutInflater.from(getContext());
         this.resourceId = resourceId;
     }
 
     public BaseListAdapter(Context context, int resourceId)
     {
-        this(context, resourceId, new ArrayList<T>());
+        this(context, resourceId, new ArrayList<>());
     }
 
-    protected abstract V getViewHolder(View view);
-
-    protected abstract void fillView(V viewHolder, T item, int position);
-
-    public void update()
-    {
-        notifyDataSetChanged();
-    }
-
-    public void update(List<T> list)
+    public void set(List<T> list)
     {
         clear();
+        add(list);
+    }
+
+    public void set(T[] list)
+    {
+        clear();
+        add(Arrays.asList(list));
+    }
+
+    public void add(List<T> list)
+    {
         addAll(list);
         notifyDataSetChanged();
     }
+
+    protected abstract void fillView(V viewHolder, T item, int position);
+
+    protected abstract V viewHolder(View view);
 
     @Override
     @SuppressWarnings("unchecked")
@@ -51,10 +60,9 @@ public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
 
         if (rowView == null)
         {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
             rowView = inflater.inflate(resourceId, parent, false);
 
-            viewHolder = getViewHolder(rowView);
+            viewHolder = viewHolder(rowView);
             rowView.setTag(viewHolder);
         }
         else

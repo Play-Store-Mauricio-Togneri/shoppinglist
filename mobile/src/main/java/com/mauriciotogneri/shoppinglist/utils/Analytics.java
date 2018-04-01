@@ -7,7 +7,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.HitBuilders.EventBuilder;
 import com.google.android.gms.analytics.Tracker;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.model.CartItem;
+import com.mauriciotogneri.shoppinglist.model.Product;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -39,11 +39,11 @@ public class Analytics
         tracker.send(eventBuilder.build());
     }
 
-    public void cartItemAdded(Context context, CartItem cartItem)
+    public void cartItemAdded(Product product)
     {
         EventBuilder eventBuilder = new EventBuilder();
         eventBuilder.setCategory("ADDED_PRODUCT_TO_CART");
-        eventBuilder.setAction(cartItem.getCategory().getName());
+        eventBuilder.setAction(product.category().name());
         tracker.send(eventBuilder.build());
     }
 }
