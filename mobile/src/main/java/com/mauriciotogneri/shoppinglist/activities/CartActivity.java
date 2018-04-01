@@ -32,7 +32,8 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     @Override
     public void onProduceSelected(Product product)
     {
-        Toast.makeText(this, product.name(), Toast.LENGTH_SHORT).show();
+        product.toggleSelection();
+        view.updateList();
     }
 
     @Override

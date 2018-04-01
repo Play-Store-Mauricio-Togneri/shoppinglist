@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,12 +22,25 @@ public class CartItemAdapter extends BaseListAdapter<Product, ViewHolder>
     }
 
     @Override
-    protected void fillView(ViewHolder viewHolder, Product item, int position)
+    protected void fillView(ViewHolder viewHolder, Product product, int position)
     {
-        viewHolder.name.setText(item.name());
+        if (product.isSelected())
+        {
+            viewHolder.row.setBackgroundColor(color(R.color.item_selected));
+            viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            viewHolder.check.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            viewHolder.row.setBackgroundColor(color(R.color.item_unselected));
+            viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            viewHolder.check.setVisibility(View.GONE);
+        }
+
+        viewHolder.name.setText(product.name());
 
         Glide.with(getContext())
-                .load(item.image())
+                .load(product.image())
                 .into(viewHolder.image);
     }
 
@@ -38,11 +52,17 @@ public class CartItemAdapter extends BaseListAdapter<Product, ViewHolder>
 
     public static class ViewHolder extends BaseListViewHolder
     {
+        @BindView(R.id.product_row)
+        public View row;
+
         @BindView(R.id.product_image)
         public ImageView image;
 
         @BindView(R.id.product_name)
         public TextView name;
+
+        @BindView(R.id.product_check)
+        public ImageView check;
 
         protected ViewHolder(View view)
         {
