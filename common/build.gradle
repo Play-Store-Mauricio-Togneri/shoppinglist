@@ -71,6 +71,11 @@ dependencies
     // google analytics
     api "com.google.android.gms:play-services-analytics:$playservices"
 
+    //implementation 'com.google.android.gms:play-services-wearable:10.2.4'
+
+    //implementation 'com.google.android.support:wearable:1.4.0'
+    //compileOnly 'com.google.android.wearable:wearable:1.0.0'
+
     // android utils
     api 'com.mauriciotogneri:androidutils:2.9.0'
 

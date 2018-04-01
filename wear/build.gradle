@@ -65,11 +65,4 @@ android
 dependencies
 {
     implementation project(':common')
-
-    implementation "com.android.support:support-v4:$support"
-
-    //implementation 'com.google.android.gms:play-services-wearable:10.2.4'
-
-    //implementation 'com.google.android.support:wearable:1.4.0'
-    //compileOnly 'com.google.android.wearable:wearable:1.0.0'
 }

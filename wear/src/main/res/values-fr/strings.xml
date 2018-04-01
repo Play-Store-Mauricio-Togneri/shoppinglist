@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="error_connection">Erreur de connexion</string>
+    <string name="error.connection">Erreur de connexion</string>
 
 </resources>

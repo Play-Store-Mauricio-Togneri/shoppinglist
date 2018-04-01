@@ -2,10 +2,10 @@ package com.mauriciotogneri.shoppinglist.activities;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
-import com.mauriciotogneri.shoppinglist.views.MainView;
-import com.mauriciotogneri.shoppinglist.views.MainView.MainViewObserver;
+import com.mauriciotogneri.shoppinglist.views.CartView;
+import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
 
-public class MainActivity extends BaseActivity<MainView> implements MainViewObserver
+public class CartActivity extends BaseActivity<CartView> implements CartViewObserver
 {
     @Override
     protected void initialize()
@@ -20,8 +20,8 @@ public class MainActivity extends BaseActivity<MainView> implements MainViewObse
     }
 
     @Override
-    protected MainView view()
+    protected CartView view()
     {
-        return new MainView(this);
+        return new CartView(this);
     }
 }

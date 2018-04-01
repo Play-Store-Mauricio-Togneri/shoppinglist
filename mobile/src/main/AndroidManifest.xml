@@ -14,7 +14,7 @@
         android:theme="@style/app.theme">
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.CartActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
