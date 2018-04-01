@@ -4,9 +4,13 @@ import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.model.Products;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.CartView;
 import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CartActivity extends BaseActivity<CartView> implements CartViewObserver
 {
@@ -15,6 +19,14 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     {
         Analytics analytics = new Analytics(this);
         analytics.appLaunched();
+
+        List<Product> products = new ArrayList<>();
+        products.add(Products.Beer);
+        products.add(Products.Coffee);
+        products.add(Products.IceTea);
+        products.add(Products.Soda);
+        products.add(Products.Water);
+        view.updateList(products);
     }
 
     @Override
@@ -24,8 +36,15 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     }
 
     @Override
+    public void onShare()
+    {
+        Toast.makeText(this, "SHARE", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void onAddProduct()
     {
+        Toast.makeText(this, "ADD", Toast.LENGTH_SHORT).show();
     }
 
     @Override
