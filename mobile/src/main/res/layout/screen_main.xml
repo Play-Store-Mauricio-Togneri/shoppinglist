@@ -2,4 +2,26 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/toolbar"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/list.background">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/default_background_color"/>
+
+        <com.mauriciotogneri.common.widgets.CustomTextView
+            android:id="@+id/empty_label"
+            style="@style/label.empty"/>
+
+    </FrameLayout>
+
+</LinearLayout>

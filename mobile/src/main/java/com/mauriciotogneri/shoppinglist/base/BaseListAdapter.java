@@ -1,4 +1,4 @@
-package com.mauriciotogneri.common.base;
+package com.mauriciotogneri.shoppinglist.base;
 
 import android.content.Context;
 import android.view.LayoutInflater;

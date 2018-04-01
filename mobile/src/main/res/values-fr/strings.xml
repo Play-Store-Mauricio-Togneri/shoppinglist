@@ -1,123 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="label_product_category">Catégorie</string>
-    <string name="label_product_new_category">Nouvelle catégorie</string>
-    <string name="label_product_edit_category">Éditer la catégorie</string>
-    <string name="label_product_name">Nom</string>
-    <string name="label_product_picture">Image</string>
-    <string name="label_select_picture_source">Choisissez une image</string>
-    <string name="label_source_gallery">Galerie</string>
-    <string name="label_source_camera">Appareil photo</string>
-    <string name="label_share_cart">Partager avec</string>
-    <string name="label_already_in_cart">Déjà présent dans le panier</string>
-    <string name="label_initializing_database">Initialistion de la base de donnée&#8230;</string>
+    <string name="label.product.category">Catégorie</string>
+    <string name="label.product.new.category">Nouvelle catégorie</string>
+    <string name="label.product.edit.category">Éditer la catégorie</string>
+    <string name="label.product.name">Nom</string>
+    <string name="label.product.picture">Image</string>
+    <string name="label.select.picture.source">Choisissez une image</string>
+    <string name="label.source.gallery">Galerie</string>
+    <string name="label.source.camera">Appareil photo</string>
+    <string name="label.share.cart">Partager avec</string>
+    <string name="label.already.in.cart">Déjà présent dans le panier</string>
+    <string name="label.initializing.database">Initialistion de la base de donnée&#8230;</string>
 
-    <string name="toolbar_title_main">Shopping List</string>
-    <string name="toolbar_title_add_product">Ajouter un produit</string>
-    <string name="toolbar_title_create_product">Créer un produit</string>
-    <string name="toolbar_title_edit_product">Éditer le produit</string>
-    <string name="toolbar_title_manage_categories">Gérer les catégories</string>
+    <string name="toolbar.title.main">Shopping List</string>
+    <string name="toolbar.title.add.product">Ajouter un produit</string>
+    <string name="toolbar.title.create.product">Créer un produit</string>
+    <string name="toolbar.title.edit.product">Éditer le produit</string>
+    <string name="toolbar.title.manage.categories">Gérer les catégories</string>
 
-    <string name="confirmation_remove_product">Voulez-vous supprimer le produit ?</string>
-    <string name="confirmation_remove_car_item">Voulez-vous retirer le produit du panier ?</string>
-    <string name="confirmation_remove_category">Voulez-vous supprimer la catégorie ?</string>
+    <string name="confirmation.remove.product">Voulez-vous supprimer le produit ?</string>
+    <string name="confirmation.remove.car.item">Voulez-vous retirer le produit du panier ?</string>
+    <string name="confirmation.remove.category">Voulez-vous supprimer la catégorie ?</string>
 
-    <string name="error_invalid_category">Catégorie invalide</string>
-    <string name="error_invalid_name">Nom invalide</string>
-    <string name="error_invalid_image">Image invalide</string>
-    <string name="error_product_already_exists">Le produit existe déjà</string>
-    <string name="error_category_already_exists">La catégorie existe déjà</string>
-    <string name="error_cart_empty">La liste est vide</string>
-    <string name="error_category_in_use">La catégorie est liée à un ou plusieurs produits.</string>
-    <string name="error_product_in_use">Le produit ne peut pas être retiré.</string>
+    <string name="error.invalid.category">Catégorie invalide</string>
+    <string name="error.invalid.name">Nom invalide</string>
+    <string name="error.invalid.image">Image invalide</string>
+    <string name="error.product.already.exists">Le produit existe déjà</string>
+    <string name="error.category.already.exists">La catégorie existe déjà</string>
+    <string name="error.cart.empty">La liste est vide</string>
+    <string name="error.category.in.use">La catégorie est liée à un ou plusieurs produits.</string>
+    <string name="error.product.in.use">Le produit ne peut pas être retiré.</string>
 
     <!-- CATEGORIES -->
 
-    <string name="category_fruitsAndVegetables">Fruits et Légumes</string>
-    <string name="category_breadAndGrain">Pain et Céréales</string>
-    <string name="category_condimentsAndOthers">Condiments et Autres</string>
-    <string name="category_milkAndCheese">Lait et Fromage</string>
-    <string name="category_meatAndFish">Viande et Poisson</string>
-    <string name="category_frozen">Surgelés</string>
-    <string name="category_beverage">Boissons</string>
-    <string name="category_household">Produits d\'entretien</string>
+    <string name="category.fruitsAndVegetables">Fruits et Légumes</string>
+    <string name="category.breadAndGrain">Pain et Céréales</string>
+    <string name="category.condimentsAndOthers">Condiments et Autres</string>
+    <string name="category.milkAndCheese">Lait et Fromage</string>
+    <string name="category.meatAndFish">Viande et Poisson</string>
+    <string name="category.frozen">Surgelés</string>
+    <string name="category.beverage">Boissons</string>
+    <string name="category.household">Produits d\'entretien</string>
 
     <!-- PRODUCTS -->
 
-    <string name="product_apples">Pommes</string>
-    <string name="product_bananas">Bananes</string>
-    <string name="product_carrots">Carottes</string>
-    <string name="product_lemons">Citrons</string>
-    <string name="product_lettuce">Salade</string>
-    <string name="product_pineapple">Ananas</string>
-    <string name="product_potatoes">Pommes de terre</string>
+    <string name="product.apples">Pommes</string>
+    <string name="product.bananas">Bananes</string>
+    <string name="product.carrots">Carottes</string>
+    <string name="product.lemons">Citrons</string>
+    <string name="product.lettuce">Salade</string>
+    <string name="product.pineapple">Ananas</string>
+    <string name="product.potatoes">Pommes de terre</string>
 
-    <string name="product_baguette">Baguette</string>
-    <string name="product_cereals">Céréales</string>
-    <string name="product_pasta">Pâtes</string>
-    <string name="product_rice">Riz</string>
-    <string name="product_slicedBread">Pain de mie</string>
+    <string name="product.baguette">Baguette</string>
+    <string name="product.cereals">Céréales</string>
+    <string name="product.pasta">Pâtes</string>
+    <string name="product.rice">Riz</string>
+    <string name="product.slicedBread">Pain de mie</string>
 
-    <string name="product_coffeeCream">Crème pour café</string>
-    <string name="product_corn">Maïs</string>
-    <string name="product_risotto">Risotto</string>
-    <string name="product_salt">Sel</string>
-    <string name="product_soup">Soupe</string>
-    <string name="product_sugar">Sucre</string>
-    <string name="product_oil">Huile</string>
-    <string name="product_tomatoSauce">Sauce tomate</string>
+    <string name="product.coffeeCream">Crème pour café</string>
+    <string name="product.corn">Maïs</string>
+    <string name="product.risotto">Risotto</string>
+    <string name="product.salt">Sel</string>
+    <string name="product.soup">Soupe</string>
+    <string name="product.sugar">Sucre</string>
+    <string name="product.oil">Huile</string>
+    <string name="product.tomatoSauce">Sauce tomate</string>
 
-    <string name="product_cheese">Fromage</string>
-    <string name="product_eggs">Oeufs</string>
-    <string name="product_gratedCheese">Frômage rapé</string>
-    <string name="product_milk">Lait</string>
-    <string name="product_yogurt">Yahourt</string>
-    <string name="product_butter">Beurre</string>
+    <string name="product.cheese">Fromage</string>
+    <string name="product.eggs">Oeufs</string>
+    <string name="product.gratedCheese">Frômage rapé</string>
+    <string name="product.milk">Lait</string>
+    <string name="product.yogurt">Yahourt</string>
+    <string name="product.butter">Beurre</string>
 
-    <string name="product_chicken">Poulet</string>
-    <string name="product_fish">Poisson</string>
-    <string name="product_ham">Jambon</string>
-    <string name="product_meat">Viande</string>
-    <string name="product_pork">Porc</string>
-    <string name="product_salami">Salami</string>
-    <string name="product_sardines">Sardines</string>
-    <string name="product_tuna">Thon</string>
+    <string name="product.chicken">Poulet</string>
+    <string name="product.fish">Poisson</string>
+    <string name="product.ham">Jambon</string>
+    <string name="product.meat">Viande</string>
+    <string name="product.pork">Porc</string>
+    <string name="product.salami">Salami</string>
+    <string name="product.sardines">Sardines</string>
+    <string name="product.tuna">Thon</string>
 
-    <string name="product_fishSticks">Bâtonnets de poisson</string>
-    <string name="product_frenchFries">Frites</string>
-    <string name="product_iceCream">Glaces</string>
-    <string name="product_lasagna">Lasagnes</string>
-    <string name="product_nuggets">Nuggets</string>
-    <string name="product_pizza">Pizza</string>
+    <string name="product.fishSticks">Bâtonnets de poisson</string>
+    <string name="product.frenchFries">Frites</string>
+    <string name="product.iceCream">Glaces</string>
+    <string name="product.lasagna">Lasagnes</string>
+    <string name="product.nuggets">Nuggets</string>
+    <string name="product.pizza">Pizza</string>
 
-    <string name="product_beer">Bière</string>
-    <string name="product_coffee">Café</string>
-    <string name="product_icedTea">Thé glacé</string>
-    <string name="product_soda">Soda</string>
-    <string name="product_water">Eau</string>
+    <string name="product.beer">Bière</string>
+    <string name="product.coffee">Café</string>
+    <string name="product.icedTea">Thé glacé</string>
+    <string name="product.soda">Soda</string>
+    <string name="product.water">Eau</string>
 
-    <string name="product_airFreshener">Désodorisant</string>
-    <string name="product_bleach">Eau de javel</string>
-    <string name="product_bulb">Ampoule</string>
-    <string name="product_cleaningSupplies">Produits de nettoyages</string>
-    <string name="product_deodorant">Déodorant</string>
-    <string name="product_dishwashingLiquid">Liquide vaisselle</string>
-    <string name="product_hairRemover">Rouleau adhésif anti-poils</string>
-    <string name="product_kitchenRags">Carré éponges</string>
-    <string name="product_garbageBags">Sacs poubelles</string>
-    <string name="product_laundryDetergent">Lessive</string>
-    <string name="product_paperTowels">Serviettes en papier</string>
-    <string name="product_razor">Rasoir</string>
-    <string name="product_shampoo">Shampooing</string>
-    <string name="product_shavingFoam">Mousse à raser</string>
-    <string name="product_showerGel">Gel douche</string>
-    <string name="product_soap">Savon</string>
-    <string name="product_sponge">Éponge</string>
-    <string name="product_spongeMetal">Grattoir</string>
-    <string name="product_cottonSwabs">Cotons-tiges</string>
-    <string name="product_toiletPaper">Papier toilettes</string>
-    <string name="product_toothbrush">Brosse à dent</string>
-    <string name="product_toothpaste">Dentifrice</string>
+    <string name="product.airFreshener">Désodorisant</string>
+    <string name="product.bleach">Eau de javel</string>
+    <string name="product.bulb">Ampoule</string>
+    <string name="product.cleaningSupplies">Produits de nettoyages</string>
+    <string name="product.deodorant">Déodorant</string>
+    <string name="product.dishwashingLiquid">Liquide vaisselle</string>
+    <string name="product.hairRemover">Rouleau adhésif anti-poils</string>
+    <string name="product.kitchenRags">Carré éponges</string>
+    <string name="product.garbageBags">Sacs poubelles</string>
+    <string name="product.laundryDetergent">Lessive</string>
+    <string name="product.paperTowels">Serviettes en papier</string>
+    <string name="product.razor">Rasoir</string>
+    <string name="product.shampoo">Shampooing</string>
+    <string name="product.shavingFoam">Mousse à raser</string>
+    <string name="product.showerGel">Gel douche</string>
+    <string name="product.soap">Savon</string>
+    <string name="product.sponge">Éponge</string>
+    <string name="product.spongeMetal">Grattoir</string>
+    <string name="product.cottonSwabs">Cotons-tiges</string>
+    <string name="product.toiletPaper">Papier toilettes</string>
+    <string name="product.toothbrush">Brosse à dent</string>
+    <string name="product.toothpaste">Dentifrice</string>
 
 </resources>

@@ -2,6 +2,8 @@
 <resources>
 
     <color name="primary">#007AB0</color>
+    <color name="primary.dark">#006C9C</color>
+    <color name="list.background">#F0F0F0</color>
 
     <color name="default_text_color">#777777</color>
     <color name="special_text_color">#007AB0</color>
