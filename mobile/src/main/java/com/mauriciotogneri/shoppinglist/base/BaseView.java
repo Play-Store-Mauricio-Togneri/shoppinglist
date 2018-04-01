@@ -57,6 +57,11 @@ public abstract class BaseView<O, C>
     {
     }
 
+    protected Context context()
+    {
+        return context;
+    }
+
     protected void title(@StringRes int resId)
     {
         TextView textView = view.findViewById(R.id.toolbar_title);
