@@ -17,7 +17,9 @@
             android:id="@+id/product.list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/default_background_color"/>
+            android:background="@color/default_background_color"
+            android:divider="@color/separator"
+            android:dividerHeight="0.3dp"/>
 
         <TextView
             android:id="@+id/empty.label"
