@@ -2,8 +2,10 @@ package com.mauriciotogneri.shoppinglist.adapters;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CartItemAdapter.ViewHolder;
@@ -22,6 +24,10 @@ public class CartItemAdapter extends BaseListAdapter<Product, ViewHolder>
     protected void fillView(ViewHolder viewHolder, Product item, int position)
     {
         viewHolder.name.setText(item.name());
+
+        Glide.with(getContext())
+                .load(item.image())
+                .into(viewHolder.image);
     }
 
     @Override
@@ -32,6 +38,9 @@ public class CartItemAdapter extends BaseListAdapter<Product, ViewHolder>
 
     public static class ViewHolder extends BaseListViewHolder
     {
+        @BindView(R.id.product_image)
+        public ImageView image;
+
         @BindView(R.id.product_name)
         public TextView name;
 

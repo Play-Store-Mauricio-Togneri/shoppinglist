@@ -2,11 +2,14 @@ package com.mauriciotogneri.shoppinglist.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -62,10 +65,25 @@ public abstract class BaseView<O, C>
         return context;
     }
 
-    protected void title(@StringRes int resId)
+    protected void toolbarTitle(@StringRes int resId)
     {
         TextView textView = view.findViewById(R.id.toolbar_title);
         textView.setText(resId);
+    }
+
+    protected void enableToolbarAction(@DrawableRes int resId, OnClickListener onClickListener)
+    {
+        ImageView imageView = view.findViewById(R.id.toolbar_action);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.setImageResource(resId);
+        imageView.setOnClickListener(onClickListener);
+    }
+
+    protected void disableToolbarAction()
+    {
+        ImageView imageView = view.findViewById(R.id.toolbar_action);
+        imageView.setVisibility(View.GONE);
+        imageView.setOnClickListener(null);
     }
 
     @SuppressLint("InflateParams")
