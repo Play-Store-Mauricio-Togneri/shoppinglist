@@ -10,7 +10,9 @@
         android:id="@+id/product.name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="15dp"
         android:textColor="@color/text.color"
         android:textSize="14sp"
         tools:text="Product"/>
