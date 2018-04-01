@@ -49,6 +49,11 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
         }
     }
 
+    public void updateList()
+    {
+        adapter.update();
+    }
+
     public interface CartViewObserver
     {
         void onProduceSelected(Product product);

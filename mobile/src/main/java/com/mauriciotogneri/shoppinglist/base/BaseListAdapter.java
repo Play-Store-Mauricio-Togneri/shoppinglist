@@ -1,6 +1,9 @@
 package com.mauriciotogneri.shoppinglist.base;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +46,17 @@ public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
     public void add(List<T> list)
     {
         addAll(list);
+        update();
+    }
+
+    public void update()
+    {
         notifyDataSetChanged();
+    }
+
+    protected int color(@ColorRes int colorId)
+    {
+        return ContextCompat.getColor(getContext(), colorId);
     }
 
     protected abstract void fillView(V viewHolder, T item, int position);
