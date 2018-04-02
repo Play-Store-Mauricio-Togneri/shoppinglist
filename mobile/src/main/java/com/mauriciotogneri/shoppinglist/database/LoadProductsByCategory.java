@@ -4,13 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.model.Products;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class LoadProductsByCategory extends AsyncTask<Void, Void, Map<String, List<Product>>>
+public class LoadProductsByCategory extends AsyncTask<Void, Void, Products>
 {
     private final ProductDao dao;
     private final OnProductsLoaded callback;
@@ -22,37 +18,26 @@ public class LoadProductsByCategory extends AsyncTask<Void, Void, Map<String, Li
     }
 
     @Override
-    protected Map<String, List<Product>> doInBackground(Void... voids)
+    protected Products doInBackground(Void... voids)
     {
-        Map<String, List<Product>> result = new HashMap<>();
-        List<Product> products = dao.all();
+        Products products = new Products();
 
-        for (Product product : products)
+        for (Product product : dao.all())
         {
-            if (result.containsKey(product.category))
-            {
-                result.get(product.category).add(product);
-            }
-            else
-            {
-                List<Product> list = new ArrayList<>();
-                list.add(product);
-
-                result.put(product.category, list);
-            }
+            products.add(product);
         }
 
-        return result;
+        return products;
     }
 
     @Override
-    protected void onPostExecute(Map<String, List<Product>> products)
+    protected void onPostExecute(Products products)
     {
         callback.onProductsLoaded(products);
     }
 
     public interface OnProductsLoaded
     {
-        void onProductsLoaded(Map<String, List<Product>> products);
+        void onProductsLoaded(Products products);
     }
 }

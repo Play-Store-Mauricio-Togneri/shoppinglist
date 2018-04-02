@@ -5,8 +5,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.text.TextUtils;
 
+import java.io.Serializable;
+
 @Entity
-public class Product
+public class Product implements Serializable
 {
     @PrimaryKey
     public Integer id;
