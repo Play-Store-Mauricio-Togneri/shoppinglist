@@ -20,7 +20,7 @@ public interface ProductDao
     List<Product> notInCart();
 
     @Query("UPDATE Product SET inCart=:inCart WHERE id=:id")
-    void inCart(Integer id, Boolean inCart);
+    void moveToCart(Integer id, Boolean inCart);
 
     @Insert
     void insertAll(Product... products);

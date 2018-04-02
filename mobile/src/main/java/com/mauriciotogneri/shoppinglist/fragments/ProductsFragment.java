@@ -3,6 +3,7 @@ package com.mauriciotogneri.shoppinglist.fragments;
 import android.os.Bundle;
 
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
+import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView.ProductListViewObserver;
@@ -40,7 +41,8 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     @Override
     public void onProduceSelected(Product product)
     {
-        product.moveToCart(getContext());
+        UpdateProducts updateProducts = new UpdateProducts(getContext());
+        updateProducts.moveToCart(product);
 
         view.removeProduct(product);
     }
