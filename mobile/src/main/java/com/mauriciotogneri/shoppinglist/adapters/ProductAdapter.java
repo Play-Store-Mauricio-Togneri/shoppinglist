@@ -11,7 +11,7 @@ import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.ProductAdapter.ViewHolder;
 import com.mauriciotogneri.shoppinglist.base.BaseListAdapter;
-import com.mauriciotogneri.shoppinglist.base.BaseListViewHolder;
+import com.mauriciotogneri.shoppinglist.base.BaseViewHolder;
 import com.mauriciotogneri.shoppinglist.model.Product;
 
 public class ProductAdapter extends BaseListAdapter<Product, ViewHolder>
@@ -50,7 +50,7 @@ public class ProductAdapter extends BaseListAdapter<Product, ViewHolder>
         return new ViewHolder(view);
     }
 
-    public static class ViewHolder extends BaseListViewHolder
+    public static class ViewHolder extends BaseViewHolder
     {
         @BindView(R.id.product_row)
         public View row;

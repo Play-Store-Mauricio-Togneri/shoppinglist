@@ -4,9 +4,9 @@ import android.view.View;
 
 import com.mauriciotogneri.androidutils.uibinder.UiBinder;
 
-public class BaseListViewHolder
+public class BaseViewHolder
 {
-    protected BaseListViewHolder(View view)
+    protected BaseViewHolder(View view)
     {
         UiBinder uiBinder = new UiBinder();
         uiBinder.bind(view, this);
