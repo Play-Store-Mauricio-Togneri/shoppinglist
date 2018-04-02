@@ -6,7 +6,7 @@ import android.widget.ListView;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.adapters.ProductAdapter;
+import com.mauriciotogneri.shoppinglist.adapters.ProductInCartAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
@@ -17,13 +17,13 @@ import java.util.List;
 
 public class CartView extends BaseView<CartViewObserver, ViewContainer>
 {
-    private ProductAdapter adapter;
+    private ProductInCartAdapter adapter;
 
     public CartView(Context context, CartViewObserver observer)
     {
         super(R.layout.screen_main, observer, new ViewContainer());
 
-        this.adapter = new ProductAdapter(context);
+        this.adapter = new ProductInCartAdapter(context);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
         ui.list.setAdapter(adapter);
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
             Product product = (Product) adapterView.getItemAtPosition(position);
-            observer.onProduceSelected(product);
+            observer.onProductSelected(product);
         });
     }
 
@@ -78,7 +78,7 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
 
     public interface CartViewObserver
     {
-        void onProduceSelected(Product product);
+        void onProductSelected(Product product);
 
         void onShare();
 

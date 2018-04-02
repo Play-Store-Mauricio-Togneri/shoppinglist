@@ -24,7 +24,7 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     }
 
     @Override
-    public void onProduceSelected(Product product)
+    public void onProductSelected(Product product)
     {
         product.toggleSelection();
         view.updateList();
