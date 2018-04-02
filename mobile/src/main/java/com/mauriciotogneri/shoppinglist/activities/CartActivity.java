@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
@@ -45,7 +46,8 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     @Override
     public void onAddProduct()
     {
-        Toast.makeText(this, "ADD", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddProductActivity.class);
+        startActivity(intent);
     }
 
     @Override
