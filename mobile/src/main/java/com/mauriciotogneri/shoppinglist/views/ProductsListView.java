@@ -5,7 +5,7 @@ import android.widget.ListView;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.adapters.ProductAdapter;
+import com.mauriciotogneri.shoppinglist.adapters.ProductAvailableAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView.ProductListViewObserver;
@@ -15,13 +15,13 @@ import java.util.List;
 
 public class ProductsListView extends BaseView<ProductListViewObserver, ViewContainer>
 {
-    private final ProductAdapter adapter;
+    private final ProductAvailableAdapter adapter;
 
     public ProductsListView(Context context, ProductListViewObserver observer)
     {
-        super(R.layout.screen_category_products, observer, new ViewContainer());
+        super(R.layout.view_category_products, observer, new ViewContainer());
 
-        this.adapter = new ProductAdapter(context);
+        this.adapter = new ProductAvailableAdapter(context);
     }
 
     public void updateList(List<Product> products)
@@ -31,7 +31,7 @@ public class ProductsListView extends BaseView<ProductListViewObserver, ViewCont
         ui.list.setAdapter(adapter);
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
             Product product = (Product) adapterView.getItemAtPosition(position);
-            observer.onProduceSelected(product);
+            observer.onProductSelected(product);
         });
     }
 
@@ -42,7 +42,7 @@ public class ProductsListView extends BaseView<ProductListViewObserver, ViewCont
 
     public interface ProductListViewObserver
     {
-        void onProduceSelected(Product product);
+        void onProductSelected(Product product);
     }
 
     public static class ViewContainer

@@ -39,7 +39,7 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     }
 
     @Override
-    public void onProduceSelected(Product product)
+    public void onProductSelected(Product product)
     {
         UpdateProducts updateProducts = new UpdateProducts(getContext());
         updateProducts.moveToCart(product);

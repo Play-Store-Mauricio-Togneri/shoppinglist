@@ -9,16 +9,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.adapters.ProductAdapter.ViewHolder;
+import com.mauriciotogneri.shoppinglist.adapters.ProductInCartAdapter.ViewHolder;
 import com.mauriciotogneri.shoppinglist.base.BaseListAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseViewHolder;
 import com.mauriciotogneri.shoppinglist.model.Product;
 
-public class ProductAdapter extends BaseListAdapter<Product, ViewHolder>
+public class ProductInCartAdapter extends BaseListAdapter<Product, ViewHolder>
 {
-    public ProductAdapter(Context context)
+    public ProductInCartAdapter(Context context)
     {
-        super(context, R.layout.item_cart_item);
+        super(context, R.layout.item_product_in_cart);
     }
 
     @Override
