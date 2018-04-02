@@ -13,7 +13,7 @@ public class LoadProductsByCategory extends AsyncTask<Void, Void, Products>
 
     public LoadProductsByCategory(Context context, OnProductsLoaded callback)
     {
-        this.dao = AppDatabase.instance(context).productDao();
+        this.dao = ProductDao.instance(context);
         this.callback = callback;
     }
 
@@ -22,7 +22,7 @@ public class LoadProductsByCategory extends AsyncTask<Void, Void, Products>
     {
         Products products = new Products();
 
-        for (Product product : dao.unselected())
+        for (Product product : dao.notInCart())
         {
             products.add(product);
         }

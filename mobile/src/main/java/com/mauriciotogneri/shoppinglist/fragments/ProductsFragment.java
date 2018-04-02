@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppinglist.fragments;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.model.Product;
@@ -41,12 +40,14 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     @Override
     public void onProduceSelected(Product product)
     {
-        Toast.makeText(getContext(), product.name(), Toast.LENGTH_SHORT).show();
+        product.moveToCart(getContext());
+
+        view.removeProduct(product);
     }
 
     @Override
     protected ProductsListView view()
     {
-        return new ProductsListView(this);
+        return new ProductsListView(getContext(), this);
     }
 }

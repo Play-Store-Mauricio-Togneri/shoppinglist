@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.ListView;
 
@@ -17,9 +18,11 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
 {
     private ProductAdapter adapter;
 
-    public CartView(CartViewObserver observer)
+    public CartView(Context context, CartViewObserver observer)
     {
         super(R.layout.screen_main, observer, new ViewContainer());
+
+        this.adapter = new ProductAdapter(context);
     }
 
     @Override
@@ -29,7 +32,6 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
 
         ui.buttonAdd.setOnClickListener(v -> observer.onAddProduct());
 
-        adapter = new ProductAdapter(context());
         ui.list.setAdapter(adapter);
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
             Product product = (Product) adapterView.getItemAtPosition(position);

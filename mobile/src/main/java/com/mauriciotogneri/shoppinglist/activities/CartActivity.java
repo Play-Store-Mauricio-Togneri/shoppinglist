@@ -45,6 +45,6 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     @Override
     protected CartView view()
     {
-        return new CartView(this);
+        return new CartView(this, this);
     }
 }

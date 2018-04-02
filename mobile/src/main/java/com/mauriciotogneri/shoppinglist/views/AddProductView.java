@@ -10,7 +10,6 @@ import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.ProductsFragmentAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
 import com.mauriciotogneri.shoppinglist.fragments.ProductsFragment;
-import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.model.Products;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.AddProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.ViewContainer;
@@ -54,8 +53,6 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
     public interface AddProductViewObserver
     {
         void onBack();
-
-        void onProduceSelected(Product product);
 
         void onCreateProduct();
     }
