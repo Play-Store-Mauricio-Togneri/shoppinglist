@@ -11,12 +11,12 @@ import com.mauriciotogneri.shoppinglist.adapters.ProductsFragmentAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
 import com.mauriciotogneri.shoppinglist.fragments.ProductsFragment;
 import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.model.Products;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.AddProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.ViewContainer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 public class AddProductView extends BaseView<AddProductViewObserver, ViewContainer>
@@ -38,13 +38,15 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
         ui.pagerHeader.setTabIndicatorColor(color(R.color.primary));
     }
 
-    public void updateLists(FragmentManager fragmentManager, Map<String, List<Product>> products)
+    public void updateLists(FragmentManager fragmentManager, Products products)
     {
         List<ProductsFragment> fragments = new ArrayList<>();
 
-        for (Entry<String, List<Product>> entry : products.entrySet())
+        for (Entry<String, List<Product>> entry : products.entries())
         {
-            fragments.add(ProductsFragment.create(entry.getKey()));
+            String category = entry.getKey();
+
+            fragments.add(ProductsFragment.create(category, products.byCategory(category)));
         }
 
         ui.pager.setOffscreenPageLimit(products.size());

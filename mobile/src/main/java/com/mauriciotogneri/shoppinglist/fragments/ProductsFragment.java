@@ -1,35 +1,52 @@
 package com.mauriciotogneri.shoppinglist.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.mauriciotogneri.shoppinglist.R;
+import com.mauriciotogneri.shoppinglist.base.BaseFragment;
+import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.views.ProductsListView;
+import com.mauriciotogneri.shoppinglist.views.ProductsListView.ProductListViewObserver;
 
-public class ProductsFragment extends Fragment
+import java.util.Arrays;
+
+public class ProductsFragment extends BaseFragment<ProductsListView> implements ProductListViewObserver
 {
-    public static ProductsFragment create(String title)
+    private static final String PARAM_CATEGORY = "category";
+    private static final String PARAM_PRODUCTS = "products";
+
+    public static ProductsFragment create(String category, Product[] products)
     {
         ProductsFragment fragment = new ProductsFragment();
         Bundle args = new Bundle();
-        args.putString("title", title);
+        args.putString(PARAM_CATEGORY, category);
+        args.putSerializable(PARAM_PRODUCTS, products);
         fragment.setArguments(args);
 
         return fragment;
     }
 
+    @Override
+    protected void initialize()
+    {
+        Product[] products = parameter(PARAM_PRODUCTS, new Product[0]);
+        view.updateList(Arrays.asList(products));
+    }
+
     public String title()
     {
-        return getArguments().getString("title").toUpperCase();
+        return parameter(PARAM_CATEGORY, "");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public void onProduceSelected(Product product)
     {
-        View view = inflater.inflate(R.layout.screen_category_products, container, false);
+        Toast.makeText(getContext(), product.name(), Toast.LENGTH_SHORT).show();
+    }
 
-        return view;
+    @Override
+    protected ProductsListView view()
+    {
+        return new ProductsListView(this);
     }
 }
