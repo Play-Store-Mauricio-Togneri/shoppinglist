@@ -1,15 +1,29 @@
 package com.mauriciotogneri.shoppinglist.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.text.TextUtils;
 
+@Entity
 public class Product
 {
-    private final String name;
-    private final Category category;
-    private final String image;
-    private boolean selected;
+    @PrimaryKey
+    public Integer id;
 
-    public Product(String name, Category category, String image, boolean selected)
+    @ColumnInfo
+    public String category;
+
+    @ColumnInfo
+    public String name;
+
+    @ColumnInfo
+    public String image;
+
+    @ColumnInfo
+    public Boolean selected;
+
+    public Product(String category, String name, String image, Boolean selected)
     {
         this.name = name;
         this.category = category;
@@ -17,14 +31,14 @@ public class Product
         this.selected = selected;
     }
 
+    public String category()
+    {
+        return category;
+    }
+
     public String name()
     {
         return name;
-    }
-
-    public Category category()
-    {
-        return category;
     }
 
     public String image()
@@ -49,6 +63,6 @@ public class Product
 
     public boolean isValid()
     {
-        return (!TextUtils.isEmpty(name) && (category != null) && (category.isValid()) && !TextUtils.isEmpty(image));
+        return (!TextUtils.isEmpty(category) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(image));
     }
 }

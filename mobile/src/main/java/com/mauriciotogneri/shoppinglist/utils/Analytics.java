@@ -43,7 +43,7 @@ public class Analytics
     {
         EventBuilder eventBuilder = new EventBuilder();
         eventBuilder.setCategory("ADDED_PRODUCT_TO_CART");
-        eventBuilder.setAction(product.category().name());
+        eventBuilder.setAction(product.category());
         tracker.send(eventBuilder.build());
     }
 }
