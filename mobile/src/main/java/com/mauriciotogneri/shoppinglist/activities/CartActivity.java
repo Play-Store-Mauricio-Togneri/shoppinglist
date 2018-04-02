@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.database.LoadProductsInCart;
+import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.CartView;
@@ -46,5 +47,14 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     protected CartView view()
     {
         return new CartView(this, this);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        UpdateProducts updateProducts = new UpdateProducts(this);
+        updateProducts.removeFromCart(view.selectedProducts());
+
+        super.onDestroy();
     }
 }

@@ -12,6 +12,7 @@ import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
 import com.mauriciotogneri.shoppinglist.views.CartView.ViewContainer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartView extends BaseView<CartViewObserver, ViewContainer>
@@ -51,6 +52,23 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
         {
             enableToolbarAction(R.drawable.ic_share, v -> observer.onShare());
         }
+    }
+
+    public List<Product> selectedProducts()
+    {
+        List<Product> products = new ArrayList<>();
+
+        for (int i = 0; i < adapter.getCount(); i++)
+        {
+            Product product = adapter.getItem(i);
+
+            if ((product != null) && product.isSelected())
+            {
+                products.add(product);
+            }
+        }
+
+        return products;
     }
 
     public void updateList()

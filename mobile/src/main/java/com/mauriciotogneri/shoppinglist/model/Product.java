@@ -3,10 +3,7 @@ package com.mauriciotogneri.shoppinglist.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.content.Context;
 import android.text.TextUtils;
-
-import com.mauriciotogneri.shoppinglist.database.ProductDao;
 
 import java.io.Serializable;
 
@@ -68,15 +65,6 @@ public class Product implements Serializable
     public boolean isSelected()
     {
         return selected;
-    }
-
-    public void moveToCart(Context context)
-    {
-        new Thread(() ->
-        {
-            ProductDao dao = ProductDao.instance(context);
-            dao.inCart(id, true);
-        }).start();
     }
 
     public void toggleSelection()
