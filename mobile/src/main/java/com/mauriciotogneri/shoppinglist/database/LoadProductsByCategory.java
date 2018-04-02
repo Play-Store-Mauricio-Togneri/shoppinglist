@@ -22,7 +22,7 @@ public class LoadProductsByCategory extends AsyncTask<Void, Void, Products>
     {
         Products products = new Products();
 
-        for (Product product : dao.all())
+        for (Product product : dao.unselected())
         {
             products.add(product);
         }

@@ -1,11 +1,10 @@
 package com.mauriciotogneri.shoppinglist.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class Products
 {
@@ -38,9 +37,12 @@ public class Products
         return products.toArray(new Product[products.size()]);
     }
 
-    public Set<Entry<String, List<Product>>> entries()
+    public List<String> categories()
     {
-        return map.entrySet();
+        List<String> categories = new ArrayList<>(map.keySet());
+        Collections.sort(categories);
+
+        return categories;
     }
 
     public int size()

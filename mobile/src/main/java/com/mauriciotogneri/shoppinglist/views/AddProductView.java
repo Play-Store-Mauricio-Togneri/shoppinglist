@@ -17,7 +17,6 @@ import com.mauriciotogneri.shoppinglist.views.AddProductView.ViewContainer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class AddProductView extends BaseView<AddProductViewObserver, ViewContainer>
 {
@@ -42,10 +41,8 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
     {
         List<ProductsFragment> fragments = new ArrayList<>();
 
-        for (Entry<String, List<Product>> entry : products.entries())
+        for (String category : products.categories())
         {
-            String category = entry.getKey();
-
             fragments.add(ProductsFragment.create(category, products.byCategory(category)));
         }
 
