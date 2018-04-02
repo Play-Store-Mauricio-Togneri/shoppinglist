@@ -25,7 +25,7 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
     @Override
     protected void initialize()
     {
-        toolbarTitle(R.string.application_name);
+        toolbarTitle(R.string.toolbar_title_main);
 
         ui.buttonAdd.setOnClickListener(v -> observer.onAddProduct());
 

@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
 import android.view.View;
-import android.widget.ListView;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
@@ -20,8 +19,10 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
     @Override
     protected void initialize()
     {
-        toolbarTitle(R.string.application_name);
+        toolbarTitle(R.string.toolbar_title_add_product);
         enableBack(v -> observer.onBack());
+
+        ui.buttonCreate.setOnClickListener(v -> observer.onCreateProduct());
     }
 
     public interface AddProductViewObserver
@@ -35,10 +36,7 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
 
     public static class ViewContainer
     {
-        @BindView(R.id.product_list)
-        public ListView list;
-
-        @BindView(R.id.product_add)
-        public View buttonAdd;
+        @BindView(R.id.product_create)
+        public View buttonCreate;
     }
 }

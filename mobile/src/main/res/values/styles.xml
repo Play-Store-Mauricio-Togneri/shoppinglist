@@ -19,7 +19,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
         <item name="android:text">@string/label.empty.list</item>
-        <item name="android:textSize">@dimen/font.size</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/default_text_color</item>
         <item name="android:visibility">gone</item>
     </style>

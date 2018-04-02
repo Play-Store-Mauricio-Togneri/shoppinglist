@@ -13,14 +13,6 @@
         android:layout_height="match_parent"
         android:background="@color/list.background">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/product.create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="15dp"
-            android:src="@drawable/ic_plus"/>
-
     </FrameLayout>
 
 </LinearLayout>
