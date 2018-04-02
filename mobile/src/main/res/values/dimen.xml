@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <dimen name="font.size">18sp</dimen>
-    <dimen name="design_fab_image_size" tools:override="true">22dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">18dp</dimen>
 
 </resources>

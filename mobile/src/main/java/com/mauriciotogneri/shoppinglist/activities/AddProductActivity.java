@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
@@ -30,7 +31,8 @@ public class AddProductActivity extends BaseActivity<AddProductView> implements 
     @Override
     public void onCreateProduct()
     {
-        Toast.makeText(this, "CREATE", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, CreateProductActivity.class);
+        startActivity(intent);
     }
 
     @Override
