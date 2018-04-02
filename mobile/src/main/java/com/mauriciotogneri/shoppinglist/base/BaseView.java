@@ -2,9 +2,11 @@ package com.mauriciotogneri.shoppinglist.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,6 +65,11 @@ public abstract class BaseView<O, C>
     protected Context context()
     {
         return context;
+    }
+
+    protected int color(@ColorRes int colorId)
+    {
+        return ContextCompat.getColor(context, colorId);
     }
 
     protected void toolbarTitle(@StringRes int resId)

@@ -13,7 +13,7 @@ public class AddProductActivity extends BaseActivity<AddProductView> implements 
     @Override
     protected void initialize()
     {
-        // TODO
+        view.updateLists(getSupportFragmentManager());
     }
 
     @Override
