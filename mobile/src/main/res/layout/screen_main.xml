@@ -28,7 +28,7 @@
             android:src="@drawable/ic_plus"/>
 
         <TextView
-            android:id="@+id/empty.label"
+            android:id="@+id/label.empty"
             style="@style/label.empty"/>
 
     </FrameLayout>
