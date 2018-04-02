@@ -1,7 +1,6 @@
 package com.mauriciotogneri.shoppinglist.base;
 
 import android.content.Context;
-import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
@@ -35,12 +33,7 @@ public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
     {
         clear();
         add(list);
-    }
-
-    public void set(T[] list)
-    {
-        clear();
-        add(Arrays.asList(list));
+        update();
     }
 
     public void add(List<T> list)
