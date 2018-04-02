@@ -9,6 +9,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowFullscreen">false</item>
+        <item name="textColorAlertDialogListItem">@color/text.color</item>
     </style>
 
     <style name="base">
