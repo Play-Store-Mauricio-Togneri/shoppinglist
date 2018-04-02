@@ -35,7 +35,7 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
 
     public String title()
     {
-        return parameter(PARAM_CATEGORY, "");
+        return parameter(PARAM_CATEGORY, "").toUpperCase();
     }
 
     @Override

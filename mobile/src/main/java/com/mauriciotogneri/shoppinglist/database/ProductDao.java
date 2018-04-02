@@ -12,9 +12,6 @@ import java.util.List;
 @Dao
 public interface ProductDao
 {
-    @Query("SELECT * FROM Product")
-    List<Product> all();
-
     @Query("SELECT * FROM Product WHERE selected")
     List<Product> selected();
 
