@@ -6,43 +6,34 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.mauriciotogneri.shoppinglist.fragments.ProductsFragment;
 
+import java.util.List;
+
 public class ProductsFragmentAdapter extends FragmentPagerAdapter
 {
-    public ProductsFragmentAdapter(FragmentManager fragmentManager)
+    private final List<ProductsFragment> fragments;
+
+    public ProductsFragmentAdapter(FragmentManager fragmentManager, List<ProductsFragment> fragments)
     {
         super(fragmentManager);
+
+        this.fragments = fragments;
     }
 
     @Override
     public int getCount()
     {
-        return 10;
+        return fragments.size();
     }
 
     @Override
     public Fragment getItem(int position)
     {
-        /*switch (position)
-        {
-            case 0:
-                return ProductsFragment.create("Page # 1");
-
-            case 1:
-                return ProductsFragment.create("Page # 2");
-
-            case 2:
-                return ProductsFragment.create("Page # 3");
-
-            default:
-                return null;
-        }*/
-
-        return ProductsFragment.create();
+        return fragments.get(position);
     }
 
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return "PAGE " + position;
+        return fragments.get(position).title();
     }
 }

@@ -10,23 +10,19 @@ import com.mauriciotogneri.shoppinglist.R;
 
 public class ProductsFragment extends Fragment
 {
-    private String title;
-
-    public static ProductsFragment create()
+    public static ProductsFragment create(String title)
     {
         ProductsFragment fragment = new ProductsFragment();
         Bundle args = new Bundle();
-        args.putString("title", "FOO");
+        args.putString("title", title);
         fragment.setArguments(args);
 
         return fragment;
     }
 
-    public void onCreate(Bundle savedInstanceState)
+    public String title()
     {
-        super.onCreate(savedInstanceState);
-
-        title = getArguments().getString("title");
+        return getArguments().getString("title").toUpperCase();
     }
 
     @Override
