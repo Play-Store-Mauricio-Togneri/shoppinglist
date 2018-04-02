@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
@@ -16,9 +15,13 @@ import com.mauriciotogneri.shoppinglist.model.Product;
 
 public class ProductAvailableAdapter extends BaseListAdapter<Product, ViewHolder>
 {
-    public ProductAvailableAdapter(Context context)
+    private final OnOptionsSelected onOptionsSelected;
+
+    public ProductAvailableAdapter(Context context, OnOptionsSelected onOptionsSelected)
     {
         super(context, R.layout.item_product_available);
+
+        this.onOptionsSelected = onOptionsSelected;
     }
 
     @Override
@@ -30,13 +33,18 @@ public class ProductAvailableAdapter extends BaseListAdapter<Product, ViewHolder
                 .load(product.image())
                 .into(viewHolder.image);
 
-        viewHolder.options.setOnClickListener(v-> Toast.makeText(getContext(), product.name(), Toast.LENGTH_SHORT).show());
+        viewHolder.options.setOnClickListener(v -> onOptionsSelected.onOptionsSelected(product));
     }
 
     @Override
     protected ViewHolder viewHolder(View view)
     {
         return new ViewHolder(view);
+    }
+
+    public interface OnOptionsSelected
+    {
+        void onOptionsSelected(Product product);
     }
 
     public static class ViewHolder extends BaseViewHolder

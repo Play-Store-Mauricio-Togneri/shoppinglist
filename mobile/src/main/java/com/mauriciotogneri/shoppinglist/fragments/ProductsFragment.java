@@ -1,7 +1,14 @@
 package com.mauriciotogneri.shoppinglist.fragments;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.widget.Toast;
 
+import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
@@ -45,6 +52,47 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
         updateProducts.moveToCart(product);
 
         view.removeProduct(product);
+    }
+
+    @Override
+    public void onProductsOptions(Product product)
+    {
+        String[] options = new String[2];
+        options[0] = getString(R.string.button_edit);
+        options[1] = getString(R.string.button_remove);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        SpannableStringBuilder spannable = new SpannableStringBuilder(product.name());
+
+        spannable.setSpan(
+                new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.primary)),
+                0,
+                product.name().length(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        builder.setTitle(spannable);
+        builder.setItems(options, (dialog, which) -> {
+            if (which == 0)
+            {
+                editProduct(product);
+            }
+            else if (which == 1)
+            {
+                removeProduct(product);
+            }
+        });
+        builder.show();
+    }
+
+    private void editProduct(Product product)
+    {
+        Toast.makeText(getContext(), "EDIT: " + product.name(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeProduct(Product product)
+    {
+        Toast.makeText(getContext(), "REMOVE: " + product.name(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
