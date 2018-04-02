@@ -14,14 +14,14 @@ public class LoadProductsInCart extends AsyncTask<Void, Void, List<Product>>
 
     public LoadProductsInCart(Context context, OnProductsLoaded callback)
     {
-        this.dao = AppDatabase.instance(context).productDao();
+        this.dao = ProductDao.instance(context);
         this.callback = callback;
     }
 
     @Override
     protected List<Product> doInBackground(Void... voids)
     {
-        return dao.selected();
+        return dao.inCart();
     }
 
     @Override

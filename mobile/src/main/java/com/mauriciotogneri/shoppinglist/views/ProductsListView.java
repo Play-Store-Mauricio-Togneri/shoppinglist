@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
+import android.content.Context;
 import android.widget.ListView;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
@@ -14,14 +15,17 @@ import java.util.List;
 
 public class ProductsListView extends BaseView<ProductListViewObserver, ViewContainer>
 {
-    public ProductsListView(ProductListViewObserver observer)
+    private final ProductAdapter adapter;
+
+    public ProductsListView(Context context, ProductListViewObserver observer)
     {
         super(R.layout.screen_category_products, observer, new ViewContainer());
+
+        this.adapter = new ProductAdapter(context);
     }
 
     public void updateList(List<Product> products)
     {
-        ProductAdapter adapter = new ProductAdapter(context());
         adapter.set(products);
 
         ui.list.setAdapter(adapter);
@@ -29,6 +33,11 @@ public class ProductsListView extends BaseView<ProductListViewObserver, ViewCont
             Product product = (Product) adapterView.getItemAtPosition(position);
             observer.onProduceSelected(product);
         });
+    }
+
+    public void removeProduct(Product product)
+    {
+        adapter.remove(product);
     }
 
     public interface ProductListViewObserver
