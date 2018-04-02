@@ -20,7 +20,7 @@
     <string name="toolbar.title.manage.categories">Administrar categorías</string>
 
     <string name="confirmation.remove.product">¿Desea eliminar el producto?</string>
-    <string name="confirmation.remove.car.item">¿Desea eliminar el producto de la lista?</string>
+    <string name="confirmation.remove.cart.item">¿Desea eliminar el producto de la lista?</string>
     <string name="confirmation.remove.category">¿Desea eliminar la categoría?</string>
 
     <string name="error.invalid.category">Categoría inválida</string>

@@ -7,9 +7,12 @@
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="textColorAlertDialogListItem">@color/text.color</item>
+
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowFullscreen">false</item>
-        <item name="textColorAlertDialogListItem">@color/text.color</item>
+        <item name="android:textColor">@color/text.color</item>
+        <item name="android:textColorPrimary">@color/text.color</item>
     </style>
 
     <style name="base">
