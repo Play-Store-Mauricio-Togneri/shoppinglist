@@ -36,11 +36,11 @@
 
         <ImageView
             android:id="@+id/product.options"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:padding="12dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:padding="15dp"
+            android:src="@drawable/gear"/>
 
     </LinearLayout>
 
