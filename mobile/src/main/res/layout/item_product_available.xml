@@ -38,9 +38,9 @@
             android:id="@+id/product.options"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="15dp"
-            android:src="@drawable/gear"/>
+            android:src="@drawable/ic_gear"/>
 
     </LinearLayout>
 
