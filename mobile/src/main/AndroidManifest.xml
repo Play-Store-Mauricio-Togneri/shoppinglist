@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     package="com.mauriciotogneri.shoppinglist"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -11,7 +12,8 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/application.name"
-        android:theme="@style/app.theme">
+        android:theme="@style/app.theme"
+        tools:replace="android:allowBackup">
 
         <activity
             android:name=".activities.CartActivity"
