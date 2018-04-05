@@ -9,10 +9,10 @@
     android:foreground="?attr/selectableItemBackground"
     android:lines="1"
     android:maxLines="1"
-    android:paddingBottom="13dp"
+    android:paddingBottom="12dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
-    android:paddingTop="13dp"
+    android:paddingTop="12dp"
     android:textColor="@color/text.color"
     android:textSize="14sp"
     tools:text="Product"/>
