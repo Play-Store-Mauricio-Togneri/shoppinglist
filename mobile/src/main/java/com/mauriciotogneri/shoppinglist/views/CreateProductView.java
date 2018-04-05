@@ -54,6 +54,12 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         ui.buttonAction.setOnClickListener(v -> observer.onAction());
     }
 
+    @OnClick(R.id.product_image_change)
+    public void onChangeImage()
+    {
+        observer.onChangeImage();
+    }
+
     @OnClick(R.id.category_manage)
     public void onManageCategories()
     {
@@ -65,6 +71,8 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         void onBack();
 
         void onManageCategories();
+
+        void onChangeImage();
 
         void onAction();
     }
