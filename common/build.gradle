@@ -67,6 +67,7 @@ dependencies
     api "com.android.support:appcompat-v7:$support"
     api "com.android.support:support-v13:$support"
     api "com.android.support:design:$support"
+    api "com.android.support:cardview-v7:$support"
 
     // google analytics
     api "com.google.android.gms:play-services-analytics:$playservices"

@@ -8,6 +8,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="textColorAlertDialogListItem">@color/text.color</item>
+        <item name="colorButtonNormal">@color/primary</item>
 
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowFullscreen">false</item>

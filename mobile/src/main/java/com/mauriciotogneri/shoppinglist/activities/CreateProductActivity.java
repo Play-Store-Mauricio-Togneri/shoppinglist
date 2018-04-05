@@ -21,9 +21,15 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     }
 
     @Override
-    public void onCreate()
+    public void onManageCategories()
     {
-        Toast.makeText(this, "CREATE", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "MANAGE", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAction()
+    {
+        Toast.makeText(this, "ACTION", Toast.LENGTH_SHORT).show();
     }
 
     @Override
