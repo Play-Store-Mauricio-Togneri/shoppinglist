@@ -34,6 +34,10 @@
             android:name=".activities.CreateProductActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activities.ManageCategoriesActivity"
+            android:screenOrientation="portrait"/>
+
         <!--<service
             android:name=".services.WearableService">
 

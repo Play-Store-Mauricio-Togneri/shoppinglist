@@ -82,6 +82,16 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
+        <CheckBox
+            android:id="@+id/product.addToCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:checked="true"
+            android:text="Add to cart automatically"
+            android:textColor="@color/text.color"/>
+
         <Button
             android:id="@+id/button.action"
             android:layout_width="match_parent"
