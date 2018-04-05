@@ -1,8 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -11,10 +9,14 @@ import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
+import com.mauriciotogneri.shoppinglist.database.LoadCategories;
+import com.mauriciotogneri.shoppinglist.database.LoadCategories.OnCategoriesLoaded;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.ViewContainer;
 
-public class CreateProductView extends BaseView<CreateProductViewObserver, ViewContainer>
+import java.util.List;
+
+public class CreateProductView extends BaseView<CreateProductViewObserver, ViewContainer> implements OnCategoriesLoaded
 {
     public CreateProductView(CreateProductViewObserver observer)
     {
@@ -28,30 +30,19 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         toolbarTitle(R.string.toolbar_title_create_product);
         enableBack(v -> observer.onBack());
 
-        CategoryAdapter adapter = new CategoryAdapter(context());
-        adapter.add("Category 1");
-        adapter.add("Category 2");
-        adapter.add("Category 3");
-        adapter.add("Category 4");
-        adapter.add("Category 5");
-
-        ui.category.setAdapter(adapter);
-        ui.category.setOnItemSelectedListener(new OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id)
-            {
-                String category = (String) adapterView.getItemAtPosition(position);
-                System.out.println(category);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView)
-            {
-            }
-        });
+        LoadCategories loadCategories = new LoadCategories(context(), this);
+        loadCategories.execute();
 
         ui.buttonAction.setOnClickListener(v -> observer.onAction());
+    }
+
+    @Override
+    public void onCategoriesLoaded(List<String> categories)
+    {
+        CategoryAdapter adapter = new CategoryAdapter(context());
+        adapter.addAll(categories);
+
+        ui.category.setAdapter(adapter);
     }
 
     @OnClick(R.id.product_image_change)

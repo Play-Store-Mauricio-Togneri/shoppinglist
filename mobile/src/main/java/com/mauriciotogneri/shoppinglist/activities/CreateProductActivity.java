@@ -67,7 +67,8 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
 
     private void imageFromSearch()
     {
-        Toast.makeText(this, "SEARCH", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SearchImageActivity.class);
+        startActivity(intent);
     }
 
     @Override

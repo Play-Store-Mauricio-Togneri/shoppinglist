@@ -38,6 +38,10 @@
             android:name=".activities.ManageCategoriesActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activities.SearchImageActivity"
+            android:screenOrientation="portrait"/>
+
         <!--<service
             android:name=".services.WearableService">
 
