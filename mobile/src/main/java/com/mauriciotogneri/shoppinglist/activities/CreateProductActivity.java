@@ -49,6 +49,9 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     @Override
     protected void initialize()
     {
+        Product product = parameter(PARAM_PRODUCT, null);
+        view.initialize(product == null);
+
         LoadCategories loadCategories = new LoadCategories(this, this);
         loadCategories.execute();
     }
@@ -58,7 +61,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     {
         Product product = parameter(PARAM_PRODUCT, null);
 
-        view.initialize(categories, product);
+        view.load(categories, product);
     }
 
     @Override
