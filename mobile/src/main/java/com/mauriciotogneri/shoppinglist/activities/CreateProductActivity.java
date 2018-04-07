@@ -13,7 +13,7 @@ import com.mauriciotogneri.androidutils.permissions.Permissions;
 import com.mauriciotogneri.androidutils.permissions.PermissionsResult;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.utils.ResoursesUtils;
+import com.mauriciotogneri.shoppinglist.utils.ResourceUtils;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
@@ -22,17 +22,14 @@ import java.io.File;
 
 public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver
 {
-    private static final int READ_DISK_PERMISSION = 1001;
+    private static final int CAMERA_PERMISSION = 1001;
+    private static final int READ_DISK_PERMISSION = 1002;
 
     private static final int CAMERA_IMAGE_REQUEST_CODE = 2001;
     private static final int GALLERY_IMAGE_REQUEST_CODE = 2002;
     private static final int SEARCH_IMAGE_REQUEST_CODE = 2003;
 
-    @Override
-    protected void initialize()
-    {
-        // TODO
-    }
+    private Uri cameraUri;
 
     @Override
     public void onBack()
@@ -74,13 +71,32 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
 
     private void imageFromCamera()
     {
-        Toast.makeText(this, "CAMERA", Toast.LENGTH_SHORT).show();
+        Permissions permissions = new Permissions(this, this);
+        permissions.request(CAMERA_PERMISSION, permission.CAMERA);
     }
 
     private void imageFromGallery()
     {
         Permissions permissions = new Permissions(this, this);
         permissions.request(READ_DISK_PERMISSION, permission.READ_EXTERNAL_STORAGE);
+    }
+
+    @OnPermissionGranted(requestCode = CAMERA_PERMISSION, permission = permission.CAMERA)
+    public void onPermissionsCameraGranted()
+    {
+        try
+        {
+            cameraUri = ResourceUtils.uri(this);
+
+            Intents.takePicture(this, cameraUri)
+                    .requestCode(CAMERA_IMAGE_REQUEST_CODE)
+                    .send(this);
+        }
+        catch (Exception e)
+        {
+            // TODO
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnPermissionGranted(requestCode = READ_DISK_PERMISSION, permission = permission.READ_EXTERNAL_STORAGE)
@@ -103,16 +119,11 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         Toast.makeText(this, "ACTION", Toast.LENGTH_SHORT).show();
     }
 
-    private void processCameraImage(Uri uri)
-    {
-        // TODO
-    }
-
-    private void processGalleryImage(Uri uri)
+    private void processUriImage(Uri uri)
     {
         try
         {
-            File file = ResoursesUtils.fileFromUri(this, uri);
+            File file = ResourceUtils.fileFromUri(this, uri);
             view.image(file.getAbsolutePath());
         }
         catch (Exception e)
@@ -134,11 +145,11 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
 
         if ((requestCode == CAMERA_IMAGE_REQUEST_CODE) && (resultCode == Activity.RESULT_OK))
         {
-            processCameraImage(data.getData());
+            processUriImage(cameraUri);
         }
         else if ((requestCode == GALLERY_IMAGE_REQUEST_CODE) && (resultCode == Activity.RESULT_OK))
         {
-            processGalleryImage(data.getData());
+            processUriImage(data.getData());
         }
         else if ((requestCode == SEARCH_IMAGE_REQUEST_CODE) && (resultCode == Activity.RESULT_OK))
         {
