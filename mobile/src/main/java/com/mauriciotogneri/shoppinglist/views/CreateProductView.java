@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,7 +10,6 @@ import com.bumptech.glide.Glide;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
-import com.mauriciotogneri.shoppinglist.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
@@ -47,8 +47,11 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
 
     public void load(List<String> categories, Product product)
     {
-        CategoryAdapter adapter = new CategoryAdapter(context());
-        adapter.addAll(categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context(), android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //CategoryAdapter adapter = new CategoryAdapter(context());
+        //adapter.addAll(categories);
 
         ui.category.setAdapter(adapter);
 

@@ -41,6 +41,7 @@ android
     {
         disable 'MissingTranslation'
         disable 'ContentDescription'
+        disable 'RtlHardcoded'
         checkReleaseBuilds false
         abortOnError false
     }
