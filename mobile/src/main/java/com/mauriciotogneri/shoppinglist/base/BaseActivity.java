@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mauriciotogneri.androidutils.ActivityParameters;
+
 public abstract class BaseActivity<V extends BaseView> extends AppCompatActivity
 {
     protected V view;
@@ -20,6 +22,14 @@ public abstract class BaseActivity<V extends BaseView> extends AppCompatActivity
         setContentView(layout);
 
         initialize();
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <A> A parameter(String key, A defaultValue)
+    {
+        ActivityParameters parameters = new ActivityParameters(getIntent());
+
+        return parameters.parameter(key, defaultValue);
     }
 
     protected abstract V view();

@@ -67,7 +67,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
 
     private void imageFromSearch()
     {
-        Intent intent = new Intent(this, SearchImageActivity.class);
+        Intent intent = SearchImageActivity.intent(this, view.name().trim());
         startActivity(intent);
     }
 

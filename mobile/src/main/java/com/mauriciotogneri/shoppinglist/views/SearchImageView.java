@@ -66,6 +66,12 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
         ui.grid.setOnItemClickListener((parent, view, position, id) -> observer.onImageSelected((String) parent.getItemAtPosition(position)));
     }
 
+    public void query(String initialQuery)
+    {
+        ui.input.setText(initialQuery);
+        search();
+    }
+
     public void loadImages(List<String> images)
     {
         adapter.loadImages(images);

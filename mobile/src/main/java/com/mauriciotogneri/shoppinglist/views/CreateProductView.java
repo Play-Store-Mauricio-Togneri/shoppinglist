@@ -57,6 +57,11 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         observer.onManageCategories();
     }
 
+    public String name()
+    {
+        return ui.name.getText().toString();
+    }
+
     public interface CreateProductViewObserver
     {
         void onBack();
