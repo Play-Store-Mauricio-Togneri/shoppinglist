@@ -64,9 +64,6 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
         adapter = new SearchImageAdapter(context());
         ui.grid.setAdapter(adapter);
         ui.grid.setOnItemClickListener((parent, view, position, id) -> observer.onImageSelected((String) parent.getItemAtPosition(position)));
-
-        Keyboard keyboard = new Keyboard(context());
-        keyboard.show(ui.input);
     }
 
     public void loadImages(List<String> images)

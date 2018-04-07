@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.mauriciotogneri.androidutils.Screen;
 import com.mauriciotogneri.androidutils.Screen.ScreenSize;
 
@@ -18,11 +19,13 @@ public class SearchImageAdapter extends BaseAdapter
 {
     private final Context context;
     private final List<String> images;
+    private final RequestManager requestManager;
 
     public SearchImageAdapter(Context context)
     {
         this.context = context;
         this.images = new ArrayList<>();
+        this.requestManager = Glide.with(context);
     }
 
     public void loadImages(List<String> list)
@@ -73,9 +76,7 @@ public class SearchImageAdapter extends BaseAdapter
             imageView = (ImageView) convertView;
         }
 
-        Glide.with(context)
-                .load(images.get(position))
-                .into(imageView);
+        requestManager.load(images.get(position)).into(imageView);
 
         return imageView;
     }
