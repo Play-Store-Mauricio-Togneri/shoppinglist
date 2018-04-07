@@ -1,9 +1,11 @@
 package com.mauriciotogneri.shoppinglist.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.R;
+import com.mauriciotogneri.shoppinglist.activities.CreateProductActivity;
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
@@ -72,7 +74,8 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
 
     private void editProduct(Product product)
     {
-        Toast.makeText(getContext(), "EDIT: " + product.name(), Toast.LENGTH_SHORT).show();
+        Intent intent = CreateProductActivity.intent(getContext(), product);
+        startActivity(intent);
     }
 
     private void removeProduct(Product product)

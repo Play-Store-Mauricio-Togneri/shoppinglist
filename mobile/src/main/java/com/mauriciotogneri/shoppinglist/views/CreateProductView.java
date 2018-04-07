@@ -1,6 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
-import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -11,15 +11,16 @@ import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
-import com.mauriciotogneri.shoppinglist.database.LoadCategories;
-import com.mauriciotogneri.shoppinglist.database.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.ViewContainer;
 
 import java.util.List;
 
-public class CreateProductView extends BaseView<CreateProductViewObserver, ViewContainer> implements OnCategoriesLoaded
+public class CreateProductView extends BaseView<CreateProductViewObserver, ViewContainer>
 {
+    private static final String DEFAULT_IMAGE = "https://i.imgur.com/ztA411S.png";
+
     public CreateProductView(CreateProductViewObserver observer)
     {
         super(R.layout.screen_create_product, observer, new ViewContainer());
@@ -32,19 +33,28 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         toolbarTitle(R.string.toolbar_title_create_product);
         enableBack(v -> observer.onBack());
 
-        LoadCategories loadCategories = new LoadCategories(context(), this);
-        loadCategories.execute();
-
         ui.buttonAction.setOnClickListener(v -> observer.onAction());
     }
 
-    @Override
-    public void onCategoriesLoaded(List<String> categories)
+    public void initialize(List<String> categories, Product product)
     {
         CategoryAdapter adapter = new CategoryAdapter(context());
         adapter.addAll(categories);
 
         ui.category.setAdapter(adapter);
+
+        if (product != null)
+        {
+            ui.category.setSelection(categories.indexOf(product.category()));
+            ui.name.setText(product.name());
+            image(product.image());
+            ui.buttonAction.setText(R.string.button_edit);
+        }
+        else
+        {
+            image(DEFAULT_IMAGE);
+            ui.buttonAction.setText(R.string.button_create);
+        }
     }
 
     @OnClick(R.id.product_image)
@@ -100,6 +110,6 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         public ImageView image;
 
         @BindView(R.id.button_action)
-        public View buttonAction;
+        public Button buttonAction;
     }
 }

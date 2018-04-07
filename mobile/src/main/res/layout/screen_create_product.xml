@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
@@ -88,10 +89,10 @@
                 android:id="@+id/product.image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:scaleType="centerInside"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
-                android:src="@drawable/ic_groceries"/>
+                android:scaleType="fitCenter"
+                tools:background="#AAAAAA"/>
 
             <TextView
                 android:id="@+id/product.image.change"
@@ -124,8 +125,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
-            android:text="@string/button.create"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            tools:text="@string/button.create"/>
 
     </LinearLayout>
 
