@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -11,6 +12,8 @@ import com.mauriciotogneri.shoppinglist.views.Dialogs;
 
 public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver
 {
+    private static final int SEARCH_IMAGE_REQUEST_CODE = 1000;
+
     @Override
     protected void initialize()
     {
@@ -68,13 +71,25 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     private void imageFromSearch()
     {
         Intent intent = SearchImageActivity.intent(this, view.name().trim());
-        startActivity(intent);
+        startActivityForResult(intent, SEARCH_IMAGE_REQUEST_CODE);
     }
 
     @Override
     public void onAction()
     {
         Toast.makeText(this, "ACTION", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if ((requestCode == SEARCH_IMAGE_REQUEST_CODE) && (resultCode == Activity.RESULT_OK))
+        {
+            String imageUrl = data.getStringExtra(SearchImageActivity.PARAM_IMAGE_URL);
+            view.image(imageUrl);
+        }
     }
 
     @Override
