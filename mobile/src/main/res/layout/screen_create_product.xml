@@ -98,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
+                android:padding="10dp"
                 android:text="Change picture"
                 android:textColor="@color/primary"
                 android:textSize="14sp"/>
