@@ -2,8 +2,10 @@ package com.mauriciotogneri.shoppinglist.views;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.bumptech.glide.Glide;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
@@ -45,6 +47,12 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         ui.category.setAdapter(adapter);
     }
 
+    @OnClick(R.id.product_image)
+    public void onProductImage()
+    {
+        observer.onChangeImage();
+    }
+
     @OnClick(R.id.product_image_change)
     public void onChangeImage()
     {
@@ -60,6 +68,13 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
     public String name()
     {
         return ui.name.getText().toString();
+    }
+
+    public void image(String imageUrl)
+    {
+        Glide.with(context())
+                .load(imageUrl)
+                .into(ui.image);
     }
 
     public interface CreateProductViewObserver
@@ -80,6 +95,9 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
 
         @BindView(R.id.category)
         public Spinner category;
+
+        @BindView(R.id.product_image)
+        public ImageView image;
 
         @BindView(R.id.button_action)
         public View buttonAction;
