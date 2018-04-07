@@ -87,17 +87,19 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
 
         Dialogs dialogs = new Dialogs(this);
         dialogs.options(getString(R.string.label_select_picture_source), options, option -> {
-            if (option == 0)
+            switch (option)
             {
-                imageFromCamera();
-            }
-            else if (option == 1)
-            {
-                imageFromGallery();
-            }
-            else if (option == 2)
-            {
-                imageFromSearch();
+                case 0:
+                    imageFromCamera();
+                    break;
+
+                case 1:
+                    imageFromGallery();
+                    break;
+
+                case 2:
+                    imageFromSearch();
+                    break;
             }
         });
     }

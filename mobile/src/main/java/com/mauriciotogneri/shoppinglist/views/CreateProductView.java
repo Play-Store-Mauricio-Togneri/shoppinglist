@@ -50,9 +50,6 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context(), android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //CategoryAdapter adapter = new CategoryAdapter(context());
-        //adapter.addAll(categories);
-
         ui.category.setAdapter(adapter);
 
         if (product != null)

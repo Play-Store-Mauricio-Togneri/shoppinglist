@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CartView extends BaseView<CartViewObserver, ViewContainer>
 {
-    private ProductInCartAdapter adapter;
+    private final ProductInCartAdapter adapter;
 
     public CartView(Context context, CartViewObserver observer)
     {
