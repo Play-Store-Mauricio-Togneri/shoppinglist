@@ -26,17 +26,26 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         super(R.layout.screen_create_product, observer, new ViewContainer());
     }
 
-    @Override
-    protected void initialize()
+    public void initialize(boolean isNew)
     {
-        // TODO: create or update title
-        toolbarTitle(R.string.toolbar_title_create_product);
         enableBack(v -> observer.onBack());
 
         ui.buttonAction.setOnClickListener(v -> observer.onAction());
+
+        if (isNew)
+        {
+            toolbarTitle(R.string.toolbar_title_create_product);
+            ui.buttonAction.setText(R.string.button_create);
+            image(DEFAULT_IMAGE);
+        }
+        else
+        {
+            toolbarTitle(R.string.toolbar_title_edit_product);
+            ui.buttonAction.setText(R.string.button_edit);
+        }
     }
 
-    public void initialize(List<String> categories, Product product)
+    public void load(List<String> categories, Product product)
     {
         CategoryAdapter adapter = new CategoryAdapter(context());
         adapter.addAll(categories);
@@ -48,12 +57,6 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
             ui.category.setSelection(categories.indexOf(product.category()));
             ui.name.setText(product.name());
             image(product.image());
-            ui.buttonAction.setText(R.string.button_edit);
-        }
-        else
-        {
-            image(DEFAULT_IMAGE);
-            ui.buttonAction.setText(R.string.button_create);
         }
     }
 
