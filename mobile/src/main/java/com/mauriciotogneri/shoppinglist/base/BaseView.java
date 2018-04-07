@@ -100,6 +100,7 @@ public abstract class BaseView<O, C>
         imageView.setOnClickListener(null);
     }
 
+    // TODO
     @SuppressLint("InflateParams")
     public void showToast(final int messageId)
     {

@@ -1,5 +1,7 @@
 package com.mauriciotogneri.common.utils;
 
+import com.mauriciotogneri.javautils.Resource;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -30,8 +32,19 @@ public class Serializer
         }
         finally
         {
-            close(out);
-            close(bos);
+            try
+            {
+                if (out != null)
+                {
+                    out.close();
+                }
+            }
+            catch (Exception e)
+            {
+                // ignore
+            }
+
+            Resource.close(bos);
         }
 
         return null;
@@ -56,25 +69,21 @@ public class Serializer
         }
         finally
         {
-            close(in);
-            close(bis);
-        }
-
-        return null;
-    }
-
-    private static void close(AutoCloseable closeable)
-    {
-        if (closeable != null)
-        {
             try
             {
-                closeable.close();
+                if (in != null)
+                {
+                    in.close();
+                }
             }
             catch (Exception e)
             {
                 // ignore
             }
+
+            Resource.close(bis);
         }
+
+        return null;
     }
 }

@@ -27,7 +27,10 @@ public class ResourceUtils
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         OutputStream outputStream = new FileOutputStream(file);
 
-        Streams.copy(inputStream, outputStream);
+        if (inputStream != null)
+        {
+            Streams.copy(inputStream, outputStream);
+        }
 
         return file;
     }

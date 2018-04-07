@@ -7,14 +7,15 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".app.ShoppingList"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/application.name"
+        android:supportsRtl="false"
         android:theme="@style/app.theme"
         tools:replace="android:allowBackup">
 
@@ -25,6 +26,19 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="mauriciotogneri.com"
+                    android:pathPattern="/shoppinglist"
+                    android:scheme="https" />
+
             </intent-filter>
 
         </activity>
@@ -85,7 +99,7 @@
 
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                android:resource="@xml/provider_paths"/>
 
         </provider>
 

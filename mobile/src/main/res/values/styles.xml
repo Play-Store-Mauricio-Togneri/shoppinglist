@@ -25,77 +25,8 @@
         <item name="android:gravity">center</item>
         <item name="android:text">@string/label.empty.list</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textColor">@color/text.color</item>
         <item name="android:visibility">gone</item>
     </style>
-
-    <!--<style name="Screen">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="LabelEmptyList">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:gravity">center</item>
-        <item name="android:text">@string/label_empty_list</item>
-        <item name="android:textSize">@dimen/default_font_size</item>
-        <item name="android:textColor">@color/default_text_color</item>
-        <item name="android:visibility">gone</item>
-        <item name="custom_font">opensans</item>
-    </style>
-
-    <style name="Toolbar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:background">@color/toolbar_background_color</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="HorizontalSeparator">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_weight">1</item>
-    </style>
-
-    <style name="ToolbarTitle">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:paddingLeft">15dp</item>
-        <item name="android:paddingRight">15dp</item>
-        <item name="custom_font">opensans</item>
-    </style>
-
-    <style name="ToolbarButton">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:paddingLeft">3sp</item>
-        <item name="android:layout_width">50dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/background_toolbar_button</item>
-        <item name="custom_font">glyphicons</item>
-    </style>
-
-    <style name="ColorButton">
-        <item name="android:layout_width">55dp</item>
-        <item name="android:layout_height">55dp</item>
-        <item name="android:gravity">center</item>
-        <item name="custom_font">glyphicons</item>
-        <item name="android:textColor">#F5F5F5</item>
-        <item name="android:textSize">@dimen/default_font_size</item>
-    </style>
-
-    <style name="ColorSeparator">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:layout_weight">1</item>
-    </style>-->
 
 </resources>

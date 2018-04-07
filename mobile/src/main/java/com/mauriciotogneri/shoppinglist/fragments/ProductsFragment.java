@@ -9,6 +9,7 @@ import com.mauriciotogneri.shoppinglist.activities.CreateProductActivity;
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
 import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView.ProductListViewObserver;
@@ -50,6 +51,9 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
         updateProducts.moveToCart(product);
 
         view.removeProduct(product);
+
+        Analytics analytics = new Analytics(getContext());
+        analytics.cartItemAdded(product);
     }
 
     @Override
@@ -67,7 +71,7 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
             }
             else if (option == 1)
             {
-                removeProduct(product);
+                confirmRemoveProduct(product);
             }
         });
     }
@@ -78,12 +82,15 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
         startActivity(intent);
     }
 
-    private void removeProduct(Product product)
+    private void confirmRemoveProduct(Product product)
     {
         Dialogs dialogs = new Dialogs(getContext());
-        dialogs.confirmation(product.name(), getString(R.string.confirmation_remove_product), () -> {
-            Toast.makeText(getContext(), "DELETE: " + product.name(), Toast.LENGTH_SHORT).show();
-        });
+        dialogs.confirmation(product.name(), getString(R.string.confirmation_remove_product), () -> removeProduct(product));
+    }
+
+    private void removeProduct(Product product)
+    {
+        Toast.makeText(getContext(), "DELETE: " + product.name(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
