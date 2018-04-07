@@ -2,6 +2,7 @@ package com.mauriciotogneri.shoppinglist.activities;
 
 import android.Manifest.permission;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -13,15 +14,21 @@ import com.mauriciotogneri.androidutils.permissions.Permissions;
 import com.mauriciotogneri.androidutils.permissions.PermissionsResult;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
+import com.mauriciotogneri.shoppinglist.database.LoadCategories;
+import com.mauriciotogneri.shoppinglist.database.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.ResourceUtils;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
 
 import java.io.File;
+import java.util.List;
 
-public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver
+public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver, OnCategoriesLoaded
 {
+    private static final String PARAM_PRODUCT = "product";
+
     private static final int CAMERA_PERMISSION = 1001;
     private static final int READ_DISK_PERMISSION = 1002;
 
@@ -30,6 +37,29 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     private static final int SEARCH_IMAGE_REQUEST_CODE = 2003;
 
     private Uri cameraUri;
+
+    public static Intent intent(Context context, Product product)
+    {
+        Intent intent = new Intent(context, CreateProductActivity.class);
+        intent.putExtra(PARAM_PRODUCT, product);
+
+        return intent;
+    }
+
+    @Override
+    protected void initialize()
+    {
+        LoadCategories loadCategories = new LoadCategories(this, this);
+        loadCategories.execute();
+    }
+
+    @Override
+    public void onCategoriesLoaded(List<String> categories)
+    {
+        Product product = parameter(PARAM_PRODUCT, null);
+
+        view.initialize(categories, product);
+    }
 
     @Override
     public void onBack()
