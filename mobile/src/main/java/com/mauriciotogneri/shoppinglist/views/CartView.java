@@ -52,6 +52,7 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
             ui.labelEmpty.setVisibility(View.GONE);
             ui.list.setVisibility(View.VISIBLE);
             adapter.set(products);
+            adapter.sortList();
             enableToolbarAction(R.drawable.ic_share, v -> observer.onShare(products));
         }
     }
@@ -75,6 +76,7 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
 
     public void updateList()
     {
+        adapter.sortList();
         adapter.update();
     }
 

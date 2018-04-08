@@ -50,7 +50,7 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
     private void renameCategory(String category)
     {
         Dialogs dialogs = new Dialogs(this);
-        dialogs.input(this, getString(R.string.label_product_new_category), category, input -> {
+        dialogs.input(this, getString(R.string.label_product_edit_category), category, input -> {
             Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
         });
     }

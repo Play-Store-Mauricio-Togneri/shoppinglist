@@ -32,7 +32,7 @@ public class ProductInCartAdapter extends BaseListAdapter<Product, ViewHolder>
         }
         else
         {
-            viewHolder.row.setBackgroundColor(color(R.color.item_unselected));
+            viewHolder.row.setBackground(null);
             viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
             viewHolder.check.setVisibility(View.GONE);
         }
@@ -42,6 +42,31 @@ public class ProductInCartAdapter extends BaseListAdapter<Product, ViewHolder>
         Glide.with(getContext())
                 .load(product.image())
                 .into(viewHolder.image);
+    }
+
+    public void sortList()
+    {
+        sort((p1, p2) -> {
+            if (!p1.isSelected() && p2.isSelected())
+            {
+                return -1;
+            }
+            else if (p1.isSelected() && !p2.isSelected())
+            {
+                return 1;
+            }
+            else
+            {
+                if (!p1.category().equals(p2.category()))
+                {
+                    return p1.category().compareTo(p2.category());
+                }
+                else
+                {
+                    return p1.name().compareTo(p2.name());
+                }
+            }
+        });
     }
 
     @Override
