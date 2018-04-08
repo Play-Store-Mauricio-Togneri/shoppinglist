@@ -24,8 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
                 android:textColor="@color/text.color"
                 android:textSize="14sp"/>
 

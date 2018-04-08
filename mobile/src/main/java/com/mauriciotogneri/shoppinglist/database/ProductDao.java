@@ -22,6 +22,9 @@ public interface ProductDao
     @Query("SELECT * FROM Product WHERE NOT inCart")
     List<Product> notInCart();
 
+    @Query("UPDATE Product SET selected=:selected WHERE id=:id")
+    void setSelection(Integer id, Boolean selected);
+
     @Query("UPDATE Product SET inCart=:inCart WHERE id=:id")
     void moveToCart(Integer id, Boolean inCart);
 
