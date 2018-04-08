@@ -30,8 +30,6 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
     {
         enableBack(v -> observer.onBack());
 
-        ui.buttonAction.setOnClickListener(v -> observer.onAction());
-
         if (isNew)
         {
             toolbarTitle(R.string.toolbar_title_create_product);
@@ -76,6 +74,12 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
     public void onManageCategories()
     {
         observer.onManageCategories();
+    }
+
+    @OnClick(R.id.button_action)
+    public void onAction()
+    {
+        observer.onAction();
     }
 
     public String name()

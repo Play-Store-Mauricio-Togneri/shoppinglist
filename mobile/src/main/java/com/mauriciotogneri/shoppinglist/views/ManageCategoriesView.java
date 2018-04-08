@@ -31,8 +31,6 @@ public class ManageCategoriesView extends BaseView<ManageCategoriesViewObserver,
         toolbarTitle(R.string.toolbar_title_manage_categories);
         enableBack(v -> observer.onBack());
 
-        // TODO ui.buttonAdd.setOnClickListener(v -> observer.onAddCategory());
-
         ui.list.setAdapter(adapter);
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
             String product = (String) adapterView.getItemAtPosition(position);
@@ -42,7 +40,7 @@ public class ManageCategoriesView extends BaseView<ManageCategoriesViewObserver,
 
     public void updateList(List<String> categories)
     {
-        if (!categories.isEmpty())
+        if (categories.isEmpty())
         {
             ui.labelEmpty.setVisibility(View.VISIBLE);
             ui.list.setVisibility(View.GONE);

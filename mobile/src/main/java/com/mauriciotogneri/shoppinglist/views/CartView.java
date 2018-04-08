@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
+import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.ProductInCartAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
@@ -31,8 +32,6 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
     {
         toolbarTitle(R.string.toolbar_title_main);
 
-        ui.buttonAdd.setOnClickListener(v -> observer.onAddProduct());
-
         ui.list.setAdapter(adapter);
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
             Product product = (Product) adapterView.getItemAtPosition(position);
@@ -42,14 +41,17 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
 
     public void updateList(List<Product> products)
     {
-        adapter.set(products);
-
         if (products.isEmpty())
         {
             disableToolbarAction();
+            ui.labelEmpty.setVisibility(View.VISIBLE);
+            ui.list.setVisibility(View.GONE);
         }
         else
         {
+            ui.labelEmpty.setVisibility(View.GONE);
+            ui.list.setVisibility(View.VISIBLE);
+            adapter.set(products);
             enableToolbarAction(R.drawable.ic_share, v -> observer.onShare());
         }
     }
@@ -76,6 +78,12 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
         adapter.update();
     }
 
+    @OnClick(R.id.product_add)
+    public void onAddProduct()
+    {
+        observer.onAddProduct();
+    }
+
     public interface CartViewObserver
     {
         void onProductSelected(Product product);
@@ -90,7 +98,7 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
         @BindView(R.id.product_list)
         public ListView list;
 
-        @BindView(R.id.product_add)
-        public View buttonAdd;
+        @BindView(R.id.label_empty)
+        public View labelEmpty;
     }
 }
