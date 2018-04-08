@@ -1,7 +1,7 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
 import android.content.Intent;
-import android.widget.Toast;
+import android.text.TextUtils;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.database.LoadProductsInCart;
@@ -40,9 +40,14 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     }
 
     @Override
-    public void onShare()
+    public void onShare(List<Product> products)
     {
-        Toast.makeText(this, "SHARE", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, shareContent(products));
+        intent.setType("text/plain");
+
+        startActivity(intent);
     }
 
     @Override
@@ -56,6 +61,35 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     protected CartView view()
     {
         return new CartView(this, this);
+    }
+
+    private String shareContent(List<Product> products)
+    {
+        StringBuilder result = new StringBuilder();
+
+        String lastCategory = "";
+
+        for (Product product : products)
+        {
+            if (!product.isSelected())
+            {
+                if (!TextUtils.equals(product.category(), lastCategory))
+                {
+                    lastCategory = product.category();
+
+                    if (result.length() != 0)
+                    {
+                        result.append("\n");
+                    }
+
+                    result.append(lastCategory).append(":\n");
+                }
+
+                result.append("   - ").append(product.name()).append("\n");
+            }
+        }
+
+        return result.toString();
     }
 
     @Override
