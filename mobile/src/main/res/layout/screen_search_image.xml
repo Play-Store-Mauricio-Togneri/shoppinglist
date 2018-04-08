@@ -32,7 +32,7 @@
                     android:padding="15dp"
                     android:src="@drawable/ic_close"/>
 
-                <EditText
+                <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/toolbar.input"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
