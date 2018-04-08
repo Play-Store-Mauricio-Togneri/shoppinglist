@@ -5,13 +5,16 @@ import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.database.LoadProductsInCart;
+import com.mauriciotogneri.shoppinglist.database.LoadProductsInCart.OnProductsLoaded;
 import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.CartView;
 import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
 
-public class CartActivity extends BaseActivity<CartView> implements CartViewObserver
+import java.util.List;
+
+public class CartActivity extends BaseActivity<CartView> implements CartViewObserver, OnProductsLoaded
 {
     @Override
     protected void initialize()
@@ -19,8 +22,14 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
         Analytics analytics = new Analytics(this);
         analytics.appLaunched();
 
-        LoadProductsInCart loader = new LoadProductsInCart(this, products -> view.updateList(products));
+        LoadProductsInCart loader = new LoadProductsInCart(this, this);
         loader.execute();
+    }
+
+    @Override
+    public void onProductsLoaded(List<Product> products)
+    {
+        view.updateList(products);
     }
 
     @Override

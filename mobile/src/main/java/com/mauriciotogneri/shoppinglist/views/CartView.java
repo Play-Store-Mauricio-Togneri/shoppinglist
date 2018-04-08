@@ -21,7 +21,7 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
 
     public CartView(Context context, CartViewObserver observer)
     {
-        super(R.layout.screen_main, observer, new ViewContainer());
+        super(R.layout.screen_cart, observer, new ViewContainer());
 
         this.adapter = new ProductInCartAdapter(context);
     }
