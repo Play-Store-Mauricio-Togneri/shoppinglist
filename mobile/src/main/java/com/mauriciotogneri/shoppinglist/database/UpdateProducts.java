@@ -15,6 +15,15 @@ public class UpdateProducts
         this.context = context;
     }
 
+    public void setSelection(Product product)
+    {
+        new Thread(() ->
+        {
+            ProductDao dao = ProductDao.instance(context);
+            dao.setSelection(product.id(), product.isSelected());
+        }).start();
+    }
+
     public void moveToCart(Product product)
     {
         new Thread(() ->

@@ -21,9 +21,6 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     {
         Analytics analytics = new Analytics(this);
         analytics.appLaunched();
-
-        LoadProductsInCart loader = new LoadProductsInCart(this, this);
-        loader.execute();
     }
 
     @Override
@@ -37,6 +34,9 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     {
         product.toggleSelection();
         view.updateList();
+
+        UpdateProducts updateProducts = new UpdateProducts(this);
+        updateProducts.setSelection(product);
     }
 
     @Override
@@ -56,6 +56,15 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     protected CartView view()
     {
         return new CartView(this, this);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        LoadProductsInCart loader = new LoadProductsInCart(this, this);
+        loader.execute();
     }
 
     @Override
