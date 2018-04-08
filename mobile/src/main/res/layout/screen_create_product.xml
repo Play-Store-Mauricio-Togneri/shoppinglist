@@ -111,7 +111,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:padding="10dp"
-                android:text="Change picture"
+                android:text="@string/changePicture"
                 android:textColor="@color/primary"
                 android:textSize="14sp"/>
 
@@ -124,7 +124,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:checked="true"
-            android:text="Add to cart automatically"
+            android:text="@string/addToCartAutomatically"
             android:textColor="@color/text.color"/>
 
         <Button

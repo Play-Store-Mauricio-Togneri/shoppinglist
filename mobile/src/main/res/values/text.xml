@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="search">Search</string>
+    <string name="changePicture">Change picture</string>
+    <string name="addToCartAutomatically">Add to cart automatically</string>
+    <string name="label.source.search">Search</string>
+    <string name="rename">Rename</string>
+    <string name="error.loadingImage">Error loading image</string>
+    <string name="error.openingCamera">Error opening camera</string>
+
+</resources>

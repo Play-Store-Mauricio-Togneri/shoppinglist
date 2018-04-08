@@ -31,7 +31,7 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
     public void onCategorySelected(String category)
     {
         String[] options = new String[2];
-        options[0] = "Rename"; // TODO
+        options[0] = getString(R.string.rename);
         options[1] = getString(R.string.button_remove);
 
         Dialogs dialogs = new Dialogs(this);

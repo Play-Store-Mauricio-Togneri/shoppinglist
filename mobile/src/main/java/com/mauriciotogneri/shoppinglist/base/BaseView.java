@@ -1,6 +1,5 @@
 package com.mauriciotogneri.shoppinglist.base;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -100,23 +99,5 @@ public abstract class BaseView<O, C>
         ImageView imageView = view.findViewById(R.id.toolbar_action);
         imageView.setVisibility(View.GONE);
         imageView.setOnClickListener(null);
-    }
-
-    // TODO
-    @SuppressLint("InflateParams")
-    public void showToast(final int messageId)
-    {
-        /*handler.post(() -> {
-            View layout = inflater.inflate(R.layout.view_toast, null);
-
-            TextView text = layout.findViewById(R.id.message);
-            text.setText(messageId);
-
-            Toast toast = new Toast(getContext().getApplicationContext());
-            toast.setGravity(Gravity.BOTTOM, 0, 50);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
-        });*/
     }
 }

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import com.mauriciotogneri.androidutils.ToastMessage;
 import com.mauriciotogneri.androidutils.intents.Intents;
 import com.mauriciotogneri.androidutils.permissions.OnPermissionGranted;
 import com.mauriciotogneri.androidutils.permissions.Permissions;
@@ -83,7 +84,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         String[] options = new String[3];
         options[0] = getString(R.string.label_source_camera);
         options[1] = getString(R.string.label_source_gallery);
-        options[2] = "Search";
+        options[2] = getString(R.string.label_source_search);
 
         Dialogs dialogs = new Dialogs(this);
         dialogs.options(getString(R.string.label_select_picture_source), options, option -> {
@@ -129,8 +130,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         catch (Exception e)
         {
-            // TODO
-            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            new ToastMessage(this).shortMessage(R.string.error_openingCamera);
         }
     }
 
@@ -163,8 +163,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         catch (Exception e)
         {
-            // TODO
-            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            new ToastMessage(this).shortMessage(R.string.error_loadingImage);
         }
     }
 
