@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
+import android.text.TextUtils;
 
 import com.mauriciotogneri.androidutils.ToastMessage;
 import com.mauriciotogneri.androidutils.intents.Intents;
@@ -149,9 +149,27 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     }
 
     @Override
-    public void onAction()
+    public void onAction(String category, String name, String image)
     {
-        Toast.makeText(this, "ACTION", Toast.LENGTH_SHORT).show();
+        view.clearError();
+
+        if (TextUtils.isEmpty(name))
+        {
+            view.missingName();
+        }
+        else
+        {
+            Product product = parameter(PARAM_PRODUCT, null);
+
+            if (product != null)
+            {
+                System.out.println();
+            }
+            else
+            {
+                System.out.println();
+            }
+        }
     }
 
     private void processUriImage(Uri uri)

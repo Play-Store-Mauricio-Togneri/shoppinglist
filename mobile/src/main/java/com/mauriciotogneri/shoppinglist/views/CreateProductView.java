@@ -1,5 +1,6 @@
 package com.mauriciotogneri.shoppinglist.views;
 
+import android.support.design.widget.TextInputLayout;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,8 @@ import java.util.List;
 public class CreateProductView extends BaseView<CreateProductViewObserver, ViewContainer>
 {
     private static final String DEFAULT_IMAGE = "https://i.imgur.com/ztA411S.png";
+
+    private String selectedImage;
 
     public CreateProductView(CreateProductViewObserver observer)
     {
@@ -79,7 +82,14 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
     @OnClick(R.id.button_action)
     public void onAction()
     {
-        observer.onAction();
+        observer.onAction(category(), name(), selectedImage);
+    }
+
+    private String category()
+    {
+        Object element = ui.category.getSelectedItem();
+
+        return (element != null) ? element.toString() : "";
     }
 
     public String name()
@@ -87,11 +97,23 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         return ui.name.getText().toString();
     }
 
-    public void image(String imageUrl)
+    public void image(String image)
     {
+        selectedImage = image;
+
         Glide.with(context())
-                .load(imageUrl)
+                .load(image)
                 .into(ui.image);
+    }
+
+    public void clearError()
+    {
+        ui.nameHeader.setError("");
+    }
+
+    public void missingName()
+    {
+        ui.nameHeader.setError("Missing name");
     }
 
     public interface CreateProductViewObserver
@@ -102,11 +124,14 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
 
         void onChangeImage();
 
-        void onAction();
+        void onAction(String category, String name, String image);
     }
 
     public static class ViewContainer
     {
+        @BindView(R.id.name_header)
+        public TextInputLayout nameHeader;
+
         @BindView(R.id.name)
         public EditText name;
 
