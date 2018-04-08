@@ -113,7 +113,7 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
 
     public void missingName()
     {
-        ui.nameHeader.setError("Missing name");
+        ui.nameHeader.setError(context().getString(R.string.error_invalid_name));
     }
 
     public interface CreateProductViewObserver
