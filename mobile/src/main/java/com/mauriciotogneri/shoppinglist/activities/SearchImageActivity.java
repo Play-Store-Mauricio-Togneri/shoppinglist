@@ -44,7 +44,7 @@ public class SearchImageActivity extends BaseActivity<SearchImageView> implement
     }
 
     @Override
-    public void onBack()
+    public void onClose()
     {
         finish();
     }

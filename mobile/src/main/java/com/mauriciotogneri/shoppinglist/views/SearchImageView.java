@@ -10,6 +10,7 @@ import android.widget.GridView;
 
 import com.mauriciotogneri.androidutils.Keyboard;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
+import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.SearchImageAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
@@ -30,13 +31,10 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
     @Override
     protected void initialize()
     {
-        ui.buttonClose.setOnClickListener(v -> observer.onBack());
-        ui.buttonSearch.setOnClickListener(v -> search());
-
         ui.input.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH)
             {
-                search();
+                onSearch();
 
                 return true;
             }
@@ -69,7 +67,7 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
     public void query(String initialQuery)
     {
         ui.input.setText(initialQuery);
-        search();
+        onSearch();
     }
 
     public void loadImages(List<String> images)
@@ -90,7 +88,14 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
         ui.loading.setVisibility(View.GONE);
     }
 
-    private void search()
+    @OnClick(R.id.toolbar_close)
+    public void onClose()
+    {
+        observer.onClose();
+    }
+
+    @OnClick(R.id.toolbar_search)
+    public void onSearch()
     {
         String query = ui.input.getText().toString();
 
@@ -105,7 +110,7 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
 
     public interface SearchImageViewObserver
     {
-        void onBack();
+        void onClose();
 
         void onSearch(String query);
 
@@ -114,9 +119,6 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
 
     public static class ViewContainer
     {
-        @BindView(R.id.toolbar_close)
-        public View buttonClose;
-
         @BindView(R.id.toolbar_input)
         public EditText input;
 
