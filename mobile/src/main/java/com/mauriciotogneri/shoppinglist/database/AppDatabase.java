@@ -106,7 +106,7 @@ public abstract class AppDatabase extends RoomDatabase
         Product yogurt = new Product(milkAndCheese.name(), context.getString(R.string.product_yogurt), "http://i.imgur.com/yn4F7xG.png", false, false);
 
         CategoryDao categoryDao = categoryDao();
-        categoryDao.insertAll(
+        categoryDao.insert(
                 beverages,
                 breadAndGrain,
                 condiments,
@@ -117,7 +117,7 @@ public abstract class AppDatabase extends RoomDatabase
                 milkAndCheese);
 
         ProductDao productDao = productDao();
-        productDao.insertAll(
+        productDao.insert(
                 // Beverages
                 beer, coffee, iceTea, soda, water,
 

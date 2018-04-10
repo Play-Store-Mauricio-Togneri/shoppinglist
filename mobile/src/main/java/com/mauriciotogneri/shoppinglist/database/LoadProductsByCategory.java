@@ -4,40 +4,40 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.mauriciotogneri.shoppinglist.model.Product;
-import com.mauriciotogneri.shoppinglist.model.Products;
 
-public class LoadProductsByCategory extends AsyncTask<Void, Void, Products>
+import java.util.Collections;
+import java.util.List;
+
+public class LoadProductsByCategory extends AsyncTask<Void, Void,  List<Product>>
 {
     private final ProductDao dao;
+    private final String category;
     private final OnProductsLoaded callback;
 
-    public LoadProductsByCategory(Context context, OnProductsLoaded callback)
+    public LoadProductsByCategory(Context context, String category, OnProductsLoaded callback)
     {
         this.dao = ProductDao.instance(context);
+        this.category = category;
         this.callback = callback;
     }
 
     @Override
-    protected Products doInBackground(Void... voids)
+    protected  List<Product> doInBackground(Void... voids)
     {
-        Products products = new Products();
-
-        for (Product product : dao.notInCart())
-        {
-            products.add(product);
-        }
+        List<Product> products = dao.byCategory(category);
+        Collections.sort(products, (p1, p2) -> p1.name().compareTo(p2.name()));
 
         return products;
     }
 
     @Override
-    protected void onPostExecute(Products products)
+    protected void onPostExecute( List<Product> products)
     {
         callback.onProductsLoaded(products);
     }
 
     public interface OnProductsLoaded
     {
-        void onProductsLoaded(Products products);
+        void onProductsLoaded( List<Product> products);
     }
 }

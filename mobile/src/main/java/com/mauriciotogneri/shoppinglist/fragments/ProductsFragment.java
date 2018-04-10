@@ -7,6 +7,8 @@ import android.widget.Toast;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.activities.CreateProductActivity;
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
+import com.mauriciotogneri.shoppinglist.database.LoadProductsByCategory;
+import com.mauriciotogneri.shoppinglist.database.LoadProductsByCategory.OnProductsLoaded;
 import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
@@ -14,29 +16,26 @@ import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView.ProductListViewObserver;
 
-import java.util.Arrays;
+import java.util.List;
 
-public class ProductsFragment extends BaseFragment<ProductsListView> implements ProductListViewObserver
+public class ProductsFragment extends BaseFragment<ProductsListView> implements ProductListViewObserver, OnProductsLoaded
 {
     private static final String PARAM_CATEGORY = "category";
-    private static final String PARAM_PRODUCTS = "products";
 
-    public static ProductsFragment create(String category, Product[] products)
+    public static ProductsFragment create(String category)
     {
         ProductsFragment fragment = new ProductsFragment();
         Bundle args = new Bundle();
         args.putString(PARAM_CATEGORY, category);
-        args.putSerializable(PARAM_PRODUCTS, products);
         fragment.setArguments(args);
 
         return fragment;
     }
 
     @Override
-    protected void initialize()
+    public void onProductsLoaded(List<Product> products)
     {
-        Product[] products = parameter(PARAM_PRODUCTS, new Product[0]);
-        view.updateList(Arrays.asList(products));
+        view.updateList(products);
     }
 
     public String title()
@@ -91,6 +90,15 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     private void removeProduct(Product product)
     {
         Toast.makeText(getContext(), "DELETE: " + product.name(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        LoadProductsByCategory loader = new LoadProductsByCategory(getContext(), parameter(PARAM_CATEGORY, ""), this);
+        loader.execute();
     }
 
     @Override
