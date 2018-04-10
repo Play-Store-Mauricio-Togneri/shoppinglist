@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppinglist.database;
+package com.mauriciotogneri.shoppinglist.tasks;
 
 import android.os.AsyncTask;
 

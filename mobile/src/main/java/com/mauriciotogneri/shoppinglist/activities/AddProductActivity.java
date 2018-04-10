@@ -3,8 +3,8 @@ package com.mauriciotogneri.shoppinglist.activities;
 import android.content.Intent;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.database.LoadCategories;
-import com.mauriciotogneri.shoppinglist.database.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.LoadCategories;
+import com.mauriciotogneri.shoppinglist.tasks.LoadCategories.OnCategoriesLoaded;
 import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.views.AddProductView;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.AddProductViewObserver;

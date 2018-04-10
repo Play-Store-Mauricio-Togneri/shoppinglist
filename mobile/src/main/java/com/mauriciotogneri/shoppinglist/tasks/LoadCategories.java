@@ -1,8 +1,9 @@
-package com.mauriciotogneri.shoppinglist.database;
+package com.mauriciotogneri.shoppinglist.tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.mauriciotogneri.shoppinglist.database.CategoryDao;
 import com.mauriciotogneri.shoppinglist.model.Category;
 
 import java.util.ArrayList;
