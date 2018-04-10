@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.database.LoadCategories;
 import com.mauriciotogneri.shoppinglist.database.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.views.AddProductView;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.AddProductViewObserver;
 
@@ -20,7 +21,7 @@ public class AddProductActivity extends BaseActivity<AddProductView> implements 
     }
 
     @Override
-    public void onCategoriesLoaded(List<String> categories)
+    public void onCategoriesLoaded(List<Category> categories)
     {
         view.updateLists(getSupportFragmentManager(), categories);
     }

@@ -8,7 +8,7 @@ import com.mauriciotogneri.shoppinglist.model.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadCategories extends AsyncTask<Void, Void, List<String>>
+public class LoadCategories extends AsyncTask<Void, Void, List<Category>>
 {
     private final CategoryDao dao;
     private final OnCategoriesLoaded callback;
@@ -20,15 +20,15 @@ public class LoadCategories extends AsyncTask<Void, Void, List<String>>
     }
 
     @Override
-    protected List<String> doInBackground(Void... voids)
+    protected List<Category> doInBackground(Void... voids)
     {
-        List<String> categories = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
 
         for (Category category : dao.all())
         {
-            if (!categories.contains(category.name()))
+            if (!categories.contains(category))
             {
-                categories.add(category.name());
+                categories.add(category);
             }
         }
 
@@ -36,13 +36,13 @@ public class LoadCategories extends AsyncTask<Void, Void, List<String>>
     }
 
     @Override
-    protected void onPostExecute(List<String> categories)
+    protected void onPostExecute(List<Category> categories)
     {
         callback.onCategoriesLoaded(categories);
     }
 
     public interface OnCategoriesLoaded
     {
-        void onCategoriesLoaded(List<String> categories);
+        void onCategoriesLoaded(List<Category> categories);
     }
 }

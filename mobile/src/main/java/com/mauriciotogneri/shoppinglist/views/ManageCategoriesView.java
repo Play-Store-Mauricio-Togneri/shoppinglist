@@ -9,6 +9,7 @@ import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CategoryAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
+import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategoriesViewObserver;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ViewContainer;
 
@@ -33,12 +34,12 @@ public class ManageCategoriesView extends BaseView<ManageCategoriesViewObserver,
 
         ui.list.setAdapter(adapter);
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
-            String product = (String) adapterView.getItemAtPosition(position);
-            observer.onCategorySelected(product);
+            Category category = (Category) adapterView.getItemAtPosition(position);
+            observer.onCategorySelected(category);
         });
     }
 
-    public void updateList(List<String> categories)
+    public void updateList(List<Category> categories)
     {
         if (categories.isEmpty())
         {
@@ -61,7 +62,7 @@ public class ManageCategoriesView extends BaseView<ManageCategoriesViewObserver,
 
     public interface ManageCategoriesViewObserver
     {
-        void onCategorySelected(String category);
+        void onCategorySelected(Category category);
 
         void onAddCategory();
 
