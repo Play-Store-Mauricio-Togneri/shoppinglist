@@ -10,9 +10,9 @@ public class CreateProduct extends AsyncTask<Void, Void, Boolean>
 {
     private final Product product;
     private final ProductDao dao;
-    private final OnProductsCreated callback;
+    private final OnProductCreated callback;
 
-    public CreateProduct(Context context, Product product, OnProductsCreated callback)
+    public CreateProduct(Context context, Product product, OnProductCreated callback)
     {
         this.product = product;
         this.dao = ProductDao.instance(context);
@@ -39,7 +39,7 @@ public class CreateProduct extends AsyncTask<Void, Void, Boolean>
         callback.onProductsCreated(result);
     }
 
-    public interface OnProductsCreated
+    public interface OnProductCreated
     {
         void onProductsCreated(Boolean result);
     }

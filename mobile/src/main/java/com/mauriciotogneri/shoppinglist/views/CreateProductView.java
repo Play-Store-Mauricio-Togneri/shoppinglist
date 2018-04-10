@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist.views;
 
 import android.support.design.widget.TextInputLayout;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -43,6 +44,9 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         }
         else
         {
+            ui.inCart.setChecked(false);
+            ui.inCart.setVisibility(View.GONE);
+
             toolbarTitle(R.string.toolbar_title_edit_product);
             ui.buttonAction.setText(R.string.button_edit);
         }

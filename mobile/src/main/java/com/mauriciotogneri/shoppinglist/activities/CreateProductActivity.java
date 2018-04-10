@@ -20,7 +20,9 @@ import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
 import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
 import com.mauriciotogneri.shoppinglist.tasks.product.CreateProduct;
-import com.mauriciotogneri.shoppinglist.tasks.product.CreateProduct.OnProductsCreated;
+import com.mauriciotogneri.shoppinglist.tasks.product.CreateProduct.OnProductCreated;
+import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProduct;
+import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProduct.OnProductUpdated;
 import com.mauriciotogneri.shoppinglist.utils.ResourceUtils;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
@@ -30,7 +32,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver, OnCategoriesLoaded, OnProductsCreated
+public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver, OnCategoriesLoaded, OnProductCreated, OnProductUpdated
 {
     private static final String PARAM_PRODUCT = "product";
 
@@ -162,17 +164,33 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         else
         {
-            Product product = parameter(PARAM_PRODUCT, null);
+            Product oldProduct = parameter(PARAM_PRODUCT, null);
+            Product newProduct = new Product(category, name, image, inCart, false);
 
-            if (product != null)
+            if (oldProduct != null)
             {
-                System.out.println();
+                UpdateProduct task = new UpdateProduct(this, oldProduct, newProduct, this);
+                task.execute();
             }
             else
             {
-                CreateProduct task = new CreateProduct(this, new Product(category, name, image, inCart, false), this);
+                CreateProduct task = new CreateProduct(this, newProduct, this);
                 task.execute();
             }
+        }
+    }
+
+    @Override
+    public void onProductUpdated(Boolean result)
+    {
+        if (result)
+        {
+            finish();
+        }
+        else
+        {
+            // TODO
+            new ToastMessage(this).shortMessage("ERROR UPDATING");
         }
     }
 
@@ -186,7 +204,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         else
         {
             // TODO
-            new ToastMessage(this).shortMessage("ERROR");
+            new ToastMessage(this).shortMessage("ERROR CREATING");
         }
     }
 
