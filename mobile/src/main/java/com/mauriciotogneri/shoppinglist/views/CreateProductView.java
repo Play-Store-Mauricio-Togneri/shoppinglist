@@ -3,6 +3,7 @@ package com.mauriciotogneri.shoppinglist.views;
 import android.support.design.widget.TextInputLayout;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -83,7 +84,7 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
     @OnClick(R.id.button_action)
     public void onAction()
     {
-        observer.onAction(category(), name(), selectedImage);
+        observer.onAction(category(), name(), selectedImage, ui.inCart.isChecked());
     }
 
     private String category()
@@ -125,7 +126,7 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
 
         void onChangeImage();
 
-        void onAction(String category, String name, String image);
+        void onAction(String category, String name, String image, Boolean inCart);
     }
 
     public static class ViewContainer
@@ -141,6 +142,9 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
 
         @BindView(R.id.product_image)
         public ImageView image;
+
+        @BindView(R.id.product_addToCard)
+        public CheckBox inCart;
 
         @BindView(R.id.button_action)
         public Button buttonAction;

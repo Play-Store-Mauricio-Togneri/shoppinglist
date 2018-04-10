@@ -14,13 +14,6 @@ import java.util.List;
 public class AddProductActivity extends BaseActivity<AddProductView> implements AddProductViewObserver, OnCategoriesLoaded
 {
     @Override
-    protected void initialize()
-    {
-        LoadCategories task = new LoadCategories(this, this);
-        task.execute();
-    }
-
-    @Override
     public void onCategoriesLoaded(List<Category> categories)
     {
         view.updateLists(getSupportFragmentManager(), categories);
@@ -37,6 +30,15 @@ public class AddProductActivity extends BaseActivity<AddProductView> implements 
     {
         Intent intent = new Intent(this, CreateProductActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        LoadCategories task = new LoadCategories(this, this);
+        task.execute();
     }
 
     @Override
