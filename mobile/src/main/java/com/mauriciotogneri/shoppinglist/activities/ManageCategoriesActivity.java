@@ -10,6 +10,7 @@ import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategoriesViewObserver;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesViewObserver, OnCategoriesLoaded
@@ -30,12 +31,14 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
     @Override
     public void onCategorySelected(String category)
     {
-        String[] options = new String[2];
-        options[0] = getString(R.string.rename);
-        options[1] = getString(R.string.button_remove);
+        List<String> options = Arrays.asList(
+                getString(R.string.rename),
+                getString(R.string.button_remove)
+        );
 
         Dialogs dialogs = new Dialogs(this);
-        dialogs.options(category, options, option -> {
+        dialogs.options(category, options, option ->
+        {
             if (option == 0)
             {
                 renameCategory(category);

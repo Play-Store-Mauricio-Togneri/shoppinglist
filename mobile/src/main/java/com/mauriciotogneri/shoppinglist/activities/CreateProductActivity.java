@@ -24,6 +24,7 @@ import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductVie
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver, OnCategoriesLoaded
@@ -81,13 +82,15 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     @Override
     public void onChangeImage()
     {
-        String[] options = new String[3];
-        options[0] = getString(R.string.label_source_camera);
-        options[1] = getString(R.string.label_source_gallery);
-        options[2] = getString(R.string.label_source_search);
+        List<String> options = Arrays.asList(
+                getString(R.string.label_source_camera),
+                getString(R.string.label_source_gallery),
+                getString(R.string.label_source_search)
+        );
 
         Dialogs dialogs = new Dialogs(this);
-        dialogs.options(getString(R.string.label_select_picture_source), options, option -> {
+        dialogs.options(getString(R.string.label_select_picture_source), options, option ->
+        {
             switch (option)
             {
                 case 0:

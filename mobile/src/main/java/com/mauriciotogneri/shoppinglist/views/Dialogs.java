@@ -17,6 +17,8 @@ import android.widget.EditText;
 
 import com.mauriciotogneri.shoppinglist.R;
 
+import java.util.List;
+
 public class Dialogs
 {
     private final Context context;
@@ -26,8 +28,11 @@ public class Dialogs
         this.context = context;
     }
 
-    public void options(String title, String[] options, OnOptionSelected callback)
+    public void options(String title, List<String> list, OnOptionSelected callback)
     {
+        String[] options = new String[list.size()];
+        list.toArray(options);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title(title));
         builder.setItems(options, (dialog, which) -> callback.onOptionSelected(which));
