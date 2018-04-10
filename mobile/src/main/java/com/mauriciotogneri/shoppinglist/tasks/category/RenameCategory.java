@@ -27,7 +27,7 @@ public class RenameCategory extends AsyncTask<Void, Void, Void>
     @Override
     protected Void doInBackground(Void... voids)
     {
-        categoryDao.rename(category.id(), newName);
+        categoryDao.rename(category.name(), newName);
         productDao.rename(category.name(), newName);
 
         return null;

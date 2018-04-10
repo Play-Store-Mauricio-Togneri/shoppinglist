@@ -16,8 +16,8 @@ public interface CategoryDao
     @Query("SELECT * FROM Category")
     List<Category> all();
 
-    @Query("UPDATE Category SET name=:name WHERE id=:id")
-    void rename(Integer id, String name);
+    @Query("UPDATE Category SET name=:newName WHERE name=:oldName")
+    void rename(String oldName, String newName);
 
     @Insert
     void insert(Category... categories);
