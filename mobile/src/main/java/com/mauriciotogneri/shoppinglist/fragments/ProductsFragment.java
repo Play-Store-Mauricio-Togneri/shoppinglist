@@ -7,9 +7,9 @@ import android.widget.Toast;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.activities.CreateProductActivity;
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
-import com.mauriciotogneri.shoppinglist.tasks.LoadProductsByCategory;
-import com.mauriciotogneri.shoppinglist.tasks.LoadProductsByCategory.OnProductsLoaded;
-import com.mauriciotogneri.shoppinglist.tasks.UpdateProducts;
+import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsByCategory;
+import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsByCategory.OnProductsLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
@@ -47,8 +47,8 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     @Override
     public void onProductSelected(Product product)
     {
-        UpdateProducts updateProducts = new UpdateProducts(getContext());
-        updateProducts.moveToCart(product);
+        UpdateProducts task = new UpdateProducts(getContext());
+        task.moveToCart(product);
 
         view.removeProduct(product);
 
@@ -100,8 +100,8 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     {
         super.onResume();
 
-        LoadProductsByCategory loader = new LoadProductsByCategory(getContext(), parameter(PARAM_CATEGORY, ""), this);
-        loader.execute();
+        LoadProductsByCategory task = new LoadProductsByCategory(getContext(), parameter(PARAM_CATEGORY, ""), this);
+        task.execute();
     }
 
     @Override

@@ -4,11 +4,13 @@ import com.mauriciotogneri.androidutils.ToastMessage;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.model.Category;
-import com.mauriciotogneri.shoppinglist.tasks.AddCategory;
-import com.mauriciotogneri.shoppinglist.tasks.AddCategory.OnCategoryAdded;
-import com.mauriciotogneri.shoppinglist.tasks.LoadCategories;
-import com.mauriciotogneri.shoppinglist.tasks.LoadCategories.OnCategoriesLoaded;
-import com.mauriciotogneri.shoppinglist.tasks.RenameCategory;
+import com.mauriciotogneri.shoppinglist.tasks.category.AddCategory;
+import com.mauriciotogneri.shoppinglist.tasks.category.AddCategory.OnCategoryAdded;
+import com.mauriciotogneri.shoppinglist.tasks.category.DeleteCategory;
+import com.mauriciotogneri.shoppinglist.tasks.category.DeleteCategory.OnCategoryDeleted;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.category.RenameCategory;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategoriesViewObserver;
@@ -16,7 +18,7 @@ import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategor
 import java.util.Arrays;
 import java.util.List;
 
-public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesViewObserver, OnCategoriesLoaded, OnCategoryAdded
+public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesViewObserver, OnCategoriesLoaded, OnCategoryAdded, OnCategoryDeleted
 {
     @Override
     protected void initialize()
@@ -26,8 +28,8 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 
     private void reloadCategories()
     {
-        LoadCategories loader = new LoadCategories(this, this);
-        loader.execute();
+        LoadCategories task = new LoadCategories(this, this);
+        task.execute();
     }
 
     @Override
@@ -66,19 +68,33 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 
     private void renameCategory(Category category, String newName)
     {
-        RenameCategory renameCategory = new RenameCategory(this, category, newName, this::reloadCategories);
-        renameCategory.execute();
+        RenameCategory task = new RenameCategory(this, category, newName, this::reloadCategories);
+        task.execute();
     }
 
     private void confirmRemoveCategory(Category category)
     {
         Dialogs dialogs = new Dialogs(this);
-        dialogs.confirmation(category.name(), getString(R.string.confirmation_remove_category), () -> removeCategory(category.name()));
+        dialogs.confirmation(category.name(), getString(R.string.confirmation_remove_category), () -> removeCategory(category));
     }
 
-    private void removeCategory(String category)
+    private void removeCategory(Category category)
     {
+        DeleteCategory task = new DeleteCategory(this, category, this);
+        task.execute();
+    }
 
+    @Override
+    public void onCategoryDeleted(Boolean result)
+    {
+        if (result)
+        {
+            reloadCategories();
+        }
+        else
+        {
+            new ToastMessage(this).shortMessage(R.string.error_category_in_use);
+        }
     }
 
     @Override
@@ -90,8 +106,8 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 
     private void addCategory(String name)
     {
-        AddCategory addCategory = new AddCategory(this, new Category(name), this);
-        addCategory.execute();
+        AddCategory task = new AddCategory(this, new Category(name), this);
+        task.execute();
     }
 
     @Override

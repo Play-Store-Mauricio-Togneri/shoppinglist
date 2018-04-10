@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppinglist.tasks;
+package com.mauriciotogneri.shoppinglist.tasks.category;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,6 +7,7 @@ import com.mauriciotogneri.shoppinglist.database.CategoryDao;
 import com.mauriciotogneri.shoppinglist.model.Category;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LoadCategories extends AsyncTask<Void, Void, List<Category>>
@@ -32,6 +33,8 @@ public class LoadCategories extends AsyncTask<Void, Void, List<Category>>
                 categories.add(category);
             }
         }
+
+        Collections.sort(categories, (c1, c2) -> c1.name().compareTo(c2.name()));
 
         return categories;
     }

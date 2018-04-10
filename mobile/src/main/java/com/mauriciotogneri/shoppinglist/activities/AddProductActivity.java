@@ -3,8 +3,8 @@ package com.mauriciotogneri.shoppinglist.activities;
 import android.content.Intent;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.tasks.LoadCategories;
-import com.mauriciotogneri.shoppinglist.tasks.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
 import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.views.AddProductView;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.AddProductViewObserver;
@@ -16,8 +16,8 @@ public class AddProductActivity extends BaseActivity<AddProductView> implements 
     @Override
     protected void initialize()
     {
-        LoadCategories loader = new LoadCategories(this, this);
-        loader.execute();
+        LoadCategories task = new LoadCategories(this, this);
+        task.execute();
     }
 
     @Override

@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.tasks.LoadImages;
-import com.mauriciotogneri.shoppinglist.tasks.LoadImages.OnImagesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.image.LoadImages;
+import com.mauriciotogneri.shoppinglist.tasks.image.LoadImages.OnImagesLoaded;
 import com.mauriciotogneri.shoppinglist.views.SearchImageView;
 import com.mauriciotogneri.shoppinglist.views.SearchImageView.SearchImageViewObserver;
 
@@ -54,8 +54,8 @@ public class SearchImageActivity extends BaseActivity<SearchImageView> implement
     {
         view.loadingMode();
 
-        LoadImages loadImages = new LoadImages(this);
-        loadImages.execute(query);
+        LoadImages task = new LoadImages(this);
+        task.execute(query);
     }
 
     @Override

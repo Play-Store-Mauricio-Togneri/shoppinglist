@@ -15,8 +15,8 @@ import com.mauriciotogneri.androidutils.permissions.Permissions;
 import com.mauriciotogneri.androidutils.permissions.PermissionsResult;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.tasks.LoadCategories;
-import com.mauriciotogneri.shoppinglist.tasks.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
 import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.ResourceUtils;
@@ -55,8 +55,8 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         Product product = parameter(PARAM_PRODUCT, null);
         view.initialize(product == null);
 
-        LoadCategories loadCategories = new LoadCategories(this, this);
-        loadCategories.execute();
+        LoadCategories task = new LoadCategories(this, this);
+        task.execute();
     }
 
     @Override
