@@ -16,6 +16,7 @@ import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView.ProductListViewObserver;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductsFragment extends BaseFragment<ProductsListView> implements ProductListViewObserver, OnProductsLoaded
@@ -58,12 +59,14 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     @Override
     public void onProductsOptions(Product product)
     {
-        String[] options = new String[2];
-        options[0] = getString(R.string.button_edit);
-        options[1] = getString(R.string.button_remove);
+        List<String> options = Arrays.asList(
+                getString(R.string.button_edit),
+                getString(R.string.button_remove)
+        );
 
         Dialogs dialogs = new Dialogs(getContext());
-        dialogs.options(product.name(), options, option -> {
+        dialogs.options(product.name(), options, option ->
+        {
             if (option == 0)
             {
                 editProduct(product);
