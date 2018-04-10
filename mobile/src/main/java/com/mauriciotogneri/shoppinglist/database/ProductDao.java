@@ -13,14 +13,11 @@ import java.util.List;
 @Dao
 public interface ProductDao
 {
-    @Query("SELECT * FROM Product")
-    List<Product> all();
-
     @Query("SELECT * FROM Product WHERE inCart")
     List<Product> inCart();
 
-    @Query("SELECT * FROM Product WHERE NOT inCart")
-    List<Product> notInCart();
+    @Query("SELECT * FROM Product WHERE category=:category")
+    List<Product> byCategory(String category);
 
     @Query("UPDATE Product SET selected=:selected WHERE id=:id")
     void setSelection(Integer id, Boolean selected);
@@ -29,7 +26,7 @@ public interface ProductDao
     void moveToCart(Integer id, Boolean inCart);
 
     @Insert
-    void insertAll(Product... products);
+    void insert(Product... products);
 
     @Delete
     void delete(Product product);

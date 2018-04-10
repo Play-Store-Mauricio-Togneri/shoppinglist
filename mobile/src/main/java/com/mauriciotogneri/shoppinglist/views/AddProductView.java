@@ -10,7 +10,7 @@ import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.ProductsFragmentAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
 import com.mauriciotogneri.shoppinglist.fragments.ProductsFragment;
-import com.mauriciotogneri.shoppinglist.model.Products;
+import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.AddProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.ViewContainer;
 
@@ -34,16 +34,16 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
         ui.pagerHeader.setTabIndicatorColor(color(R.color.primary));
     }
 
-    public void updateLists(FragmentManager fragmentManager, Products products)
+    public void updateLists(FragmentManager fragmentManager, List<String> categories)
     {
         List<ProductsFragment> fragments = new ArrayList<>();
 
-        for (String category : products.categories())
+        for (String category : categories)
         {
-            fragments.add(ProductsFragment.create(category, products.byCategory(category)));
+            fragments.add(ProductsFragment.create(category));
         }
 
-        ui.pager.setOffscreenPageLimit(products.size());
+        ui.pager.setOffscreenPageLimit(categories.size());
         ProductsFragmentAdapter adapter = new ProductsFragmentAdapter(fragmentManager, fragments);
         ui.pager.setAdapter(adapter);
     }
