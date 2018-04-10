@@ -19,6 +19,9 @@ public interface ProductDao
     @Query("SELECT * FROM Product WHERE category=:category")
     List<Product> byCategory(String category);
 
+    @Query("SELECT EXISTS(SELECT * FROM Product WHERE name=:name AND category=:category)")
+    boolean contains(String name, String category);
+
     @Query("UPDATE Product SET category=:newCategory WHERE category=:oldCategory")
     void rename(String oldCategory, String newCategory);
 

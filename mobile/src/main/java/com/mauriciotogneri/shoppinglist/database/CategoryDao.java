@@ -16,7 +16,7 @@ public interface CategoryDao
     @Query("SELECT * FROM Category")
     List<Category> all();
 
-    @Query("SELECT EXISTS(SELECT * FROM Category where name=:name)")
+    @Query("SELECT EXISTS(SELECT * FROM Category WHERE name=:name)")
     boolean contains(String name);
 
     @Query("UPDATE Category SET name=:newName WHERE name=:oldName")

@@ -15,10 +15,12 @@ import com.mauriciotogneri.androidutils.permissions.Permissions;
 import com.mauriciotogneri.androidutils.permissions.PermissionsResult;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
-import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
 import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
+import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.product.CreateProduct;
+import com.mauriciotogneri.shoppinglist.tasks.product.CreateProduct.OnProductsCreated;
 import com.mauriciotogneri.shoppinglist.utils.ResourceUtils;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
@@ -28,7 +30,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver, OnCategoriesLoaded
+public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver, OnCategoriesLoaded, OnProductsCreated
 {
     private static final String PARAM_PRODUCT = "product";
 
@@ -54,9 +56,6 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     {
         Product product = parameter(PARAM_PRODUCT, null);
         view.initialize(product == null);
-
-        LoadCategories task = new LoadCategories(this, this);
-        task.execute();
     }
 
     @Override
@@ -153,7 +152,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     }
 
     @Override
-    public void onAction(String category, String name, String image)
+    public void onAction(String category, String name, String image, Boolean inCart)
     {
         view.clearError();
 
@@ -171,8 +170,23 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
             }
             else
             {
-                System.out.println();
+                CreateProduct task = new CreateProduct(this, new Product(category, name, image, inCart, false), this);
+                task.execute();
             }
+        }
+    }
+
+    @Override
+    public void onProductsCreated(Boolean result)
+    {
+        if (result)
+        {
+            finish();
+        }
+        else
+        {
+            // TODO
+            new ToastMessage(this).shortMessage("ERROR");
         }
     }
 
@@ -220,6 +234,15 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
 
         PermissionsResult permissionsResult = new PermissionsResult(this);
         permissionsResult.process(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        LoadCategories task = new LoadCategories(this, this);
+        task.execute();
     }
 
     @Override
