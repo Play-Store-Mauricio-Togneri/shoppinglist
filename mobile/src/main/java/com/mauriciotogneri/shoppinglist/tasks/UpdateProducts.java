@@ -1,7 +1,8 @@
-package com.mauriciotogneri.shoppinglist.database;
+package com.mauriciotogneri.shoppinglist.tasks;
 
 import android.content.Context;
 
+import com.mauriciotogneri.shoppinglist.database.ProductDao;
 import com.mauriciotogneri.shoppinglist.model.Product;
 
 import java.util.List;

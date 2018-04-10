@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.database.LoadProductsInCart;
-import com.mauriciotogneri.shoppinglist.database.LoadProductsInCart.OnProductsLoaded;
-import com.mauriciotogneri.shoppinglist.database.UpdateProducts;
+import com.mauriciotogneri.shoppinglist.tasks.LoadProductsInCart;
+import com.mauriciotogneri.shoppinglist.tasks.LoadProductsInCart.OnProductsLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.CartView;

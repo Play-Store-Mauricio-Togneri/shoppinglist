@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.database.LoadImages;
-import com.mauriciotogneri.shoppinglist.database.LoadImages.OnImagesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.LoadImages;
+import com.mauriciotogneri.shoppinglist.tasks.LoadImages.OnImagesLoaded;
 import com.mauriciotogneri.shoppinglist.views.SearchImageView;
 import com.mauriciotogneri.shoppinglist.views.SearchImageView.SearchImageViewObserver;
 

@@ -1,14 +1,14 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
-import android.widget.Toast;
-
+import com.mauriciotogneri.androidutils.ToastMessage;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.database.LoadCategories;
-import com.mauriciotogneri.shoppinglist.database.LoadCategories.OnCategoriesLoaded;
-import com.mauriciotogneri.shoppinglist.database.RenameCategory;
-import com.mauriciotogneri.shoppinglist.database.RenameCategory.OnCategoryRenamed;
 import com.mauriciotogneri.shoppinglist.model.Category;
+import com.mauriciotogneri.shoppinglist.tasks.AddCategory;
+import com.mauriciotogneri.shoppinglist.tasks.AddCategory.OnCategoryAdded;
+import com.mauriciotogneri.shoppinglist.tasks.LoadCategories;
+import com.mauriciotogneri.shoppinglist.tasks.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.RenameCategory;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategoriesViewObserver;
@@ -16,7 +16,7 @@ import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategor
 import java.util.Arrays;
 import java.util.List;
 
-public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesViewObserver, OnCategoriesLoaded, OnCategoryRenamed
+public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesViewObserver, OnCategoriesLoaded, OnCategoryAdded
 {
     @Override
     protected void initialize()
@@ -66,14 +66,8 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 
     private void renameCategory(Category category, String newName)
     {
-        RenameCategory renameCategory = new RenameCategory(this, category, newName, this);
+        RenameCategory renameCategory = new RenameCategory(this, category, newName, this::reloadCategories);
         renameCategory.execute();
-    }
-
-    @Override
-    public void onCategoryRenamed()
-    {
-        reloadCategories();
     }
 
     private void confirmRemoveCategory(Category category)
@@ -91,9 +85,26 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
     public void onAddCategory()
     {
         Dialogs dialogs = new Dialogs(this);
-        dialogs.input(this, getString(R.string.label_product_new_category), "", input -> {
-            Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
-        });
+        dialogs.input(this, getString(R.string.label_product_new_category), "", this::addCategory);
+    }
+
+    private void addCategory(String name)
+    {
+        AddCategory addCategory = new AddCategory(this, new Category(name), this);
+        addCategory.execute();
+    }
+
+    @Override
+    public void onCategoryAdded(Boolean result)
+    {
+        if (result)
+        {
+            reloadCategories();
+        }
+        else
+        {
+            new ToastMessage(this).shortMessage(R.string.error_category_already_exists);
+        }
     }
 
     @Override
