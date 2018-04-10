@@ -25,11 +25,14 @@ public interface ProductDao
     @Query("UPDATE Product SET category=:newCategory WHERE category=:oldCategory")
     void rename(String oldCategory, String newCategory);
 
+    @Query("UPDATE Product SET name=:name, category=:category, image=:image WHERE id=:id")
+    void update(Integer id, String name, String category, String image);
+
     @Query("UPDATE Product SET selected=:selected WHERE id=:id")
     void setSelection(Integer id, Boolean selected);
 
-    @Query("UPDATE Product SET inCart=:inCart WHERE id=:id")
-    void moveToCart(Integer id, Boolean inCart);
+    @Query("UPDATE Product SET inCart=:inCart, selected=:selected WHERE id=:id")
+    void moveToCart(Integer id, Boolean inCart, Boolean selected);
 
     @Insert
     void insert(Product... products);

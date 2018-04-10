@@ -30,7 +30,7 @@ public class UpdateProducts
         new Thread(() ->
         {
             ProductDao dao = ProductDao.instance(context);
-            dao.moveToCart(product.id(), true);
+            dao.moveToCart(product.id(), true, false);
         }).start();
     }
 
@@ -42,7 +42,7 @@ public class UpdateProducts
 
             for (Product product : products)
             {
-                dao.moveToCart(product.id(), false);
+                dao.moveToCart(product.id(), false, false);
             }
         }).start();
     }
