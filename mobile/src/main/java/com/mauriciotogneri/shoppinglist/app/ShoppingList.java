@@ -13,5 +13,12 @@ public class ShoppingList extends SugarApp
         super.onCreate();
 
         Fabric.with(this, new Crashlytics());
+
+        // TODO: remove
+        /*new Thread(() ->
+        {
+            AppDatabase database = AppDatabase.instance(this);
+            database.initialize(this);
+        }).start();*/
     }
 }

@@ -3,19 +3,19 @@ package com.mauriciotogneri.shoppinglist.database;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.model.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoadCategories extends AsyncTask<Void, Void, List<String>>
 {
-    private final ProductDao dao;
+    private final CategoryDao dao;
     private final OnCategoriesLoaded callback;
 
     public LoadCategories(Context context, OnCategoriesLoaded callback)
     {
-        this.dao = ProductDao.instance(context);
+        this.dao = CategoryDao.instance(context);
         this.callback = callback;
     }
 
@@ -24,11 +24,11 @@ public class LoadCategories extends AsyncTask<Void, Void, List<String>>
     {
         List<String> categories = new ArrayList<>();
 
-        for (Product product : dao.all())
+        for (Category category : dao.all())
         {
-            if (!categories.contains(product.category()))
+            if (!categories.contains(category.name()))
             {
-                categories.add(product.category());
+                categories.add(category.name());
             }
         }
 
