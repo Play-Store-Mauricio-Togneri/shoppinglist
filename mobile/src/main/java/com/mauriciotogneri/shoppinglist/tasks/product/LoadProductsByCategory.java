@@ -1,4 +1,4 @@
-package com.mauriciotogneri.shoppinglist.tasks;
+package com.mauriciotogneri.shoppinglist.tasks.product;
 
 import android.content.Context;
 import android.os.AsyncTask;

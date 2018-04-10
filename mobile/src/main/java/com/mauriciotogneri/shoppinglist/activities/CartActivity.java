@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
-import com.mauriciotogneri.shoppinglist.tasks.LoadProductsInCart;
-import com.mauriciotogneri.shoppinglist.tasks.LoadProductsInCart.OnProductsLoaded;
-import com.mauriciotogneri.shoppinglist.tasks.UpdateProducts;
+import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsInCart;
+import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsInCart.OnProductsLoaded;
+import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.CartView;
@@ -35,8 +35,8 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
         product.toggleSelection();
         view.updateList();
 
-        UpdateProducts updateProducts = new UpdateProducts(this);
-        updateProducts.setSelection(product);
+        UpdateProducts task = new UpdateProducts(this);
+        task.setSelection(product);
     }
 
     @Override
@@ -97,15 +97,15 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     {
         super.onResume();
 
-        LoadProductsInCart loader = new LoadProductsInCart(this, this);
-        loader.execute();
+        LoadProductsInCart task = new LoadProductsInCart(this, this);
+        task.execute();
     }
 
     @Override
     protected void onDestroy()
     {
-        UpdateProducts updateProducts = new UpdateProducts(this);
-        updateProducts.removeFromCart(view.selectedProducts());
+        UpdateProducts task = new UpdateProducts(this);
+        task.removeFromCart(view.selectedProducts());
 
         super.onDestroy();
     }
