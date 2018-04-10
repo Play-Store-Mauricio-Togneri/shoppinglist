@@ -7,7 +7,7 @@ import com.mauriciotogneri.shoppinglist.database.CategoryDao;
 import com.mauriciotogneri.shoppinglist.database.ProductDao;
 import com.mauriciotogneri.shoppinglist.model.Category;
 
-public class RenameCategory extends AsyncTask<Void, Void, Void>
+public class RenameCategory extends AsyncTask<Void, Void, Boolean>
 {
     private final Category category;
     private final String newName;
@@ -25,22 +25,28 @@ public class RenameCategory extends AsyncTask<Void, Void, Void>
     }
 
     @Override
-    protected Void doInBackground(Void... voids)
+    protected Boolean doInBackground(Void... voids)
     {
-        categoryDao.rename(category.name(), newName);
-        productDao.rename(category.name(), newName);
+        Boolean result = false;
 
-        return null;
+        if (!categoryDao.contains(newName))
+        {
+            categoryDao.rename(category.name(), newName);
+            productDao.rename(category.name(), newName);
+            result = true;
+        }
+
+        return result;
     }
 
     @Override
-    protected void onPostExecute(Void avoid)
+    protected void onPostExecute(Boolean result)
     {
-        callback.onCategoryRenamed();
+        callback.onCategoryRenamed(result);
     }
 
     public interface OnCategoryRenamed
     {
-        void onCategoryRenamed();
+        void onCategoryRenamed(Boolean result);
     }
 }

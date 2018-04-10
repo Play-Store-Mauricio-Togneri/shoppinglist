@@ -24,7 +24,7 @@ public class AddCategory extends AsyncTask<Void, Void, Boolean>
     {
         Boolean result = false;
 
-        if (!dao.all().contains(category))
+        if (!dao.contains(category.name()))
         {
             dao.insert(category);
             result = true;
