@@ -17,6 +17,7 @@ import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.database.LoadCategories;
 import com.mauriciotogneri.shoppinglist.database.LoadCategories.OnCategoriesLoaded;
+import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.ResourceUtils;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView;
@@ -59,7 +60,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     }
 
     @Override
-    public void onCategoriesLoaded(List<String> categories)
+    public void onCategoriesLoaded(List<Category> categories)
     {
         Product product = parameter(PARAM_PRODUCT, null);
 

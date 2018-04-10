@@ -12,6 +12,7 @@ import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.androidutils.uibinder.annotations.OnClick;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseView;
+import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.CreateProductViewObserver;
 import com.mauriciotogneri.shoppinglist.views.CreateProductView.ViewContainer;
@@ -46,16 +47,16 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         }
     }
 
-    public void load(List<String> categories, Product product)
+    public void load(List<Category> categories, Product product)
     {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context(), android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<Category> adapter = new ArrayAdapter<>(context(), android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ui.category.setAdapter(adapter);
 
         if (product != null)
         {
-            ui.category.setSelection(categories.indexOf(product.category()));
+            ui.category.setSelection(categories.indexOf(new Category(product.category())));
             ui.name.setText(product.name());
             image(product.image());
         }

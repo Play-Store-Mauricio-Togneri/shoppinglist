@@ -9,8 +9,9 @@ import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.CategoryAdapter.ViewHolder;
 import com.mauriciotogneri.shoppinglist.base.BaseListAdapter;
 import com.mauriciotogneri.shoppinglist.base.BaseViewHolder;
+import com.mauriciotogneri.shoppinglist.model.Category;
 
-public class CategoryAdapter extends BaseListAdapter<String, ViewHolder>
+public class CategoryAdapter extends BaseListAdapter<Category, ViewHolder>
 {
     public CategoryAdapter(Context context)
     {
@@ -18,9 +19,9 @@ public class CategoryAdapter extends BaseListAdapter<String, ViewHolder>
     }
 
     @Override
-    protected void fillView(ViewHolder viewHolder, String category, int position)
+    protected void fillView(ViewHolder viewHolder, Category category, int position)
     {
-        viewHolder.name.setText(category);
+        viewHolder.name.setText(category.name());
     }
 
     @Override

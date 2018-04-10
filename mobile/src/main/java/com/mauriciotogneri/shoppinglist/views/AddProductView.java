@@ -34,13 +34,13 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
         ui.pagerHeader.setTabIndicatorColor(color(R.color.primary));
     }
 
-    public void updateLists(FragmentManager fragmentManager, List<String> categories)
+    public void updateLists(FragmentManager fragmentManager, List<Category> categories)
     {
         List<ProductsFragment> fragments = new ArrayList<>();
 
-        for (String category : categories)
+        for (Category category : categories)
         {
-            fragments.add(ProductsFragment.create(category));
+            fragments.add(ProductsFragment.create(category.name()));
         }
 
         ui.pager.setOffscreenPageLimit(categories.size());
