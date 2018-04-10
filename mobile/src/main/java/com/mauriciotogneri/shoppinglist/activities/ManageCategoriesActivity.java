@@ -11,6 +11,7 @@ import com.mauriciotogneri.shoppinglist.tasks.category.DeleteCategory.OnCategory
 import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
 import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
 import com.mauriciotogneri.shoppinglist.tasks.category.RenameCategory;
+import com.mauriciotogneri.shoppinglist.tasks.category.RenameCategory.OnCategoryRenamed;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView;
 import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategoriesViewObserver;
@@ -18,7 +19,7 @@ import com.mauriciotogneri.shoppinglist.views.ManageCategoriesView.ManageCategor
 import java.util.Arrays;
 import java.util.List;
 
-public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesViewObserver, OnCategoriesLoaded, OnCategoryAdded, OnCategoryDeleted
+public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView> implements ManageCategoriesViewObserver, OnCategoriesLoaded, OnCategoryAdded, OnCategoryDeleted, OnCategoryRenamed
 {
     @Override
     protected void initialize()
@@ -68,8 +69,21 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
 
     private void renameCategory(Category category, String newName)
     {
-        RenameCategory task = new RenameCategory(this, category, newName, this::reloadCategories);
+        RenameCategory task = new RenameCategory(this, category, newName, this);
         task.execute();
+    }
+
+    @Override
+    public void onCategoryRenamed(Boolean result)
+    {
+        if (result)
+        {
+            reloadCategories();
+        }
+        else
+        {
+            new ToastMessage(this).shortMessage(R.string.error_category_already_exists);
+        }
     }
 
     private void confirmRemoveCategory(Category category)
