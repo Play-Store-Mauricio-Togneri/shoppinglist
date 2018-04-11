@@ -60,7 +60,7 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     public void onProductsOptions(Product product)
     {
         List<String> options = Arrays.asList(
-                getString(R.string.button_edit),
+                getString(R.string.button_update),
                 getString(R.string.button_remove)
         );
 

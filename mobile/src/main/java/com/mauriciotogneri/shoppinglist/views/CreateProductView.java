@@ -48,7 +48,7 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
             ui.inCart.setVisibility(View.GONE);
 
             toolbarTitle(R.string.toolbar_title_edit_product);
-            ui.buttonAction.setText(R.string.button_edit);
+            ui.buttonAction.setText(R.string.button_update);
         }
     }
 

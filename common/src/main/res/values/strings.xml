@@ -3,13 +3,133 @@
 
     <string name="application.name">Shopping List</string>
 
-    <string name="label.error">Error</string>
     <string name="label.empty.list">Empty list</string>
 
     <string name="button.accept">Accept</string>
     <string name="button.cancel">Cancel</string>
-    <string name="button.edit">Edit</string>
-    <string name="button.remove">Remove</string>
     <string name="button.create">Create</string>
+    <string name="button.update">Update</string>
+    <string name="button.remove">Remove</string>
+
+    <string name="error.connection">Connection error</string>
+
+    <string name="label.product.category">Category</string>
+    <string name="label.product.new.category">New category</string>
+    <string name="label.product.edit.category">Edit category</string>
+    <string name="label.product.name">Name</string>
+    <string name="label.product.picture">Picture</string>
+    <string name="label.select.picture.source">Select picture source</string>
+    <string name="label.source.gallery">Gallery</string>
+    <string name="label.source.camera">Camera</string>
+    <string name="label.share.cart">Share list with</string>
+    <string name="label.already.in.cart">Already in cart</string>
+    <string name="label.initializing.database">Initializing database&#8230;</string>
+
+    <string name="toolbar.title.main">Shopping List</string>
+    <string name="toolbar.title.add.product">Add product</string>
+    <string name="toolbar.title.create.product">Create product</string>
+    <string name="toolbar.title.edit.product">Edit product</string>
+    <string name="toolbar.title.manage.categories">Manage categories</string>
+
+    <string name="confirmation.remove.product">Do you want to remove the product?</string>
+    <string name="confirmation.remove.cart.item">Do you want to remove the product from the cart?</string>
+    <string name="confirmation.remove.category">Do you want to remove the category?</string>
+
+    <string name="error.invalid.category">Invalid category</string>
+    <string name="error.invalid.name">Invalid name</string>
+    <string name="error.invalid.image">Invalid image</string>
+    <string name="error.product.already.exists">Product already exists</string>
+    <string name="error.category.already.exists">Category already exists</string>
+    <string name="error.cart.empty">The list is empty</string>
+    <string name="error.category.in.use">The category is linked to one or more products.</string>
+    <string name="error.product.in.use">The product cannot be removed.</string>
+
+    <!-- CATEGORIES -->
+
+    <string name="category.fruitsAndVegetables">Fruits &amp; Vegetables</string>
+    <string name="category.breadAndGrain">Bread &amp; Grain Products</string>
+    <string name="category.condimentsAndOthers">Condiments &amp; Others</string>
+    <string name="category.milkAndCheese">Milk &amp; Cheese</string>
+    <string name="category.meatAndFish">Meat &amp; Fish</string>
+    <string name="category.frozen">Frozen</string>
+    <string name="category.beverage">Beverages</string>
+    <string name="category.household">Household</string>
+
+    <!-- PRODUCTS -->
+
+    <string name="product.apples">Apples</string>
+    <string name="product.bananas">Bananas</string>
+    <string name="product.carrots">Carrots</string>
+    <string name="product.lemons">Lemons</string>
+    <string name="product.lettuce">Lettuce</string>
+    <string name="product.pineapple">Pineapple</string>
+    <string name="product.potatoes">Potatoes</string>
+
+    <string name="product.baguette">Baguette</string>
+    <string name="product.cereals">Cereals</string>
+    <string name="product.pasta">Pasta</string>
+    <string name="product.rice">Rice</string>
+    <string name="product.slicedBread">Sliced bread</string>
+
+    <string name="product.coffeeCream">Coffee cream</string>
+    <string name="product.corn">Corn</string>
+    <string name="product.risotto">Risotto</string>
+    <string name="product.salt">Salt</string>
+    <string name="product.soup">Soup</string>
+    <string name="product.sugar">Sugar</string>
+    <string name="product.oil">Oil</string>
+    <string name="product.tomatoSauce">Tomato sauce</string>
+
+    <string name="product.cheese">Cheese</string>
+    <string name="product.eggs">Eggs</string>
+    <string name="product.gratedCheese">Grated cheese</string>
+    <string name="product.milk">Milk</string>
+    <string name="product.yogurt">Yogurt</string>
+    <string name="product.butter">Butter</string>
+
+    <string name="product.chicken">Chicken</string>
+    <string name="product.fish">Fish</string>
+    <string name="product.ham">Ham</string>
+    <string name="product.meat">Meat</string>
+    <string name="product.pork">Pork</string>
+    <string name="product.salami">Salami</string>
+    <string name="product.sardines">Sardines</string>
+    <string name="product.tuna">Tuna</string>
+
+    <string name="product.fishSticks">Fish sticks</string>
+    <string name="product.frenchFries">French fries</string>
+    <string name="product.iceCream">Ice cream</string>
+    <string name="product.lasagna">Lasagna</string>
+    <string name="product.nuggets">Nuggets</string>
+    <string name="product.pizza">Pizza</string>
+
+    <string name="product.beer">Beer</string>
+    <string name="product.coffee">Coffee</string>
+    <string name="product.icedTea">Iced tea</string>
+    <string name="product.soda">Soda</string>
+    <string name="product.water">Water</string>
+
+    <string name="product.airFreshener">Air freshener</string>
+    <string name="product.bleach">Bleach</string>
+    <string name="product.bulb">Bulb</string>
+    <string name="product.cleaningSupplies">Cleaning supplies</string>
+    <string name="product.deodorant">Deodorant</string>
+    <string name="product.dishwashingLiquid">Dishwashing liquid</string>
+    <string name="product.hairRemover">Hair remover</string>
+    <string name="product.kitchenRags">Kitchen rags</string>
+    <string name="product.garbageBags">Garbage bags</string>
+    <string name="product.laundryDetergent">Laundry Detergent</string>
+    <string name="product.paperTowels">Paper towels</string>
+    <string name="product.razor">Razor</string>
+    <string name="product.shampoo">Shampoo</string>
+    <string name="product.shavingFoam">Shaving foam</string>
+    <string name="product.showerGel">Shower gel</string>
+    <string name="product.soap">Soap</string>
+    <string name="product.sponge">Sponge</string>
+    <string name="product.spongeMetal">Sponge metal</string>
+    <string name="product.cottonSwabs">Cotton swabs</string>
+    <string name="product.toiletPaper">Toilet paper</string>
+    <string name="product.toothbrush">Toothbrush</string>
+    <string name="product.toothpaste">Toothpaste</string>
 
 </resources>
