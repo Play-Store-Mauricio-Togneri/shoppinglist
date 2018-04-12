@@ -19,13 +19,13 @@ public class SearchImageAdapter extends BaseAdapter
 {
     private final Context context;
     private final List<String> images;
-    private final RequestManager requestManager;
+    private final RequestManager imageLoader;
 
     public SearchImageAdapter(Context context)
     {
         this.context = context;
         this.images = new ArrayList<>();
-        this.requestManager = Glide.with(context);
+        this.imageLoader = Glide.with(context);
     }
 
     public void loadImages(List<String> list)
@@ -76,7 +76,7 @@ public class SearchImageAdapter extends BaseAdapter
             imageView = (ImageView) convertView;
         }
 
-        requestManager.load(images.get(position)).into(imageView);
+        imageLoader.load(images.get(position)).into(imageView);
 
         return imageView;
     }

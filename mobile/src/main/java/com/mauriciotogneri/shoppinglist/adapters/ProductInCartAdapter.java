@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.ProductInCartAdapter.ViewHolder;
@@ -16,9 +17,13 @@ import com.mauriciotogneri.shoppinglist.model.Product;
 
 public class ProductInCartAdapter extends BaseListAdapter<Product, ViewHolder>
 {
+    private final RequestManager imageLoader;
+
     public ProductInCartAdapter(Context context)
     {
         super(context, R.layout.item_product_in_cart);
+
+        this.imageLoader = Glide.with(context);
     }
 
     @Override
@@ -39,9 +44,7 @@ public class ProductInCartAdapter extends BaseListAdapter<Product, ViewHolder>
 
         viewHolder.name.setText(product.name());
 
-        Glide.with(getContext())
-                .load(product.image())
-                .into(viewHolder.image);
+        imageLoader.load(product.image()).into(viewHolder.image);
     }
 
     public void sortList()
