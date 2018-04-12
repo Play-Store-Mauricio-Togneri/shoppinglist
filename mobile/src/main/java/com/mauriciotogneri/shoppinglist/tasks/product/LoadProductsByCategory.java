@@ -25,7 +25,7 @@ public class LoadProductsByCategory extends AsyncTask<Void, Void, List<Product>>
     @Override
     protected List<Product> doInBackground(Void... voids)
     {
-        List<Product> products = dao.byCategory(category);
+        List<Product> products = dao.byCategory(category, false);
         Collections.sort(products, (p1, p2) -> p1.name().compareTo(p2.name()));
 
         return products;

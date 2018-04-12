@@ -16,14 +16,17 @@ public interface ProductDao
     @Query("SELECT * FROM Product WHERE inCart")
     List<Product> inCart();
 
-    @Query("SELECT * FROM Product WHERE category=:category")
-    List<Product> byCategory(String category);
+    @Query("SELECT * FROM Product WHERE category=:category AND inCart=:inCart")
+    List<Product> byCategory(String category, Boolean inCart);
 
     @Query("SELECT * FROM Product WHERE name=:name")
     Product byName(String name);
 
     @Query("SELECT EXISTS(SELECT * FROM Product WHERE name=:name)")
-    boolean contains(String name);
+    boolean containsWithName(String name);
+
+    @Query("SELECT EXISTS(SELECT * FROM Product WHERE category=:category)")
+    boolean containsWithCategory(String category);
 
     @Query("UPDATE Product SET category=:newCategory WHERE category=:oldCategory")
     void updateCategory(String oldCategory, String newCategory);
