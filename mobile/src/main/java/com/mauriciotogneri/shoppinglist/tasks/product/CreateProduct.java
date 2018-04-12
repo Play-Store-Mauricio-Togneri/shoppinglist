@@ -24,7 +24,7 @@ public class CreateProduct extends AsyncTask<Void, Void, Boolean>
     {
         Boolean result = false;
 
-        if (!dao.contains(product.name(), product.category()))
+        if (!dao.contains(product.name()))
         {
             dao.insert(product);
             result = true;

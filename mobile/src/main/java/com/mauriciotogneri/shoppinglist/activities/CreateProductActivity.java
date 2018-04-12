@@ -189,8 +189,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         else
         {
-            // TODO
-            new ToastMessage(this).shortMessage("ERROR UPDATING");
+            new ToastMessage(this).shortMessage(R.string.error_product_already_exists);
         }
     }
 
@@ -203,8 +202,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         else
         {
-            // TODO
-            new ToastMessage(this).shortMessage("ERROR CREATING");
+            new ToastMessage(this).shortMessage(R.string.error_product_already_exists);
         }
     }
 

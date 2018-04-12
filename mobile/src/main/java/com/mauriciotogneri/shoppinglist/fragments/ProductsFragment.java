@@ -2,15 +2,15 @@ package com.mauriciotogneri.shoppinglist.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.activities.CreateProductActivity;
 import com.mauriciotogneri.shoppinglist.base.BaseFragment;
+import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.tasks.product.DeleteProduct;
 import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsByCategory;
 import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsByCategory.OnProductsLoaded;
 import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProducts;
-import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.views.Dialogs;
 import com.mauriciotogneri.shoppinglist.views.ProductsListView;
@@ -92,7 +92,14 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
 
     private void removeProduct(Product product)
     {
-        Toast.makeText(getContext(), "DELETE: " + product.name(), Toast.LENGTH_SHORT).show();
+        DeleteProduct task = new DeleteProduct(getContext(), product, this::reloadProducts);
+        task.execute();
+    }
+
+    private void reloadProducts()
+    {
+        LoadProductsByCategory task = new LoadProductsByCategory(getContext(), parameter(PARAM_CATEGORY, ""), this);
+        task.execute();
     }
 
     @Override
@@ -100,8 +107,7 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     {
         super.onResume();
 
-        LoadProductsByCategory task = new LoadProductsByCategory(getContext(), parameter(PARAM_CATEGORY, ""), this);
-        task.execute();
+        reloadProducts();
     }
 
     @Override
