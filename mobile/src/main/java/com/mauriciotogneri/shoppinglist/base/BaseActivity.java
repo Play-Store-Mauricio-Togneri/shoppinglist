@@ -1,11 +1,13 @@
 package com.mauriciotogneri.shoppinglist.base;
 
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mauriciotogneri.androidutils.ActivityParameters;
+import com.mauriciotogneri.androidutils.ToastMessage;
 
 public abstract class BaseActivity<V extends BaseView> extends AppCompatActivity
 {
@@ -36,5 +38,10 @@ public abstract class BaseActivity<V extends BaseView> extends AppCompatActivity
 
     protected void initialize()
     {
+    }
+
+    protected void toast(@StringRes int resId)
+    {
+        new ToastMessage(this).shortMessage(resId);
     }
 }

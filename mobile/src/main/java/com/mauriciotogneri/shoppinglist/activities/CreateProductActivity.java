@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.mauriciotogneri.androidutils.ToastMessage;
 import com.mauriciotogneri.androidutils.intents.Intents;
 import com.mauriciotogneri.androidutils.permissions.OnPermissionGranted;
 import com.mauriciotogneri.androidutils.permissions.Permissions;
@@ -135,7 +134,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         catch (Exception e)
         {
-            new ToastMessage(this).shortMessage(R.string.error_openingCamera);
+            toast(R.string.error_openingCamera);
         }
     }
 
@@ -189,7 +188,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         else
         {
-            new ToastMessage(this).shortMessage(R.string.error_product_already_exists);
+            toast(R.string.error_product_already_exists);
         }
     }
 
@@ -202,7 +201,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         else
         {
-            new ToastMessage(this).shortMessage(R.string.error_product_already_exists);
+            toast(R.string.error_product_already_exists);
         }
     }
 
@@ -215,7 +214,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         }
         catch (Exception e)
         {
-            new ToastMessage(this).shortMessage(R.string.error_loadingImage);
+            toast(R.string.error_loadingImage);
         }
     }
 

@@ -18,12 +18,12 @@ public class ResourceUtils
 
     public static Uri uri(Context context) throws Exception
     {
-        return FileProvider.getUriForFile(context, AUTHORITY, tempFile(context));
+        return FileProvider.getUriForFile(context, AUTHORITY, tempFile(context.getCacheDir()));
     }
 
     public static File fileFromUri(Context context, Uri uri) throws Exception
     {
-        File file = tempFile(context);
+        File file = tempFile(context.getFilesDir());
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         OutputStream outputStream = new FileOutputStream(file);
 
@@ -35,8 +35,8 @@ public class ResourceUtils
         return file;
     }
 
-    private static File tempFile(Context context) throws Exception
+    private static File tempFile(File parent) throws Exception
     {
-        return File.createTempFile("temp", "", context.getCacheDir());
+        return File.createTempFile("temp", "", parent);
     }
 }
