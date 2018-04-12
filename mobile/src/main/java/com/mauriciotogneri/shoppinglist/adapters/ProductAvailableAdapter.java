@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.adapters.ProductAvailableAdapter.ViewHolder;
@@ -16,12 +17,14 @@ import com.mauriciotogneri.shoppinglist.model.Product;
 public class ProductAvailableAdapter extends BaseListAdapter<Product, ViewHolder>
 {
     private final OnOptionsSelected onOptionsSelected;
+    private final RequestManager imageLoader;
 
     public ProductAvailableAdapter(Context context, OnOptionsSelected onOptionsSelected)
     {
         super(context, R.layout.item_product_available);
 
         this.onOptionsSelected = onOptionsSelected;
+        this.imageLoader = Glide.with(context);
     }
 
     @Override
@@ -29,9 +32,7 @@ public class ProductAvailableAdapter extends BaseListAdapter<Product, ViewHolder
     {
         viewHolder.name.setText(product.name());
 
-        Glide.with(getContext())
-                .load(product.image())
-                .into(viewHolder.image);
+        imageLoader.load(product.image()).into(viewHolder.image);
 
         viewHolder.options.setOnClickListener(v -> onOptionsSelected.onOptionsSelected(product));
     }
