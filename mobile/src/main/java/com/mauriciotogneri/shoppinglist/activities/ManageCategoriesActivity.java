@@ -1,6 +1,5 @@
 package com.mauriciotogneri.shoppinglist.activities;
 
-import com.mauriciotogneri.androidutils.ToastMessage;
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
 import com.mauriciotogneri.shoppinglist.model.Category;
@@ -82,7 +81,7 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
         }
         else
         {
-            new ToastMessage(this).shortMessage(R.string.error_category_already_exists);
+            toast(R.string.error_category_already_exists);
         }
     }
 
@@ -107,7 +106,7 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
         }
         else
         {
-            new ToastMessage(this).shortMessage(R.string.error_category_in_use);
+            toast(R.string.error_category_in_use);
         }
     }
 
@@ -133,7 +132,7 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
         }
         else
         {
-            new ToastMessage(this).shortMessage(R.string.error_category_already_exists);
+            toast(R.string.error_category_already_exists);
         }
     }
 
