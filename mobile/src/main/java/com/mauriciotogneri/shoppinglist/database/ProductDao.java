@@ -19,11 +19,14 @@ public interface ProductDao
     @Query("SELECT * FROM Product WHERE category=:category")
     List<Product> byCategory(String category);
 
-    @Query("SELECT EXISTS(SELECT * FROM Product WHERE name=:name AND category=:category)")
-    boolean contains(String name, String category);
+    @Query("SELECT * FROM Product WHERE name=:name")
+    Product byName(String name);
+
+    @Query("SELECT EXISTS(SELECT * FROM Product WHERE name=:name)")
+    boolean contains(String name);
 
     @Query("UPDATE Product SET category=:newCategory WHERE category=:oldCategory")
-    void rename(String oldCategory, String newCategory);
+    void updateCategory(String oldCategory, String newCategory);
 
     @Query("UPDATE Product SET name=:name, category=:category, image=:image WHERE id=:id")
     void update(Integer id, String name, String category, String image);

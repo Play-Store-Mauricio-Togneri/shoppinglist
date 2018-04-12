@@ -32,7 +32,7 @@ public class RenameCategory extends AsyncTask<Void, Void, Boolean>
         if (!categoryDao.contains(newName))
         {
             categoryDao.rename(category.name(), newName);
-            productDao.rename(category.name(), newName);
+            productDao.updateCategory(category.name(), newName);
             result = true;
         }
 

@@ -26,7 +26,9 @@ public class UpdateProduct extends AsyncTask<Void, Void, Boolean>
     {
         Boolean result = false;
 
-        if (!dao.contains(newProduct.name(), newProduct.category()))
+        Product product = dao.byName(newProduct.name());
+
+        if ((product == null) || (product.id().equals(oldProduct.id())))
         {
             dao.update(oldProduct.id(), newProduct.name(), newProduct.category(), newProduct.image());
             result = true;
