@@ -27,7 +27,7 @@ public class DeleteCategory extends AsyncTask<Void, Void, Boolean>
     {
         Boolean result = false;
 
-        if (productDao.byCategory(category.name()).isEmpty())
+        if (!productDao.containsWithCategory(category.name()))
         {
             categoryDao.delete(category);
             result = true;
