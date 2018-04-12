@@ -38,6 +38,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     private static final int CAMERA_PERMISSION = 1001;
     private static final int READ_DISK_PERMISSION = 1002;
 
+    private static final int MANAGE_CATEGORIES_REQUEST_CODE = 2000;
     private static final int CAMERA_IMAGE_REQUEST_CODE = 2001;
     private static final int GALLERY_IMAGE_REQUEST_CODE = 2002;
     private static final int SEARCH_IMAGE_REQUEST_CODE = 2003;
@@ -57,6 +58,13 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     {
         Product product = parameter(PARAM_PRODUCT, null);
         view.initialize(product == null);
+        reloadCategories();
+    }
+
+    private void reloadCategories()
+    {
+        LoadCategories task = new LoadCategories(this, this);
+        task.execute();
     }
 
     @Override
@@ -77,7 +85,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     public void onManageCategories()
     {
         Intent intent = new Intent(this, ManageCategoriesActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, MANAGE_CATEGORIES_REQUEST_CODE);
     }
 
     @Override
@@ -240,6 +248,10 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         {
             processSearchImage(data.getStringExtra(SearchImageActivity.PARAM_IMAGE_URL));
         }
+        else if (requestCode == MANAGE_CATEGORIES_REQUEST_CODE)
+        {
+            reloadCategories();
+        }
     }
 
     @Override
@@ -249,15 +261,6 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
 
         PermissionsResult permissionsResult = new PermissionsResult(this);
         permissionsResult.process(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-
-        LoadCategories task = new LoadCategories(this, this);
-        task.execute();
     }
 
     @Override
