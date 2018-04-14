@@ -50,6 +50,6 @@ public class ResourceUtils
 
     private static File newFile(File parent) throws Exception
     {
-        return File.createTempFile("temp", "", parent);
+        return File.createTempFile("image", "", parent);
     }
 }
