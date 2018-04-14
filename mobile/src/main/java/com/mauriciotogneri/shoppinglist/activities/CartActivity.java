@@ -4,17 +4,20 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
+import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.tasks.migration.Migration;
+import com.mauriciotogneri.shoppinglist.tasks.migration.Migration.OnMigrationDone;
 import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsInCart;
 import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsInCart.OnProductsLoaded;
 import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProducts;
-import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
+import com.mauriciotogneri.shoppinglist.utils.NormalPreferences;
 import com.mauriciotogneri.shoppinglist.views.CartView;
 import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
 
 import java.util.List;
 
-public class CartActivity extends BaseActivity<CartView> implements CartViewObserver, OnProductsLoaded
+public class CartActivity extends BaseActivity<CartView> implements CartViewObserver, OnProductsLoaded, OnMigrationDone
 {
     @Override
     protected void initialize()
@@ -92,13 +95,37 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
         return result.toString();
     }
 
+    private void reloadProducts()
+    {
+        LoadProductsInCart task = new LoadProductsInCart(this, this);
+        task.execute();
+    }
+
+    @Override
+    public void onMigrationDone()
+    {
+        NormalPreferences preferences = new NormalPreferences(this);
+        preferences.migrationDone();
+
+        reloadProducts();
+    }
+
     @Override
     protected void onResume()
     {
         super.onResume();
 
-        LoadProductsInCart task = new LoadProductsInCart(this, this);
-        task.execute();
+        NormalPreferences preferences = new NormalPreferences(this);
+
+        if (preferences.isMigrationDone())
+        {
+            reloadProducts();
+        }
+        else
+        {
+            Migration migration = new Migration(this, this);
+            migration.execute();
+        }
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.mauriciotogneri.androidutils.Preferences;
 
 public class NormalPreferences extends Preferences
 {
-    private static final String FIELD_LOCALE = "locale";
+    private static final String FIELD_MIGRATION_DONE = "migration.done";
 
     public NormalPreferences(Context context)
     {
@@ -16,13 +16,13 @@ public class NormalPreferences extends Preferences
 
     // =============================================================================================
 
-    public void locale(String locale)
+    public void migrationDone()
     {
-        save(FIELD_LOCALE, locale);
+        save(FIELD_MIGRATION_DONE, true);
     }
 
-    public String locale()
+    public Boolean isMigrationDone()
     {
-        return load(FIELD_LOCALE, "");
+        return load(FIELD_MIGRATION_DONE, false);
     }
 }

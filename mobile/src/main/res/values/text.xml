@@ -8,5 +8,6 @@
     <string name="rename">Rename</string>
     <string name="error.loadingImage">Error loading image</string>
     <string name="error.openingCamera">Error opening camera</string>
+    <string name="dialog.updatingDatabase">Updating database…</string>
 
 </resources>
