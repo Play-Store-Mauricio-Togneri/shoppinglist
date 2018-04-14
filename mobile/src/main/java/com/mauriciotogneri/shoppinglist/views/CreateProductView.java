@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist.views;
 
 import android.support.design.widget.TextInputLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -52,7 +53,7 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
         }
     }
 
-    public void load(List<Category> categories, Product product)
+    public void load(List<Category> categories, String category, Product product)
     {
         ArrayAdapter<Category> adapter = new ArrayAdapter<>(context(), android.R.layout.simple_spinner_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,6 +65,10 @@ public class CreateProductView extends BaseView<CreateProductViewObserver, ViewC
             ui.category.setSelection(categories.indexOf(new Category(product.category())));
             ui.name.setText(product.name());
             image(product.image());
+        }
+        else if (!TextUtils.isEmpty(category))
+        {
+            ui.category.setSelection(categories.indexOf(new Category(category)));
         }
     }
 

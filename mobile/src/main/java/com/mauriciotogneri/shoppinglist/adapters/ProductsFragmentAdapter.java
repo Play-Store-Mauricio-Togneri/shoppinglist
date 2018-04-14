@@ -34,6 +34,6 @@ public class ProductsFragmentAdapter extends FragmentPagerAdapter
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return fragments.get(position).title();
+        return fragments.get(position).title().toUpperCase();
     }
 }

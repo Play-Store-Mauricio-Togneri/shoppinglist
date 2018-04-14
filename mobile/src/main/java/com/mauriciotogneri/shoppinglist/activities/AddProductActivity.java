@@ -3,9 +3,9 @@ package com.mauriciotogneri.shoppinglist.activities;
 import android.content.Intent;
 
 import com.mauriciotogneri.shoppinglist.base.BaseActivity;
+import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories;
 import com.mauriciotogneri.shoppinglist.tasks.category.LoadCategories.OnCategoriesLoaded;
-import com.mauriciotogneri.shoppinglist.model.Category;
 import com.mauriciotogneri.shoppinglist.views.AddProductView;
 import com.mauriciotogneri.shoppinglist.views.AddProductView.AddProductViewObserver;
 
@@ -26,9 +26,9 @@ public class AddProductActivity extends BaseActivity<AddProductView> implements 
     }
 
     @Override
-    public void onCreateProduct()
+    public void onCreateProduct(String category)
     {
-        Intent intent = new Intent(this, CreateProductActivity.class);
+        Intent intent = CreateProductActivity.intent(this, category);
         startActivity(intent);
     }
 

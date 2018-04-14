@@ -51,14 +51,17 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
     @OnClick(R.id.product_create)
     public void onActionButton()
     {
-        observer.onCreateProduct();
+        ProductsFragmentAdapter adapter = (ProductsFragmentAdapter) ui.pager.getAdapter();
+        ProductsFragment fragment = (ProductsFragment) adapter.getItem(ui.pager.getCurrentItem());
+
+        observer.onCreateProduct(fragment.title());
     }
 
     public interface AddProductViewObserver
     {
         void onBack();
 
-        void onCreateProduct();
+        void onCreateProduct(String category);
     }
 
     public static class ViewContainer

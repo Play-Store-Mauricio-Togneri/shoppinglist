@@ -34,6 +34,7 @@ import java.util.List;
 public class CreateProductActivity extends BaseActivity<CreateProductView> implements CreateProductViewObserver, OnCategoriesLoaded, OnProductCreated, OnProductUpdated
 {
     private static final String PARAM_PRODUCT = "product";
+    private static final String PARAM_CATEGORY = "category";
 
     private static final int CAMERA_PERMISSION = 1001;
     private static final int READ_DISK_PERMISSION = 1002;
@@ -49,6 +50,14 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     {
         Intent intent = new Intent(context, CreateProductActivity.class);
         intent.putExtra(PARAM_PRODUCT, product);
+
+        return intent;
+    }
+
+    public static Intent intent(Context context, String category)
+    {
+        Intent intent = new Intent(context, CreateProductActivity.class);
+        intent.putExtra(PARAM_CATEGORY, category);
 
         return intent;
     }
@@ -70,9 +79,10 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
     @Override
     public void onCategoriesLoaded(List<Category> categories)
     {
+        String category = parameter(PARAM_CATEGORY, "");
         Product product = parameter(PARAM_PRODUCT, null);
 
-        view.load(categories, product);
+        view.load(categories, category, product);
     }
 
     @Override
