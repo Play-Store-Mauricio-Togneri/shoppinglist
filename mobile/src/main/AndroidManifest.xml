@@ -20,7 +20,7 @@
         tools:replace="android:allowBackup">
 
         <activity
-            android:name=".activities.TestActivity"
+            android:name=".activities.CartActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -29,15 +29,15 @@
             </intent-filter>
 
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
                     android:host="mauriciotogneri.com"
                     android:pathPattern="/shoppinglist"
-                    android:scheme="https" />
+                    android:scheme="https"/>
 
             </intent-filter>
 
@@ -61,18 +61,8 @@
             android:windowSoftInputMode="stateVisible"/>
 
         <service
-            android:name=".utils.WearableService">
-
-            <intent-filter>
-                <action android:name="com.google.android.gms.wearable.DATA_CHANGED"/>
-                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED"/>
-
-                <data
-                    android:host="*"
-                    android:scheme="wear"/>
-            </intent-filter>
-
-        </service>
+            android:name=".utils.WearableService"
+            android:exported="false"/>
 
         <meta-data
             android:name="DATABASE"

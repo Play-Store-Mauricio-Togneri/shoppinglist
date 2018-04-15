@@ -12,6 +12,7 @@ import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsInCart.OnProdu
 import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProducts;
 import com.mauriciotogneri.shoppinglist.utils.Analytics;
 import com.mauriciotogneri.shoppinglist.utils.NormalPreferences;
+import com.mauriciotogneri.shoppinglist.utils.WearableService;
 import com.mauriciotogneri.shoppinglist.views.CartView;
 import com.mauriciotogneri.shoppinglist.views.CartView.CartViewObserver;
 
@@ -24,6 +25,9 @@ public class CartActivity extends BaseActivity<CartView> implements CartViewObse
     {
         Analytics analytics = new Analytics(this);
         analytics.appLaunched();
+
+        Intent intent = new Intent(this, WearableService.class);
+        startService(intent);
     }
 
     @Override
