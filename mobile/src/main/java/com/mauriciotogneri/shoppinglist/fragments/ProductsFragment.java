@@ -34,6 +34,12 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     }
 
     @Override
+    protected void initialize()
+    {
+        reloadProducts();
+    }
+
+    @Override
     public void onProductsLoaded(List<Product> products)
     {
         view.updateList(products);
@@ -100,14 +106,6 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     {
         LoadProductsByCategory task = new LoadProductsByCategory(getContext(), parameter(PARAM_CATEGORY, ""), this);
         task.execute();
-    }
-
-    @Override
-    public void onResume()
-    {
-        super.onResume();
-
-        reloadProducts();
     }
 
     @Override
