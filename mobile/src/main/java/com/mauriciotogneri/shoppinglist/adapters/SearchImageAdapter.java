@@ -3,6 +3,7 @@ package com.mauriciotogneri.shoppinglist.adapters;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -67,7 +68,7 @@ public class SearchImageAdapter extends BaseAdapter
 
             imageView = new ImageView(context);
             imageView.setScaleType(ScaleType.CENTER_INSIDE);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(size, size));
+            imageView.setLayoutParams(new LayoutParams(size, size));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(padding, padding, padding, padding);
         }
