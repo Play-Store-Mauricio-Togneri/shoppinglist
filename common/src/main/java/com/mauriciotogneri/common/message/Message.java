@@ -15,12 +15,18 @@ public class Message
 
     public static final String REQUEST_PRODUCTS = "request.products";
     public static final String RESPONSE_PRODUCTS = "response.products";
+    public static final String REQUEST_SELECT_PRODUCT = "request.select.product";
 
     public Message(String nodeId, String action, String payload)
     {
         this.nodeId = nodeId;
         this.action = action;
         this.payload = payload;
+    }
+
+    public Message(String nodeId, String action)
+    {
+        this(nodeId, action, "");
     }
 
     public Message(MessageEvent messageEvent)
