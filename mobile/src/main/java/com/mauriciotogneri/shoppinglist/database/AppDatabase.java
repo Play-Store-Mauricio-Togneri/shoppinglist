@@ -4,6 +4,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.support.annotation.StringRes;
 
 import com.mauriciotogneri.shoppinglist.R;
 import com.mauriciotogneri.shoppinglist.model.Category;
@@ -24,11 +25,10 @@ public abstract class AppDatabase extends RoomDatabase
     public void initialize(Context context)
     {
         Category beverages = new Category(context.getString(R.string.category_beverage));
-        Product beer = new Product(beverages.name(), context.getString(R.string.product_beer), "http://i.imgur.com/WmfEenJ.png", false, false);
-        Product coffee = new Product(beverages.name(), context.getString(R.string.product_coffee), "http://i.imgur.com/aGiXxjf.png", false, false);
-        Product iceTea = new Product(beverages.name(), context.getString(R.string.product_icedTea), "http://i.imgur.com/Spi8duE.png", false, false);
-        Product soda = new Product(beverages.name(), context.getString(R.string.product_soda), "http://i.imgur.com/jybjFMf.png", false, false);
-        Product water = new Product(beverages.name(), context.getString(R.string.product_water), "http://i.imgur.com/h34kKfv.png", false, false);
+        Product beer = product(context, R.string.product_beer, beverages, "http://i.imgur.com/OAYaqkM.png");
+        Product coffee = product(context, R.string.product_coffee, beverages, "https://i.imgur.com/SCW2fcK.png");
+        Product soda = product(context, R.string.product_soda, beverages, "https://i.imgur.com/FagEbsU.png");
+        Product water = product(context, R.string.product_water, beverages, "https://i.imgur.com/XWVwKDK.png");
 
         Category breadAndGrain = new Category(context.getString(R.string.category_breadAndGrain));
         Product baguette = new Product(breadAndGrain.name(), context.getString(R.string.product_baguette), "http://i.imgur.com/6tf1nXp.png", false, false);
@@ -119,7 +119,7 @@ public abstract class AppDatabase extends RoomDatabase
         ProductDao productDao = productDao();
         productDao.insert(
                 // Beverages
-                beer, coffee, iceTea, soda, water,
+                beer, coffee, soda, water,
 
                 // Bread & Grain Products
                 baguette, cereals, pasta, rice, risotto, slicedBread,
@@ -143,5 +143,10 @@ public abstract class AppDatabase extends RoomDatabase
 
                 // Milk & Cheese
                 butter, cheese, eggs, gratedCheese, milk, yogurt);
+    }
+
+    private Product product(Context context, @StringRes int resId, Category category, String imageUrl)
+    {
+        return new Product(category.name(), context.getString(resId), imageUrl, false, false);
     }
 }
