@@ -67,27 +67,7 @@ dependencies
     api "com.android.support:appcompat-v7:$support"
     api "com.android.support:support-v13:$support"
     api "com.android.support:design:$support"
-    api "com.android.support:cardview-v7:$support"
-
-    // google analytics
-    api "com.google.android.gms:play-services-analytics:$playservices"
-
-    //implementation 'com.google.android.gms:play-services-wearable:10.2.4'
 
     //implementation 'com.google.android.support:wearable:1.4.0'
     //compileOnly 'com.google.android.wearable:wearable:1.0.0'
-
-    // android utils
-    api 'com.mauriciotogneri:androidutils:2.9.0'
-
-    // glide
-    api 'com.github.bumptech.glide:glide:4.6.1'
-
-    // database
-    api 'com.github.satyan:sugar:1.3.1'
-
-    // crashlytics
-    api('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
-        transitive = true
-    }
 }
