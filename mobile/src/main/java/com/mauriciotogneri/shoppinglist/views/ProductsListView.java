@@ -1,6 +1,8 @@
 package com.mauriciotogneri.shoppinglist.views;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ListView;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
@@ -34,6 +36,12 @@ public class ProductsListView extends BaseView<ProductListViewObserver, ViewCont
             Product product = (Product) adapterView.getItemAtPosition(position);
             observer.onProductSelected(product);
         });
+
+        if (!products.isEmpty())
+        {
+            View footer = LayoutInflater.from(context()).inflate(R.layout.view_footer, null);
+            ui.list.addFooterView(footer, null, false);
+        }
     }
 
     public void removeProduct(Product product)
