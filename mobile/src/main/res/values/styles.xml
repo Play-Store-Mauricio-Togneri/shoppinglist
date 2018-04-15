@@ -30,4 +30,8 @@
         <item name="android:visibility">gone</item>
     </style>
 
+    <style name="floatingButton">
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
 </resources>

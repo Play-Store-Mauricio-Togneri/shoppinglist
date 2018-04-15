@@ -27,21 +27,22 @@ public class ProductsListView extends BaseView<ProductListViewObserver, ViewCont
         this.adapter = new ProductAvailableAdapter(context, this);
     }
 
-    public void updateList(List<Product> products)
+    @Override
+    protected void initialize()
     {
-        adapter.set(products);
-
         ui.list.setAdapter(adapter);
         ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
             Product product = (Product) adapterView.getItemAtPosition(position);
             observer.onProductSelected(product);
         });
 
-        if (!products.isEmpty())
-        {
-            View footer = LayoutInflater.from(context()).inflate(R.layout.view_footer, null);
-            ui.list.addFooterView(footer, null, false);
-        }
+        View footer = LayoutInflater.from(context()).inflate(R.layout.view_footer, null);
+        ui.list.addFooterView(footer, null, false);
+    }
+
+    public void updateList(List<Product> products)
+    {
+        adapter.set(products);
     }
 
     public void removeProduct(Product product)
