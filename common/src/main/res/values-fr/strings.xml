@@ -57,6 +57,18 @@
 
     <!-- PRODUCTS -->
 
+    <string name="product.beer">Bière</string>
+    <string name="product.coffee">Café</string>
+    <string name="product.soda">Soda</string>
+    <string name="product.water">Eau</string>
+
+    <string name="product.baguette">Baguette</string>
+    <string name="product.cereals">Céréales</string>
+    <string name="product.pasta">Pâtes</string>
+    <string name="product.rice">Riz</string>
+
+    <!-- ********************************* -->
+
     <string name="product.apples">Pommes</string>
     <string name="product.bananas">Bananes</string>
     <string name="product.carrots">Carottes</string>
@@ -65,15 +77,8 @@
     <string name="product.pineapple">Ananas</string>
     <string name="product.potatoes">Pommes de terre</string>
 
-    <string name="product.baguette">Baguette</string>
-    <string name="product.cereals">Céréales</string>
-    <string name="product.pasta">Pâtes</string>
-    <string name="product.rice">Riz</string>
-    <string name="product.slicedBread">Pain de mie</string>
-
     <string name="product.coffeeCream">Crème pour café</string>
     <string name="product.corn">Maïs</string>
-    <string name="product.risotto">Risotto</string>
     <string name="product.salt">Sel</string>
     <string name="product.soup">Soupe</string>
     <string name="product.sugar">Sucre</string>
@@ -102,12 +107,6 @@
     <string name="product.lasagna">Lasagnes</string>
     <string name="product.nuggets">Nuggets</string>
     <string name="product.pizza">Pizza</string>
-
-    <string name="product.beer">Bière</string>
-    <string name="product.coffee">Café</string>
-    <string name="product.icedTea">Thé glacé</string>
-    <string name="product.soda">Soda</string>
-    <string name="product.water">Eau</string>
 
     <string name="product.airFreshener">Désodorisant</string>
     <string name="product.bleach">Eau de javel</string>

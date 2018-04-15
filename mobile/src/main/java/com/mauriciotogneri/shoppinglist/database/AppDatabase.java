@@ -31,12 +31,12 @@ public abstract class AppDatabase extends RoomDatabase
         Product water = product(context, R.string.product_water, beverages, "https://i.imgur.com/XWVwKDK.png");
 
         Category breadAndGrain = new Category(context.getString(R.string.category_breadAndGrain));
-        Product baguette = new Product(breadAndGrain.name(), context.getString(R.string.product_baguette), "http://i.imgur.com/6tf1nXp.png", false, false);
-        Product cereals = new Product(breadAndGrain.name(), context.getString(R.string.product_cereals), "http://i.imgur.com/cjxBkMd.png", false, false);
-        Product pasta = new Product(breadAndGrain.name(), context.getString(R.string.product_pasta), "http://i.imgur.com/VV4Z96m.png", false, false);
-        Product rice = new Product(breadAndGrain.name(), context.getString(R.string.product_rice), "http://i.imgur.com/wOJ6XaT.png", false, false);
-        Product risotto = new Product(breadAndGrain.name(), context.getString(R.string.product_risotto), "http://i.imgur.com/7dpAjjm.png", false, false);
-        Product slicedBread = new Product(breadAndGrain.name(), context.getString(R.string.product_slicedBread), "http://i.imgur.com/Si3TyUt.png", false, false);
+        Product baguette = product(context, R.string.product_baguette, breadAndGrain, "https://i.imgur.com/hkI7tAI.png");
+        Product cereals = product(context, R.string.product_cereals, breadAndGrain, "https://i.imgur.com/cY6UouB.png");
+        Product pasta = product(context, R.string.product_pasta, breadAndGrain, "https://i.imgur.com/0nWmLHr.png");
+        Product rice = product(context, R.string.product_rice, breadAndGrain, "https://i.imgur.com/psXXfuG.png");
+
+        // -------------------------------------------------------------------------------------------
 
         Category condiments = new Category(context.getString(R.string.category_condimentsAndOthers));
         Product coffeeCream = new Product(condiments.name(), context.getString(R.string.product_coffeeCream), "http://i.imgur.com/uPn1oTB.png", false, false);
@@ -122,7 +122,7 @@ public abstract class AppDatabase extends RoomDatabase
                 beer, coffee, soda, water,
 
                 // Bread & Grain Products
-                baguette, cereals, pasta, rice, risotto, slicedBread,
+                baguette, cereals, pasta, rice,
 
                 // Condiments & Others
                 coffeeCream, corn, oil, salt, soup, sugar, tomatoSauce,
