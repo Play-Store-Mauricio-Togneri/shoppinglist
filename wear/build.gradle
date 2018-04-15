@@ -69,8 +69,5 @@ dependencies
     implementation "com.android.support:wear:$support"
     implementation 'com.google.android.support:wearable:2.3.0'
 
-    // wearable
-    implementation "com.google.android.gms:play-services-wearable:$playservices"
-
     compileOnly 'com.google.android.wearable:wearable:2.3.0'
 }
