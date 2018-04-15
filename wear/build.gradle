@@ -8,7 +8,7 @@ android
     defaultConfig
     {
         applicationId 'com.mauriciotogneri.shoppinglist'
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 27
         versionCode 12
         versionName '2.0.0'
@@ -65,4 +65,12 @@ android
 dependencies
 {
     implementation project(':common')
+
+    implementation "com.android.support:wear:$support"
+    implementation 'com.google.android.support:wearable:2.3.0'
+
+    // wearable
+    implementation "com.google.android.gms:play-services-wearable:$playservices"
+
+    compileOnly 'com.google.android.wearable:wearable:2.3.0'
 }
