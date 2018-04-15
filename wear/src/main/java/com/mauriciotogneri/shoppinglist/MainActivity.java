@@ -22,6 +22,8 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main);
 
+        findViewById(R.id.test).setOnClickListener(v -> selectProduct(123L, true));
+
         requestProducts();
     }
 
@@ -32,7 +34,21 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
         {
             for (Node node : nodes)
             {
-                Wearable.getMessageClient(this).sendMessage(node.getId(), Message.REQUEST_PRODUCTS, new byte[0]);
+                Message message = new Message(node.getId(), Message.REQUEST_PRODUCTS);
+                message.send(this);
+            }
+        });
+    }
+
+    private void selectProduct(Long productId, Boolean selected)
+    {
+        Task<List<Node>> task = Wearable.getNodeClient(this).getConnectedNodes();
+        task.addOnSuccessListener(nodes ->
+        {
+            for (Node node : nodes)
+            {
+                Message message = new Message(node.getId(), Message.REQUEST_SELECT_PRODUCT, String.format("%s:%s", productId, selected));
+                message.send(this);
             }
         });
     }

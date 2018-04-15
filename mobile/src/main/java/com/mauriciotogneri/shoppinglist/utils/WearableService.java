@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
@@ -43,6 +44,10 @@ public class WearableService extends Service implements MessageClient.OnMessageR
         {
             Message response = new Message(message.nodeId(), Message.RESPONSE_PRODUCTS, "THIS ARE THE PRODUCTS");
             response.send(this);
+        }
+        else if (message.action().equals(Message.REQUEST_SELECT_PRODUCT))
+        {
+            Toast.makeText(this, message.payload(), Toast.LENGTH_SHORT).show();
         }
     }
 }
