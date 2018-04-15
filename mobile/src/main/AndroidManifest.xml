@@ -4,6 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature android:name="android.hardware.type.watch"/>
+
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
@@ -19,8 +21,12 @@
         android:theme="@style/app.theme"
         tools:replace="android:allowBackup">
 
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="true"/>
+
         <activity
-            android:name=".activities.CartActivity"
+            android:name=".activities.TestActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -60,8 +66,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible"/>
 
-        <!--<service
-            android:name=".services.WearableService">
+        <service
+            android:name=".utils.WearableService">
 
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.DATA_CHANGED"/>
@@ -72,17 +78,20 @@
                     android:scheme="wear"/>
             </intent-filter>
 
-        </service>-->
+        </service>
 
         <meta-data
             android:name="DATABASE"
             android:value="shoppinglist.db"/>
+
         <meta-data
             android:name="VERSION"
             android:value="1"/>
+
         <meta-data
             android:name="QUERY_LOG"
             android:value="false"/>
+
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.mauriciotogneri.shoppinglist"/>

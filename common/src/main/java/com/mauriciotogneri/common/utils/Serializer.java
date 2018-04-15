@@ -1,7 +1,5 @@
 package com.mauriciotogneri.common.utils;
 
-import com.mauriciotogneri.javautils.Resource;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInput;
@@ -44,7 +42,7 @@ public class Serializer
                 // ignore
             }
 
-            Resource.close(bos);
+            //TODO Resource.close(bos);
         }
 
         return null;
@@ -81,7 +79,7 @@ public class Serializer
                 // ignore
             }
 
-            Resource.close(bis);
+            // TODO Resource.close(bis);
         }
 
         return null;
