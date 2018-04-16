@@ -3,20 +3,28 @@ package com.mauriciotogneri.shoppinglist;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
+import android.support.wear.widget.WearableLinearLayoutManager;
+import android.support.wear.widget.WearableRecyclerView;
+import android.view.View;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.message.Message;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity implements MessageClient.OnMessageReceivedListener
 {
+    private CartElementAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,6 +32,27 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
         setContentView(R.layout.screen_main);
 
         requestProducts();
+    }
+
+    private void setProducts(List<CartElement> products)
+    {
+        if (!products.isEmpty())
+        {
+            adapter = new CartElementAdapter(this, products);
+
+            WearableRecyclerView list = findViewById(R.id.list);
+            list.setLayoutManager(new WearableLinearLayoutManager(this));
+            list.setAdapter(adapter);
+            list.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            View emptyLabel = findViewById(R.id.empty_label);
+            emptyLabel.setVisibility(View.VISIBLE);
+        }
+
+        View progress = findViewById(R.id.progress);
+        progress.setVisibility(View.GONE);
     }
 
     private void requestProducts()
@@ -52,6 +81,14 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
         });
     }
 
+    public void onProductSelected(CartElement cartElement)
+    {
+        cartElement.toggleSelection();
+        adapter.sort();
+
+        selectProduct(cartElement);
+    }
+
     @Override
     public void onResume()
     {
@@ -75,7 +112,12 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
 
         if (message.action().equals(Message.RESPONSE_PRODUCTS))
         {
-            Toast.makeText(this, message.payload(), Toast.LENGTH_SHORT).show();
+            Type listType = new TypeToken<ArrayList<CartElement>>()
+            {
+            }.getType();
+            List<CartElement> products = new Gson().fromJson(message.payload(), listType);
+
+            setProducts(products);
         }
     }
 }
