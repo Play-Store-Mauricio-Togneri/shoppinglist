@@ -10,7 +10,14 @@ import android.widget.Toast;
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Wearable;
+import com.google.gson.Gson;
+import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.message.Message;
+import com.mauriciotogneri.shoppinglist.model.Product;
+import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsInCart;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WearableService extends Service implements MessageClient.OnMessageReceivedListener
 {
@@ -42,12 +49,28 @@ public class WearableService extends Service implements MessageClient.OnMessageR
 
         if (message.action().equals(Message.REQUEST_PRODUCTS))
         {
-            Message response = new Message(message.nodeId(), Message.RESPONSE_PRODUCTS, "THIS ARE THE PRODUCTS");
-            response.send(this);
+            returnProducts(message.nodeId());
         }
         else if (message.action().equals(Message.REQUEST_SELECT_PRODUCT))
         {
             Toast.makeText(this, message.payload(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void returnProducts(String nodeId)
+    {
+        LoadProductsInCart task = new LoadProductsInCart(this, products ->
+        {
+            List<CartElement> cartElements = new ArrayList<>();
+
+            for (Product product : products)
+            {
+                cartElements.add(product.cartElement());
+            }
+
+            Message response = new Message(nodeId, Message.RESPONSE_PRODUCTS, new Gson().toJson(cartElements));
+            response.send(this);
+        });
+        task.execute();
     }
 }

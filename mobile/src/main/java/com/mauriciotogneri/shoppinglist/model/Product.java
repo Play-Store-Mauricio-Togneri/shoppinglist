@@ -5,6 +5,8 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.text.TextUtils;
 
+import com.mauriciotogneri.common.api.CartElement;
+
 import java.io.Serializable;
 
 @Entity
@@ -75,5 +77,15 @@ public class Product implements Serializable
     public boolean isValid()
     {
         return (!TextUtils.isEmpty(category) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(image));
+    }
+
+    public CartElement cartElement()
+    {
+        return new CartElement(
+                id,
+                category,
+                name,
+                image
+        );
     }
 }

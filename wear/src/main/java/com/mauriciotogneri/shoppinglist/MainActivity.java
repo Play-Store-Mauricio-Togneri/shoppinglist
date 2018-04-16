@@ -10,6 +10,7 @@ import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.Wearable;
+import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.message.Message;
 
 import java.util.List;
@@ -21,8 +22,6 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_main);
-
-        findViewById(R.id.test).setOnClickListener(v -> selectProduct(123L, true));
 
         requestProducts();
     }
@@ -40,14 +39,14 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
         });
     }
 
-    private void selectProduct(Long productId, Boolean selected)
+    private void selectProduct(CartElement cartElement)
     {
         Task<List<Node>> task = Wearable.getNodeClient(this).getConnectedNodes();
         task.addOnSuccessListener(nodes ->
         {
             for (Node node : nodes)
             {
-                Message message = new Message(node.getId(), Message.REQUEST_SELECT_PRODUCT, String.format("%s:%s", productId, selected));
+                Message message = new Message(node.getId(), Message.REQUEST_SELECT_PRODUCT, String.format("%s:%s", cartElement.id(), cartElement.isSelected()));
                 message.send(this);
             }
         });
