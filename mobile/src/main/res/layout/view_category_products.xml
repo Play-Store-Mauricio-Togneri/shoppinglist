@@ -13,6 +13,6 @@
 
     <TextView
         android:id="@+id/label.empty"
-        style="@style/label.empty"/>
+        style="@style/labelEmpty"/>
 
 </FrameLayout>
