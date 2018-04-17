@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import com.google.android.gms.wearable.MessageClient;
 import com.google.android.gms.wearable.MessageEvent;
@@ -15,6 +14,7 @@ import com.mauriciotogneri.common.api.CartElement;
 import com.mauriciotogneri.common.message.Message;
 import com.mauriciotogneri.shoppinglist.model.Product;
 import com.mauriciotogneri.shoppinglist.tasks.product.LoadProductsInCart;
+import com.mauriciotogneri.shoppinglist.tasks.product.UpdateProducts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class WearableService extends Service implements MessageClient.OnMessageR
         }
         else if (message.action().equals(Message.REQUEST_SELECT_PRODUCT))
         {
-            Toast.makeText(this, message.payload(), Toast.LENGTH_SHORT).show();
+            selectProduct(message.payload());
         }
     }
 
@@ -72,5 +72,22 @@ public class WearableService extends Service implements MessageClient.OnMessageR
             response.send(this);
         });
         task.execute();
+    }
+
+    private void selectProduct(String payload)
+    {
+        try
+        {
+            String[] parts = payload.split(":");
+            Integer productId = Integer.parseInt(parts[0]);
+            Boolean selected = Boolean.parseBoolean(parts[1]);
+
+            UpdateProducts task = new UpdateProducts(this);
+            task.setSelection(productId, selected);
+        }
+        catch (Exception e)
+        {
+            // ignore
+        }
     }
 }
