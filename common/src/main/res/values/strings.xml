@@ -67,6 +67,11 @@
     <string name="product.pasta">Pasta</string>
     <string name="product.rice">Rice</string>
 
+    <string name="product.corn">Corn</string>
+    <string name="product.oil">Oil</string>
+    <string name="product.salt">Salt</string>
+    <string name="product.tomatoSauce">Tomato sauce</string>
+
     <!-- ********************************* -->
 
     <string name="product.apples">Apples</string>
@@ -76,14 +81,6 @@
     <string name="product.lettuce">Lettuce</string>
     <string name="product.pineapple">Pineapple</string>
     <string name="product.potatoes">Potatoes</string>
-
-    <string name="product.coffeeCream">Coffee cream</string>
-    <string name="product.corn">Corn</string>
-    <string name="product.salt">Salt</string>
-    <string name="product.soup">Soup</string>
-    <string name="product.sugar">Sugar</string>
-    <string name="product.oil">Oil</string>
-    <string name="product.tomatoSauce">Tomato sauce</string>
 
     <string name="product.cheese">Cheese</string>
     <string name="product.eggs">Eggs</string>

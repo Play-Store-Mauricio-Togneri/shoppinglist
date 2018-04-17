@@ -36,16 +36,13 @@ public abstract class AppDatabase extends RoomDatabase
         Product pasta = product(context, R.string.product_pasta, breadAndGrain, "https://i.imgur.com/0nWmLHr.png");
         Product rice = product(context, R.string.product_rice, breadAndGrain, "https://i.imgur.com/psXXfuG.png");
 
-        // -------------------------------------------------------------------------------------------
-
         Category condiments = new Category(context.getString(R.string.category_condimentsAndOthers));
-        Product coffeeCream = new Product(condiments.name(), context.getString(R.string.product_coffeeCream), "http://i.imgur.com/uPn1oTB.png", false, false);
-        Product corn = new Product(condiments.name(), context.getString(R.string.product_corn), "http://i.imgur.com/oZol6zV.png", false, false);
-        Product oil = new Product(condiments.name(), context.getString(R.string.product_oil), "http://i.imgur.com/Us8YBF8.png", false, false);
-        Product salt = new Product(condiments.name(), context.getString(R.string.product_salt), "http://i.imgur.com/NzU28LS.png", false, false);
-        Product soup = new Product(condiments.name(), context.getString(R.string.product_soup), "http://i.imgur.com/lrUCxbM.png", false, false);
-        Product sugar = new Product(condiments.name(), context.getString(R.string.product_sugar), "http://i.imgur.com/h1jCQQH.png", false, false);
-        Product tomatoSauce = new Product(condiments.name(), context.getString(R.string.product_tomatoSauce), "http://i.imgur.com/WQYeED4.png", false, false);
+        Product corn = product(context, R.string.product_corn, condiments, "https://i.imgur.com/pnsKbJg.png");
+        Product oil = product(context, R.string.product_oil, condiments, "https://i.imgur.com/r2ZecGS.png");
+        Product salt = product(context, R.string.product_salt, condiments, "https://i.imgur.com/o14W3sV.png");
+        Product tomatoSauce = product(context, R.string.product_tomatoSauce, condiments, "https://i.imgur.com/GGnudqb.png");
+
+        // -------------------------------------------------------------------------------------------
 
         Category frozen = new Category(context.getString(R.string.category_frozen));
         Product fishSticks = new Product(frozen.name(), context.getString(R.string.product_fishSticks), "http://i.imgur.com/HpCxIrW.png", false, false);
@@ -125,7 +122,7 @@ public abstract class AppDatabase extends RoomDatabase
                 baguette, cereals, pasta, rice,
 
                 // Condiments & Others
-                coffeeCream, corn, oil, salt, soup, sugar, tomatoSauce,
+                corn, oil, salt, tomatoSauce,
 
                 // Frozen
                 fishSticks, frenchFries, iceCream, lasagna, nuggets, pizza,
