@@ -3,7 +3,7 @@ package com.mauriciotogneri.shoppinglist;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.wear.widget.WearableLinearLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.wear.widget.WearableRecyclerView;
 import android.view.View;
 
@@ -41,7 +41,8 @@ public class MainActivity extends Activity implements MessageClient.OnMessageRec
             adapter = new CartElementAdapter(this, products);
 
             WearableRecyclerView list = findViewById(R.id.list);
-            list.setLayoutManager(new WearableLinearLayoutManager(this));
+            list.setEdgeItemsCenteringEnabled(true);
+            list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             list.setAdapter(adapter);
             list.setVisibility(View.VISIBLE);
         }
