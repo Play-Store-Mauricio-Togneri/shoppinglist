@@ -6,6 +6,7 @@
     <color name="list.background">#FAFAFA</color>
     <color name="text.color">#777777</color>
     <color name="separator">#CCCCCC</color>
+    <color name="item.marked">#BBBBBB</color>
     <color name="item.selected">#EEEEEE</color>
     <color name="item.unselected">#FFFFFF</color>
 

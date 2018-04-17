@@ -1,6 +1,7 @@
 package com.mauriciotogneri.shoppinglist;
 
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.support.wear.widget.WearableRecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,10 +72,12 @@ public class CartElementAdapter extends WearableRecyclerView.Adapter<ViewHolder>
 
         if (element.isSelected())
         {
+            viewHolder.name.setTextColor(ContextCompat.getColor(mainActivity, R.color.item_marked));
             viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() | (Paint.STRIKE_THRU_TEXT_FLAG));
         }
         else
         {
+            viewHolder.name.setTextColor(ContextCompat.getColor(mainActivity, R.color.text_color));
             viewHolder.name.setPaintFlags(viewHolder.name.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
     }
