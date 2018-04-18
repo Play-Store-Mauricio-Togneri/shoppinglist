@@ -67,8 +67,8 @@
     <string name="product.pasta">Pâtes</string>
     <string name="product.rice">Riz</string>
 
-    <string name="product.corn">Maïs</string>
     <string name="product.oil">Huile</string>
+    <string name="product.pepper">Poivre</string>
     <string name="product.salt">Sel</string>
     <string name="product.tomatoSauce">Sauce tomate</string>
 
