@@ -72,6 +72,11 @@
     <string name="product.salt">Sal</string>
     <string name="product.tomatoSauce">Salsa de tomate</string>
 
+    <string name="product.frenchFries">Patatas fritas</string>
+    <string name="product.iceCream">Helado</string>
+    <string name="product.lasagna">Lasaña</string>
+    <string name="product.pizza">Pizza</string>
+
     <!-- ********************************* -->
 
     <string name="product.apples">Manzanas</string>
@@ -97,13 +102,6 @@
     <string name="product.salami">Salami</string>
     <string name="product.sardines">Sardinas</string>
     <string name="product.tuna">Atún</string>
-
-    <string name="product.fishSticks">Barritas de pescado</string>
-    <string name="product.frenchFries">Patatas fritas</string>
-    <string name="product.iceCream">Helado</string>
-    <string name="product.lasagna">Lasaña</string>
-    <string name="product.nuggets">Nuggets</string>
-    <string name="product.pizza">Pizza</string>
 
     <string name="product.airFreshener">Ambientador</string>
     <string name="product.bleach">Lejía</string>

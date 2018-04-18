@@ -24,6 +24,7 @@ public abstract class AppDatabase extends RoomDatabase
 
     public void initialize(Context context)
     {
+        // TODO: REPLACE THE HTTPS FOR HTTP
         Category beverages = new Category(context.getString(R.string.category_beverage));
         Product beer = product(context, R.string.product_beer, beverages, "http://i.imgur.com/OAYaqkM.png");
         Product coffee = product(context, R.string.product_coffee, beverages, "https://i.imgur.com/SCW2fcK.png");
@@ -42,15 +43,13 @@ public abstract class AppDatabase extends RoomDatabase
         Product salt = product(context, R.string.product_salt, condiments, "https://i.imgur.com/o14W3sV.png");
         Product tomatoSauce = product(context, R.string.product_tomatoSauce, condiments, "https://i.imgur.com/GGnudqb.png");
 
-        // -------------------------------------------------------------------------------------------
-
         Category frozen = new Category(context.getString(R.string.category_frozen));
-        Product fishSticks = new Product(frozen.name(), context.getString(R.string.product_fishSticks), "http://i.imgur.com/HpCxIrW.png", false, false);
-        Product frenchFries = new Product(frozen.name(), context.getString(R.string.product_frenchFries), "http://i.imgur.com/KsWRC0d.png", false, false);
-        Product iceCream = new Product(frozen.name(), context.getString(R.string.product_iceCream), "http://i.imgur.com/Jku9Mjy.png", false, false);
-        Product lasagna = new Product(frozen.name(), context.getString(R.string.product_lasagna), "http://i.imgur.com/yizvszE.png", false, false);
-        Product nuggets = new Product(frozen.name(), context.getString(R.string.product_nuggets), "http://i.imgur.com/uzuI4UK.png", false, false);
-        Product pizza = new Product(frozen.name(), context.getString(R.string.product_pizza), "http://i.imgur.com/Kc7PiH9.png", false, false);
+        Product frenchFries = product(context, R.string.product_frenchFries, frozen, "https://i.imgur.com/UEeHBCY.png");
+        Product iceCream = product(context, R.string.product_iceCream, frozen, "https://i.imgur.com/ewXqBfF.png");
+        Product lasagna = product(context, R.string.product_lasagna, frozen, "https://i.imgur.com/dLp0saj.png");
+        Product pizza = product(context, R.string.product_pizza, frozen, "https://i.imgur.com/Zist1Zr.png");
+
+        // -------------------------------------------------------------------------------------------
 
         Category fruitsAndVegetables = new Category(context.getString(R.string.category_fruitsAndVegetables));
         Product apples = new Product(fruitsAndVegetables.name(), context.getString(R.string.product_apples), "http://i.imgur.com/hkNdwlF.png", false, false);
@@ -125,7 +124,7 @@ public abstract class AppDatabase extends RoomDatabase
                 corn, oil, salt, tomatoSauce,
 
                 // Frozen
-                fishSticks, frenchFries, iceCream, lasagna, nuggets, pizza,
+                frenchFries, iceCream, lasagna, pizza,
 
                 // Fruits & Vegetables
                 apples, bananas, carrots, lemons, lettuce, potatoes,
