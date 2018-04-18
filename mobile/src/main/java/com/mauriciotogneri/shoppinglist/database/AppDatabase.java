@@ -27,37 +27,35 @@ public abstract class AppDatabase extends RoomDatabase
         // TODO: REPLACE THE HTTPS FOR HTTP
         Category beverages = new Category(context.getString(R.string.category_beverage));
         Product beer = product(context, R.string.product_beer, beverages, "http://i.imgur.com/OAYaqkM.png");
-        Product coffee = product(context, R.string.product_coffee, beverages, "https://i.imgur.com/SCW2fcK.png");
-        Product soda = product(context, R.string.product_soda, beverages, "https://i.imgur.com/FagEbsU.png");
-        Product water = product(context, R.string.product_water, beverages, "https://i.imgur.com/XWVwKDK.png");
+        Product coffee = product(context, R.string.product_coffee, beverages, "http://i.imgur.com/SCW2fcK.png");
+        Product soda = product(context, R.string.product_soda, beverages, "http://i.imgur.com/FagEbsU.png");
+        Product water = product(context, R.string.product_water, beverages, "http://i.imgur.com/XWVwKDK.png");
 
         Category breadAndGrain = new Category(context.getString(R.string.category_breadAndGrain));
-        Product baguette = product(context, R.string.product_baguette, breadAndGrain, "https://i.imgur.com/hkI7tAI.png");
-        Product cereals = product(context, R.string.product_cereals, breadAndGrain, "https://i.imgur.com/cY6UouB.png");
-        Product pasta = product(context, R.string.product_pasta, breadAndGrain, "https://i.imgur.com/0nWmLHr.png");
-        Product rice = product(context, R.string.product_rice, breadAndGrain, "https://i.imgur.com/psXXfuG.png");
+        Product baguette = product(context, R.string.product_baguette, breadAndGrain, "http://i.imgur.com/hkI7tAI.png");
+        Product cereals = product(context, R.string.product_cereals, breadAndGrain, "http://i.imgur.com/cY6UouB.png");
+        Product pasta = product(context, R.string.product_pasta, breadAndGrain, "http://i.imgur.com/0nWmLHr.png");
+        Product rice = product(context, R.string.product_rice, breadAndGrain, "http://i.imgur.com/psXXfuG.png");
 
         Category condiments = new Category(context.getString(R.string.category_condimentsAndOthers));
-        Product corn = product(context, R.string.product_corn, condiments, "https://i.imgur.com/pnsKbJg.png");
-        Product oil = product(context, R.string.product_oil, condiments, "https://i.imgur.com/r2ZecGS.png");
-        Product salt = product(context, R.string.product_salt, condiments, "https://i.imgur.com/o14W3sV.png");
-        Product tomatoSauce = product(context, R.string.product_tomatoSauce, condiments, "https://i.imgur.com/GGnudqb.png");
+        Product corn = product(context, R.string.product_corn, condiments, "http://i.imgur.com/pnsKbJg.png");
+        Product oil = product(context, R.string.product_oil, condiments, "http://i.imgur.com/r2ZecGS.png");
+        Product salt = product(context, R.string.product_salt, condiments, "http://i.imgur.com/o14W3sV.png");
+        Product tomatoSauce = product(context, R.string.product_tomatoSauce, condiments, "http://i.imgur.com/GGnudqb.png");
 
         Category frozen = new Category(context.getString(R.string.category_frozen));
-        Product frenchFries = product(context, R.string.product_frenchFries, frozen, "https://i.imgur.com/UEeHBCY.png");
-        Product iceCream = product(context, R.string.product_iceCream, frozen, "https://i.imgur.com/ewXqBfF.png");
-        Product lasagna = product(context, R.string.product_lasagna, frozen, "https://i.imgur.com/dLp0saj.png");
-        Product pizza = product(context, R.string.product_pizza, frozen, "https://i.imgur.com/Zist1Zr.png");
-
-        // -------------------------------------------------------------------------------------------
+        Product frenchFries = product(context, R.string.product_frenchFries, frozen, "http://i.imgur.com/UEeHBCY.png");
+        Product iceCream = product(context, R.string.product_iceCream, frozen, "http://i.imgur.com/ewXqBfF.png");
+        Product lasagna = product(context, R.string.product_lasagna, frozen, "http://i.imgur.com/dLp0saj.png");
+        Product pizza = product(context, R.string.product_pizza, frozen, "http://i.imgur.com/Zist1Zr.png");
 
         Category fruitsAndVegetables = new Category(context.getString(R.string.category_fruitsAndVegetables));
-        Product apples = new Product(fruitsAndVegetables.name(), context.getString(R.string.product_apples), "http://i.imgur.com/hkNdwlF.png", false, false);
-        Product bananas = new Product(fruitsAndVegetables.name(), context.getString(R.string.product_bananas), "http://i.imgur.com/edf83Ow.png", false, false);
-        Product carrots = new Product(fruitsAndVegetables.name(), context.getString(R.string.product_carrots), "http://i.imgur.com/rEUNdI0.png", false, false);
-        Product lemons = new Product(fruitsAndVegetables.name(), context.getString(R.string.product_lemons), "http://i.imgur.com/i8wwGmB.png", false, false);
-        Product lettuce = new Product(fruitsAndVegetables.name(), context.getString(R.string.product_lettuce), "http://i.imgur.com/NIguQT1.png", false, false);
-        Product potatoes = new Product(fruitsAndVegetables.name(), context.getString(R.string.product_potatoes), "http://i.imgur.com/by3SaCG.png", false, false);
+        Product apples = product(context, R.string.product_apples, fruitsAndVegetables, "https://i.imgur.com/tQRbEZh.png");
+        Product bananas = product(context, R.string.product_bananas, fruitsAndVegetables, "https://i.imgur.com/9iCHh7G.png");
+        Product carrots = product(context, R.string.product_carrots, fruitsAndVegetables, "https://i.imgur.com/h8FxUEd.png");
+        Product potatoes = product(context, R.string.product_potatoes, fruitsAndVegetables, "https://i.imgur.com/nJ3JpgI.png");
+
+        // -------------------------------------------------------------------------------------------
 
         Category household = new Category(context.getString(R.string.category_household));
         Product airFreshener = new Product(household.name(), context.getString(R.string.product_airFreshener), "http://i.imgur.com/kLBRUMh.png", false, false);
@@ -127,7 +125,7 @@ public abstract class AppDatabase extends RoomDatabase
                 frenchFries, iceCream, lasagna, pizza,
 
                 // Fruits & Vegetables
-                apples, bananas, carrots, lemons, lettuce, potatoes,
+                apples, bananas, carrots, potatoes,
 
                 // Household
                 airFreshener, bleach, bulb, cleaningSupplies, cottonSwabs, deodorant, dishwashingLiquid, garbageBags,

@@ -77,15 +77,12 @@
     <string name="product.lasagna">Lasaña</string>
     <string name="product.pizza">Pizza</string>
 
-    <!-- ********************************* -->
-
     <string name="product.apples">Manzanas</string>
     <string name="product.bananas">Bananas</string>
     <string name="product.carrots">Zanahorias</string>
-    <string name="product.lemons">Limones</string>
-    <string name="product.lettuce">Lechuga</string>
-    <string name="product.pineapple">Piñas</string>
     <string name="product.potatoes">Patatas</string>
+
+    <!-- ********************************* -->
 
     <string name="product.cheese">Queso</string>
     <string name="product.eggs">Huevos</string>
