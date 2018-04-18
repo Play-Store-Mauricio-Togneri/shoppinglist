@@ -67,8 +67,8 @@
     <string name="product.pasta">Pasta</string>
     <string name="product.rice">Rice</string>
 
-    <string name="product.corn">Corn</string>
     <string name="product.oil">Oil</string>
+    <string name="product.pepper">Pepper</string>
     <string name="product.salt">Salt</string>
     <string name="product.tomatoSauce">Tomato sauce</string>
 
