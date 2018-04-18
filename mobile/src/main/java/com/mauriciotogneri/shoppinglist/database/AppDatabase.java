@@ -34,12 +34,12 @@ public abstract class AppDatabase extends RoomDatabase
         Category breadAndGrain = new Category(context.getString(R.string.category_breadAndGrain));
         Product baguette = product(context, R.string.product_baguette, breadAndGrain, "http://i.imgur.com/hkI7tAI.png");
         Product cereals = product(context, R.string.product_cereals, breadAndGrain, "http://i.imgur.com/cY6UouB.png");
-        Product pasta = product(context, R.string.product_pasta, breadAndGrain, "https://i.imgur.com/yzrIBX1.png");
+        Product pasta = product(context, R.string.product_pasta, breadAndGrain, "http://i.imgur.com/yzrIBX1.png");
         Product rice = product(context, R.string.product_rice, breadAndGrain, "http://i.imgur.com/psXXfuG.png");
 
         Category condiments = new Category(context.getString(R.string.category_condimentsAndOthers));
         Product oil = product(context, R.string.product_oil, condiments, "http://i.imgur.com/r2ZecGS.png");
-        Product pepper = product(context, R.string.product_pepper, condiments, "https://i.imgur.com/SjEIvSI.png");
+        Product pepper = product(context, R.string.product_pepper, condiments, "http://i.imgur.com/SjEIvSI.png");
         Product salt = product(context, R.string.product_salt, condiments, "http://i.imgur.com/o14W3sV.png");
         Product tomatoSauce = product(context, R.string.product_tomatoSauce, condiments, "http://i.imgur.com/GGnudqb.png");
 
@@ -50,10 +50,10 @@ public abstract class AppDatabase extends RoomDatabase
         Product pizza = product(context, R.string.product_pizza, frozen, "http://i.imgur.com/Zist1Zr.png");
 
         Category fruitsAndVegetables = new Category(context.getString(R.string.category_fruitsAndVegetables));
-        Product apples = product(context, R.string.product_apples, fruitsAndVegetables, "https://i.imgur.com/tQRbEZh.png");
-        Product bananas = product(context, R.string.product_bananas, fruitsAndVegetables, "https://i.imgur.com/9iCHh7G.png");
-        Product carrots = product(context, R.string.product_carrots, fruitsAndVegetables, "https://i.imgur.com/h8FxUEd.png");
-        Product potatoes = product(context, R.string.product_potatoes, fruitsAndVegetables, "https://i.imgur.com/f2OsMoE.png");
+        Product apples = product(context, R.string.product_apples, fruitsAndVegetables, "http://i.imgur.com/tQRbEZh.png");
+        Product bananas = product(context, R.string.product_bananas, fruitsAndVegetables, "http://i.imgur.com/9iCHh7G.png");
+        Product carrots = product(context, R.string.product_carrots, fruitsAndVegetables, "http://i.imgur.com/h8FxUEd.png");
+        Product potatoes = product(context, R.string.product_potatoes, fruitsAndVegetables, "http://i.imgur.com/f2OsMoE.png");
 
         // -------------------------------------------------------------------------------------------
 
