@@ -46,16 +46,22 @@
 
     <!-- CATEGORIES -->
 
-    <string name="category.fruitsAndVegetables">Frutas y Vegetales</string>
+    <string name="category.bathroom">Baño</string>
+    <string name="category.beverage">Bebidas</string>
     <string name="category.breadAndGrain">Productos Integrales</string>
     <string name="category.condimentsAndOthers">Condimentos y Otros</string>
-    <string name="category.milkAndCheese">Lacteos</string>
-    <string name="category.meatAndFish">Carnes y Pescados</string>
     <string name="category.frozen">Congelados</string>
-    <string name="category.beverage">Bebidas</string>
+    <string name="category.fruitsAndVegetables">Frutas y Vegetales</string>
     <string name="category.household">Hogar</string>
+    <string name="category.meatAndFish">Carnes y Pescados</string>
+    <string name="category.milkAndCheese">Lacteos</string>
 
     <!-- PRODUCTS -->
+
+    <string name="product.shampoo">Champú</string>
+    <string name="product.toiletPaper">Pepel higiénico</string>
+    <string name="product.toothbrush">Cepillo de dientes</string>
+    <string name="product.toothpaste">Pasta dental</string>
 
     <string name="product.beer">Cerveza</string>
     <string name="product.coffee">Café</string>
@@ -112,15 +118,11 @@
     <string name="product.laundryDetergent">Detergente para ropa</string>
     <string name="product.paperTowels">Papel de cocina</string>
     <string name="product.razor">Hojas de afeitar</string>
-    <string name="product.shampoo">Champú</string>
     <string name="product.shavingFoam">Crema de afeitar</string>
     <string name="product.showerGel">Gel de ducha</string>
     <string name="product.soap">Jabón</string>
     <string name="product.sponge">Esponja</string>
     <string name="product.spongeMetal">Esponja de metal</string>
     <string name="product.cottonSwabs">Bastoncillos</string>
-    <string name="product.toiletPaper">Pepel higiénico</string>
-    <string name="product.toothbrush">Cepillo de dientes</string>
-    <string name="product.toothpaste">Pasta dental</string>
 
 </resources>

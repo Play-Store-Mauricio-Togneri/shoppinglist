@@ -25,6 +25,12 @@ public abstract class AppDatabase extends RoomDatabase
     public void initialize(Context context)
     {
         // TODO: REPLACE THE HTTPS FOR HTTP
+        Category bathroom = new Category(context.getString(R.string.category_bathroom));
+        Product shampoo = product(context, R.string.product_shampoo, bathroom, "http://i.imgur.com/BM0GFUC.png");
+        Product toiletPaper = product(context, R.string.product_toiletPaper, bathroom, "http://i.imgur.com/LDI12E4.png");
+        Product toothbrush = product(context, R.string.product_toothbrush, bathroom, "http://i.imgur.com/Lgz5fTy.png");
+        Product toothpaste = product(context, R.string.product_toothpaste, bathroom, "http://i.imgur.com/glyrlhS.png");
+
         Category beverages = new Category(context.getString(R.string.category_beverage));
         Product beer = product(context, R.string.product_beer, beverages, "http://i.imgur.com/OAYaqkM.png");
         Product coffee = product(context, R.string.product_coffee, beverages, "http://i.imgur.com/SCW2fcK.png");
@@ -58,28 +64,11 @@ public abstract class AppDatabase extends RoomDatabase
         // -------------------------------------------------------------------------------------------
 
         Category household = new Category(context.getString(R.string.category_household));
-        Product airFreshener = new Product(household.name(), context.getString(R.string.product_airFreshener), "http://i.imgur.com/kLBRUMh.png", false, false);
-        Product bleach = new Product(household.name(), context.getString(R.string.product_bleach), "http://i.imgur.com/CxdYGWK.png", false, false);
-        Product bulb = new Product(household.name(), context.getString(R.string.product_bulb), "http://i.imgur.com/bp64U2i.png", false, false);
         Product cleaningSupplies = new Product(household.name(), context.getString(R.string.product_cleaningSupplies), "http://i.imgur.com/dyhc3o4.png", false, false);
-        Product cottonSwabs = new Product(household.name(), context.getString(R.string.product_cottonSwabs), "http://i.imgur.com/tJ3oyEL.png", false, false);
-        Product deodorant = new Product(household.name(), context.getString(R.string.product_deodorant), "http://i.imgur.com/14gYHs0.png", false, false);
         Product dishwashingLiquid = new Product(household.name(), context.getString(R.string.product_dishwashingLiquid), "http://i.imgur.com/AcIzH1s.png", false, false);
         Product garbageBags = new Product(household.name(), context.getString(R.string.product_garbageBags), "http://i.imgur.com/ZYQK4Tm.png", false, false);
-        Product hairRemover = new Product(household.name(), context.getString(R.string.product_hairRemover), "http://i.imgur.com/bS6cyo1.png", false, false);
-        Product kitchenRags = new Product(household.name(), context.getString(R.string.product_kitchenRags), "http://i.imgur.com/mvlB34z.png", false, false);
         Product laundryDetergent = new Product(household.name(), context.getString(R.string.product_laundryDetergent), "http://i.imgur.com/6GQ3TgM.png", false, false);
         Product paperTowels = new Product(household.name(), context.getString(R.string.product_paperTowels), "http://i.imgur.com/ZiYsOOA.png", false, false);
-        Product razor = new Product(household.name(), context.getString(R.string.product_razor), "http://i.imgur.com/QYMgdEt.png", false, false);
-        Product shampoo = new Product(household.name(), context.getString(R.string.product_shampoo), "http://i.imgur.com/1NWMm5T.png", false, false);
-        Product shavingFoam = new Product(household.name(), context.getString(R.string.product_shavingFoam), "http://i.imgur.com/n7w8V2b.png", false, false);
-        Product showerGel = new Product(household.name(), context.getString(R.string.product_showerGel), "http://i.imgur.com/FZTkxdb.png", false, false);
-        Product soap = new Product(household.name(), context.getString(R.string.product_soap), "http://i.imgur.com/mB6oVNU.png", false, false);
-        Product sponge = new Product(household.name(), context.getString(R.string.product_sponge), "http://i.imgur.com/JijYcgb.png", false, false);
-        Product spongeMetal = new Product(household.name(), context.getString(R.string.product_spongeMetal), "http://i.imgur.com/BU63SGw.png", false, false);
-        Product toiletPaper = new Product(household.name(), context.getString(R.string.product_toiletPaper), "http://i.imgur.com/XFk0mUh.png", false, false);
-        Product toothbrush = new Product(household.name(), context.getString(R.string.product_toothbrush), "http://i.imgur.com/oyAW8CW.png", false, false);
-        Product toothpaste = new Product(household.name(), context.getString(R.string.product_toothpaste), "http://i.imgur.com/JUHf50H.png", false, false);
 
         Category meatAndFish = new Category(context.getString(R.string.category_meatAndFish));
         Product chicken = new Product(meatAndFish.name(), context.getString(R.string.product_chicken), "http://i.imgur.com/hYKIUgB.png", false, false);
@@ -101,6 +90,7 @@ public abstract class AppDatabase extends RoomDatabase
 
         CategoryDao categoryDao = categoryDao();
         categoryDao.insert(
+                bathroom,
                 beverages,
                 breadAndGrain,
                 condiments,
@@ -112,6 +102,9 @@ public abstract class AppDatabase extends RoomDatabase
 
         ProductDao productDao = productDao();
         productDao.insert(
+                // Bathroom
+                shampoo, toiletPaper, toothbrush, toothpaste,
+
                 // Beverages
                 beer, coffee, soda, water,
 
@@ -128,9 +121,7 @@ public abstract class AppDatabase extends RoomDatabase
                 apples, bananas, carrots, potatoes,
 
                 // Household
-                airFreshener, bleach, bulb, cleaningSupplies, cottonSwabs, deodorant, dishwashingLiquid, garbageBags,
-                hairRemover, kitchenRags, laundryDetergent, paperTowels, razor, shampoo, shavingFoam, showerGel, soap,
-                sponge, spongeMetal, toiletPaper, toothbrush, toothpaste,
+                cleaningSupplies, dishwashingLiquid, garbageBags, laundryDetergent, paperTowels,
 
                 // Meat & Fish
                 chicken, fish, ham, meat, pork, salami, sardines, tuna,

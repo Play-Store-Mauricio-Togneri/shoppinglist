@@ -46,16 +46,22 @@
 
     <!-- CATEGORIES -->
 
-    <string name="category.fruitsAndVegetables">Fruits et Légumes</string>
+    <string name="category.bathroom">Salle de Bain</string>
+    <string name="category.beverage">Boissons</string>
     <string name="category.breadAndGrain">Pain et Céréales</string>
     <string name="category.condimentsAndOthers">Condiments et Autres</string>
-    <string name="category.milkAndCheese">Lait et Fromage</string>
-    <string name="category.meatAndFish">Viande et Poisson</string>
     <string name="category.frozen">Surgelés</string>
-    <string name="category.beverage">Boissons</string>
+    <string name="category.fruitsAndVegetables">Fruits et Légumes</string>
     <string name="category.household">Produits d\'entretien</string>
+    <string name="category.meatAndFish">Viande et Poisson</string>
+    <string name="category.milkAndCheese">Lait et Fromage</string>
 
     <!-- PRODUCTS -->
+
+    <string name="product.shampoo">Shampooing</string>
+    <string name="product.toiletPaper">Papier toilettes</string>
+    <string name="product.toothbrush">Brosse à dent</string>
+    <string name="product.toothpaste">Dentifrice</string>
 
     <string name="product.beer">Bière</string>
     <string name="product.coffee">Café</string>
@@ -112,15 +118,11 @@
     <string name="product.laundryDetergent">Lessive</string>
     <string name="product.paperTowels">Serviettes en papier</string>
     <string name="product.razor">Rasoir</string>
-    <string name="product.shampoo">Shampooing</string>
     <string name="product.shavingFoam">Mousse à raser</string>
     <string name="product.showerGel">Gel douche</string>
     <string name="product.soap">Savon</string>
     <string name="product.sponge">Éponge</string>
     <string name="product.spongeMetal">Grattoir</string>
     <string name="product.cottonSwabs">Cotons-tiges</string>
-    <string name="product.toiletPaper">Papier toilettes</string>
-    <string name="product.toothbrush">Brosse à dent</string>
-    <string name="product.toothpaste">Dentifrice</string>
 
 </resources>
