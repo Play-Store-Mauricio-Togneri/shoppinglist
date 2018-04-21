@@ -98,13 +98,9 @@
     <string name="product.meat">Meat</string>
     <string name="product.tuna">Tuna</string>
 
-    <!-- ********************************* -->
-
     <string name="product.cheese">Cheese</string>
     <string name="product.eggs">Eggs</string>
-    <string name="product.gratedCheese">Grated cheese</string>
     <string name="product.milk">Milk</string>
     <string name="product.yogurt">Yogurt</string>
-    <string name="product.butter">Butter</string>
 
 </resources>
