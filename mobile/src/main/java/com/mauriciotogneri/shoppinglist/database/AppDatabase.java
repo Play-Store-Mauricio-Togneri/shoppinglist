@@ -24,7 +24,6 @@ public abstract class AppDatabase extends RoomDatabase
 
     public void initialize(Context context)
     {
-        // TODO: REPLACE THE HTTPS FOR HTTP
         Category bathroom = new Category(context.getString(R.string.category_bathroom));
         Product shampoo = product(context, R.string.product_shampoo, bathroom, "http://i.imgur.com/BM0GFUC.png");
         Product toiletPaper = product(context, R.string.product_toiletPaper, bathroom, "http://i.imgur.com/LDI12E4.png");
@@ -70,18 +69,14 @@ public abstract class AppDatabase extends RoomDatabase
         Category meatAndFish = new Category(context.getString(R.string.category_meatAndFish));
         Product chicken = product(context, R.string.product_chicken, meatAndFish, "http://i.imgur.com/Cjsu3Sl.png");
         Product fish = product(context, R.string.product_fish, meatAndFish, "http://i.imgur.com/Wzumh0P.png");
-        Product meat = product(context, R.string.product_meat, meatAndFish, "https://i.imgur.com/4ru5VVy.png");
-        Product tuna = product(context, R.string.product_tuna, meatAndFish, "https://i.imgur.com/MgrEyWa.png");
-
-        // -------------------------------------------------------------------------------------------
+        Product meat = product(context, R.string.product_meat, meatAndFish, "http://i.imgur.com/4ru5VVy.png");
+        Product tuna = product(context, R.string.product_tuna, meatAndFish, "http://i.imgur.com/MgrEyWa.png");
 
         Category milkAndCheese = new Category(context.getString(R.string.category_milkAndCheese));
-        Product butter = new Product(milkAndCheese.name(), context.getString(R.string.product_butter), "http://i.imgur.com/GgQnfPI.png", false, false);
-        Product cheese = new Product(milkAndCheese.name(), context.getString(R.string.product_cheese), "http://i.imgur.com/UvK6s35.png", false, false);
-        Product eggs = new Product(milkAndCheese.name(), context.getString(R.string.product_eggs), "http://i.imgur.com/6gw4RrK.png", false, false);
-        Product gratedCheese = new Product(milkAndCheese.name(), context.getString(R.string.product_gratedCheese), "http://i.imgur.com/VgN12fA.png", false, false);
-        Product milk = new Product(milkAndCheese.name(), context.getString(R.string.product_milk), "http://i.imgur.com/2nAlaR1.png", false, false);
-        Product yogurt = new Product(milkAndCheese.name(), context.getString(R.string.product_yogurt), "http://i.imgur.com/yn4F7xG.png", false, false);
+        Product cheese = product(context, R.string.product_cheese, milkAndCheese, "http://i.imgur.com/ebP7mp2.png");
+        Product eggs = product(context, R.string.product_eggs, milkAndCheese, "http://i.imgur.com/aIXuDqG.png");
+        Product milk = product(context, R.string.product_milk, milkAndCheese, "http://i.imgur.com/ERuiwHw.png");
+        Product yogurt = product(context, R.string.product_yogurt, milkAndCheese, "http://i.imgur.com/mhxVBOA.png");
 
         CategoryDao categoryDao = categoryDao();
         categoryDao.insert(
@@ -122,7 +117,7 @@ public abstract class AppDatabase extends RoomDatabase
                 chicken, fish, meat, tuna,
 
                 // Milk & Cheese
-                butter, cheese, eggs, gratedCheese, milk, yogurt);
+                cheese, eggs, milk, yogurt);
     }
 
     private Product product(Context context, @StringRes int resId, Category category, String imageUrl)

@@ -98,13 +98,9 @@
     <string name="product.meat">Viande</string>
     <string name="product.tuna">Thon</string>
 
-    <!-- ********************************* -->
-
     <string name="product.cheese">Fromage</string>
     <string name="product.eggs">Oeufs</string>
-    <string name="product.gratedCheese">Frômage rapé</string>
     <string name="product.milk">Lait</string>
     <string name="product.yogurt">Yahourt</string>
-    <string name="product.butter">Beurre</string>
 
 </resources>
