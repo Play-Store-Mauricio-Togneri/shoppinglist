@@ -93,6 +93,11 @@
     <string name="product.garbageBags">Garbage bags</string>
     <string name="product.laundryDetergent">Laundry Detergent</string>
 
+    <string name="product.chicken">Chicken</string>
+    <string name="product.fish">Fish</string>
+    <string name="product.meat">Meat</string>
+    <string name="product.tuna">Tuna</string>
+
     <!-- ********************************* -->
 
     <string name="product.cheese">Cheese</string>
@@ -101,14 +106,5 @@
     <string name="product.milk">Milk</string>
     <string name="product.yogurt">Yogurt</string>
     <string name="product.butter">Butter</string>
-
-    <string name="product.chicken">Chicken</string>
-    <string name="product.fish">Fish</string>
-    <string name="product.ham">Ham</string>
-    <string name="product.meat">Meat</string>
-    <string name="product.pork">Pork</string>
-    <string name="product.salami">Salami</string>
-    <string name="product.sardines">Sardines</string>
-    <string name="product.tuna">Tuna</string>
 
 </resources>

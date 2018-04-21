@@ -93,6 +93,11 @@
     <string name="product.garbageBags">Sacs poubelles</string>
     <string name="product.laundryDetergent">Lessive</string>
 
+    <string name="product.chicken">Poulet</string>
+    <string name="product.fish">Poisson</string>
+    <string name="product.meat">Viande</string>
+    <string name="product.tuna">Thon</string>
+
     <!-- ********************************* -->
 
     <string name="product.cheese">Fromage</string>
@@ -101,14 +106,5 @@
     <string name="product.milk">Lait</string>
     <string name="product.yogurt">Yahourt</string>
     <string name="product.butter">Beurre</string>
-
-    <string name="product.chicken">Poulet</string>
-    <string name="product.fish">Poisson</string>
-    <string name="product.ham">Jambon</string>
-    <string name="product.meat">Viande</string>
-    <string name="product.pork">Porc</string>
-    <string name="product.salami">Salami</string>
-    <string name="product.sardines">Sardines</string>
-    <string name="product.tuna">Thon</string>
 
 </resources>
