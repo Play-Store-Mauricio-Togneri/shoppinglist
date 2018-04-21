@@ -88,6 +88,11 @@
     <string name="product.carrots">Carrots</string>
     <string name="product.potatoes">Potatoes</string>
 
+    <string name="product.cleaningSupplies">Cleaning supplies</string>
+    <string name="product.dishwashingLiquid">Dishwashing liquid</string>
+    <string name="product.garbageBags">Garbage bags</string>
+    <string name="product.laundryDetergent">Laundry Detergent</string>
+
     <!-- ********************************* -->
 
     <string name="product.cheese">Cheese</string>
@@ -105,24 +110,5 @@
     <string name="product.salami">Salami</string>
     <string name="product.sardines">Sardines</string>
     <string name="product.tuna">Tuna</string>
-
-    <string name="product.airFreshener">Air freshener</string>
-    <string name="product.bleach">Bleach</string>
-    <string name="product.bulb">Bulb</string>
-    <string name="product.cleaningSupplies">Cleaning supplies</string>
-    <string name="product.deodorant">Deodorant</string>
-    <string name="product.dishwashingLiquid">Dishwashing liquid</string>
-    <string name="product.hairRemover">Hair remover</string>
-    <string name="product.kitchenRags">Kitchen rags</string>
-    <string name="product.garbageBags">Garbage bags</string>
-    <string name="product.laundryDetergent">Laundry Detergent</string>
-    <string name="product.paperTowels">Paper towels</string>
-    <string name="product.razor">Razor</string>
-    <string name="product.shavingFoam">Shaving foam</string>
-    <string name="product.showerGel">Shower gel</string>
-    <string name="product.soap">Soap</string>
-    <string name="product.sponge">Sponge</string>
-    <string name="product.spongeMetal">Sponge metal</string>
-    <string name="product.cottonSwabs">Cotton swabs</string>
 
 </resources>

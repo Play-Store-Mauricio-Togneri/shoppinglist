@@ -88,6 +88,11 @@
     <string name="product.carrots">Carottes</string>
     <string name="product.potatoes">Pommes de terre</string>
 
+    <string name="product.cleaningSupplies">Produits de nettoyages</string>
+    <string name="product.dishwashingLiquid">Liquide vaisselle</string>
+    <string name="product.garbageBags">Sacs poubelles</string>
+    <string name="product.laundryDetergent">Lessive</string>
+
     <!-- ********************************* -->
 
     <string name="product.cheese">Fromage</string>
@@ -105,24 +110,5 @@
     <string name="product.salami">Salami</string>
     <string name="product.sardines">Sardines</string>
     <string name="product.tuna">Thon</string>
-
-    <string name="product.airFreshener">Désodorisant</string>
-    <string name="product.bleach">Eau de javel</string>
-    <string name="product.bulb">Ampoule</string>
-    <string name="product.cleaningSupplies">Produits de nettoyages</string>
-    <string name="product.deodorant">Déodorant</string>
-    <string name="product.dishwashingLiquid">Liquide vaisselle</string>
-    <string name="product.hairRemover">Rouleau adhésif anti-poils</string>
-    <string name="product.kitchenRags">Carré éponges</string>
-    <string name="product.garbageBags">Sacs poubelles</string>
-    <string name="product.laundryDetergent">Lessive</string>
-    <string name="product.paperTowels">Serviettes en papier</string>
-    <string name="product.razor">Rasoir</string>
-    <string name="product.shavingFoam">Mousse à raser</string>
-    <string name="product.showerGel">Gel douche</string>
-    <string name="product.soap">Savon</string>
-    <string name="product.sponge">Éponge</string>
-    <string name="product.spongeMetal">Grattoir</string>
-    <string name="product.cottonSwabs">Cotons-tiges</string>
 
 </resources>

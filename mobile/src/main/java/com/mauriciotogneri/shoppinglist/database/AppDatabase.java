@@ -61,14 +61,13 @@ public abstract class AppDatabase extends RoomDatabase
         Product carrots = product(context, R.string.product_carrots, fruitsAndVegetables, "http://i.imgur.com/h8FxUEd.png");
         Product potatoes = product(context, R.string.product_potatoes, fruitsAndVegetables, "http://i.imgur.com/f2OsMoE.png");
 
-        // -------------------------------------------------------------------------------------------
-
         Category household = new Category(context.getString(R.string.category_household));
-        Product cleaningSupplies = new Product(household.name(), context.getString(R.string.product_cleaningSupplies), "http://i.imgur.com/dyhc3o4.png", false, false);
-        Product dishwashingLiquid = new Product(household.name(), context.getString(R.string.product_dishwashingLiquid), "http://i.imgur.com/AcIzH1s.png", false, false);
-        Product garbageBags = new Product(household.name(), context.getString(R.string.product_garbageBags), "http://i.imgur.com/ZYQK4Tm.png", false, false);
-        Product laundryDetergent = new Product(household.name(), context.getString(R.string.product_laundryDetergent), "http://i.imgur.com/6GQ3TgM.png", false, false);
-        Product paperTowels = new Product(household.name(), context.getString(R.string.product_paperTowels), "http://i.imgur.com/ZiYsOOA.png", false, false);
+        Product cleaningSupplies = product(context, R.string.product_cleaningSupplies, household, "http://i.imgur.com/mU7N85R.png");
+        Product dishwashingLiquid = product(context, R.string.product_dishwashingLiquid, household, "http://i.imgur.com/gMZ40BT.png");
+        Product garbageBags = product(context, R.string.product_garbageBags, household, "http://i.imgur.com/DekDs24.png");
+        Product laundryDetergent = product(context, R.string.product_laundryDetergent, household, "http://i.imgur.com/oi5EFNa.png");
+
+        // -------------------------------------------------------------------------------------------
 
         Category meatAndFish = new Category(context.getString(R.string.category_meatAndFish));
         Product chicken = new Product(meatAndFish.name(), context.getString(R.string.product_chicken), "http://i.imgur.com/hYKIUgB.png", false, false);
@@ -121,7 +120,7 @@ public abstract class AppDatabase extends RoomDatabase
                 apples, bananas, carrots, potatoes,
 
                 // Household
-                cleaningSupplies, dishwashingLiquid, garbageBags, laundryDetergent, paperTowels,
+                cleaningSupplies, dishwashingLiquid, garbageBags, laundryDetergent,
 
                 // Meat & Fish
                 chicken, fish, ham, meat, pork, salami, sardines, tuna,
