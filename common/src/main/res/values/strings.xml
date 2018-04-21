@@ -46,16 +46,22 @@
 
     <!-- CATEGORIES -->
 
-    <string name="category.fruitsAndVegetables">Fruits &amp; Vegetables</string>
+    <string name="category.bathroom">Bathroom</string>
+    <string name="category.beverage">Beverages</string>
     <string name="category.breadAndGrain">Bread &amp; Grain Products</string>
     <string name="category.condimentsAndOthers">Condiments &amp; Others</string>
-    <string name="category.milkAndCheese">Milk &amp; Cheese</string>
-    <string name="category.meatAndFish">Meat &amp; Fish</string>
     <string name="category.frozen">Frozen</string>
-    <string name="category.beverage">Beverages</string>
+    <string name="category.fruitsAndVegetables">Fruits &amp; Vegetables</string>
     <string name="category.household">Household</string>
+    <string name="category.meatAndFish">Meat &amp; Fish</string>
+    <string name="category.milkAndCheese">Milk &amp; Cheese</string>
 
     <!-- PRODUCTS -->
+
+    <string name="product.shampoo">Shampoo</string>
+    <string name="product.toiletPaper">Toilet paper</string>
+    <string name="product.toothbrush">Toothbrush</string>
+    <string name="product.toothpaste">Toothpaste</string>
 
     <string name="product.beer">Beer</string>
     <string name="product.coffee">Coffee</string>
@@ -112,15 +118,11 @@
     <string name="product.laundryDetergent">Laundry Detergent</string>
     <string name="product.paperTowels">Paper towels</string>
     <string name="product.razor">Razor</string>
-    <string name="product.shampoo">Shampoo</string>
     <string name="product.shavingFoam">Shaving foam</string>
     <string name="product.showerGel">Shower gel</string>
     <string name="product.soap">Soap</string>
     <string name="product.sponge">Sponge</string>
     <string name="product.spongeMetal">Sponge metal</string>
     <string name="product.cottonSwabs">Cotton swabs</string>
-    <string name="product.toiletPaper">Toilet paper</string>
-    <string name="product.toothbrush">Toothbrush</string>
-    <string name="product.toothpaste">Toothpaste</string>
 
 </resources>
