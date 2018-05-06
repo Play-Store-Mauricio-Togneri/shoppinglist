@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mauriciotogneri.javautils.Encoding;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class LoadImages extends AsyncTask<String, Void, List<String>>
     private final OkHttpClient client;
     private final OnImagesLoaded callback;
 
-    private static final String URL = "https://api.cognitive.microsoft.com/bing/v7.0/images/search?mkt=en-us&q=";
+    private static final String URL = "https://pixabay.com/api/?key=8916913-905d7b5a1d35466fd2341bc9c&per_page=99&image_type=illustration&q=";
 
     public LoadImages(OnImagesLoaded callback)
     {
@@ -31,16 +32,15 @@ public class LoadImages extends AsyncTask<String, Void, List<String>>
     @Override
     protected List<String> doInBackground(String... queries)
     {
-        Request request = new Request.Builder()
-                .url(URL + queries[0])
-                .header("Ocp-Apim-Subscription-Key", "c1487859adda4a8a8304c6f42f4e3be6")
-                .build();
-
         try
         {
+            Request request = new Request.Builder()
+                    .url(URL + Encoding.urlEncode(queries[0]))
+                    .build();
+
             Response response = client.newCall(request).execute();
             JsonElement element = new JsonParser().parse(response.body().string());
-            JsonArray list = element.getAsJsonObject().getAsJsonArray("value");
+            JsonArray list = element.getAsJsonObject().getAsJsonArray("hits");
 
             List<String> result = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class LoadImages extends AsyncTask<String, Void, List<String>>
             {
                 JsonObject object = list.get(i).getAsJsonObject();
 
-                result.add(object.get("contentUrl").getAsString());
+                result.add(object.get("webformatURL").getAsString());
             }
 
             return result;
