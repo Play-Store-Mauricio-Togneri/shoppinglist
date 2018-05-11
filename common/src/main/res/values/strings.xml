@@ -11,19 +11,13 @@
     <string name="button.update">Update</string>
     <string name="button.remove">Remove</string>
 
-    <string name="error.connection">Connection error</string>
-
     <string name="label.product.category">Category</string>
     <string name="label.product.new.category">New category</string>
     <string name="label.product.edit.category">Edit category</string>
     <string name="label.product.name">Name</string>
-    <string name="label.product.picture">Picture</string>
     <string name="label.select.picture.source">Select picture source</string>
     <string name="label.source.gallery">Gallery</string>
     <string name="label.source.camera">Camera</string>
-    <string name="label.share.cart">Share list with</string>
-    <string name="label.already.in.cart">Already in cart</string>
-    <string name="label.initializing.database">Initializing database&#8230;</string>
 
     <string name="toolbar.title.main">Shopping List</string>
     <string name="toolbar.title.add.product">Add product</string>
@@ -32,17 +26,12 @@
     <string name="toolbar.title.manage.categories">Manage categories</string>
 
     <string name="confirmation.remove.product">Do you want to remove the product?</string>
-    <string name="confirmation.remove.cart.item">Do you want to remove the product from the cart?</string>
     <string name="confirmation.remove.category">Do you want to remove the category?</string>
 
-    <string name="error.invalid.category">Invalid category</string>
     <string name="error.invalid.name">Invalid name</string>
-    <string name="error.invalid.image">Invalid image</string>
     <string name="error.product.already.exists">Product already exists</string>
     <string name="error.category.already.exists">Category already exists</string>
-    <string name="error.cart.empty">The list is empty</string>
     <string name="error.category.in.use">The category is linked to one or more products.</string>
-    <string name="error.product.in.use">The product cannot be removed.</string>
 
     <!-- CATEGORIES -->
 

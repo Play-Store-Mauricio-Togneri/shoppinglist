@@ -11,19 +11,13 @@
     <string name="button.update">Actualizar</string>
     <string name="button.remove">Eliminar</string>
 
-    <string name="error.connection">Error de conexión</string>
-
     <string name="label.product.category">Categoría</string>
     <string name="label.product.new.category">Nueva categoría</string>
     <string name="label.product.edit.category">Editar categoría</string>
     <string name="label.product.name">Nombre</string>
-    <string name="label.product.picture">Imagen</string>
     <string name="label.select.picture.source">Seleccionar fuente de imagen</string>
     <string name="label.source.gallery">Galería</string>
     <string name="label.source.camera">Cámara</string>
-    <string name="label.share.cart">Compartir lista con</string>
-    <string name="label.already.in.cart">En el carro</string>
-    <string name="label.initializing.database">Inicializando base de datos&#8230;</string>
 
     <string name="toolbar.title.main">Shopping List</string>
     <string name="toolbar.title.add.product">Añadir producto</string>
@@ -32,17 +26,12 @@
     <string name="toolbar.title.manage.categories">Administrar categorías</string>
 
     <string name="confirmation.remove.product">¿Desea eliminar el producto?</string>
-    <string name="confirmation.remove.cart.item">¿Desea eliminar el producto de la lista?</string>
     <string name="confirmation.remove.category">¿Desea eliminar la categoría?</string>
 
-    <string name="error.invalid.category">Categoría inválida</string>
     <string name="error.invalid.name">Nombre inválido</string>
-    <string name="error.invalid.image">Imagen inválida</string>
     <string name="error.product.already.exists">Producto ya existente</string>
     <string name="error.category.already.exists">Categoría ya existente</string>
-    <string name="error.cart.empty">La lista está vacía</string>
     <string name="error.category.in.use">La categoría esta vinculada a uno o más productos.</string>
-    <string name="error.product.in.use">El producto no puede ser eliminado.</string>
 
     <!-- CATEGORIES -->
 

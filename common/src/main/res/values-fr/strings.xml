@@ -11,19 +11,13 @@
     <string name="button.update">Mettre à jour</string>
     <string name="button.remove">Supprimer</string>
 
-    <string name="error.connection">Erreur de connexion</string>
-
     <string name="label.product.category">Catégorie</string>
     <string name="label.product.new.category">Nouvelle catégorie</string>
     <string name="label.product.edit.category">Éditer la catégorie</string>
     <string name="label.product.name">Nom</string>
-    <string name="label.product.picture">Image</string>
     <string name="label.select.picture.source">Choisissez une image</string>
     <string name="label.source.gallery">Galerie</string>
     <string name="label.source.camera">Appareil photo</string>
-    <string name="label.share.cart">Partager avec</string>
-    <string name="label.already.in.cart">Déjà présent dans le panier</string>
-    <string name="label.initializing.database">Initialistion de la base de donnée&#8230;</string>
 
     <string name="toolbar.title.main">Shopping List</string>
     <string name="toolbar.title.add.product">Ajouter un produit</string>
@@ -32,17 +26,12 @@
     <string name="toolbar.title.manage.categories">Gérer les catégories</string>
 
     <string name="confirmation.remove.product">Voulez-vous supprimer le produit ?</string>
-    <string name="confirmation.remove.cart.item">Voulez-vous retirer le produit du panier ?</string>
     <string name="confirmation.remove.category">Voulez-vous supprimer la catégorie ?</string>
 
-    <string name="error.invalid.category">Catégorie invalide</string>
     <string name="error.invalid.name">Nom invalide</string>
-    <string name="error.invalid.image">Image invalide</string>
     <string name="error.product.already.exists">Le produit existe déjà</string>
     <string name="error.category.already.exists">La catégorie existe déjà</string>
-    <string name="error.cart.empty">La liste est vide</string>
     <string name="error.category.in.use">La catégorie est liée à un ou plusieurs produits.</string>
-    <string name="error.product.in.use">Le produit ne peut pas être retiré.</string>
 
     <!-- CATEGORIES -->
 
