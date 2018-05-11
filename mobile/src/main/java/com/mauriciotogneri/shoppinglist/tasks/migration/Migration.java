@@ -34,7 +34,7 @@ public class Migration extends AsyncTask<Void, Void, Void>
         this.database = AppDatabase.instance(context);
         this.callback = callback;
         this.dialog = new ProgressDialog(context);
-        this.dialog.setMessage(context.getString(R.string.dialog_updatingDatabase));
+        this.dialog.setMessage(context.getString(R.string.dialog_update_database));
         this.dialog.setCancelable(false);
         this.dialog.setCanceledOnTouchOutside(false);
     }

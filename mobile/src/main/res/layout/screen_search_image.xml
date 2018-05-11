@@ -40,7 +40,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:hint="@string/search"
+                    android:hint="@string/label.search.hint"
                     android:imeOptions="actionSearch"
                     android:inputType="textCapSentences"
                     android:lines="1"

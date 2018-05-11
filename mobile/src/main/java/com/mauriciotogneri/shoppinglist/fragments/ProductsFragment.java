@@ -93,7 +93,7 @@ public class ProductsFragment extends BaseFragment<ProductsListView> implements 
     private void confirmRemoveProduct(Product product)
     {
         Dialogs dialogs = new Dialogs(getContext());
-        dialogs.confirmation(product.name(), getString(R.string.confirmation_remove_product), () -> removeProduct(product));
+        dialogs.confirmation(product.name(), getString(R.string.dialog_remove_product), () -> removeProduct(product));
     }
 
     private void removeProduct(Product product)
