@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="search">Search</string>
-    <string name="changePicture">Change picture</string>
-    <string name="addToCartAutomatically">Add to cart automatically</string>
+    <string name="label.search.hint">Search</string>
+    <string name="label.product.changePicture">Change picture</string>
+    <string name="label.product.addToCartAutomatically">Add to cart automatically</string>
     <string name="label.source.search">Search</string>
-    <string name="rename">Rename</string>
+    <string name="button.rename">Rename</string>
     <string name="error.loadingImage">Error loading image</string>
     <string name="error.openingCamera">Error opening camera</string>
-    <string name="dialog.updatingDatabase">Updating database…</string>
+    <string name="dialog.update.database">Updating database…</string>
 
 </resources>

@@ -42,7 +42,7 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
     public void onCategorySelected(Category category)
     {
         List<String> options = Arrays.asList(
-                getString(R.string.rename),
+                getString(R.string.button_rename),
                 getString(R.string.button_remove)
         );
 
@@ -88,7 +88,7 @@ public class ManageCategoriesActivity extends BaseActivity<ManageCategoriesView>
     private void confirmRemoveCategory(Category category)
     {
         Dialogs dialogs = new Dialogs(this);
-        dialogs.confirmation(category.name(), getString(R.string.confirmation_remove_category), () -> removeCategory(category));
+        dialogs.confirmation(category.name(), getString(R.string.dialog_remove_category), () -> removeCategory(category));
     }
 
     private void removeCategory(Category category)

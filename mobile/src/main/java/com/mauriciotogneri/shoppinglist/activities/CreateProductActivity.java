@@ -108,7 +108,7 @@ public class CreateProductActivity extends BaseActivity<CreateProductView> imple
         );
 
         Dialogs dialogs = new Dialogs(this);
-        dialogs.options(getString(R.string.label_select_picture_source), options, option ->
+        dialogs.options(getString(R.string.label_source_select), options, option ->
         {
             switch (option)
             {

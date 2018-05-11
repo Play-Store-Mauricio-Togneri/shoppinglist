@@ -3,19 +3,18 @@
 
     <string name="application.name">Shopping List</string>
 
-    <string name="label.empty.list">Empty list</string>
-
     <string name="button.accept">Accept</string>
     <string name="button.cancel">Cancel</string>
     <string name="button.create">Create</string>
     <string name="button.update">Update</string>
     <string name="button.remove">Remove</string>
 
+    <string name="label.empty.list">Empty list</string>
     <string name="label.product.category">Category</string>
     <string name="label.product.new.category">New category</string>
     <string name="label.product.edit.category">Edit category</string>
     <string name="label.product.name">Name</string>
-    <string name="label.select.picture.source">Select picture source</string>
+    <string name="label.source.select">Select picture source</string>
     <string name="label.source.gallery">Gallery</string>
     <string name="label.source.camera">Camera</string>
 
@@ -25,8 +24,8 @@
     <string name="toolbar.title.edit.product">Edit product</string>
     <string name="toolbar.title.manage.categories">Manage categories</string>
 
-    <string name="confirmation.remove.product">Do you want to remove the product?</string>
-    <string name="confirmation.remove.category">Do you want to remove the category?</string>
+    <string name="dialog.remove.product">Do you want to remove the product?</string>
+    <string name="dialog.remove.category">Do you want to remove the category?</string>
 
     <string name="error.invalid.name">Invalid name</string>
     <string name="error.product.already.exists">Product already exists</string>
