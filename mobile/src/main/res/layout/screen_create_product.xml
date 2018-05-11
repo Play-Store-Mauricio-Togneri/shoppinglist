@@ -85,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textCapSentences"
                 android:paddingTop="10dp"
+                android:paddingBottom="18dp"
                 android:textColor="@color/text.color"
                 android:textSize="16sp"
                 app:backgroundTint="@color/separator"/>
