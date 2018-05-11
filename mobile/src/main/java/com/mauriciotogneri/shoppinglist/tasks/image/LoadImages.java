@@ -21,7 +21,7 @@ public class LoadImages extends AsyncTask<String, Void, List<String>>
     private final OkHttpClient client;
     private final OnImagesLoaded callback;
 
-    private static final String URL = "https://pixabay.com/api/?key=8916913-905d7b5a1d35466fd2341bc9c&per_page=99&image_type=illustration&q=";
+    private static final String URL = "https://pixabay.com/api/?key=8916913-905d7b5a1d35466fd2341bc9c&per_page=99&q=";
 
     public LoadImages(OnImagesLoaded callback)
     {
