@@ -69,8 +69,8 @@ dependencies
     api "com.android.support:design:$support"
 
     // gson
-    api 'com.google.code.gson:gson:2.8.3'
+    api 'com.google.code.gson:gson:2.8.4'
 
     // wearable
-    api "com.google.android.gms:play-services-wearable:$playservices"
+    api 'com.google.android.gms:play-services-wearable:15.0.1'
 }

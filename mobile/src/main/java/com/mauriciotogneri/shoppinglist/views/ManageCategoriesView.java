@@ -33,7 +33,8 @@ public class ManageCategoriesView extends BaseView<ManageCategoriesViewObserver,
         enableBack(v -> observer.onBack());
 
         ui.list.setAdapter(adapter);
-        ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
+        ui.list.setOnItemClickListener((adapterView, view, position, id) ->
+        {
             Category category = (Category) adapterView.getItemAtPosition(position);
             observer.onCategorySelected(category);
         });
