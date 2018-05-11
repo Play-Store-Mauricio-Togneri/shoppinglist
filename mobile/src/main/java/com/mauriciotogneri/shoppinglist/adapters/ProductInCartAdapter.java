@@ -49,7 +49,8 @@ public class ProductInCartAdapter extends BaseListAdapter<Product, ViewHolder>
 
     public void sortList()
     {
-        sort((p1, p2) -> {
+        sort((p1, p2) ->
+        {
             if (!p1.isSelected() && p2.isSelected())
             {
                 return -1;

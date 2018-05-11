@@ -31,15 +31,18 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
     @Override
     protected void initialize()
     {
-        ui.input.setOnEditorActionListener((v, actionId, event) -> {
+        ui.input.setOnEditorActionListener((v, actionId, event) ->
+        {
             if (actionId == EditorInfo.IME_ACTION_SEARCH)
             {
                 onSearch();
 
                 return true;
             }
+
             return false;
         });
+
         ui.input.addTextChangedListener(new TextWatcher()
         {
             @Override
@@ -67,6 +70,12 @@ public class SearchImageView extends BaseView<SearchImageViewObserver, ViewConta
     public void query(String initialQuery)
     {
         ui.input.setText(initialQuery);
+
+        if (initialQuery.length() > 0)
+        {
+            ui.input.setSelection(initialQuery.length());
+        }
+
         onSearch();
     }
 

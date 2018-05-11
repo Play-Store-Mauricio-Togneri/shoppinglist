@@ -95,7 +95,8 @@ public class Dialogs
             }
         });
 
-        nameField.setOnEditorActionListener((view1, actionId, event) -> {
+        nameField.setOnEditorActionListener((view1, actionId, event) ->
+        {
             if (actionId == EditorInfo.IME_ACTION_DONE)
             {
                 try

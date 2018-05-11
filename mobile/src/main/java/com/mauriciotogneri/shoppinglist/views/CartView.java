@@ -33,7 +33,8 @@ public class CartView extends BaseView<CartViewObserver, ViewContainer>
         toolbarTitle(R.string.toolbar_title_main);
 
         ui.list.setAdapter(adapter);
-        ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
+        ui.list.setOnItemClickListener((adapterView, view, position, id) ->
+        {
             Product product = (Product) adapterView.getItemAtPosition(position);
             observer.onProductSelected(product);
         });

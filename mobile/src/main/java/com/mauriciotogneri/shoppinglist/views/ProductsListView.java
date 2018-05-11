@@ -31,7 +31,8 @@ public class ProductsListView extends BaseView<ProductListViewObserver, ViewCont
     protected void initialize()
     {
         ui.list.setAdapter(adapter);
-        ui.list.setOnItemClickListener((adapterView, view, position, id) -> {
+        ui.list.setOnItemClickListener((adapterView, view, position, id) ->
+        {
             Product product = (Product) adapterView.getItemAtPosition(position);
             observer.onProductSelected(product);
         });
