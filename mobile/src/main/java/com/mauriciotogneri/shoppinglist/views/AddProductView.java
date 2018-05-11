@@ -3,6 +3,7 @@ package com.mauriciotogneri.shoppinglist.views;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.androidutils.uibinder.annotations.BindView;
@@ -18,7 +19,7 @@ import com.mauriciotogneri.shoppinglist.views.AddProductView.ViewContainer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddProductView extends BaseView<AddProductViewObserver, ViewContainer>
+public class AddProductView extends BaseView<AddProductViewObserver, ViewContainer> implements OnPageChangeListener
 {
     private String lastCategorySelected;
 
@@ -47,6 +48,8 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
             fragments.add(fragment);
         }
 
+        ui.pager.removeOnPageChangeListener(this);
+        ui.pager.addOnPageChangeListener(this);
         ui.pager.setOffscreenPageLimit(fragments.size());
         ProductsFragmentAdapter adapter = new ProductsFragmentAdapter(fragmentManager, fragments);
         ui.pager.setAdapter(adapter);
@@ -61,11 +64,31 @@ public class AddProductView extends BaseView<AddProductViewObserver, ViewContain
     @OnClick(R.id.product_create)
     public void onActionButton()
     {
-        ProductsFragmentAdapter adapter = (ProductsFragmentAdapter) ui.pager.getAdapter();
-        ProductsFragment fragment = (ProductsFragment) adapter.getItem(ui.pager.getCurrentItem());
-        lastCategorySelected = fragment.title();
+        observer.onCreateProduct(currentTitle(ui.pager.getCurrentItem()));
+    }
 
-        observer.onCreateProduct(fragment.title());
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+    {
+    }
+
+    @Override
+    public void onPageSelected(int position)
+    {
+        lastCategorySelected = currentTitle(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state)
+    {
+    }
+
+    private String currentTitle(int position)
+    {
+        ProductsFragmentAdapter adapter = (ProductsFragmentAdapter) ui.pager.getAdapter();
+        ProductsFragment fragment = (ProductsFragment) adapter.getItem(position);
+
+        return fragment.title();
     }
 
     public interface AddProductViewObserver
