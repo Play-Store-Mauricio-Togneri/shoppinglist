@@ -21,14 +21,6 @@ import java.util.List;
 
 public class WearableService extends Service implements MessageClient.OnMessageReceivedListener
 {
-    @Override
-    public void onCreate()
-    {
-        super.onCreate();
-
-        Wearable.getMessageClient(this).addListener(this);
-    }
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent)
@@ -39,7 +31,10 @@ public class WearableService extends Service implements MessageClient.OnMessageR
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        return Service.START_STICKY;
+        Wearable.getMessageClient(this).removeListener(this);
+        Wearable.getMessageClient(this).addListener(this);
+
+        return START_STICKY;
     }
 
     @Override
