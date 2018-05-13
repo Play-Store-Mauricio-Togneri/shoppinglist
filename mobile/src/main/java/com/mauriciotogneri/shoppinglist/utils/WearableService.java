@@ -37,6 +37,11 @@ public class WearableService extends Service implements MessageClient.OnMessageR
         return START_STICKY;
     }
 
+    public void onDestroy()
+    {
+        startService(new Intent(this, getClass()));
+    }
+
     @Override
     public void onMessageReceived(@NonNull MessageEvent messageEvent)
     {
