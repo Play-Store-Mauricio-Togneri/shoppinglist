@@ -8,15 +8,20 @@
     <string name="button.create">Crear</string>
     <string name="button.update">Actualizar</string>
     <string name="button.remove">Eliminar</string>
+    <string name="button.rename">Renombrar</string>
 
+    <string name="label.search.hint">Buscar</string>
     <string name="label.empty.list">Lista vacía</string>
     <string name="label.product.category">Categoría</string>
     <string name="label.product.new.category">Nueva categoría</string>
     <string name="label.product.edit.category">Editar categoría</string>
     <string name="label.product.name">Nombre</string>
+    <string name="label.product.changePicture">Cambiar imagen</string>
+    <string name="label.product.addToCartAutomatically">Agregar al carro automáticamente</string>
     <string name="label.source.select">Seleccionar fuente de imagen</string>
     <string name="label.source.gallery">Galería</string>
     <string name="label.source.camera">Cámara</string>
+    <string name="label.source.search">Buscar online</string>
 
     <string name="toolbar.title.main">Shopping List</string>
     <string name="toolbar.title.add.product">Añadir producto</string>
@@ -26,11 +31,14 @@
 
     <string name="dialog.remove.product">¿Desea eliminar el producto?</string>
     <string name="dialog.remove.category">¿Desea eliminar la categoría?</string>
+    <string name="dialog.update.database">Actualizando base de datos…</string>
 
     <string name="error.invalid.name">Nombre inválido</string>
     <string name="error.product.already.exists">Producto ya existente</string>
     <string name="error.category.already.exists">Categoría ya existente</string>
-    <string name="error.category.in.use">La categoría esta vinculada a uno o más productos.</string>
+    <string name="error.category.in.use">La categoría esta vinculada a uno o más productos</string>
+    <string name="error.loadingImage">Error cargando imagen</string>
+    <string name="error.openingCamera">Error abriendo cámara</string>
 
     <!-- CATEGORIES -->
 

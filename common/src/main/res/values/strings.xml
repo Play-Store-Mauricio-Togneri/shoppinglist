@@ -8,15 +8,20 @@
     <string name="button.create">Create</string>
     <string name="button.update">Update</string>
     <string name="button.remove">Remove</string>
+    <string name="button.rename">Rename</string>
 
+    <string name="label.search.hint">Search</string>
     <string name="label.empty.list">Empty list</string>
     <string name="label.product.category">Category</string>
     <string name="label.product.new.category">New category</string>
     <string name="label.product.edit.category">Edit category</string>
     <string name="label.product.name">Name</string>
+    <string name="label.product.changePicture">Change picture</string>
+    <string name="label.product.addToCartAutomatically">Add to cart automatically</string>
     <string name="label.source.select">Select picture source</string>
     <string name="label.source.gallery">Gallery</string>
     <string name="label.source.camera">Camera</string>
+    <string name="label.source.search">Search online</string>
 
     <string name="toolbar.title.main">Shopping List</string>
     <string name="toolbar.title.add.product">Add product</string>
@@ -26,11 +31,14 @@
 
     <string name="dialog.remove.product">Do you want to remove the product?</string>
     <string name="dialog.remove.category">Do you want to remove the category?</string>
+    <string name="dialog.update.database">Updating database…</string>
 
     <string name="error.invalid.name">Invalid name</string>
     <string name="error.product.already.exists">Product already exists</string>
     <string name="error.category.already.exists">Category already exists</string>
-    <string name="error.category.in.use">The category is linked to one or more products.</string>
+    <string name="error.category.in.use">The category is linked to one or more products</string>
+    <string name="error.loadingImage">Error loading image</string>
+    <string name="error.openingCamera">Error opening camera</string>
 
     <!-- CATEGORIES -->
 
