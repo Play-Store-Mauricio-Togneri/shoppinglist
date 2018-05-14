@@ -1,58 +1,54 @@
 package com.mauriciotogneri.shoppinglist.model;
 
-import android.graphics.Color;
-import android.text.TextUtils;
-
-import com.orm.SugarRecord;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class Category extends SugarRecord<Category> implements Serializable
+@Entity
+public class Category implements Serializable
 {
-    private String name;
-    private String color;
+    @PrimaryKey
+    @NonNull
+    public String name;
 
-    public Category()
-    {
-    }
-
-    public Category(String name, String color)
+    public Category(String name)
     {
         this.name = name;
-        this.color = color;
     }
 
-    public String getName()
+    public String name()
     {
         return name;
-    }
-
-    public String getColor()
-    {
-        return color;
-    }
-
-    public int getIntColor()
-    {
-        return Color.parseColor(color);
-    }
-
-    public boolean isValid()
-    {
-        return (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(color));
-    }
-
-    public void update(String newName, String newColor)
-    {
-        name = newName;
-        color = newColor;
-
-        save();
     }
 
     @Override
     public String toString()
     {
-        return name;
+        return name();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        else if ((o == null) || (getClass() != o.getClass()))
+        {
+            return false;
+        }
+
+        Category category = (Category) o;
+
+        return name.equals(category.name);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return name.hashCode();
     }
 }

@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    style="@style/Screen"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        style="@style/Toolbar">
-
-        <com.mauriciotogneri.common.widgets.CustomTextView
-            style="@style/ToolbarTitle"
-            android:text="@string/toolbar_title_manage_categories"/>
-
-        <View style="@style/HorizontalSeparator"/>
-
-        <com.mauriciotogneri.common.widgets.CustomTextView
-            android:id="@+id/create_category"
-            style="@style/ToolbarButton"
-            android:text="@string/icon_add"/>
-
-    </LinearLayout>
+    <include
+        layout="@layout/toolbar"/>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/default_background_color">
+        android:background="@color/list.background">
 
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/category.list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/default_background_color"/>
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:divider="@null"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
-        <com.mauriciotogneri.common.widgets.CustomTextView
-            android:id="@+id/empty_label"
-            style="@style/LabelEmptyList"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/category.add"
+            style="@style/floatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_plus"/>
+
+        <TextView
+            android:id="@+id/label.empty"
+            style="@style/labelEmpty"/>
 
     </FrameLayout>
 

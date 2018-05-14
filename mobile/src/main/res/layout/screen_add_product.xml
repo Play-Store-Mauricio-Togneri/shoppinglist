@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    style="@style/Screen"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        style="@style/Toolbar">
+    <include
+        layout="@layout/toolbar"/>
 
-        <com.mauriciotogneri.common.widgets.CustomTextView
-            style="@style/ToolbarTitle"
-            android:text="@string/toolbar_title_add_product"/>
-
-        <View
-            style="@style/HorizontalSeparator"/>
-
-        <com.mauriciotogneri.common.widgets.CustomTextView
-            android:id="@+id/create_product"
-            style="@style/ToolbarButton"
-            android:text="@string/icon_add"/>
-
-    </LinearLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/list.background">
 
-        <android.support.v4.view.PagerTabStrip
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@android:color/white"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            android:textColor="@color/toolbar_background_color"/>
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
 
-    </android.support.v4.view.ViewPager>
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pager.header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textColor="@color/text.color"
+                android:textSize="14sp"/>
+
+        </android.support.v4.view.ViewPager>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/product.create"
+            style="@style/floatingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_plus"/>
+
+    </FrameLayout>
 
 </LinearLayout>

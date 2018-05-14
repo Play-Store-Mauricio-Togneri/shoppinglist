@@ -1,63 +1,91 @@
 package com.mauriciotogneri.shoppinglist.model;
 
-import android.content.Context;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.text.TextUtils;
-import android.util.Base64;
 
-import com.mauriciotogneri.common.utils.ImageHelper;
-import com.mauriciotogneri.shoppinglist.R;
-import com.orm.SugarRecord;
+import com.mauriciotogneri.common.api.CartElement;
 
-public class Product extends SugarRecord<Product>
+import java.io.Serializable;
+
+@Entity
+public class Product implements Serializable
 {
-    private String name;
-    private Category category;
-    private String image;
+    @PrimaryKey
+    public Integer id;
 
-    public Product()
-    {
-    }
+    @ColumnInfo
+    public String category;
 
-    public Product(String name, Category category, byte[] image)
+    @ColumnInfo
+    public String name;
+
+    @ColumnInfo
+    public String image;
+
+    @ColumnInfo
+    public Boolean inCart;
+
+    @ColumnInfo
+    public Boolean selected;
+
+    public Product(String category, String name, String image, Boolean inCart, Boolean selected)
     {
         this.name = name;
         this.category = category;
-        this.image = Base64.encodeToString(image, Base64.DEFAULT);
+        this.image = image;
+        this.inCart = inCart;
+        this.selected = selected;
     }
 
-    public String getName()
+    public Integer id()
     {
-        return name;
+        return id;
     }
 
-    public Category getCategory()
+    public String category()
     {
         return category;
     }
 
-    public byte[] getImage(Context context)
+    public String name()
     {
-        try
-        {
-            return Base64.decode(image, Base64.DEFAULT);
-        }
-        catch (Exception e)
-        {
-            return ImageHelper.getByteArrayFromResource(context, R.drawable.product_generic);
-        }
+        return name;
+    }
+
+    public String image()
+    {
+        return image;
+    }
+
+    public boolean isInCard()
+    {
+        return inCart;
+    }
+
+    public boolean isSelected()
+    {
+        return selected;
+    }
+
+    public void toggleSelection()
+    {
+        selected = !selected;
     }
 
     public boolean isValid()
     {
-        return (!TextUtils.isEmpty(name) && (category != null) && (category.isValid()) && !TextUtils.isEmpty(image));
+        return (!TextUtils.isEmpty(category) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(image));
     }
 
-    public void update(String newName, Category newCategory, byte[] newImage)
+    public CartElement cartElement()
     {
-        name = newName;
-        category = newCategory;
-        image = Base64.encodeToString(newImage, Base64.DEFAULT);
-
-        save();
+        return new CartElement(
+                id,
+                category,
+                name,
+                image
+        );
     }
 }

@@ -4,18 +4,48 @@ import java.io.Serializable;
 
 public class CartElement implements Serializable
 {
-    public final long id;
-    public final String name;
-    public final String category;
-    public final byte[] picture;
-    public boolean isSelected = false;
+    private final Integer id;
+    private final String category;
+    private final String name;
+    private final String image;
+    private Boolean isSelected;
 
-    public CartElement(long id, String name, String category, byte[] picture, boolean isSelected)
+    public CartElement(Integer id, String category, String name, String image)
     {
         this.id = id;
-        this.name = name;
         this.category = category;
-        this.picture = picture;
-        this.isSelected = isSelected;
+        this.name = name;
+        this.image = image;
+        this.isSelected = false;
+    }
+
+    public Integer id()
+    {
+        return id;
+    }
+
+    public String category()
+    {
+        return category;
+    }
+
+    public String name()
+    {
+        return name;
+    }
+
+    public String image()
+    {
+        return image;
+    }
+
+    public void toggleSelection()
+    {
+        isSelected = !isSelected;
+    }
+
+    public Boolean isSelected()
+    {
+        return isSelected;
     }
 }

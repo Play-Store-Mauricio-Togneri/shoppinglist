@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="default_text_color">#777777</color>
-    <color name="special_text_color">#007AB0</color>
-    <color name="default_background_color">#F0F0F0</color>
-    <color name="toolbar_background_color">#00A0E6</color>
-    <color name="border_color">#AAAAAA</color>
-    <color name="horizontal_line">#E0E0E0</color>
-    <color name="toast_background">#888888</color>
-
-    <color name="color_1">#7EA2F2</color>
-    <color name="color_2">#73CC84</color>
-    <color name="color_3">#DA635D</color>
-    <color name="color_4">#FFC552</color>
-    <color name="color_5">#F5A4DF</color>
-    <color name="color_6">#D6916B</color>
-    <color name="color_7">#C77CDE</color>
-    <color name="color_8">#76DBD5</color>
-    <color name="color_neutral">#B4B4B4</color>
+    <color name="primary">#007AB0</color>
+    <color name="primary.dark">#006C9C</color>
+    <color name="list.background">#FAFAFA</color>
+    <color name="text.color">#777777</color>
+    <color name="separator">#CCCCCC</color>
+    <color name="item.marked">#BBBBBB</color>
+    <color name="item.selected">#EEEEEE</color>
+    <color name="item.unselected">#FFFFFF</color>
 
 </resources>

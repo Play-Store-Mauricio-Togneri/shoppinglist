@@ -7,16 +7,20 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".app.ShoppingList"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/app_theme"
-        tools:replace="android:icon">
+        android:label="@string/application.name"
+        android:supportsRtl="false"
+        android:theme="@style/app.theme"
+        tools:replace="android:allowBackup">
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.CartActivity"
             android:screenOrientation="portrait">
 
             <intent-filter>
@@ -24,31 +28,74 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-        </activity>
-
-        <service
-            android:name=".services.WearableService">
-
             <intent-filter>
-                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
-                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-                <data android:scheme="wear" android:host="*" />
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="mauriciotogneri.com"
+                    android:pathPattern="/shoppinglist"
+                    android:scheme="https"/>
+
             </intent-filter>
 
-        </service>
+        </activity>
+
+        <activity
+            android:name=".activities.AddProductActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activities.CreateProductActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activities.ManageCategoriesActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activities.SearchImageActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"/>
+
+        <service
+            android:name=".utils.WearableService"
+            android:enabled="true"
+            android:exported="false"/>
 
         <meta-data
             android:name="DATABASE"
             android:value="shoppinglist.db"/>
+
         <meta-data
             android:name="VERSION"
             android:value="1"/>
+
         <meta-data
             android:name="QUERY_LOG"
             android:value="false"/>
+
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.mauriciotogneri.shoppinglist"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8cffce1302373dfaa1df9a1eaa9097d3bf4520fc"/>
+
+        <provider
+            android:name=".provider.LegacyCompatFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+
+        </provider>
 
     </application>
 
