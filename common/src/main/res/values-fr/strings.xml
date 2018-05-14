@@ -8,15 +8,20 @@
     <string name="button.create">Créer</string>
     <string name="button.update">Mettre à jour</string>
     <string name="button.remove">Supprimer</string>
+    <string name="button.rename">Renommer</string>
 
+    <string name="label.search.hint">Rechercher</string>
     <string name="label.empty.list">Liste vide</string>
     <string name="label.product.category">Catégorie</string>
     <string name="label.product.new.category">Nouvelle catégorie</string>
     <string name="label.product.edit.category">Éditer la catégorie</string>
     <string name="label.product.name">Nom</string>
+    <string name="label.product.changePicture">Changer l\'image</string>
+    <string name="label.product.addToCartAutomatically">Ajouter automatiquement au panier</string>
     <string name="label.source.select">Choisissez une image</string>
     <string name="label.source.gallery">Galerie</string>
     <string name="label.source.camera">Appareil photo</string>
+    <string name="label.source.search">Rechercher online</string>
 
     <string name="toolbar.title.main">Shopping List</string>
     <string name="toolbar.title.add.product">Ajouter un produit</string>
@@ -26,11 +31,14 @@
 
     <string name="dialog.remove.product">Voulez-vous supprimer le produit ?</string>
     <string name="dialog.remove.category">Voulez-vous supprimer la catégorie ?</string>
+    <string name="dialog.update.database">Mise à jour de la base de donnée…</string>
 
     <string name="error.invalid.name">Nom invalide</string>
     <string name="error.product.already.exists">Le produit existe déjà</string>
     <string name="error.category.already.exists">La catégorie existe déjà</string>
-    <string name="error.category.in.use">La catégorie est liée à un ou plusieurs produits.</string>
+    <string name="error.category.in.use">La catégorie est liée à un ou plusieurs produits</string>
+    <string name="error.loadingImage">Erreur de chargement de l\'image</string>
+    <string name="error.openingCamera">Erreur d'accès à l'appareil photo</string>
 
     <!-- CATEGORIES -->
 
